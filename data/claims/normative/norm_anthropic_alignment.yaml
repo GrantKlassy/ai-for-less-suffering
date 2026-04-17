@@ -1,0 +1,9 @@
+axiom_detail: AI-safety-industry framing with catastrophic-risk weighting.
+axiom_family: ea_80k
+created_at: '2026-04-17T00:00:00Z'
+id: norm_anthropic_alignment
+kind: normative_claim
+provenance_url: null
+text: Alignment of frontier systems is the dominant catastrophic risk; capability
+  must not outrun it.
+updated_at: '2026-04-17T00:00:00Z'

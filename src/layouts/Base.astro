@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body class="bg-zinc-950 font-mono text-zinc-100">
+    <div class="mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-10">
+      <header class="mb-10 border-b border-zinc-800 pb-4">
+        <a href="/" class="text-sm text-zinc-400 hover:text-zinc-100"
+          >ai-for-less-suffering.com</a
+        >
+      </header>
+      <main class="flex-1">
+        <slot />
+      </main>
+      <footer class="mt-16 border-t border-zinc-800 pt-4 text-xs text-zinc-500">
+        <a href="/canary/" class="hover:text-zinc-300">canary</a>
+        <span class="mx-2 text-zinc-700">·</span>
+        <a
+          href="https://github.com/GrantKlassy/ai-for-less-suffering"
+          class="hover:text-zinc-300">source</a
+        >
+      </footer>
+    </div>
+  </body>
+</html>

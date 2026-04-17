@@ -1,15 +1,21 @@
 ---
+import Base from "../layouts/Base.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ai-for-less-suffering.com</title>
-  </head>
-  <body>
-    <h1>ai-for-less-suffering.com</h1>
-    <p>Under construction.</p>
-  </body>
-</html>
+<Base title="ai-for-less-suffering.com">
+  <h1 class="mb-4 text-2xl text-zinc-100">ai-for-less-suffering</h1>
+  <p class="mb-6 text-sm text-zinc-400">
+    Public thinking on AI deployment toward suffering reduction. A typed
+    reasoning tool that separates descriptive convergence from normative
+    divergence, and finds coalition bridges that do not require conceding the
+    divergence.
+  </p>
+  <ul class="space-y-2 text-sm">
+    <li>
+      <a href="/analyses/" class="text-zinc-100 hover:underline">Analyses</a>
+      <span class="text-zinc-500">
+        --- structured outputs from the afls engine</span
+      >
+    </li>
+  </ul>
+</Base>

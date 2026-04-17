@@ -1,0 +1,19 @@
+agents:
+- Anthropic
+- allied frontier labs with safety orientation
+created_at: '2026-04-17T00:00:00Z'
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_grid_constraint
+- desc_us_lead
+held_normative:
+- norm_anthropic_safety
+- norm_anthropic_alignment
+id: camp_anthropic
+kind: camp
+name: Anthropic
+provenance_url: null
+summary: Frontier lab with alignment orientation. Build capability safely before others
+  do.
+updated_at: '2026-04-17T00:00:00Z'

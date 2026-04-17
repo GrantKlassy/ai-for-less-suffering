@@ -9,6 +9,7 @@ tasks:
       - task: check:license
       - task: check:history
       - task: check:last-updated
+      - task: engine:check
 
   check:author:
     desc: Verify git identity is GrantKlassy
@@ -66,3 +67,48 @@ tasks:
         if [ -f README.md ]; then
           git add README.md
         fi
+
+  canary:renew:
+    desc: Rewrite canary.txt with today's date + current BTC block, sign, verify
+    cmds:
+      - scripts/renew-canary.sh
+
+  dev:
+    desc: Run the Astro dev server with HMR (http://localhost:4321)
+    cmds:
+      - pnpm dev
+
+  build:
+    desc: Build the Astro site to dist/
+    cmds:
+      - pnpm build
+
+  preview:
+    desc: Preview the built site locally
+    cmds:
+      - pnpm preview
+
+  engine:install:
+    desc: Install Python engine dependencies via uv
+    dir: engine
+    cmds:
+      - uv sync
+
+  engine:test:
+    desc: Run engine pytest suite
+    dir: engine
+    cmds:
+      - uv run pytest
+
+  engine:check:
+    desc: Lint (ruff) and typecheck (mypy) the engine
+    dir: engine
+    cmds:
+      - uv run ruff check .
+      - uv run mypy afls
+
+  engine:cli:
+    desc: Run the afls CLI (pass args after -- , e.g. task engine:cli -- --help)
+    dir: engine
+    cmds:
+      - uv run afls {{.CLI_ARGS}}

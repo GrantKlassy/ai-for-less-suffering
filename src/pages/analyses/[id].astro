@@ -1,0 +1,221 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Base from "../../layouts/Base.astro";
+import type { PalantirAnalysis } from "../../lib/analysis";
+
+interface LoadedNode {
+  id: string;
+  kind: string;
+  name?: string;
+  text?: string;
+}
+
+function loadNodeIndex(): Record<string, LoadedNode> {
+  const dataDir = path.resolve(process.cwd(), "data");
+  const index: Record<string, LoadedNode> = {};
+  if (!fs.existsSync(dataDir)) return index;
+  const walk = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else if (entry.name.endsWith(".yaml")) {
+        const raw = fs.readFileSync(full, "utf-8");
+        const id = entry.name.replace(/\.yaml$/, "");
+        const kindMatch = /^kind:\s*(\S+)/m.exec(raw);
+        const nameMatch = /^name:\s*(.+)$/m.exec(raw);
+        const textMatch = /^text:\s*(.+)$/m.exec(raw);
+        index[id] = {
+          id,
+          kind: kindMatch ? kindMatch[1].trim() : "unknown",
+          name: nameMatch ? nameMatch[1].trim() : undefined,
+          text: textMatch ? textMatch[1].trim() : undefined,
+        };
+      }
+    }
+  };
+  walk(dataDir);
+  return index;
+}
+
+export async function getStaticPaths() {
+  const analysesDir = path.resolve(process.cwd(), "public-output/analyses");
+  if (!fs.existsSync(analysesDir)) return [];
+  return fs
+    .readdirSync(analysesDir)
+    .filter((name) => name.endsWith(".json"))
+    .map((name) => {
+      const id = name.replace(/\.json$/, "");
+      const analysis = JSON.parse(
+        fs.readFileSync(path.join(analysesDir, name), "utf-8"),
+      ) as PalantirAnalysis;
+      return { params: { id }, props: { analysis } };
+    });
+}
+
+interface Props {
+  analysis: PalantirAnalysis;
+}
+
+const { analysis } = Astro.props;
+const nodes = loadNodeIndex();
+const label = (id: string): string => {
+  const node = nodes[id];
+  if (!node) return id;
+  return node.name ?? node.text ?? id;
+};
+---
+
+<Base title={`Palantir analysis --- ${analysis.generated_at}`}>
+  <h1 class="mb-2 text-2xl text-zinc-100">Palantir coalition analysis</h1>
+  <p class="mb-8 text-xs text-zinc-500">
+    Generated <span class="font-mono">{analysis.generated_at}</span>
+  </p>
+
+  <section class="mb-10">
+    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+      Camps analyzed
+    </h2>
+    <ul class="space-y-1 text-sm">
+      {
+        analysis.camps.map((id) => (
+          <li>
+            <span class="text-zinc-100">{label(id)}</span>
+            <span class="ml-2 font-mono text-xs text-zinc-500">{id}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+      Descriptive convergence
+    </h2>
+    {
+      analysis.descriptive_convergences.length === 0 ? (
+        <p class="text-sm text-zinc-500">
+          No claims held across every analyzed camp.
+        </p>
+      ) : (
+        <ul class="space-y-2 text-sm">
+          {analysis.descriptive_convergences.map((id) => (
+            <li>
+              <div class="text-zinc-100">{label(id)}</div>
+              <div class="font-mono text-xs text-zinc-500">{id}</div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="mb-10">
+    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+      Convergent interventions
+    </h2>
+    {
+      analysis.convergent_interventions.length === 0 ? (
+        <p class="text-sm text-zinc-500">No interventions reach ≥2 camps.</p>
+      ) : (
+        <div class="space-y-6">
+          {analysis.convergent_interventions.map((item) => (
+            <div class="rounded border border-zinc-800 p-4">
+              <div class="text-sm text-zinc-100">
+                {label(item.intervention_id)}
+              </div>
+              <div class="mb-3 font-mono text-xs text-zinc-500">
+                {item.intervention_id}
+              </div>
+              {item.operator_note && (
+                <blockquote class="mb-3 border-l-2 border-zinc-700 pl-3 text-sm text-zinc-300 italic">
+                  {item.operator_note}
+                </blockquote>
+              )}
+              <div class="mb-2 text-xs text-zinc-500">
+                Supporters and divergent anchors:
+              </div>
+              <ul class="space-y-1 text-sm">
+                {item.supporting_camps.map((campId) => {
+                  const normId = item.divergent_reasons[campId];
+                  return (
+                    <li>
+                      <span class="text-zinc-100">{label(campId)}</span>
+                      <span class="text-zinc-500"> --- </span>
+                      <span class="text-zinc-300">
+                        {normId ? label(normId) : "(no anchor)"}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="mb-10">
+    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+      Bridges
+    </h2>
+    {
+      analysis.bridges.length === 0 ? (
+        <p class="text-sm text-zinc-500">No bridges generated.</p>
+      ) : (
+        <div class="space-y-4">
+          {analysis.bridges.map((bridge) => (
+            <div class="rounded border border-zinc-800 p-4">
+              <div class="mb-2 text-sm text-zinc-100">
+                {label(bridge.from_camp)}
+                <span class="text-zinc-500"> → </span>
+                {label(bridge.to_camp)}
+              </div>
+              <p class="mb-3 text-sm text-zinc-300">{bridge.translation}</p>
+              {bridge.caveats.length > 0 && (
+                <div>
+                  <div class="mb-1 text-xs text-zinc-500">
+                    Does not translate:
+                  </div>
+                  <ul class="list-inside list-disc space-y-1 text-xs text-zinc-400">
+                    {bridge.caveats.map((caveat) => (
+                      <li>{caveat}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="mb-10">
+    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+      Blindspots
+    </h2>
+    {
+      analysis.blindspots.length === 0 ? (
+        <p class="text-sm text-zinc-500">None flagged.</p>
+      ) : (
+        <ul class="space-y-3 text-sm">
+          {analysis.blindspots.map((blindspot) => (
+            <li class="rounded border border-zinc-800 p-3">
+              <div class="mb-1 text-xs text-zinc-500">
+                Against{" "}
+                <span class="font-mono">{blindspot.against_prior_set}</span>
+                {" · flags "}
+                <span class="text-zinc-300">
+                  {label(blindspot.flagged_camp_id)}
+                </span>
+              </div>
+              <p class="text-zinc-200">{blindspot.reasoning}</p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

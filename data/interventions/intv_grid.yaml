@@ -1,0 +1,16 @@
+action_kind: political
+cost_estimate: Hundreds of billions federal + state; multi-decade.
+created_at: '2026-04-17T00:00:00Z'
+friction_scores:
+  friction_capex: 0.6
+  friction_enterprise: 0.8
+  friction_grid: 0.5
+  friction_public: 0.6
+  friction_regulation: 0.3
+id: intv_grid
+kind: intervention
+leverage_score: 0.75
+provenance_url: null
+text: Accelerate grid and generation buildout (permitting reform, interconnection,
+  new generation).
+updated_at: '2026-04-17T00:00:00Z'

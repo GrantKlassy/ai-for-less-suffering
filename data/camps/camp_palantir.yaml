@@ -1,0 +1,20 @@
+agents:
+- Palantir Technologies
+- allied DoD contractors
+created_at: '2026-04-17T00:00:00Z'
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_grid_constraint
+- desc_us_lead
+- desc_enterprise_slow
+held_normative:
+- norm_palantir_national
+- norm_palantir_order
+id: camp_palantir
+kind: camp
+name: Palantir
+provenance_url: null
+summary: Government/defense AI contractor. National-advantage framing; order-first;
+  enterprise absorption is the gap they close.
+updated_at: '2026-04-17T00:00:00Z'

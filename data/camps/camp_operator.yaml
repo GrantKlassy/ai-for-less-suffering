@@ -1,0 +1,18 @@
+agents:
+- operator prior set
+created_at: '2026-04-17T00:00:00Z'
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_grid_constraint
+- desc_enterprise_slow
+held_normative:
+- norm_operator_flourishing
+- norm_operator_sovereignty
+id: camp_operator
+kind: camp
+name: Operator-aligned
+provenance_url: null
+summary: Starting point for the operator's frame. Refine via BRAIN.md and `afls edit
+  camp_operator`.
+updated_at: '2026-04-17T00:00:00Z'

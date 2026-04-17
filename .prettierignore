@@ -3,3 +3,13 @@ dist/
 .astro/
 .wrangler/
 node_modules/
+data/
+public-output/
+public/canary.txt
+public/canary.txt.asc
+public/canary-key.asc
+engine/
+scripts/
+directives-ai/ARCHITECTURE.md
+directives-ai/MANIFESTO.md
+directives-ai/site-downloads/

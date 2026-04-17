@@ -8,6 +8,24 @@ dist/
 # Dependencies
 node_modules/
 
+# Python engine
+engine/.venv/
+engine/.pytest_cache/
+engine/.mypy_cache/
+engine/.ruff_cache/
+__pycache__/
+*.pyc
+*.pyo
+
+# Engine runtime artifacts
+data/afls.db
+data/afls.db-wal
+data/afls.db-shm
+
+# Secrets
+.env
+.env.local
+
 # Editor
 .vscode/
 .idea/

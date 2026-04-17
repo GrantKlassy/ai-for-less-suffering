@@ -1,0 +1,15 @@
+action_kind: political
+cost_estimate: Single-digit billions annually.
+created_at: '2026-04-17T00:00:00Z'
+friction_scores:
+  friction_capex: 0.8
+  friction_enterprise: 0.5
+  friction_grid: 1.0
+  friction_public: 0.8
+  friction_regulation: 0.7
+id: intv_training
+kind: intervention
+leverage_score: 0.35
+provenance_url: null
+text: Invest in AI workforce training and retraining programs.
+updated_at: '2026-04-17T00:00:00Z'

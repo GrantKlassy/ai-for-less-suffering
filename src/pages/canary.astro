@@ -1,0 +1,113 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Base from "../layouts/Base.astro";
+
+const canaryPath = path.resolve(process.cwd(), "public/canary.txt");
+const canaryText = fs.existsSync(canaryPath)
+  ? fs.readFileSync(canaryPath, "utf-8")
+  : "";
+
+const expiresMatch = /^Expires\s*:\s*(.+)$/m.exec(canaryText);
+const fingerprintMatch = /^Fingerprint\s*:\s*(.+)$/m.exec(canaryText);
+const issuedMatch = /^Issued\s*:\s*(.+)$/m.exec(canaryText);
+
+const expires = expiresMatch ? expiresMatch[1].trim() : "PENDING";
+const issued = issuedMatch ? issuedMatch[1].trim() : "PENDING";
+const fingerprint = fingerprintMatch
+  ? fingerprintMatch[1].trim()
+  : "PENDING FIRST RENEWAL";
+---
+
+<Base title="Warrant canary --- ai-for-less-suffering.com">
+  <h1 class="mb-2 text-2xl text-zinc-100">Warrant canary</h1>
+  <p class="mb-6 text-sm text-zinc-400">
+    A public, PGP-signed statement that I have not received certain kinds of
+    secret legal orders. If I stop renewing it, assume I have. The absence of a
+    renewal is the signal.
+  </p>
+
+  <div
+    id="canary-expired-banner"
+    class="mb-6 hidden rounded border border-red-700 bg-red-950 p-4 text-sm text-red-200"
+  >
+    <strong class="text-red-100">EXPIRED.</strong> This canary was not renewed before
+    its expiration date, or has not yet been signed. Treat the statement below as
+    no longer attested. Assume compromise.
+  </div>
+
+  <section
+    class="mb-6 grid grid-cols-1 gap-2 text-xs text-zinc-400 sm:grid-cols-3"
+  >
+    <div>
+      <div class="text-zinc-500">Issued</div>
+      <div class="font-mono text-zinc-200">{issued}</div>
+    </div>
+    <div>
+      <div class="text-zinc-500">Expires</div>
+      <div class="font-mono text-zinc-200">{expires}</div>
+    </div>
+    <div>
+      <div class="text-zinc-500">Fingerprint</div>
+      <div class="font-mono break-all text-zinc-200">{fingerprint}</div>
+    </div>
+  </section>
+
+  <section class="mb-6">
+    <h2 class="mb-2 text-sm text-zinc-500">Statement</h2>
+    <pre
+      class="overflow-x-auto rounded border border-zinc-800 bg-zinc-900 p-4 text-xs text-zinc-200">{canaryText || "canary.txt not found"}</pre>
+  </section>
+
+  <section class="mb-6">
+    <h2 class="mb-2 text-sm text-zinc-500">Downloads</h2>
+    <ul class="space-y-1 text-sm">
+      <li>
+        <a href="/canary.txt" class="text-zinc-100 hover:underline"
+          >canary.txt</a
+        >
+        <span class="text-zinc-500"> --- the signed plaintext statement</span>
+      </li>
+      <li>
+        <a href="/canary.txt.asc" class="text-zinc-100 hover:underline"
+          >canary.txt.asc</a
+        >
+        <span class="text-zinc-500"> --- detached PGP signature</span>
+      </li>
+      <li>
+        <a href="/canary-key.asc" class="text-zinc-100 hover:underline"
+          >canary-key.asc</a
+        >
+        <span class="text-zinc-500">
+          --- public key (import once, verify forever)</span
+        >
+      </li>
+    </ul>
+  </section>
+
+  <section class="mb-6">
+    <h2 class="mb-2 text-sm text-zinc-500">Verify</h2>
+    <pre
+      class="overflow-x-auto rounded border border-zinc-800 bg-zinc-900 p-4 text-xs text-zinc-200">curl -O https://ai-for-less-suffering.com/canary-key.asc
+curl -O https://ai-for-less-suffering.com/canary.txt
+curl -O https://ai-for-less-suffering.com/canary.txt.asc
+gpg --import canary-key.asc
+gpg --verify canary.txt.asc canary.txt</pre>
+    <p class="mt-3 text-xs text-zinc-500">
+      Look for <code class="text-zinc-300">Good signature</code> and a key fingerprint
+      that matches the one above. If the fingerprint is different, or verification
+      fails, do not trust the statement.
+    </p>
+  </section>
+
+  <script is:inline define:vars={{ expires }}>
+    (() => {
+      const banner = document.getElementById("canary-expired-banner");
+      if (!banner) return;
+      const parsed = Date.parse(expires + "T23:59:59Z");
+      if (Number.isNaN(parsed) || parsed < Date.now()) {
+        banner.classList.remove("hidden");
+      }
+    })();
+  </script>
+</Base>
