@@ -19,7 +19,12 @@ from afls.schema import (
     FrictionLayer,
     Intervention,
     InterventionKind,
+    MethodTag,
     NormativeClaim,
+    Source,
+    SourceKind,
+    Support,
+    Warrant,
 )
 from afls.storage import save_node
 
@@ -325,3 +330,166 @@ def test_edit_id_change_rejected(
 def test_edit_missing_exits(runner: CliRunner, data_root: Path) -> None:
     result = runner.invoke(app, ["edit", "camp_nonexistent"])
     assert result.exit_code == 1
+
+
+def test_add_source_uses_src_prefix(
+    runner: CliRunner, data_root: Path, tmp_path: Path
+) -> None:
+    fragment = _write_fragment(
+        tmp_path,
+        "src.yaml",
+        {
+            "kind": "source",
+            "source_kind": "paper",
+            "title": "Epoch AI compute trends",
+            "reliability": 0.8,
+        },
+    )
+    result = runner.invoke(app, ["add", str(fragment)])
+    assert result.exit_code == 0, result.output
+    files = list((data_root / "sources").glob("src_*.yaml"))
+    assert len(files) == 1
+
+
+def test_add_warrant_uses_war_prefix(
+    runner: CliRunner, data_root: Path, tmp_path: Path
+) -> None:
+    fragment = _write_fragment(
+        tmp_path,
+        "war.yaml",
+        {
+            "kind": "warrant",
+            "claim_id": "desc_x",
+            "source_id": "src_x",
+            "method_tag": "direct_measurement",
+            "weight": 0.7,
+        },
+    )
+    result = runner.invoke(app, ["add", str(fragment)])
+    assert result.exit_code == 0, result.output
+    files = list((data_root / "warrants").glob("war_*.yaml"))
+    assert len(files) == 1
+
+
+def test_validate_catches_warrant_bad_claim_ref(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(
+        Source(
+            id="src_a",
+            source_kind=SourceKind.PAPER,
+            title="t",
+            reliability=0.7,
+        ),
+        data_root,
+    )
+    save_node(
+        Warrant(
+            id="war_a",
+            claim_id="desc_missing",
+            source_id="src_a",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            weight=0.7,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 1
+    assert "desc_missing" in result.output
+
+
+def test_validate_catches_warrant_bad_source_ref(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.5), data_root)
+    save_node(
+        Warrant(
+            id="war_a",
+            claim_id="desc_a",
+            source_id="src_missing",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            weight=0.7,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 1
+    assert "src_missing" in result.output
+
+
+def test_validate_catches_disputed_warrant_bad_ref(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(
+        Camp(id="camp_a", name="A", disputed_warrants=["war_missing"]), data_root
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 1
+    assert "war_missing" in result.output
+
+
+def test_validate_warns_high_confidence_no_warrants(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.9), data_root)
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "warn" in result.output.lower()
+    assert "desc_a" in result.output
+
+
+def test_validate_warns_all_expert_estimate(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.9), data_root)
+    save_node(
+        Source(id="src_a", source_kind=SourceKind.BLOG, title="t", reliability=0.5),
+        data_root,
+    )
+    save_node(
+        Warrant(
+            id="war_a",
+            claim_id="desc_a",
+            source_id="src_a",
+            method_tag=MethodTag.EXPERT_ESTIMATE,
+            supports=Support.SUPPORT,
+            weight=0.6,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "expert_estimate" in result.output
+
+
+def test_validate_no_warning_when_confidence_low(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.4), data_root)
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "warn" not in result.output.lower()
+
+
+def test_validate_no_warning_when_direct_measurement_present(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.9), data_root)
+    save_node(
+        Source(id="src_a", source_kind=SourceKind.PAPER, title="t", reliability=0.9),
+        data_root,
+    )
+    save_node(
+        Warrant(
+            id="war_a",
+            claim_id="desc_a",
+            source_id="src_a",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            supports=Support.SUPPORT,
+            weight=0.9,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "warn" not in result.output.lower()

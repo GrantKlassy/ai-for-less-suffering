@@ -1,0 +1,14 @@
+accessed_at: ''
+authors:
+- United Nations Department of Economic and Social Affairs
+created_at: '2026-04-17T00:00:00Z'
+id: src_un_desa_wpp_2024
+kind: source
+notes: Canonical global demographic dataset.
+provenance_url: null
+published_at: '2024'
+reliability: 0.9
+source_kind: dataset
+title: World Population Prospects 2024
+updated_at: '2026-04-17T00:00:00Z'
+url: ''

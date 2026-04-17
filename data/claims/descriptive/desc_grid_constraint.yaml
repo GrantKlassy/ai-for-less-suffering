@@ -1,10 +1,8 @@
 confidence: 0.8
 created_at: '2026-04-17T00:00:00Z'
-evidence: []
 id: desc_grid_constraint
 kind: descriptive_claim
 provenance_url: null
-sources: []
 text: Electricity generation and transmission are near-term bottlenecks for datacenter
   buildout.
 updated_at: '2026-04-17T00:00:00Z'

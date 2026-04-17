@@ -15,7 +15,12 @@ from afls.schema import (
     FrictionLayer,
     Intervention,
     InterventionKind,
+    MethodTag,
     NormativeClaim,
+    Source,
+    SourceKind,
+    Support,
+    Warrant,
     new_id,
     slug_id,
 )
@@ -41,12 +46,20 @@ def test_descriptive_claim_valid() -> None:
     claim = DescriptiveClaim(
         id=new_id("desc"),
         text="AI deployment is accelerating.",
-        sources=["https://epoch.ai"],
         confidence=0.9,
-        evidence=["Epoch AI compute estimates Q1 2026"],
     )
     assert claim.kind == "descriptive_claim"
     assert claim.confidence == 0.9
+
+
+def test_descriptive_claim_rejects_legacy_sources_field() -> None:
+    with pytest.raises(ValidationError):
+        DescriptiveClaim(
+            id=new_id("desc"),
+            text="x",
+            confidence=0.5,
+            sources=["https://epoch.ai"],  # type: ignore[call-arg]
+        )
 
 
 def test_descriptive_claim_rejects_bad_confidence() -> None:
@@ -160,6 +173,104 @@ def test_blindspot_requires_reasoning() -> None:
     assert spot.against_prior_set == "grant"
 
 
+def test_source_requires_title_and_reliability() -> None:
+    source = Source(
+        id=new_id("src"),
+        source_kind=SourceKind.PAPER,
+        title="Epoch AI compute trends 2024",
+        url="https://epoch.ai/trends",
+        authors=["Epoch AI staff"],
+        published_at="2024",
+        reliability=0.8,
+    )
+    assert source.source_kind is SourceKind.PAPER
+    assert source.reliability == 0.8
+
+
+def test_source_rejects_bad_reliability() -> None:
+    with pytest.raises(ValidationError):
+        Source(
+            id=new_id("src"),
+            source_kind=SourceKind.BLOG,
+            title="x",
+            reliability=1.5,
+        )
+
+
+def test_source_rejects_empty_title() -> None:
+    with pytest.raises(ValidationError):
+        Source(
+            id=new_id("src"),
+            source_kind=SourceKind.BLOG,
+            title="",
+            reliability=0.5,
+        )
+
+
+def test_warrant_basic() -> None:
+    warrant = Warrant(
+        id=new_id("war"),
+        claim_id="desc_compute_matters",
+        source_id="src_epoch",
+        locator="figure 3",
+        quote="Training compute grew 4x/year from 2018-2024.",
+        method_tag=MethodTag.DIRECT_MEASUREMENT,
+        supports=Support.SUPPORT,
+        weight=0.9,
+    )
+    assert warrant.method_tag is MethodTag.DIRECT_MEASUREMENT
+    assert warrant.supports is Support.SUPPORT
+
+
+def test_warrant_defaults_to_support() -> None:
+    warrant = Warrant(
+        id=new_id("war"),
+        claim_id="desc_x",
+        source_id="src_x",
+        method_tag=MethodTag.JOURNALISTIC_REPORT,
+        weight=0.5,
+    )
+    assert warrant.supports is Support.SUPPORT
+
+
+def test_warrant_contradict_allowed() -> None:
+    warrant = Warrant(
+        id=new_id("war"),
+        claim_id="desc_x",
+        source_id="src_x",
+        method_tag=MethodTag.JOURNALISTIC_REPORT,
+        supports=Support.CONTRADICT,
+        weight=0.4,
+    )
+    assert warrant.supports is Support.CONTRADICT
+
+
+def test_warrant_rejects_bad_weight() -> None:
+    with pytest.raises(ValidationError):
+        Warrant(
+            id=new_id("war"),
+            claim_id="desc_x",
+            source_id="src_x",
+            method_tag=MethodTag.EXPERT_ESTIMATE,
+            weight=1.5,
+        )
+
+
+def test_camp_disputed_warrants_default_empty() -> None:
+    camp = Camp(id="camp_test", name="Test")
+    assert camp.disputed_warrants == []
+
+
+def test_camp_disputed_warrants_accepts_refs() -> None:
+    camp = Camp(
+        id="camp_test",
+        name="Test",
+        held_descriptive=["desc_x"],
+        disputed_warrants=["war_abc123"],
+    )
+    assert camp.disputed_warrants == ["war_abc123"]
+
+
 @pytest.mark.parametrize(
     "model_factory",
     [
@@ -189,6 +300,19 @@ def test_blindspot_requires_reasoning() -> None:
             against_prior_set="grant",
             flagged_camp_id="camp_x",
             reasoning="x",
+        ),
+        lambda: Source(
+            id=new_id("src"),
+            source_kind=SourceKind.FILING,
+            title="Palantir 2024 10-K",
+            reliability=0.85,
+        ),
+        lambda: Warrant(
+            id=new_id("war"),
+            claim_id="desc_x",
+            source_id="src_x",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            weight=0.7,
         ),
     ],
 )

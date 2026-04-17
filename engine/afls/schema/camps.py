@@ -19,4 +19,9 @@ class Camp(BaseNode):
     agents: list[str] = Field(default_factory=list, description="Real-world orgs/people/movements.")
     held_descriptive: list[NodeRef] = Field(default_factory=list)
     held_normative: list[NodeRef] = Field(default_factory=list)
+    disputed_warrants: list[NodeRef] = Field(
+        default_factory=list,
+        description="Warrants the camp rejects on provenance grounds "
+        "while still holding the underlying claim.",
+    )
     summary: str = Field(default="", description="One-line operator characterization.")

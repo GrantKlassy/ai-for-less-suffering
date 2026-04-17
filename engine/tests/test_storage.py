@@ -42,7 +42,6 @@ def test_save_and_load_descriptive_claim(data_dir: Path) -> None:
         id=new_id("desc"),
         text="AI deployment is accelerating.",
         confidence=0.9,
-        sources=["https://epoch.ai"],
     )
     path = save_node(claim, data_dir)
     assert path.exists()

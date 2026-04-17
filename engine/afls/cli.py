@@ -17,7 +17,15 @@ from rich.table import Table
 
 from afls import __version__
 from afls.config import data_dir, db_path, public_output_dir
-from afls.output import analysis_paths, write_analysis_json, write_analysis_markdown
+from afls.output import (
+    analysis_paths,
+    leverage_analysis_paths,
+    write_analysis_json,
+    write_analysis_markdown,
+    write_leverage_json,
+    write_leverage_markdown,
+)
+from afls.queries.leverage import run_leverage_query
 from afls.queries.palantir import run_palantir_query
 from afls.reasoning import AnthropicClient
 from afls.schema import (
@@ -26,7 +34,11 @@ from afls.schema import (
     Bridge,
     Camp,
     Convergence,
+    DescriptiveClaim,
     Intervention,
+    MethodTag,
+    Support,
+    Warrant,
     new_id,
     slug_id,
 )
@@ -55,6 +67,8 @@ _ID_PREFIX: dict[str, str] = {
     "bridge": "bridge",
     "convergence": "conv",
     "blindspot": "blind",
+    "source": "src",
+    "warrant": "war",
 }
 
 
@@ -235,6 +249,8 @@ def validate() -> None:
             expect(camp.id, "held_descriptive", ref, "descriptive_claim")
         for ref in camp.held_normative:
             expect(camp.id, "held_normative", ref, "normative_claim")
+        for ref in camp.disputed_warrants:
+            expect(camp.id, "disputed_warrants", ref, "warrant")
     for intv in list_nodes(Intervention, root):
         for ref in intv.friction_scores:
             expect(intv.id, "friction_scores", ref, "friction_layer")
@@ -250,6 +266,10 @@ def validate() -> None:
             expect(conv.id, "divergent_reasons.value", norm_id, "normative_claim")
     for blindspot in list_nodes(BlindSpot, root):
         expect(blindspot.id, "flagged_camp_id", blindspot.flagged_camp_id, "camp")
+    warrants = list_nodes(Warrant, root)
+    for warrant in warrants:
+        expect(warrant.id, "claim_id", warrant.claim_id, "descriptive_claim")
+        expect(warrant.id, "source_id", warrant.source_id, "source")
 
     if errors:
         for err in errors:
@@ -260,7 +280,42 @@ def validate() -> None:
             bold=True,
         )
         raise typer.Exit(1)
-    typer.secho(f"ok: {len(id_to_kind)} nodes, no referential errors", fg="green")
+
+    warnings = _confidence_lint(list_nodes(DescriptiveClaim, root), warrants)
+    for warn in warnings:
+        typer.secho(f"  warn: {warn}", fg="yellow")
+    suffix = f", {len(warnings)} warnings" if warnings else ""
+    typer.secho(
+        f"ok: {len(id_to_kind)} nodes, no referential errors{suffix}", fg="green"
+    )
+
+
+def _confidence_lint(
+    claims: list[DescriptiveClaim], warrants: list[Warrant]
+) -> list[str]:
+    """Operator-discipline warnings on claim confidence vs. attached warrants."""
+    by_claim: dict[str, list[Warrant]] = {}
+    for warrant in warrants:
+        by_claim.setdefault(warrant.claim_id, []).append(warrant)
+    messages: list[str] = []
+    for claim in claims:
+        supporting = [
+            w for w in by_claim.get(claim.id, []) if w.supports is Support.SUPPORT
+        ]
+        if claim.confidence > 0.5 and not supporting:
+            messages.append(
+                f"{claim.id}: confidence {claim.confidence} with no supporting warrants"
+            )
+        if (
+            claim.confidence > 0.8
+            and supporting
+            and all(w.method_tag is MethodTag.EXPERT_ESTIMATE for w in supporting)
+        ):
+            messages.append(
+                f"{claim.id}: confidence {claim.confidence} backed only by "
+                "expert_estimate warrants"
+            )
+    return messages
 
 
 @app.command()
@@ -271,17 +326,31 @@ def reindex() -> None:
     typer.secho(f"indexed {count} nodes -> {db}", fg="green")
 
 
+_SUPPORTED_QUERIES: tuple[str, ...] = ("palantir", "leverage")
+
+
 @app.command()
 def query(name: str) -> None:
-    """Run a named reasoning query. Supported: `palantir`."""
-    if name != "palantir":
-        typer.secho(f"unknown query {name!r}. supported: palantir", fg="red")
+    """Run a named reasoning query. Supported: `palantir`, `leverage`."""
+    if name not in _SUPPORTED_QUERIES:
+        typer.secho(
+            f"unknown query {name!r}. supported: {', '.join(_SUPPORTED_QUERIES)}",
+            fg="red",
+        )
         raise typer.Exit(1)
     client = AnthropicClient()
-    analysis = run_palantir_query(client, data_dir())
-    json_path, md_path = analysis_paths(public_output_dir(), analysis)
-    write_analysis_json(analysis, json_path)
-    write_analysis_markdown(analysis, md_path, data_dir())
+    if name == "palantir":
+        palantir_analysis = run_palantir_query(client, data_dir())
+        json_path, md_path = analysis_paths(public_output_dir(), palantir_analysis)
+        write_analysis_json(palantir_analysis, json_path)
+        write_analysis_markdown(palantir_analysis, md_path, data_dir())
+    else:
+        leverage_analysis = run_leverage_query(client, data_dir())
+        json_path, md_path = leverage_analysis_paths(
+            public_output_dir(), leverage_analysis
+        )
+        write_leverage_json(leverage_analysis, json_path)
+        write_leverage_markdown(leverage_analysis, md_path, data_dir())
     typer.secho(f"wrote {json_path}", fg="green")
     typer.secho(f"wrote {md_path}", fg="green")
 

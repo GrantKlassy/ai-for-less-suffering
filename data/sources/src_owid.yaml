@@ -1,0 +1,18 @@
+accessed_at: ''
+authors:
+- Max Roser
+- Hannah Ritchie
+- Esteban Ortiz-Ospina
+- et al.
+created_at: '2026-04-17T00:00:00Z'
+id: src_owid
+kind: source
+notes: 'Meta-source: visualizes and harmonizes data from IHME, WHO, WB, UN, FAO. Peer-reviewed
+  methodology notes per chart.'
+provenance_url: null
+published_at: ongoing
+reliability: 0.85
+source_kind: dashboard
+title: Our World in Data
+updated_at: '2026-04-17T00:00:00Z'
+url: https://ourworldindata.org

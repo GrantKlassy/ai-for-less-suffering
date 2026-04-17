@@ -21,11 +21,20 @@ from afls.schema import (
     DescriptiveClaim,
     Intervention,
     NormativeClaim,
+    Source,
+    Support,
+    Warrant,
     new_id,
 )
 from afls.storage import list_nodes
 
-DEFAULT_CAMP_IDS: tuple[str, ...] = ("camp_palantir", "camp_anthropic", "camp_operator")
+DEFAULT_CAMP_IDS: tuple[str, ...] = (
+    "camp_palantir",
+    "camp_anthropic",
+    "camp_operator",
+    "camp_displaced_workers",
+    "camp_xrisk",
+)
 
 
 class _StrictModel(BaseModel):
@@ -70,6 +79,38 @@ class PalantirLLMOutput(_StrictModel):
     blindspots: list[BlindSpotProposal] = Field(default_factory=list)
 
 
+class WarrantSummary(_StrictModel):
+    """Flattened warrant view for the contested-claim renderer.
+
+    Deliberately embeds source title and stance inline so downstream consumers
+    (markdown, Astro page) do not need to re-read the YAML graph to label the
+    evidence. The JSON is self-contained.
+    """
+
+    warrant_id: str
+    source_id: str
+    source_title: str
+    stance: str
+    method_tag: str
+    weight: float
+    locator: str = ""
+
+
+class ContestedClaim(_StrictModel):
+    """A claim with both supporting and contradicting warrants attached.
+
+    Computed deterministically --- no LLM involved. The presence of a contested
+    claim in the analysis signals auditable disagreement, not a black-box
+    confidence score.
+    """
+
+    claim_id: str
+    claim_text: str
+    supports: list[WarrantSummary]
+    contradicts: list[WarrantSummary]
+    qualifies: list[WarrantSummary] = Field(default_factory=list)
+
+
 class PalantirAnalysis(BaseModel):
     """Canonical output written to `public-output/analyses/palantir_<timestamp>.json`."""
 
@@ -82,6 +123,7 @@ class PalantirAnalysis(BaseModel):
     convergent_interventions: list[ConvergentInterventionAnalysis]
     bridges: list[Bridge]
     blindspots: list[BlindSpot]
+    contested_claims: list[ContestedClaim] = Field(default_factory=list)
 
 
 def find_descriptive_convergences(camps: list[Camp]) -> list[str]:
@@ -92,6 +134,63 @@ def find_descriptive_convergences(camps: list[Camp]) -> list[str]:
     for camp in camps[1:]:
         shared &= set(camp.held_descriptive)
     return sorted(shared)
+
+
+def _warrant_summary(warrant: Warrant, source_title: str) -> WarrantSummary:
+    return WarrantSummary(
+        warrant_id=warrant.id,
+        source_id=warrant.source_id,
+        source_title=source_title,
+        stance=warrant.supports.value,
+        method_tag=warrant.method_tag.value,
+        weight=warrant.weight,
+        locator=warrant.locator,
+    )
+
+
+def find_contested_claims(
+    claims: list[DescriptiveClaim],
+    warrants: list[Warrant],
+    sources: list[Source],
+) -> list[ContestedClaim]:
+    """Claims with at least one support warrant AND at least one contradict warrant.
+
+    Sorted by claim_id for determinism. Qualifying warrants are surfaced too --- a
+    contested claim deserves the full evidence context, not just the two stances.
+    """
+    sources_by_id = {s.id: s for s in sources}
+    warrants_by_claim: dict[str, list[Warrant]] = {}
+    for warrant in warrants:
+        warrants_by_claim.setdefault(warrant.claim_id, []).append(warrant)
+
+    claims_by_id = {c.id: c for c in claims}
+    contested: list[ContestedClaim] = []
+    for claim_id in sorted(warrants_by_claim):
+        claim = claims_by_id.get(claim_id)
+        if claim is None:
+            continue
+        ws = warrants_by_claim[claim_id]
+        supports = [w for w in ws if w.supports is Support.SUPPORT]
+        contradicts = [w for w in ws if w.supports is Support.CONTRADICT]
+        if not supports or not contradicts:
+            continue
+        qualifies = [w for w in ws if w.supports is Support.QUALIFY]
+
+        def summarize(w: Warrant) -> WarrantSummary:
+            src = sources_by_id.get(w.source_id)
+            title = src.title if src else "(source missing)"
+            return _warrant_summary(w, title)
+
+        contested.append(
+            ContestedClaim(
+                claim_id=claim.id,
+                claim_text=claim.text,
+                supports=[summarize(w) for w in supports],
+                contradicts=[summarize(w) for w in contradicts],
+                qualifies=[summarize(w) for w in qualifies],
+            )
+        )
+    return contested
 
 
 def _format_camp(camp: Camp, claims_by_id: dict[str, DescriptiveClaim | NormativeClaim]) -> str:
@@ -125,22 +224,63 @@ def _format_intervention(intv: Intervention) -> str:
     return "\n".join(lines)
 
 
+def _format_descriptive_with_warrants(
+    claim: DescriptiveClaim,
+    warrants: list[Warrant],
+    sources_by_id: dict[str, Source],
+) -> str:
+    lines = [
+        f"- id: {claim.id}",
+        f"  text: {claim.text}",
+        f"  confidence: {claim.confidence}",
+    ]
+    if warrants:
+        lines.append("  warrants:")
+        for warrant in warrants:
+            source = sources_by_id.get(warrant.source_id)
+            source_title = source.title if source else "(source missing)"
+            lines.append(
+                f"    - [{warrant.supports.value}|{warrant.method_tag.value}|"
+                f"w={warrant.weight}] {source_title} (src={warrant.source_id})"
+            )
+    return "\n".join(lines)
+
+
 def build_graph_context(
     camps: list[Camp],
     descriptives: list[DescriptiveClaim],
     normatives: list[NormativeClaim],
     interventions: list[Intervention],
+    warrants: list[Warrant] | None = None,
+    sources: list[Source] | None = None,
 ) -> str:
-    """Render the slice of graph state the LLM needs to reason over."""
+    """Render the slice of graph state the LLM needs to reason over.
+
+    Warrants are folded inline under each descriptive claim so the LLM sees which
+    evidence the confidence score is (or is not) resting on. Without this, a reader
+    from camp Palantir cannot audit the reasoning --- they only see an asserted number.
+    """
     claims_by_id: dict[str, DescriptiveClaim | NormativeClaim] = {}
     for desc in descriptives:
         claims_by_id[desc.id] = desc
     for norm in normatives:
         claims_by_id[norm.id] = norm
+    sources_by_id = {s.id: s for s in (sources or [])}
+    warrants_by_claim: dict[str, list[Warrant]] = {}
+    for warrant in warrants or []:
+        warrants_by_claim.setdefault(warrant.claim_id, []).append(warrant)
 
-    sections = ["# Current graph (camps, claims, interventions)", "", "## Camps"]
+    sections = ["# Current graph (camps, claims, interventions, warrants)", "", "## Camps"]
     for camp in camps:
         sections.append(_format_camp(camp, claims_by_id))
+    if warrants is not None:
+        sections.append("\n## Descriptive claims (with warrants)")
+        for desc in descriptives:
+            sections.append(
+                _format_descriptive_with_warrants(
+                    desc, warrants_by_claim.get(desc.id, []), sources_by_id
+                )
+            )
     sections.append("\n## Interventions")
     for intv in interventions:
         sections.append(_format_intervention(intv))
@@ -182,9 +322,14 @@ def run_palantir_query(
     descriptives = list_nodes(DescriptiveClaim, data_dir)
     normatives = list_nodes(NormativeClaim, data_dir)
     interventions = list_nodes(Intervention, data_dir)
+    warrants = list_nodes(Warrant, data_dir)
+    sources = list_nodes(Source, data_dir)
 
     desc_convs = find_descriptive_convergences(camps)
-    context = build_graph_context(camps, descriptives, normatives, interventions)
+    contested = find_contested_claims(descriptives, warrants, sources)
+    context = build_graph_context(
+        camps, descriptives, normatives, interventions, warrants, sources
+    )
 
     llm_out = complete_and_parse(
         client,
@@ -220,4 +365,5 @@ def run_palantir_query(
         convergent_interventions=llm_out.convergent_interventions,
         bridges=bridges,
         blindspots=blindspots,
+        contested_claims=contested,
     )

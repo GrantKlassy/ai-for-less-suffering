@@ -9,13 +9,15 @@ from afls.schema.base import BaseNode
 
 
 class DescriptiveClaim(BaseNode):
-    """A factual assertion about the world. Never carries a value judgment."""
+    """A factual assertion about the world. Never carries a value judgment.
+
+    Provenance lives on Warrant nodes, not here. `confidence` is the operator's
+    posterior after reading the warrants attached to this claim.
+    """
 
     kind: str = Field(default="descriptive_claim", frozen=True)
     text: str = Field(min_length=1)
-    sources: list[str] = Field(default_factory=list)
     confidence: float = Field(ge=0.0, le=1.0)
-    evidence: list[str] = Field(default_factory=list)
 
 
 class NormativeClaim(BaseNode):

@@ -22,7 +22,12 @@ from afls.schema import (
     FrictionLayer,
     Intervention,
     InterventionKind,
+    MethodTag,
     NormativeClaim,
+    Source,
+    SourceKind,
+    Support,
+    Warrant,
 )
 from afls.storage import save_node
 
@@ -42,13 +47,11 @@ def _descriptive_claims() -> list[DescriptiveClaim]:
             id="desc_accelerating",
             text="AI capability is accelerating along compute, data, and algorithmic axes.",
             confidence=0.9,
-            sources=["https://epoch.ai"],
         ),
         DescriptiveClaim(
             id="desc_compute_matters",
             text="Frontier AI performance scales with compute and capex.",
             confidence=0.9,
-            sources=["https://epoch.ai", "https://semianalysis.com"],
         ),
         DescriptiveClaim(
             id="desc_grid_constraint",
@@ -66,6 +69,65 @@ def _descriptive_claims() -> list[DescriptiveClaim]:
             text="Enterprise and government absorption of AI capability lags the frontier by "
             "years, not months.",
             confidence=0.75,
+        ),
+    ]
+
+
+def _sources() -> list[Source]:
+    return [
+        Source(
+            id="src_epoch_ai",
+            source_kind=SourceKind.DASHBOARD,
+            title="Epoch AI --- compute, data, and algorithmic trends",
+            url="https://epoch.ai",
+            authors=["Epoch AI research team"],
+            published_at="ongoing",
+            reliability=0.85,
+            notes="Public dashboard tracking frontier-model compute and data scaling. "
+            "Primary operator reference.",
+        ),
+        Source(
+            id="src_semianalysis",
+            source_kind=SourceKind.BLOG,
+            title="SemiAnalysis --- compute, capex, and datacenter analysis",
+            url="https://semianalysis.com",
+            authors=["Dylan Patel et al."],
+            published_at="ongoing",
+            reliability=0.7,
+            notes="Industry-adjacent analysis. Strong on supply-chain specifics; "
+            "not peer-reviewed.",
+        ),
+    ]
+
+
+def _warrants() -> list[Warrant]:
+    return [
+        Warrant(
+            id="war_epoch_accelerating",
+            claim_id="desc_accelerating",
+            source_id="src_epoch_ai",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            supports=Support.SUPPORT,
+            weight=0.9,
+            locator="trends dashboard",
+        ),
+        Warrant(
+            id="war_epoch_compute_matters",
+            claim_id="desc_compute_matters",
+            source_id="src_epoch_ai",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            supports=Support.SUPPORT,
+            weight=0.85,
+            locator="compute-vs-performance section",
+        ),
+        Warrant(
+            id="war_semi_compute_matters",
+            claim_id="desc_compute_matters",
+            source_id="src_semianalysis",
+            method_tag=MethodTag.TRIANGULATION,
+            supports=Support.SUPPORT,
+            weight=0.7,
+            locator="capex and cluster analyses",
         ),
     ]
 
@@ -265,6 +327,8 @@ def seed(target_dir: Path | None = None) -> int:
     nodes.extend(_friction_layers())
     nodes.extend(_interventions())
     nodes.extend(_camps())
+    nodes.extend(_sources())
+    nodes.extend(_warrants())
     for node in nodes:
         save_node(_stamp(node), root)
     return len(nodes)

@@ -1,0 +1,26 @@
+agents:
+- frontier-lab and big-tech employee organizers
+- AI-exposed white-collar labor (legal, administrative, creative)
+- building-trades and logistics unions exposed to AI-driven workforce reshaping
+created_at: '2026-04-17T16:55:00Z'
+disputed_warrants:
+- war_pltr_ceo_dismisses_resistance
+held_descriptive:
+- desc_accelerating
+- desc_enterprise_slow
+- desc_workforce_resistance
+- desc_maven_status
+- desc_dod_ai_contract_spend
+- desc_palantir_gov_revenue
+- desc_mental_health_burden
+held_normative:
+- norm_workers_dignity
+- norm_operator_flourishing
+id: camp_displaced_workers
+kind: camp
+name: Displaced workers
+provenance_url: null
+summary: Labor-organizer coalition. Holds that AI displacement without replacement
+  of role and meaning is a first-order harm; contests interested-party dismissals of
+  employee resistance.
+updated_at: '2026-04-17T16:55:00Z'

@@ -1,0 +1,16 @@
+accessed_at: ''
+authors:
+- New York Times
+- Associated Press
+created_at: '2026-04-17T00:00:00Z'
+id: src_nyt_openai_idf
+kind: source
+notes: Reports on OpenAI's 2024 policy change allowing military use and downstream
+  Azure-IDF deployments.
+provenance_url: null
+published_at: '2024'
+reliability: 0.75
+source_kind: press
+title: Coverage of OpenAI and Microsoft AI use by Israeli military, 2024
+updated_at: '2026-04-17T00:00:00Z'
+url: ''

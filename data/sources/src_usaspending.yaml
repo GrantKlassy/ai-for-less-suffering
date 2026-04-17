@@ -1,0 +1,15 @@
+accessed_at: ''
+authors:
+- US Treasury / Bureau of the Fiscal Service
+created_at: '2026-04-17T00:00:00Z'
+id: src_usaspending
+kind: source
+notes: Primary federal contract-level dataset. Query completeness limited by inconsistent
+  PSC/NAICS tagging on AI-specific line items.
+provenance_url: null
+published_at: ongoing
+reliability: 0.9
+source_kind: dataset
+title: USASpending.gov federal contract awards
+updated_at: '2026-04-17T00:00:00Z'
+url: https://www.usaspending.gov

@@ -1,0 +1,13 @@
+claim_id: desc_algorithmic_efficiency
+created_at: '2026-04-17T00:00:00Z'
+id: war_algo_progress_epoch
+kind: warrant
+locator: Abstract; headline finding
+method_tag: modeled_projection
+provenance_url: null
+quote: compute required to reach a set performance threshold has halved approximately
+  every 8 months
+source_id: src_epoch_algorithmic_progress
+supports: support
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.85

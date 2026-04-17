@@ -1,0 +1,14 @@
+accessed_at: ''
+authors:
+- US Department of Defense
+created_at: '2026-04-17T00:00:00Z'
+id: src_dod_maven_contract
+kind: source
+notes: Primary contract announcement via DoD and NGA press releases.
+provenance_url: null
+published_at: 2024-05
+reliability: 0.9
+source_kind: primary_doc
+title: DoD announcement of Maven Smart System contract award to Palantir ($480M)
+updated_at: '2026-04-17T00:00:00Z'
+url: ''

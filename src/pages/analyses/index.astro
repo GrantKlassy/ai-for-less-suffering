@@ -2,25 +2,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import Base from "../../layouts/Base.astro";
-import type { PalantirAnalysis } from "../../lib/analysis";
+import { parseAnalysis, type AnalysisEntry } from "../../lib/analysis";
 
-interface Entry {
-  id: string;
-  analysis: PalantirAnalysis;
-}
-
-function loadAnalyses(): Entry[] {
+function loadAnalyses(): AnalysisEntry[] {
   const analysesDir = path.resolve(process.cwd(), "public-output/analyses");
   if (!fs.existsSync(analysesDir)) return [];
   return fs
     .readdirSync(analysesDir)
     .filter((name) => name.endsWith(".json"))
-    .map((name): Entry => {
+    .map((name): AnalysisEntry => {
       const id = name.replace(/\.json$/, "");
-      const analysis = JSON.parse(
-        fs.readFileSync(path.join(analysesDir, name), "utf-8"),
-      ) as PalantirAnalysis;
-      return { id, analysis };
+      const raw = fs.readFileSync(path.join(analysesDir, name), "utf-8");
+      return { id, analysis: parseAnalysis(name, raw) };
     })
     .sort((a, b) =>
       b.analysis.generated_at.localeCompare(a.analysis.generated_at),
@@ -57,9 +50,21 @@ const entries = loadAnalyses();
                 <span class="text-zinc-500">{analysis.generated_at}</span>
               </div>
               <div class="mt-2 text-xs text-zinc-500">
-                camps: {analysis.camps.join(", ")} · bridges:{" "}
-                {analysis.bridges.length} · blindspots:{" "}
-                {analysis.blindspots.length}
+                {analysis.kind === "palantir" ? (
+                  <>
+                    camps: {analysis.camps.join(", ")} · bridges:{" "}
+                    {analysis.bridges.length} · blindspots:{" "}
+                    {analysis.blindspots.length} · contested:{" "}
+                    {analysis.contested_claims.length}
+                  </>
+                ) : (
+                  <>
+                    camps: {analysis.camps.join(", ")} · ranked:{" "}
+                    {analysis.rankings.length} · ranking blindspots:{" "}
+                    {analysis.ranking_blindspots.length} · contested:{" "}
+                    {analysis.contested_claims.length}
+                  </>
+                )}
               </div>
             </a>
           </li>

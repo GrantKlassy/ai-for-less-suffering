@@ -1,11 +1,34 @@
 agents:
 - operator prior set
 created_at: '2026-04-17T00:00:00Z'
+disputed_warrants:
+- war_pltr_10k_competitive
+- war_pltr_earnings_call_growth
+- war_pltr_ceo_dismisses_resistance
 held_descriptive:
 - desc_accelerating
 - desc_compute_matters
 - desc_grid_constraint
 - desc_enterprise_slow
+- desc_training_compute_growth
+- desc_flagship_training_cost
+- desc_transmission_stall
+- desc_interconnection_queue_backlog
+- desc_us_datacenter_load_forecast
+- desc_leading_edge_chip_concentration
+- desc_ic_cloud_concentration
+- desc_dod_ai_contract_spend
+- desc_maven_status
+- desc_palantir_dominant
+- desc_palantir_gov_revenue
+- desc_workforce_resistance
+- desc_animal_suffering_scale
+- desc_child_mortality_progress
+- desc_extreme_poverty_trajectory
+- desc_life_expectancy_gain
+- desc_mental_health_burden
+- desc_ncd_shift
+- desc_suffering_geography
 held_normative:
 - norm_operator_flourishing
 - norm_operator_sovereignty
@@ -15,4 +38,4 @@ name: Operator-aligned
 provenance_url: null
 summary: Starting point for the operator's frame. Refine via BRAIN.md and `afls edit
   camp_operator`.
-updated_at: '2026-04-17T00:00:00Z'
+updated_at: '2026-04-17T15:35:00Z'

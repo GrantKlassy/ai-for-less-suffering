@@ -12,6 +12,8 @@ from afls.schema import (
     FrictionLayer,
     Intervention,
     NormativeClaim,
+    Source,
+    Warrant,
 )
 
 NODE_TYPES: dict[str, type[BaseNode]] = {
@@ -23,6 +25,8 @@ NODE_TYPES: dict[str, type[BaseNode]] = {
     "bridge": Bridge,
     "convergence": Convergence,
     "blindspot": BlindSpot,
+    "source": Source,
+    "warrant": Warrant,
 }
 
 NODE_SUBDIRS: dict[type[BaseNode], tuple[str, ...]] = {
@@ -34,4 +38,6 @@ NODE_SUBDIRS: dict[type[BaseNode], tuple[str, ...]] = {
     Bridge: ("bridges",),
     Convergence: ("convergences",),
     BlindSpot: ("blindspots",),
+    Source: ("sources",),
+    Warrant: ("warrants",),
 }

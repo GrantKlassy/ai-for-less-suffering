@@ -1,0 +1,12 @@
+claim_id: desc_palantir_dominant
+created_at: '2026-04-17T00:00:00Z'
+id: war_intercept_dominance_skeptical
+kind: warrant
+locator: Coverage framing Palantir as over-sold relative to internal-tool alternatives
+method_tag: journalistic_report
+provenance_url: null
+quote: ''
+source_id: src_intercept_palantir
+supports: contradict
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.5

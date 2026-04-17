@@ -2,12 +2,25 @@ agents:
 - Palantir Technologies
 - allied DoD contractors
 created_at: '2026-04-17T00:00:00Z'
+disputed_warrants: []
 held_descriptive:
 - desc_accelerating
 - desc_compute_matters
 - desc_grid_constraint
 - desc_us_lead
 - desc_enterprise_slow
+- desc_training_compute_growth
+- desc_flagship_training_cost
+- desc_algorithmic_efficiency
+- desc_transmission_stall
+- desc_interconnection_queue_backlog
+- desc_us_datacenter_load_forecast
+- desc_leading_edge_chip_concentration
+- desc_ic_cloud_concentration
+- desc_dod_ai_contract_spend
+- desc_maven_status
+- desc_palantir_dominant
+- desc_palantir_gov_revenue
 held_normative:
 - norm_palantir_national
 - norm_palantir_order
@@ -17,4 +30,4 @@ name: Palantir
 provenance_url: null
 summary: Government/defense AI contractor. National-advantage framing; order-first;
   enterprise absorption is the gap they close.
-updated_at: '2026-04-17T00:00:00Z'
+updated_at: '2026-04-17T15:35:00Z'

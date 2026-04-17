@@ -1,0 +1,12 @@
+claim_id: desc_ic_cloud_concentration
+created_at: '2026-04-17T00:00:00Z'
+id: war_semi_cloud_concentration
+kind: warrant
+locator: Hyperscaler capex and share coverage, 2024
+method_tag: triangulation
+provenance_url: null
+quote: ''
+source_id: src_semianalysis
+supports: support
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.7

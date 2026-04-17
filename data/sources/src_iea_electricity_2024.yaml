@@ -1,0 +1,15 @@
+accessed_at: ''
+authors:
+- International Energy Agency
+created_at: '2026-04-17T00:00:00Z'
+id: src_iea_electricity_2024
+kind: source
+notes: First IEA report with dedicated datacenter/AI/crypto electricity chapter. Global
+  view; US numbers are a subset and run lower than US-specific forecasts.
+provenance_url: null
+published_at: 2024-01
+reliability: 0.85
+source_kind: primary_doc
+title: Electricity 2024 --- Analysis and Forecast to 2026
+updated_at: '2026-04-17T00:00:00Z'
+url: ''

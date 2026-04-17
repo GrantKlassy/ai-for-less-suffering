@@ -1,0 +1,26 @@
+agents:
+- MIRI and allied alignment-first researchers
+- Pause AI and capability-moratorium advocates
+- x-risk-weighted fractions of EA and 80K communities
+created_at: '2026-04-17T16:55:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_training_compute_growth
+- desc_flagship_training_cost
+- desc_algorithmic_efficiency
+- desc_us_lead
+- desc_leading_edge_chip_concentration
+- desc_enterprise_slow
+held_normative:
+- norm_xrisk_halt
+- norm_anthropic_alignment
+id: camp_xrisk
+kind: camp
+name: X-risk
+provenance_url: null
+summary: Alignment-maximalist coalition distinct from Anthropic's lead-seeking variant.
+  Holds that halting capability progress must remain a live policy option; build-carefully-to-stay-ahead
+  is not a substitute for build-only-if-safe.
+updated_at: '2026-04-17T16:55:00Z'
