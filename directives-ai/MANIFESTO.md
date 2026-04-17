@@ -20,7 +20,7 @@ The tool should let me interrogate questions like:
   economic — that accelerate AI toward suffering reduction while staying robust 
   to the friction layers (power grid, capex, regulation, enterprise absorption, 
   public backlash)?
-- Where are my own blind spots? Challenge my priors. I default to accelerationism
+- Where are my own blind spots? Challenge my priors. I default to [accelerationism](https://en.wikipedia.org/wiki/Effective_accelerationism)
   with an "[80K](https://80000hours.org/)/EA" overlay and I self-host everything. Flag when my framework is 
   missing something.
 
