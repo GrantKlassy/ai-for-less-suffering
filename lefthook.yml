@@ -11,6 +11,14 @@ pre-commit:
         fi
     - name: update-badge
       run: task fix:badge
+    - name: strip-exif
+      run: |
+        IMAGES=$(git diff --cached --name-only --diff-filter=ACM -- 'directives-ai/*.jpg' 'directives-ai/*.jpeg' 'directives-ai/*.png' 'directives-ai/*.tiff' 'directives-ai/*.webp' 'directives-ai/*.gif' 'directives-ai/*.bmp' 'directives-ai/*.heic')
+        if [ -n "$IMAGES" ]; then
+          echo "$IMAGES" | xargs exiftool -all= -overwrite_original
+          echo "$IMAGES" | xargs git add
+          echo "Stripped EXIF data from: $IMAGES"
+        fi
 
 commit-msg:
   jobs:
