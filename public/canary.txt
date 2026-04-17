@@ -6,27 +6,35 @@ Issued        : 2026-04-17
 Expires       : 2029-04-16
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945479
-Block hash    : 0000000000000000000142a9911c23d812ce31f8793e3fa76cd2492eb1ff07ed
+Block height  : 945483
+Block hash    : 00000000000000000001450df403dd39b086d3fb49b7a6c4893d36b91d1db8dd
 
 As of the Issued date above, I attest that:
 
   1. I have received no National Security Letters related to
      ai-for-less-suffering.com.
+
   2. I have received no FISA orders related to ai-for-less-suffering.com.
+
   3. I have received no gag orders or sealed court orders related to
      ai-for-less-suffering.com.
+
   4. I have not been compelled to modify, backdoor, or weaken any software
      or cryptography published from this domain or its source repository.
+
   5. I have not been compelled to hand over keys, credentials, or
      infrastructure control for ai-for-less-suffering.com to any third
      party.
+
   6. No ai-for-less-suffering.com user data has been handed to any
      government, law enforcement, or intelligence agency.
+
   7. I have not (knowingly) been contacted by any member of a foreign
      government regarding this website or the ideas published here.
+
   8. I have never been asked to take down any repository on my personal
      GitHub account.
+
   9. I have not felt that Anthropic was "limiting compute" based on my
      ideas or thoughts around AI.
 
@@ -40,3 +48,28 @@ Verification:
   gpg --verify canary.txt.asc canary.txt
 
 Fingerprint   : 5CD5 69FF 79CB 62B6 2A12 A093 9788 0C5D 5061 FF63
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣤⣤⣠⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⢰⣤⡀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣿⣿⡿⢿⡿⢻⣿⠿⣿⡿⢿⡿⠿⣿⣿⣆⠀⠀⠀⠀⠀⣀⣠⣤⣴⣶⣶⣶⣶⣶⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⣿⣿⠄⠀⢀⣠⣴⣶⣿⡿⢿⣟⠸⣿⣶⣿⣷⣾⣿⣷⣿⣿⣾⣿⣷⣿⣿⣿⣦⣴⣶⣾⣿⣿⣿⣿⣿⡿⠿⠛⠋⠉⠙⠿⢿⣄⣀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀
+⠀⠉⣿⣷⣿⣿⣿⣟⢻⣷⣦⣿⣿⣿⣿⣿⠟⢻⣯⣉⣿⣟⣻⣿⣻⣿⡛⢻⣿⣿⣿⠿⠿⠛⠛⠋⠁⠀⠀⠀⣀⣀⣀⣀⣀⣀⣿⣿⡿⠿⠿⠿⠿⠿⣿⡇⠀⠀⠀⠀
+⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⣻⣯⣴⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⢀⣀⣀⣤⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀
+⠀⠀⠈⣿⣿⣿⣿⣿⣯⣀⣿⣷⣿⣿⣿⠿⣿⣭⣽⣷⣤⣷⣦⣶⣦⣼⣏⣈⣿⣿⢺⣶⣿⣿⣿⣿⣿⡿⠟⠛⠋⠉⠉⠀⠉⠉⠙⣤⣤⣶⣶⣶⣶⣶⣾⡇⠀⠀⠀⠀
+⠀⠀⠀⠙⣿⣇⣿⣿⣿⣿⠿⢿⣏⣰⣿⣶⣿⣿⣿⠿⣿⠿⣿⡿⢿⡿⠿⠿⠿⣿⣎⡿⠿⠟⠛⠉⠁⠀⠀⢀⣀⣤⣤⣤⣤⣤⣀⣹⣿⠿⠿⠟⠛⠛⠻⡇⠀⠀⠀⠀
+⠀⠀⠀⠀⢻⣿⡎⢻⣿⣿⣦⣾⣿⣿⡿⢿⡋⢹⣷⣴⣿⣶⣿⣷⣾⣿⣾⣿⣶⣿⣿⠀⠀⠀⣀⣠⣤⣶⣾⣿⣿⣿⠿⠿⠿⠿⠿⣧⠀⢀⣀⣀⣀⣀⣠⣷⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⢿⣷⡄⢻⣿⣿⣟⠉⣷⣤⣽⣷⣿⡿⠿⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⢸⣿⣿⣿⣿⣿⠿⠟⠋⠀⠀⢀⣀⣀⣀⣂⣸⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠘⣿⣧⠀⠹⣿⣿⣷⣿⣿⠿⠛⠁⠀⠀⠀⠀⠀⣀⣀⣀⣀⣠⣀⣀⣀⣸⠛⠛⠋⠉⠀⠀⢀⣤⣶⣾⣿⣿⣿⣿⣿⣿⡛⠉⠉⠉⠉⠀⠈⣿⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢹⣿⡆⠀⢻⣿⠛⠉⠀⠀⠀⢀⣠⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⣤⣤⣴⣶⣿⣿⣿⠿⠛⠋⠁⠀⠀⠀⢈⣷⣶⣶⣶⣶⣶⣶⣿⡆⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢻⣿⡄⠀⣿⡆⠀⣀⣴⣾⣿⣿⣿⠿⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⢹⣿⠿⠿⠿⠛⠋⠁⠀⢀⣠⣶⣶⣶⣶⣶⣶⣾⠟⠛⠉⠉⠉⠉⢹⡇⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⣿⣷⠀⢸⣿⣿⣿⡿⠿⠛⠁⠀⠀⢀⣀⣠⣤⣤⣤⣤⣤⣤⣤⣾⠁⠀⠀⣀⣀⣤⣴⣾⣿⡿⠿⠛⠛⠛⠛⠛⠛⣀⣀⣤⣤⣤⣴⣾⣿⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣧⠀⣿⣟⠉⠀⠀⢀⣠⣴⣾⣿⡿⠿⠿⠿⠟⠛⠛⠛⠛⠛⣿⣿⣿⣿⣿⡿⠿⠛⠉⠀⣀⣠⣤⣤⣬⣤⣴⣿⡿⠟⠛⠛⠉⠉⢹⣧⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⡆⠸⣿⣀⣴⣶⣿⡿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡟⠉⠉⠉⠁⠀⣀⣠⣴⣾⣿⣿⠿⠿⠿⠿⢿⡇⠀⠀⣀⣠⣤⣤⣬⣿⡀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⠀⣿⡿⠟⠋⠁⠀⢀⣀⣤⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣇⣤⣤⣶⣶⡿⠿⠛⠉⠁⠀⠀⢀⣀⣀⡀⠀⠾⣿⣿⣿⡿⠿⠿⠿⠿⣧⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣧⢸⣷⠀⣠⣴⣾⣿⣿⣿⣿⡿⠿⠟⠛⠉⠉⠉⠀⢸⡿⠿⠛⠉⠁⢀⣀⣤⣶⣾⣿⣿⣿⠿⠿⠿⠿⣿⣿⠁⠀⠀⠀⠀⠀⠀⣿⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣾⣿⣿⣿⣿⠿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⢀⣠⣴⣾⡿⠿⠛⠋⠉⠀⠀⠀⠀⠀⠀⣼⡿⢁⣀⣤⣴⣶⣿⠿⠿⠿⠷
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⡿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡿⠿⠟⠋⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
