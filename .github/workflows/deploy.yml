@@ -5,7 +5,58 @@ on:
     branches: [main]
 
 jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: engine --- sync
+        working-directory: engine
+        run: uv sync
+
+      - name: engine --- lint (ruff)
+        working-directory: engine
+        run: uv run ruff check .
+
+      - name: engine --- typecheck (mypy)
+        working-directory: engine
+        run: uv run mypy afls
+
+      - name: engine --- tests (pytest, includes cross-layer drift check)
+        working-directory: engine
+        run: uv run pytest
+
+      - name: site --- typecheck (astro check)
+        run: pnpm check
+
+      - name: site --- prettier
+        run: pnpm format:check
+
+      - name: site --- vitest
+        run: pnpm test
+
+      - name: site --- build
+        run: pnpm build
+
   deploy:
+    needs: verify
     runs-on: ubuntu-latest
     permissions:
       contents: read

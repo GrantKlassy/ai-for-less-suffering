@@ -21,7 +21,9 @@ tasks:
       - task: check:history
       - task: check:last-updated
       - task: check:canary
+      - task: check:layering
       - task: engine:check
+      - task: site:test
 
   check:author:
     desc: Verify git identity is GrantKlassy
@@ -70,6 +72,12 @@ tasks:
     desc: Verify README "Code last updated" badge matches the most recent substantive commit
     cmds:
       - ~/git/grantklassy/tools/update-last-updated --check .
+
+  check:layering:
+    desc: Cross-layer invariant --- CAMP_EMOJI in src/lib/graph.ts stays in sync with data/camps/ (missing/stale both fail)
+    dir: engine
+    cmds:
+      - uv run pytest tests/test_layering.py -q
 
   check:canary:
     desc: Verify canary.txt signature is valid (catches stale signatures from edits without re-sign)
@@ -120,6 +128,11 @@ tasks:
     cmds:
       - pnpm check
       - pnpm format:check
+
+  site:test:
+    desc: Run vitest unit tests (src/**/*.test.ts)
+    cmds:
+      - pnpm test
 
   engine:install:
     desc: Install Python engine dependencies via uv
