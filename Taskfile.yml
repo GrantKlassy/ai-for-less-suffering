@@ -54,9 +54,9 @@ tasks:
         echo "OK: no Co-Authored-By contamination"
 
   check:last-updated:
-    desc: Verify README "Code last updated" badge matches current substantive commit
+    desc: Warn if README "Code last updated" badge is stale (non-blocking — pre-commit hook updates one commit behind)
     cmds:
-      - ~/git/grantklassy/tools/update-last-updated --check .
+      - ~/git/grantklassy/tools/update-last-updated --check . || echo "(badge stale — push not blocked)"
 
   fix:badge:
     desc: Write the README "Code last updated" badge and stage it
