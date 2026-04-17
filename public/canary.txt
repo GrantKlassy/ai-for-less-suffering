@@ -11,6 +11,8 @@ Block hash    : 00000000000000000001450df403dd39b086d3fb49b7a6c4893d36b91d1db8dd
 
 As of the Issued date above, I attest that:
 
+  0. <3
+
   1. I have received no National Security Letters related to
      ai-for-less-suffering.com.
 
@@ -35,8 +37,16 @@ As of the Issued date above, I attest that:
   8. I have never been asked to take down any repository on my personal
      GitHub account.
 
-  9. I have not felt that Anthropic was "limiting compute" based on my
-     ideas or thoughts around AI.
+  9. I have not felt that any frontier AI company  was "limiting compute"
+     based on my ideas or thoughts around AI.
+
+  10. I am of sound mind and body, sober, not under duress, and fully aware
+      of what I am attesting to at the time of signing this statement. No
+      party with technical control over its publication --- hosting
+      provider, domain registrar, source-code platform, or DNS operator
+      --- has attempted to prevent, alter, or suppress its release.
+
+  11. <3
 
 Interpretation:
   This statement attests to the Issued date. A signature dated in the past
@@ -73,3 +83,4 @@ Fingerprint   : 5CD5 69FF 79CB 62B6 2A12 A093 9788 0C5D 5061 FF63
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
