@@ -1,0 +1,56 @@
+---
+// Renders a friction_scores or harm_scores map as a labeled set of bars.
+// Polarity is shared across friction and harm: 1 = no friction / no harm,
+// 0 = fully blocked / maximum harm. The color runs cold-left → warm-right so
+// a low score (bad --- blocked or harmed) lands at the cool/short end, high
+// score (good --- unblocked or unharmed) lands at the warm/long end. Keep the
+// polarity convention synchronized with engine/afls/schema/interventions.py.
+
+import NodeRef from "./NodeRef.astro";
+
+interface Props {
+  kind: "friction" | "harm";
+  scores: Record<string, number>;
+  class?: string;
+}
+
+const { kind, scores, class: className = "" } = Astro.props;
+const entries = Object.entries(scores).sort(([a], [b]) => a.localeCompare(b));
+
+const accentFill =
+  kind === "friction"
+    ? "from-orange-800 via-amber-600 to-emerald-500"
+    : "from-rose-800 via-amber-600 to-emerald-500";
+---
+
+<div class:list={["space-y-1.5", className]}>
+  {
+    entries.length === 0 && (
+      <p class="text-xs text-zinc-600">No {kind} scores.</p>
+    )
+  }
+  {
+    entries.map(([id, value]) => {
+      const pct = Math.max(0, Math.min(1, value)) * 100;
+      return (
+        <div class="flex items-center gap-2 text-xs">
+          <div class="w-40 shrink-0 truncate">
+            <NodeRef id={id} showKind={false} />
+          </div>
+          <div class="relative h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-900">
+            <div
+              class:list={[
+                "absolute inset-y-0 left-0 bg-gradient-to-r",
+                accentFill,
+              ]}
+              style={`width: ${pct}%`}
+            />
+          </div>
+          <span class="w-10 shrink-0 text-right font-mono text-zinc-400">
+            {value.toFixed(2)}
+          </span>
+        </div>
+      );
+    })
+  }
+</div>

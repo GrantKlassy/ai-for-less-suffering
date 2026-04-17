@@ -1,0 +1,106 @@
+---
+// The single choke point for rendering a node ID anywhere on the site.
+// Resolves `id` through graph.resolveNode and renders:
+//   - a kind-coded colored link when the id is known and has a detail page
+//   - a colored non-link span when the id is known but has no page (warrants)
+//   - a zinc-500 monospace fallback if the id is unknown
+//
+// Optional `label` overrides the resolved label. `showKind=false` hides the badge.
+
+import { resolveNode, type NodeKind } from "../lib/graph";
+
+interface Props {
+  id: string;
+  label?: string;
+  showKind?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  label: labelOverride,
+  showKind = true,
+  class: className = "",
+} = Astro.props;
+
+const resolved = await resolveNode(id);
+
+const linkColor: Record<NodeKind, string> = {
+  camp: "text-zinc-100 hover:text-white",
+  descriptive_claim: "text-sky-300 hover:text-sky-200",
+  normative_claim: "text-violet-300 hover:text-violet-200",
+  intervention: "text-emerald-300 hover:text-emerald-200",
+  source: "text-amber-300 hover:text-amber-200",
+  friction_layer: "text-orange-300 hover:text-orange-200",
+  harm_layer: "text-rose-300 hover:text-rose-200",
+  warrant: "text-zinc-400",
+};
+
+const badge: Record<NodeKind, { letter: string; classes: string }> = {
+  camp: { letter: "C", classes: "bg-zinc-800 text-zinc-300" },
+  descriptive_claim: { letter: "d", classes: "bg-sky-950 text-sky-300" },
+  normative_claim: { letter: "N", classes: "bg-violet-950 text-violet-300" },
+  intervention: {
+    letter: "I",
+    classes: "bg-emerald-950 text-emerald-300",
+  },
+  source: { letter: "S", classes: "bg-amber-950 text-amber-300" },
+  friction_layer: { letter: "F", classes: "bg-orange-950 text-orange-300" },
+  harm_layer: { letter: "H", classes: "bg-rose-950 text-rose-300" },
+  warrant: { letter: "W", classes: "bg-zinc-800 text-zinc-500" },
+};
+---
+
+{
+  resolved && resolved.href ? (
+    <a
+      href={resolved.href}
+      class:list={[
+        "inline-flex items-baseline gap-1 hover:underline",
+        linkColor[resolved.kind],
+        className,
+      ]}
+    >
+      {showKind && (
+        <span
+          class:list={[
+            "inline-flex h-4 w-4 shrink-0 items-center justify-center self-center rounded-sm font-mono text-[10px] font-semibold",
+            badge[resolved.kind].classes,
+          ]}
+          aria-hidden="true"
+        >
+          {badge[resolved.kind].letter}
+        </span>
+      )}
+      <span>{labelOverride ?? resolved.label}</span>
+    </a>
+  ) : resolved ? (
+    <span
+      class:list={[
+        "inline-flex items-baseline gap-1",
+        linkColor[resolved.kind],
+        className,
+      ]}
+    >
+      {showKind && (
+        <span
+          class:list={[
+            "inline-flex h-4 w-4 shrink-0 items-center justify-center self-center rounded-sm font-mono text-[10px] font-semibold",
+            badge[resolved.kind].classes,
+          ]}
+          aria-hidden="true"
+        >
+          {badge[resolved.kind].letter}
+        </span>
+      )}
+      <span>{labelOverride ?? resolved.label}</span>
+    </span>
+  ) : (
+    <span
+      class:list={["font-mono text-xs text-zinc-500", className]}
+      title="unknown node"
+    >
+      {labelOverride ?? id}
+    </span>
+  )
+}

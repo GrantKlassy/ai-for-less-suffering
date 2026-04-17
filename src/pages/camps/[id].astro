@@ -1,0 +1,121 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import NodeRef from "../../components/NodeRef.astro";
+import { analysesReferencing } from "../../lib/graph";
+
+export async function getStaticPaths() {
+  const camps = await getCollection("camps");
+  return camps.map((c) => ({ params: { id: c.id }, props: { camp: c } }));
+}
+
+type Camp = Awaited<ReturnType<typeof getCollection<"camps">>>[number];
+interface Props {
+  camp: Camp;
+}
+
+const { camp } = Astro.props as Props;
+const referencedBy = analysesReferencing(camp.id);
+---
+
+<Base title={`${camp.data.name} --- camp`}>
+  <p class="mb-2 text-xs text-zinc-500">
+    <a href="/camps/" class="hover:text-zinc-300">← all camps</a>
+  </p>
+  <h1 class="mb-1 text-2xl text-zinc-100">{camp.data.name}</h1>
+  <p class="mb-8 font-mono text-xs text-zinc-500">{camp.data.id}</p>
+
+  {
+    camp.data.summary && (
+      <p class="mb-8 text-sm text-zinc-300">{camp.data.summary}</p>
+    )
+  }
+
+  {
+    camp.data.agents.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">Agents</h2>
+        <ul class="space-y-1 text-sm text-zinc-300">
+          {camp.data.agents.map((a) => (
+            <li>· {a}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    camp.data.held_descriptive.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Descriptive claims held ({camp.data.held_descriptive.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {camp.data.held_descriptive.map((ref) => (
+            <li>
+              <NodeRef id={ref.id} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    camp.data.held_normative.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Normative claims held ({camp.data.held_normative.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {camp.data.held_normative.map((ref) => (
+            <li>
+              <NodeRef id={ref.id} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    camp.data.disputed_warrants.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Disputed warrants ({camp.data.disputed_warrants.length})
+        </h2>
+        <p class="mb-2 text-xs text-zinc-500">
+          Warrants this camp rejects on provenance grounds while still holding
+          the underlying claim.
+        </p>
+        <ul class="space-y-1 text-sm">
+          {camp.data.disputed_warrants.map((ref) => (
+            <li class="font-mono text-xs text-zinc-500">{ref.id}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    referencedBy.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Analyses featuring this camp ({referencedBy.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {referencedBy.map(({ id }) => (
+            <li>
+              <a
+                href={`/analyses/${id}/`}
+                class="font-mono text-xs text-zinc-300 hover:text-zinc-100 hover:underline"
+              >
+                {id}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

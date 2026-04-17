@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const friction = (await getCollection("frictionLayers")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+const harm = (await getCollection("harmLayers")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
+---
+
+<Base title="Layers --- ai-for-less-suffering">
+  <h1 class="mb-2 text-2xl text-zinc-100">Layers</h1>
+  <p class="mb-8 text-sm text-zinc-400">
+    Friction layers are what slows an intervention (grid, capex, regulation).
+    Harm layers are what the intervention costs <em>when it lands</em> (water, extraction,
+    displacement, concentration, lock-in). Polarity is shared --- 1 = unblocked / no
+    harm, 0 = blocked / maximum harm --- so both can feed a single suffering-discounted
+    leverage composite downstream.
+  </p>
+
+  <section class="mb-10">
+    <h2 class="mb-4 text-lg text-orange-300">Friction ({friction.length})</h2>
+    <ul class="space-y-2">
+      {
+        friction.map((l) => (
+          <li class="rounded border border-zinc-800 p-3 hover:border-zinc-600">
+            <a
+              href={`/layers/friction/${l.id}/`}
+              class="block text-sm text-zinc-200"
+            >
+              <div class="flex items-baseline justify-between">
+                <p class="text-zinc-100">{l.data.name}</p>
+                <span class="font-mono text-xs text-zinc-500">{l.data.id}</span>
+              </div>
+              <p class="mt-1 text-xs text-zinc-400">{l.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="mb-4 text-lg text-rose-300">Harm ({harm.length})</h2>
+    <ul class="space-y-2">
+      {
+        harm.map((l) => (
+          <li class="rounded border border-zinc-800 p-3 hover:border-zinc-600">
+            <a
+              href={`/layers/harm/${l.id}/`}
+              class="block text-sm text-zinc-200"
+            >
+              <div class="flex items-baseline justify-between">
+                <p class="text-zinc-100">{l.data.name}</p>
+                <span class="font-mono text-xs text-zinc-500">{l.data.id}</span>
+              </div>
+              <p class="mt-1 text-xs text-zinc-400">{l.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

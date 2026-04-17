@@ -1,0 +1,134 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import NodeRef from "../../components/NodeRef.astro";
+import ConfidenceBar from "../../components/ConfidenceBar.astro";
+import { warrantsFromSource } from "../../lib/graph";
+
+export async function getStaticPaths() {
+  const sources = await getCollection("sources");
+  return sources.map((s) => ({ params: { id: s.id }, props: { source: s } }));
+}
+
+type Source = Awaited<ReturnType<typeof getCollection<"sources">>>[number];
+interface Props {
+  source: Source;
+}
+
+const { source } = Astro.props as Props;
+const warrants = await warrantsFromSource(source.id);
+
+const stanceColor: Record<string, string> = {
+  support: "text-emerald-300",
+  contradict: "text-rose-300",
+  qualify: "text-amber-300",
+};
+---
+
+<Base title={`${source.data.title} --- source`}>
+  <p class="mb-2 text-xs text-zinc-500">
+    <a href="/sources/" class="hover:text-zinc-300">← all sources</a>
+  </p>
+  <p class="mb-2 font-mono text-xs text-amber-400">
+    source · {source.data.source_kind.replace(/_/g, " ")}
+  </p>
+  <h1 class="mb-2 text-xl leading-snug text-zinc-100">{source.data.title}</h1>
+  <p class="mb-6 font-mono text-xs text-zinc-500">{source.data.id}</p>
+
+  {
+    source.data.url && (
+      <p class="mb-4 text-sm">
+        <a
+          href={source.data.url}
+          rel="noopener noreferrer"
+          class="text-amber-300 hover:text-amber-200 hover:underline"
+        >
+          {source.data.url}
+        </a>
+      </p>
+    )
+  }
+
+  <section class="mb-6 space-y-2">
+    <ConfidenceBar value={source.data.reliability} label="reliability" />
+    {
+      source.data.authors.length > 0 && (
+        <p class="text-xs text-zinc-400">
+          <span class="text-zinc-600">authors:</span>{" "}
+          {source.data.authors.join(", ")}
+        </p>
+      )
+    }
+    {
+      source.data.published_at && (
+        <p class="text-xs text-zinc-400">
+          <span class="text-zinc-600">published:</span>{" "}
+          {source.data.published_at}
+        </p>
+      )
+    }
+    {
+      source.data.accessed_at && (
+        <p class="text-xs text-zinc-400">
+          <span class="text-zinc-600">accessed:</span> {source.data.accessed_at}
+        </p>
+      )
+    }
+  </section>
+
+  {
+    source.data.notes && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">Notes</h2>
+        <p class="text-sm text-zinc-300">{source.data.notes}</p>
+      </section>
+    )
+  }
+
+  {
+    warrants.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-3 text-sm text-zinc-400">
+          Warrants from this source ({warrants.length})
+        </h2>
+        <ul class="space-y-3">
+          {warrants.map((w) => (
+            <li class="rounded border border-zinc-800 p-3 text-xs">
+              <div class="mb-2 flex items-center justify-between">
+                <NodeRef id={w.data.claim_id.id} />
+                <span
+                  class:list={[
+                    "font-mono text-[10px] tracking-wide uppercase",
+                    stanceColor[w.data.supports],
+                  ]}
+                >
+                  {w.data.supports}
+                </span>
+              </div>
+              <ConfidenceBar
+                value={w.data.weight}
+                label="weight"
+                class="mb-1"
+              />
+              <p class="text-zinc-500">
+                <span class="text-zinc-600">method:</span> {w.data.method_tag}
+                {w.data.locator && (
+                  <>
+                    {" "}
+                    · <span class="text-zinc-600">locator:</span>{" "}
+                    {w.data.locator}
+                  </>
+                )}
+              </p>
+              {w.data.quote && (
+                <blockquote class="mt-1 border-l-2 border-zinc-700 pl-3 text-zinc-300">
+                  “{w.data.quote}”
+                </blockquote>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

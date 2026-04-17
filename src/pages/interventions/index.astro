@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const interventions = (await getCollection("interventions")).sort(
+  (a, b) => b.data.leverage_score - a.data.leverage_score,
+);
+---
+
+<Base title="Interventions --- ai-for-less-suffering">
+  <h1 class="mb-2 text-2xl text-zinc-100">Interventions</h1>
+  <p class="mb-8 text-sm text-zinc-400">
+    Proposed actions, scored against friction layers (what slows them) and harm
+    layers (what they cost when they succeed). Sorted by operator leverage
+    estimate.
+  </p>
+  <ul class="space-y-3">
+    {
+      interventions.map((i) => (
+        <li class="rounded border border-zinc-800 p-4 hover:border-zinc-600">
+          <a href={`/interventions/${i.id}/`} class="block">
+            <div class="flex items-baseline justify-between">
+              <p class="text-sm text-zinc-100">{i.data.text}</p>
+              <span class="ml-4 shrink-0 font-mono text-xs text-emerald-400">
+                {i.data.leverage_score.toFixed(2)}
+              </span>
+            </div>
+            <p class="mt-2 flex items-center gap-4 text-xs text-zinc-500">
+              <span class="font-mono">{i.data.id}</span>
+              <span>kind: {i.data.action_kind}</span>
+              <span>
+                {Object.keys(i.data.friction_scores).length} friction ·{" "}
+                {Object.keys(i.data.harm_scores).length} harm
+              </span>
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

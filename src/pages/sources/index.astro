@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const sources = await getCollection("sources");
+const byKind = new Map<string, typeof sources>();
+for (const s of sources) {
+  const list = byKind.get(s.data.source_kind) ?? [];
+  list.push(s);
+  byKind.set(s.data.source_kind, list);
+}
+const order = [
+  "paper",
+  "dataset",
+  "filing",
+  "primary_doc",
+  "dashboard",
+  "press",
+  "blog",
+];
+const groups = order
+  .filter((k) => byKind.has(k))
+  .map((k) => ({
+    kind: k,
+    items: (byKind.get(k) ?? []).sort((a, b) =>
+      a.data.title.localeCompare(b.data.title),
+    ),
+  }));
+---
+
+<Base title="Sources --- ai-for-less-suffering">
+  <h1 class="mb-2 text-2xl text-zinc-100">Sources</h1>
+  <p class="mb-8 text-sm text-zinc-400">
+    Citable things warrants point at. Operator-scored reliability is separate
+    from the claim confidence it backs --- a high-reliability source can warrant a
+    low-confidence claim and vice versa.
+  </p>
+  {
+    groups.map(({ kind, items }) => (
+      <section class="mb-8">
+        <h2 class="mb-3 text-sm tracking-wide text-amber-300 uppercase">
+          {kind.replace(/_/g, " ")} ({items.length})
+        </h2>
+        <ul class="space-y-2">
+          {items.map((s) => (
+            <li class="rounded border border-zinc-800 p-3 hover:border-zinc-600">
+              <a href={`/sources/${s.id}/`} class="block text-sm text-zinc-200">
+                <p class="text-zinc-100">{s.data.title}</p>
+                <p class="mt-1 flex items-center justify-between text-xs">
+                  <span class="font-mono text-zinc-500">{s.data.id}</span>
+                  <span class="text-zinc-500">
+                    reliability {s.data.reliability.toFixed(2)}
+                  </span>
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

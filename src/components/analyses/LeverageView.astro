@@ -1,0 +1,130 @@
+---
+// Leverage render. CoalitionStrip up top (same reason as palantir: reader
+// needs the analyzed set before rankings). Rankings via RankingRow render
+// friction_scores as bars, not key=value text. Coalition analyses surface
+// which camps support / contest each intervention. Ranking blindspots flag
+// interventions that the composite score may miss.
+
+import { getEntry } from "astro:content";
+import NodeRef from "../NodeRef.astro";
+import CoalitionStrip from "./CoalitionStrip.astro";
+import RankingRow from "./RankingRow.astro";
+import type { LeverageAnalysis } from "../../lib/analysis";
+
+interface Props {
+  analysis: LeverageAnalysis;
+}
+
+const { analysis } = Astro.props;
+
+const convergenceText: Record<string, string> = {};
+for (const id of analysis.descriptive_convergences) {
+  const entry = await getEntry("descriptiveClaims", id);
+  if (entry) convergenceText[id] = entry.data.text;
+}
+---
+
+<CoalitionStrip camps={analysis.camps} />
+
+{
+  analysis.descriptive_convergences.length > 0 && (
+    <section class="mb-10">
+      <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+        Descriptive convergence
+      </h2>
+      <ul class="space-y-3 text-sm">
+        {analysis.descriptive_convergences.map((id) => (
+          <li class="rounded border border-zinc-800 p-3">
+            {convergenceText[id] && (
+              <p class="mb-1 text-zinc-100">{convergenceText[id]}</p>
+            )}
+            <NodeRef id={id} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Rankings
+  </h2>
+  <p class="mb-3 text-xs text-zinc-500">
+    Friction semantic: <span class="font-mono">1 = no friction</span>,{" "}
+    <span class="font-mono">0 = fully blocked</span>. Composite ={" "}
+    <span class="font-mono">leverage_score × mean(friction_scores)</span>.
+  </p>
+  {
+    analysis.rankings.length === 0 ? (
+      <p class="text-sm text-zinc-500">No interventions ranked.</p>
+    ) : (
+      <ol class="space-y-4 text-sm">
+        {analysis.rankings.map((row, i) => (
+          <RankingRow row={row} index={i} />
+        ))}
+      </ol>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Coalition analyses
+  </h2>
+  {
+    analysis.coalition_analyses.length === 0 ? (
+      <p class="text-sm text-zinc-500">No coalition analyses.</p>
+    ) : (
+      <div class="space-y-4">
+        {analysis.coalition_analyses.map((item) => (
+          <div class="rounded border border-zinc-800 p-4">
+            <div class="mb-3">
+              <NodeRef id={item.intervention_id} />
+            </div>
+            {item.supporting_camps.length > 0 && (
+              <div class="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs">
+                <span class="text-emerald-400">Supporting:</span>
+                {item.supporting_camps.map((c) => (
+                  <NodeRef id={c} />
+                ))}
+              </div>
+            )}
+            {item.contesting_camps.length > 0 && (
+              <div class="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs">
+                <span class="text-rose-400">Contesting:</span>
+                {item.contesting_camps.map((c) => (
+                  <NodeRef id={c} />
+                ))}
+              </div>
+            )}
+            <p class="mt-2 text-sm text-zinc-300">{item.expected_friction}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Ranking blindspots
+  </h2>
+  {
+    analysis.ranking_blindspots.length === 0 ? (
+      <p class="text-sm text-zinc-500">None flagged.</p>
+    ) : (
+      <ul class="space-y-3 text-sm">
+        {analysis.ranking_blindspots.map((bs) => (
+          <li class="rounded border border-zinc-800 p-3">
+            <div class="mb-1 flex flex-wrap items-baseline gap-x-2 text-xs">
+              <span class="text-zinc-500">Flags</span>
+              <NodeRef id={bs.flagged_intervention_id} />
+            </div>
+            <p class="text-zinc-200">{bs.reasoning}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
