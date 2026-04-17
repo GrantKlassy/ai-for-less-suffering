@@ -2,13 +2,15 @@ version: "3"
 
 tasks:
   ship:
-    desc: Full pre-deploy gate + push --- repo checks, site typecheck + format, engine tests, site build, then git push (deploy auto-kicks on push)
+    desc: Pre-deploy gate + signed ship tag + push. Kills gpg-agent so the tag signs with a fresh passphrase --- shipping is a deliberate human act.
     cmds:
       - task: check
       - task: site:check
       - task: engine:test
       - task: build
-      - git push
+      - gpgconf --kill gpg-agent 2>/dev/null || true
+      - git tag -s "ship/$(date -u +%Y%m%dT%H%M%SZ)" -m "ship"
+      - git push --follow-tags
 
   check:
     desc: Run all standard repo checks
