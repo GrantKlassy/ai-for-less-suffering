@@ -16,7 +16,7 @@ tasks:
       - |
         NAME=$(git config user.name)
         if [ "$NAME" != "GrantKlassy" ]; then
-          echo "ERROR: git user.name is '$NAME' — expected 'GrantKlassy'"
+          echo "ERROR: git user.name is '$NAME' --- expected 'GrantKlassy'"
           exit 1
         fi
         echo "OK: git user.name is GrantKlassy"
@@ -54,14 +54,14 @@ tasks:
         echo "OK: no Co-Authored-By contamination"
 
   check:last-updated:
-    desc: Warn if README "Code last updated" badge is stale (non-blocking — pre-commit hook updates one commit behind)
+    desc: Verify README "Code last updated" badge matches the most recent substantive commit
     cmds:
-      - ~/git/grantklassy/tools/update-last-updated --check . || echo "(badge stale — push not blocked)"
+      - ~/git/grantklassy/tools/update-last-updated --check .
 
   fix:badge:
-    desc: Write the README "Code last updated" badge and stage it
+    desc: Write the README "Code last updated" badge and stage it (pre-commit flow --- uses staged files to predict substantivity)
     cmds:
-      - ~/git/grantklassy/tools/update-last-updated .
+      - ~/git/grantklassy/tools/update-last-updated --pre-commit .
       - |
         if [ -f README.md ]; then
           git add README.md

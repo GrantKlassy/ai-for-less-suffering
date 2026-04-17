@@ -4,20 +4,23 @@ pre-commit:
       run: |
         NAME=$(git config user.name)
         if [ "$NAME" != "GrantKlassy" ]; then
-          echo "ERROR: git user.name is '$NAME' — expected 'GrantKlassy'"
+          echo "ERROR: git user.name is '$NAME' --- expected 'GrantKlassy'"
           echo "  git config user.name 'GrantKlassy'"
           echo "  git config user.email '28637437+GrantKlassy@users.noreply.github.com'"
           exit 1
         fi
     - name: update-badge
       run: task fix:badge
-    - name: strip-exif
+    - name: no-emdash
       run: |
-        IMAGES=$(git diff --cached --name-only --diff-filter=ACM -- 'directives-ai/*.jpg' 'directives-ai/*.jpeg' 'directives-ai/*.png' 'directives-ai/*.tiff' 'directives-ai/*.webp' 'directives-ai/*.gif' 'directives-ai/*.bmp' 'directives-ai/*.heic')
-        if [ -n "$IMAGES" ]; then
-          echo "$IMAGES" | xargs exiftool -all= -overwrite_original
-          echo "$IMAGES" | xargs git add
-          echo "Stripped EXIF data from: $IMAGES"
+        DASH=$(printf '\xe2\x80\x94')
+        FILES=$(grep -rlI --color=never --exclude-dir=.git "$DASH" .)
+        if [ -n "$FILES" ]; then
+          echo "$FILES" | xargs sed -i "s/$DASH/---/g"
+          echo "ERROR: emdash(es) found and converted to --- in:"
+          echo "$FILES"
+          echo "Review, re-stage, and commit again."
+          exit 1
         fi
 
 commit-msg:
@@ -25,7 +28,7 @@ commit-msg:
     - name: no-coauthor
       run: |
         if grep -qi "co-authored-by" {1}; then
-          echo "ERROR: Co-Authored-By trailer detected — not allowed in grantklassy repos"
+          echo "ERROR: Co-Authored-By trailer detected --- not allowed in grantklassy repos"
           exit 1
         fi
 

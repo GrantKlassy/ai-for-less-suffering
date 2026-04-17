@@ -12,7 +12,7 @@ This is thinking-in-progress, not a position paper.
 
 ## directives-ai
 
-Grant's past pattern was a "directives" framework — `COPY_ME.md` with raw thoughts that got reshaped in conversation.
+Grant's past pattern was a "directives" framework --- `COPY_ME.md` with raw thoughts that got reshaped in conversation.
 
 This repo uses "directives-AI": because it's public, raw thoughts don't get committed. Grant feeds them to `claude`, `claude` shapes them into the public-facing version, and the shaped version is what ships.
 

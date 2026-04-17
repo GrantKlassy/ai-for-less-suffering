@@ -16,8 +16,8 @@ The tool should let me interrogate questions like:
   a given reallocation, and what normative bridges (Kantian, capabilities-based,
   theological) would let those camps converge on the same policy output without 
   requiring they agree on first principles?
-- What are the highest-leverage interventions — technical, political, 
-  economic — that accelerate AI toward suffering reduction while staying robust 
+- What are the highest-leverage interventions --- technical, political, 
+  economic --- that accelerate AI toward suffering reduction while staying robust 
   to the friction layers (power grid, capex, regulation, enterprise absorption, 
   public backlash)?
 - Where are my own blind spots? Challenge my priors. I default to [accelerationism](https://en.wikipedia.org/wiki/Effective_accelerationism)
