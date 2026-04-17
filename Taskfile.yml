@@ -18,6 +18,7 @@ tasks:
       - task: check:license
       - task: check:history
       - task: check:last-updated
+      - task: check:canary
       - task: engine:check
 
   check:author:
@@ -67,6 +68,21 @@ tasks:
     desc: Verify README "Code last updated" badge matches the most recent substantive commit
     cmds:
       - ~/git/grantklassy/tools/update-last-updated --check .
+
+  check:canary:
+    desc: Verify canary.txt signature is valid (catches stale signatures from edits without re-sign)
+    cmds:
+      - |
+        if [ ! -f public/canary.txt ] || [ ! -f public/canary.txt.asc ]; then
+          echo "ERROR: canary files missing"
+          exit 1
+        fi
+        if ! gpg --verify public/canary.txt.asc public/canary.txt 2>&1 | grep -q "Good signature"; then
+          echo "ERROR: canary signature does not verify --- canary.txt was modified without re-signing"
+          echo "  fix: task canary:renew"
+          exit 1
+        fi
+        echo "OK: canary signature verifies"
 
   fix:badge:
     desc: Write the README "Code last updated" badge and stage it (pre-commit flow --- uses staged files to predict substantivity)

@@ -26,6 +26,21 @@ pre-commit:
           echo "Converted emdashes to --- and re-staged:"
           for f in $FIXED; do echo "  $f"; done
         fi
+    - name: canary-resign
+      interactive: true
+      run: |
+        if [ ! -f public/canary.txt ] || [ ! -f public/canary.txt.asc ]; then
+          exit 0
+        fi
+        if gpg --verify public/canary.txt.asc public/canary.txt 2>&1 | grep -q "Good signature"; then
+          exit 0
+        fi
+        echo ""
+        echo "Canary signature is stale --- re-signing now."
+        echo "gpg-agent will be killed; passphrase will be prompted fresh."
+        echo ""
+        scripts/renew-canary.sh
+        git add public/canary.txt public/canary.txt.asc
 
 commit-msg:
   jobs:
