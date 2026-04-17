@@ -9,9 +9,6 @@ pre-commit:
           echo "  git config user.email '28637437+GrantKlassy@users.noreply.github.com'"
           exit 1
         fi
-    - name: prettier-write
-      run: pnpm prettier --write --ignore-unknown {staged_files}
-      stage_fixed: true
     - name: update-badge
       run: task fix:badge
     - name: no-emdash
@@ -44,6 +41,14 @@ pre-commit:
         echo ""
         scripts/renew-canary.sh
         git add public/canary.txt public/canary.txt.asc
+    # prettier runs LAST so no-emdash / update-badge / canary-resign can't
+    # leave the tree unformatted. `--- ` replacements lengthen lines, which
+    # shifts prettier's wrap points; running prettier after the mutations
+    # guarantees the staged result matches `pnpm format:check` (which is
+    # what `task ship` gates on).
+    - name: prettier-write
+      run: pnpm prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
 
 commit-msg:
   jobs:
