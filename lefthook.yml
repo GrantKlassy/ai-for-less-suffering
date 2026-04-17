@@ -14,13 +14,17 @@ pre-commit:
     - name: no-emdash
       run: |
         DASH=$(printf '\xe2\x80\x94')
-        FILES=$(grep -rlI --color=never --exclude-dir=.git "$DASH" .)
-        if [ -n "$FILES" ]; then
-          echo "$FILES" | xargs sed -i "s/$DASH/---/g"
-          echo "ERROR: emdash(es) found and converted to --- in:"
-          echo "$FILES"
-          echo "Review, re-stage, and commit again."
-          exit 1
+        FIXED=""
+        for f in $(git diff --cached --name-only --diff-filter=ACM); do
+          if [ -f "$f" ] && grep -qI "$DASH" "$f"; then
+            sed -i "s/$DASH/---/g" "$f"
+            git add "$f"
+            FIXED="$FIXED $f"
+          fi
+        done
+        if [ -n "$FIXED" ]; then
+          echo "Converted emdashes to --- and re-staged:"
+          for f in $FIXED; do echo "  $f"; done
         fi
 
 commit-msg:
