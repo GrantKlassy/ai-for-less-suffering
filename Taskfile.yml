@@ -57,3 +57,12 @@ tasks:
     desc: Verify README "Code last updated" badge matches current substantive commit
     cmds:
       - ~/git/grantklassy/tools/update-last-updated --check .
+
+  fix:badge:
+    desc: Write the README "Code last updated" badge and stage it
+    cmds:
+      - ~/git/grantklassy/tools/update-last-updated .
+      - |
+        if [ -f README.md ]; then
+          git add README.md
+        fi

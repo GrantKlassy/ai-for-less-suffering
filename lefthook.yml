@@ -9,6 +9,8 @@ pre-commit:
           echo "  git config user.email '28637437+GrantKlassy@users.noreply.github.com'"
           exit 1
         fi
+    - name: update-badge
+      run: task fix:badge
 
 commit-msg:
   jobs:
