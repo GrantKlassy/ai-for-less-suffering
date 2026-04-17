@@ -1,0 +1,371 @@
+{
+  "case_against": [
+    {
+      "axiom_family": "theological",
+      "case": "Creation is not a substrate to be drawn down for compute. Grid buildout at AI-datacenter scale directly couples to aquifer depletion (hyperscaler water up 20% YoY tied to AI), thermoelectric water embedding, and rare-earth extraction harms concentrated at mine sites on populations who receive none of the benefit. Harm scores land (0.3), water (0.4), extraction (0.4) are not acceptable offsets against downstream utility --- they are first-order wrongs against the integrity of watersheds and creaturely life. The intervention sanctifies extraction.",
+      "descriptive_claim_ids": [
+        "desc_datacenter_water_intensity",
+        "desc_hyperscaler_water_growth",
+        "desc_thermoelectric_water_embed",
+        "desc_rare_earth_supply_chain",
+        "desc_critical_minerals_refining"
+      ],
+      "normative_claim_ids": [
+        "norm_ecological_stewardship"
+      ]
+    },
+    {
+      "axiom_family": "capabilities",
+      "case": "Watersheds and airsheds are preconditions of capability, not substitutable inputs. Grid buildout with harm_water 0.4 and harm_land 0.3 degrades the capability set of the communities hosting the load --- siting disproportionately lands in environmental-justice regions, and thermoelectric water embedding compounds at the generation tier. harm_displacement 0.8 means labor welfare is not incidentally damaged; it is the design. No quantity of downstream compute substitutes for the capability floor this intervention erodes at the sites where it physically lands.",
+      "descriptive_claim_ids": [
+        "desc_datacenter_water_intensity",
+        "desc_hyperscaler_water_growth",
+        "desc_thermoelectric_water_embed",
+        "desc_rare_earth_supply_chain"
+      ],
+      "normative_claim_ids": [
+        "norm_ecosystem_capabilities",
+        "norm_workers_dignity"
+      ]
+    },
+    {
+      "axiom_family": "kantian",
+      "case": "Permitting reform accelerates buildout but also locks in a specific generation mix, a specific siting footprint, and a specific governance tier (four hyperscalers, one mission-software prime) for decades. harm_lock_in 0.6 is the categorical failure: present actors foreclosing future option sets on water, land, and institutional control in order to meet a 2030 load forecast whose range spans 2x. You cannot justify a duty-violating foreclosure with a point estimate from a factor-of-two confidence interval.",
+      "descriptive_claim_ids": [
+        "desc_interconnection_queue_backlog",
+        "desc_us_datacenter_load_forecast",
+        "desc_leading_edge_chip_concentration",
+        "desc_ic_cloud_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_future_generations_duty"
+      ]
+    },
+    {
+      "axiom_family": "consequentialist",
+      "case": "harm_concentration 0.7 is the tell. Grid buildout without governance preconditions feeds load to four hyperscalers and one mission-software prime whose revenue and contract posture is accelerating into defense targeting. The expected downstream use of the marginal megawatt is not protein folding --- it is JWCC workloads, Maven expansion, and capital-extraction SaaS. Accelerating the substrate under current concentration conditions is straightforwardly negative-EV on suffering reduction.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_palantir_dominant",
+        "desc_palantir_gov_revenue",
+        "desc_dod_ai_contract_spend",
+        "desc_maven_status",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "axiom_family": "ea_80k",
+      "case": "Compute is the single largest input into capability gain; training compute doubles every 5-6 months and algorithmic efficiency compounds on top. Removing the grid constraint removes the last non-alignment-gated physical brake on the capability curve. 'Build-only-if-safe' requires a live pause option; permitting reform that uncorks 2,600 GW of queued capacity destroys that option irreversibly. This is the intervention most precisely targeted at eliminating the brake x-risk depends on.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost",
+        "desc_algorithmic_efficiency",
+        "desc_compute_matters"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt"
+      ]
+    },
+    {
+      "axiom_family": "e_acc",
+      "case": "Grid is the wrong bottleneck to unjam. Enterprise absorption lags the frontier by years, leading-edge fab is single-point-of-failure at TSMC, and algorithmic efficiency halves compute requirements every 8 months --- so the marginal megawatt buys less capability each year while the actual rate-limiting steps (chips, absorption) remain untouched. Grid buildout is a political project with a 10-year payoff horizon when the velocity-binding constraints are silicon and deployment surface area today. Misallocated acceleration.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_leading_edge_chip_concentration",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "axiom_family": "other",
+      "case": "Sovereignty-expanding deployment requires a distributed compute and governance substrate. Grid buildout under current conditions routes the new megawatts through four hyperscaler primes and one mission-software vendor --- harm_concentration 0.7 by design. The intervention does not expand individual capacity; it expands the capacity of the existing concentration tier to absorb more load. Sovereignty erodes in direct proportion to how much grid you hand them.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_palantir_dominant",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty",
+        "norm_palantir_order"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "axiom_family": "e_acc",
+      "case": "Grid is the binding physical constraint on the only variable that matters: compute. Training compute grew 4-5x/year while transmission circuit-miles grew 1%/year and 2,600 GW sits rotting in interconnection queues. The bottleneck is not technology or capital --- it is permitting, siting, and cost-allocation. Every month of delay is deployed capability that did not arrive, flourishing that did not land. Of all friction layers, regulation on grid buildout (0.3) is the most tractable and the most blocking. Pull this lever or admit you are not serious about deployment velocity.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_transmission_stall",
+        "desc_interconnection_queue_backlog",
+        "desc_compute_matters",
+        "desc_training_compute_growth",
+        "desc_us_datacenter_load_forecast"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "axiom_family": "consequentialist",
+      "case": "The 6-18 month US lead over China is compute-gated, and compute is grid-gated. If the US loses the power-delivery race, the frontier migrates to a jurisdiction with weaker alignment culture and weaker safety norms --- a strictly worse consequentialist outcome across every downstream metric. Grid buildout is the physical substrate under which 'responsible actors build first' is possible at all. Without it, the strategy collapses. The expected-value math is not close.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_compute_matters",
+        "desc_grid_constraint",
+        "desc_interconnection_queue_backlog",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_safety",
+        "norm_palantir_national"
+      ]
+    },
+    {
+      "axiom_family": "ea_80k",
+      "case": "Alignment-keeping-pace requires the alignment-oriented frontier to stay at the frontier. Grid buildout in jurisdictions with functioning safety culture keeps interpretability-funded labs on the leading edge; grid stagnation cedes the frontier to actors who will not fund interpretability at all. The intervention is alignment-positive because it preserves the substrate under which alignment work has leverage over deployed systems.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_leading_edge_chip_concentration",
+        "desc_grid_constraint",
+        "desc_training_compute_growth"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "axiom_family": "capabilities",
+      "case": "A stalled grid is not a neutral baseline --- it is a capability ceiling that binds hardest on the poorest regions and the sickest populations. Interregional transmission doubling is a precondition for decarbonized generation reaching load centers; without it, the existing fossil baseload stays online and the capability set of downstream communities (clean air, stable climate, affordable power) degrades. Permitting reform that accelerates grid buildout is substrate expansion for every capability that depends on electricity --- which is all of them.",
+      "descriptive_claim_ids": [
+        "desc_transmission_stall",
+        "desc_interconnection_queue_backlog",
+        "desc_mental_health_burden",
+        "desc_ncd_shift",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_ecosystem_capabilities"
+      ]
+    },
+    {
+      "axiom_family": "theological",
+      "case": "Stewardship of creation includes stewardship of the built infrastructure that sustains human flourishing. 4.9M children still die before age five; 700M remain in extreme poverty; the disease burden is geographically concentrated where power is scarcest. Grid buildout is not an abstract industrial project --- it is the material precondition for the medical, agricultural, and educational systems that serve human persons. Refusing to build is not neutrality; it is acquiescence to preventable suffering.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_extreme_poverty_trajectory",
+        "desc_mental_health_burden",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    },
+    {
+      "axiom_family": "poker_ev",
+      "case": "Leverage 0.75, regulation friction 0.3, and the downstream unlock covers compute, deployment, and decarbonization simultaneously. The bet is underpriced because grid is boring and the discourse chases model releases. This is the asymmetric --- cheap regulatory capital, multi-decade payoff surface, stacked option value across multiple theses. Pass on this and you are passing on the highest +EV political intervention on the board.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_transmission_stall",
+        "desc_interconnection_queue_backlog",
+        "desc_us_datacenter_load_forecast"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing",
+        "norm_operator_sovereignty"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_compute_matters",
+    "desc_interconnection_queue_backlog",
+    "desc_leading_edge_chip_concentration",
+    "desc_training_compute_growth",
+    "desc_us_datacenter_load_forecast"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "warrant_id": "war_intercept_contract_failures",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "warrant_id": "war_gao_ai_slow",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "warrant_id": "war_crs_ai_dod_spend",
+          "weight": 0.8
+        },
+        {
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "warrant_id": "war_usaspending_contracts",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "warrant_id": "war_intercept_dominance_skeptical",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "warrant_id": "war_crs_vendor_landscape",
+          "weight": 0.75
+        },
+        {
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "warrant_id": "war_pltr_10k_competitive",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "warrant_id": "war_goldman_high_forecast",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "warrant_id": "war_iea_low_forecast",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "warrant_id": "war_epri_scenarios",
+          "weight": 0.85
+        },
+        {
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "warrant_id": "war_pjm_market_signal",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "warrant_id": "war_pltr_ceo_dismisses_resistance",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "warrant_id": "war_google_maven_withdraw",
+          "weight": 0.9
+        },
+        {
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "warrant_id": "war_microsoft_workers_ivas",
+          "weight": 0.85
+        },
+        {
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "warrant_id": "war_openai_idf_nyt",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-17T20:35:06.726427Z",
+  "operator_tension": "You hold norm_operator_sovereignty and self-host everything precisely because you distrust the concentration tier --- yet the grid intervention you are modeling hands that tier the substrate it needs to extend. The uncomfortable case is not the environmentalist one (you can discount it on poker-EV grounds); it is the consequentialist-against case from inside your own suffering-reduction frame. harm_concentration 0.7 plus the Palantir/JWCC absorption pattern means the marginal megawatt from permitting reform has a higher expected probability of landing in Maven-class workloads than in protein folding, because that is where the contracts and the enterprise-absorption readiness already are. You are temperamentally cautious about risk and you let that show up in the IBKR buffer, but on grid you are running naked e/acc --- accelerating a substrate whose downstream allocation you would not endorse if you had to pre-commit to it. The bet is not wrong on leverage; it is wrong on who collects.",
+  "target_intervention_id": "intv_grid",
+  "target_intervention_text": "Accelerate grid and generation buildout (permitting reform, interconnection, new generation)."
+}

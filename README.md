@@ -4,15 +4,11 @@ Code last updated @ [2026-04-17](https://github.com/GrantKlassy/ai-for-less-suff
 
 # What is this Project?
 
-- I have many ideas about how AI could be used to maximally reduce human suffering
+- I have many ideas about how AI could be used to maximally reduce human suffering. Sometimes, thinking about these ideas in a rational way can be difficult
 
-- Sometimes, thinking about these ideas in a rational way can be difficult
+- Example --- Palantir wants to accelerate AI development for weapons. I want to accelerate AI development to reduce suffering. What makes it "morally" okay for me to work at a frontier AI company who might want to accelerate AI development KNOWING that it COULD be used by $PLTR to kill people?
 
-- Example --- Palantir wants to accelerate AI development. I want to accelerate AI development.
-
-- Example --- What makes it "morally" okay for me to work at a frontier AI company?
-
-- This repo seeks to answer those deep questions by using `claude`
+- This repo seeks to answer my questions by using `claude`
 
 #
 

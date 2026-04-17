@@ -3,11 +3,11 @@ WARRANT CANARY --- ai-for-less-suffering.com
 Identity      : Grant Klassy <canary@ai-for-less-suffering.com>
 Canonical URL : https://ai-for-less-suffering.com/canary.txt
 Issued        : 2026-04-17
-Expires       : 2029-04-16
+Expires       : 2029-04-17
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945505
-Block hash    : 0000000000000000000102b7479f37e6df02e101f517dce9e4fa6a4a578a8c40
+Block height  : 945516
+Block hash    : 000000000000000000012dd4f80f46b9002fd816a97fb6fbacb354bb8fb48c67
 
 As of the Issued date above, I attest that:
 
@@ -51,11 +51,22 @@ As of the Issued date above, I attest that:
       provider, domain registrar, source-code platform, or DNS operator
       --- has attempted to prevent, alter, or suppress its release.
 
-  12. It is the official stance of ai-for-less-suffering.com that
+  12. I am aware of no surveillance --- physical, digital, or covert ---
+      directed at me in connection with ai-for-less-suffering.com, and
+      I have observed no signs of any (tails, device or account
+      compromise, anomalous access, unannounced contact).
+
+  13. No external entity has directed or controlled the editorial
+      content of ai-for-less-suffering.com. I have not been asked or
+      required by any government, law enforcement, intelligence agency,
+      or past or present employer to modify, add, or remove content
+      on this website.
+
+  14. It is the official stance of ai-for-less-suffering.com that
       "Neon Genesis Evangelion" is a TV show that represents the idea
       of "human suffering" with artistic integrity.
 
-  13. <3
+  15. <3
 
 Interpretation:
   This statement attests to the Issued date. A signature dated in the past
