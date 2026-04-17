@@ -67,6 +67,14 @@ For code, infrastructure, tools --- whatever the manifesto is pulling toward:
 - Claiming Grant has read, believes, or endorses things he hasn't said.
 - Reintroducing anything sanitized in past passes (see Precedent).
 
+## Canary
+
+Warrant canary at `/canary`, signed source at `public/canary.txt`, detached signature at `public/canary.txt.asc`, public key at `public/canary-key.asc`. The directive recipe for building one in any repo is at `directives-ai/CANARY.md` --- the portable version of the system.
+
+Editing `canary.txt` invalidates the signature. Any byte change requires `task canary:renew` to re-sign --- no exceptions, no "small fixups." The script rewrites the date and Bitcoin-block lines, kills `gpg-agent` first so the passphrase prompts fresh (signing is a deliberate human act, not a cached credential), then verifies. Commit `canary.txt` and `canary.txt.asc` together in the same commit.
+
+The page renders the file verbatim inside a `<pre>` block. ASCII art and other unicode survive Astro's build, but copy-paste / email / CDN normalization can mangle non-ASCII bytes and break verification downstream. If non-ASCII content is present, verify after deploy with `curl https://ai-for-less-suffering.com/canary.txt | gpg --verify public/canary.txt.asc -` from a fresh machine.
+
 ## Precedent
 
 An earlier pass of the directives-AI loop (commit `2a8dda0`) shipped BRAIN.md with three references to a named private project ("VETO Protocol"), an opsec tell linking this real-name repo to pseudonymous work in sibling directories ("pseudonymous building"), and granular portfolio mechanics ("tranched deployment"). Grant caught them himself and fix-forwarded rather than force-pushing --- the sanitization is its own commit, the original stays in history. The pass evaluated each specific in isolation and didn't notice they were load-bearing when combined with the surrounding context: real name, public repo, pseudonymous siblings one `cd ..` away.
