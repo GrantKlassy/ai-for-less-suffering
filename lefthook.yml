@@ -9,6 +9,9 @@ pre-commit:
           echo "  git config user.email '28637437+GrantKlassy@users.noreply.github.com'"
           exit 1
         fi
+    - name: prettier-write
+      run: pnpm prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
     - name: update-badge
       run: task fix:badge
     - name: no-emdash

@@ -173,8 +173,7 @@ const heading =
           Rankings
         </h2>
         <p class="mb-3 text-xs text-zinc-500">
-          Friction semantic:{" "}
-          <span class="font-mono">1 = no friction</span>,{" "}
+          Friction semantic: <span class="font-mono">1 = no friction</span>,{" "}
           <span class="font-mono">0 = fully blocked</span>. Composite ={" "}
           <span class="font-mono">leverage_score × mean(friction_scores)</span>.
         </p>
@@ -195,7 +194,9 @@ const heading =
                 <div class="mb-2 font-mono text-xs text-zinc-500">
                   {row.intervention_id}
                 </div>
-                <p class="mb-2 text-xs text-zinc-300">{row.intervention_text}</p>
+                <p class="mb-2 text-xs text-zinc-300">
+                  {row.intervention_text}
+                </p>
                 <div class="font-mono text-xs text-zinc-500">
                   leverage {row.leverage_score} · robustness{" "}
                   {row.mean_robustness.toFixed(3)}
@@ -276,7 +277,9 @@ const heading =
                   <span class="text-zinc-300">
                     {label(bs.flagged_intervention_id)}
                   </span>
-                  <span class="ml-2 font-mono">{bs.flagged_intervention_id}</span>
+                  <span class="ml-2 font-mono">
+                    {bs.flagged_intervention_id}
+                  </span>
                 </div>
                 <p class="text-zinc-200">{bs.reasoning}</p>
               </li>
