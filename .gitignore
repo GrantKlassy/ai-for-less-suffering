@@ -1,0 +1,19 @@
+# Astro
+dist/
+.astro/
+
+# Cloudflare / Wrangler
+.wrangler/
+
+# Dependencies
+node_modules/
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
