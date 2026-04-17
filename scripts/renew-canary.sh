@@ -14,7 +14,6 @@ set -euo pipefail
 CANARY="public/canary.txt"
 SIG="public/canary.txt.asc"
 SIGNER="canary@ai-for-less-suffering.com"
-VALIDITY_DAYS=1095  # 3 years
 
 FINGERPRINT=""
 while [[ $# -gt 0 ]]; do
@@ -54,7 +53,7 @@ echo "  Block height: $BLOCK_HEIGHT"
 echo "  Block hash:   $BLOCK_HASH"
 
 ISSUED=$(date -u +%Y-%m-%d)
-EXPIRES=$(date -u -d "+${VALIDITY_DAYS} days" +%Y-%m-%d)
+EXPIRES=$(date -u -d "$ISSUED +3 years" +%Y-%m-%d)
 
 echo "  Issued:  $ISSUED"
 echo "  Expires: $EXPIRES"
