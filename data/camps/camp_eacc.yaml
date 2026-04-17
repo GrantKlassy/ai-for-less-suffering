@@ -1,0 +1,33 @@
+agents:
+- Effective accelerationism (e/acc) movement
+- Andreessen Horowitz (a16z)
+- Marc Andreessen, Ben Horowitz
+- Beff Jezos / Guillaume Verdon (e/acc founder)
+- Garry Tan and Y Combinator-adjacent techno-optimists
+created_at: '2026-04-17T17:00:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_training_compute_growth
+- desc_algorithmic_efficiency
+- desc_flagship_training_cost
+- desc_us_lead
+- desc_leading_edge_chip_concentration
+- desc_grid_constraint
+- desc_transmission_stall
+- desc_interconnection_queue_backlog
+- desc_us_datacenter_load_forecast
+- desc_life_expectancy_gain
+- desc_child_mortality_progress
+- desc_extreme_poverty_trajectory
+held_normative:
+- norm_eacc_deployment
+id: camp_eacc
+kind: camp
+name: e/acc
+provenance_url: null
+summary: Deployment velocity is the moral variable. Friction layers (grid, capex,
+  regulation, public sentiment) are the adversary, not a trade-off to optimize. Accelerate
+  until physics says stop; every delay is averted flourishing that did not arrive.
+updated_at: '2026-04-17T17:00:00Z'
