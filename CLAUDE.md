@@ -34,6 +34,10 @@ The repo trusts Anthropic's Claude enough to run this loop. Don't fuck it up.
 - Importing the `funny` series' ironic register wholesale. Different room.
 - Claiming Grant has read, believes, or endorses things he hasn't said.
 
+## Precedent
+
+An earlier pass of the directives-AI loop (commit `2a8dda0`) shipped BRAIN.md with three references to a named private project ("VETO Protocol"), an opsec tell linking this real-name repo to pseudonymous work in sibling directories ("pseudonymous building"), and granular portfolio mechanics ("tranched deployment"). Grant caught them himself and fix-forwarded rather than force-pushing --- the sanitization is its own commit, the original stays in history. The pass evaluated each specific in isolation and didn't notice they were load-bearing when combined with the surrounding context: real name, public repo, pseudonymous siblings one `cd ..` away.
+
 ## Commits
 
 Identity, SSH, and commit-trailer rules inherit from `~/git/grantklassy/CLAUDE.md`. No `Co-Authored-By`, ever.
