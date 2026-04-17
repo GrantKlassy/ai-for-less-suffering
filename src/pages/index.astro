@@ -78,6 +78,57 @@ const featuredContested: ContestedClaim[] = featured
 
 const analysisCount = allAnalyses().length;
 
+const legend = [
+  {
+    letter: "P",
+    label: "Camp",
+    blurb: "Coherent cluster of held claims.",
+    classes: "bg-zinc-800 text-zinc-300",
+  },
+  {
+    letter: "CD",
+    label: "Descriptive claim",
+    blurb: "What is.",
+    classes: "bg-sky-950 text-sky-300",
+  },
+  {
+    letter: "CN",
+    label: "Normative claim",
+    blurb: "What should be.",
+    classes: "bg-violet-950 text-violet-300",
+  },
+  {
+    letter: "S",
+    label: "Source",
+    blurb: "A citable primary document.",
+    classes: "bg-amber-950 text-amber-300",
+  },
+  {
+    letter: "W",
+    label: "Warrant",
+    blurb: "A source's stance on a claim --- support, contradict, or qualify.",
+    classes: "bg-zinc-800 text-zinc-500",
+  },
+  {
+    letter: "I",
+    label: "Intervention",
+    blurb: "A proposed action.",
+    classes: "bg-emerald-950 text-emerald-300",
+  },
+  {
+    letter: "LF",
+    label: "Friction layer",
+    blurb: "What slows deployment.",
+    classes: "bg-orange-950 text-orange-300",
+  },
+  {
+    letter: "LH",
+    label: "Harm layer",
+    blurb: "A welfare harm to weigh.",
+    classes: "bg-rose-950 text-rose-300",
+  },
+];
+
 const tiles = [
   {
     href: "/analyses/",
@@ -133,6 +184,36 @@ const tiles = [
         >finds coalition bridges that do not require conceding the divergence</a
       >.
     </p>
+  </section>
+
+  <section class="mb-10">
+    <h2
+      class="mb-3 text-xs font-semibold tracking-wide text-zinc-500 uppercase"
+    >
+      Node types
+    </h2>
+    <dl class="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+      {
+        legend.map((entry) => (
+          <div class="flex items-baseline gap-2">
+            <dt>
+              <span
+                class:list={[
+                  "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-sm px-1 font-mono text-[10px] font-semibold",
+                  entry.classes,
+                ]}
+                aria-hidden="true"
+              >
+                {entry.letter}
+              </span>
+            </dt>
+            <dd class="text-zinc-400">
+              <span class="text-zinc-100">{entry.label}</span> --- {entry.blurb}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
   </section>
 
   {

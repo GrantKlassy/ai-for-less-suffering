@@ -76,6 +76,25 @@ export function collectionForId(id: string): CollectionName | null {
   return match?.collection ?? null;
 }
 
+// Presentation-only. Not part of the camp data model --- the engine's Pydantic
+// schema forbids extra fields, and mixing presentation into data violates the
+// layering rule. Every place a camp is rendered should apply this (either via
+// resolveNode, which does it centrally, or via campEmoji for direct reads).
+export const CAMP_EMOJI: Record<string, string> = {
+  camp_anthropic: "🧡",
+  camp_displaced_workers: "👷",
+  camp_eacc: "🚀",
+  camp_environmentalists: "🌳",
+  camp_operator: "🕺",
+  camp_palantir: "💣",
+  camp_religious: "🛐",
+  camp_xrisk: "📉",
+};
+
+export function campEmoji(id: string): string {
+  return CAMP_EMOJI[id] ?? "";
+}
+
 function truncate(s: string, max = 80): string {
   return s.length <= max ? s : s.slice(0, max - 1).trimEnd() + "…";
 }
@@ -101,9 +120,11 @@ export async function resolveNode(id: string): Promise<ResolvedRef | null> {
   if (!collection) return null;
   const entry = await getEntry(collection, id);
   if (!entry) return null;
+  const label = pickLabel(collection, entry.data as Record<string, unknown>);
+  const emoji = collection === "camps" ? campEmoji(id) : "";
   return {
     href: HREF_BY_COLLECTION[collection](id),
-    label: pickLabel(collection, entry.data as Record<string, unknown>),
+    label: emoji ? `${emoji} ${label}` : label,
     kind: KIND_BY_COLLECTION[collection],
   };
 }
