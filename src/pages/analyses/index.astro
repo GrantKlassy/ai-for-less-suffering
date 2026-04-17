@@ -50,18 +50,28 @@ const entries = loadAnalyses();
                 <span class="text-zinc-500">{analysis.generated_at}</span>
               </div>
               <div class="mt-2 text-xs text-zinc-500">
-                {analysis.kind === "palantir" ? (
+                {analysis.kind === "palantir" && (
                   <>
                     camps: {analysis.camps.join(", ")} · bridges:{" "}
                     {analysis.bridges.length} · blindspots:{" "}
                     {analysis.blindspots.length} · contested:{" "}
                     {analysis.contested_claims.length}
                   </>
-                ) : (
+                )}
+                {analysis.kind === "leverage" && (
                   <>
                     camps: {analysis.camps.join(", ")} · ranked:{" "}
                     {analysis.rankings.length} · ranking blindspots:{" "}
                     {analysis.ranking_blindspots.length} · contested:{" "}
+                    {analysis.contested_claims.length}
+                  </>
+                )}
+                {analysis.kind === "steelman" && (
+                  <>
+                    target: {analysis.target_intervention_id} · for:{" "}
+                    {analysis.case_for.length} · against:{" "}
+                    {analysis.case_against.length} · conceded:{" "}
+                    {analysis.conceded_descriptive.length} · contested:{" "}
                     {analysis.contested_claims.length}
                   </>
                 )}

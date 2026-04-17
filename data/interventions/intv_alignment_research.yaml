@@ -7,6 +7,13 @@ friction_scores:
   friction_grid: 1.0
   friction_public: 0.9
   friction_regulation: 0.8
+harm_scores:
+  harm_concentration: 0.6
+  harm_displacement: 1.0
+  harm_extraction: 0.9
+  harm_land: 1.0
+  harm_lock_in: 0.7
+  harm_water: 0.9
 id: intv_alignment_research
 kind: intervention
 leverage_score: 0.6

@@ -64,14 +64,18 @@ const label = (id: string): string => {
   return node.name ?? node.text ?? id;
 };
 
-const title =
-  analysis.kind === "palantir"
-    ? `Palantir analysis --- ${analysis.generated_at}`
-    : `Leverage analysis --- ${analysis.generated_at}`;
-const heading =
-  analysis.kind === "palantir"
-    ? "Palantir coalition analysis"
-    : "Leverage analysis";
+const titleByKind: Record<Analysis["kind"], string> = {
+  palantir: `Palantir analysis --- ${analysis.generated_at}`,
+  leverage: `Leverage analysis --- ${analysis.generated_at}`,
+  steelman: `Steelman analysis --- ${analysis.generated_at}`,
+};
+const headingByKind: Record<Analysis["kind"], string> = {
+  palantir: "Palantir coalition analysis",
+  leverage: "Leverage analysis",
+  steelman: "Steelman analysis",
+};
+const title = titleByKind[analysis.kind];
+const heading = headingByKind[analysis.kind];
 ---
 
 <Base title={title}>
@@ -80,43 +84,195 @@ const heading =
     Generated <span class="font-mono">{analysis.generated_at}</span>
   </p>
 
-  <section class="mb-10">
-    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
-      Camps analyzed
-    </h2>
-    <ul class="space-y-1 text-sm">
-      {
-        analysis.camps.map((id) => (
-          <li>
-            <span class="text-zinc-100">{label(id)}</span>
-            <span class="ml-2 font-mono text-xs text-zinc-500">{id}</span>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="mb-10">
-    <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
-      Descriptive convergence
-    </h2>
-    {
-      analysis.descriptive_convergences.length === 0 ? (
-        <p class="text-sm text-zinc-500">
-          No claims held across every analyzed camp.
-        </p>
-      ) : (
-        <ul class="space-y-2 text-sm">
-          {analysis.descriptive_convergences.map((id) => (
+  {
+    analysis.kind !== "steelman" && (
+      <section class="mb-10">
+        <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+          Camps analyzed
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {analysis.camps.map((id) => (
             <li>
-              <div class="text-zinc-100">{label(id)}</div>
-              <div class="font-mono text-xs text-zinc-500">{id}</div>
+              <span class="text-zinc-100">{label(id)}</span>
+              <span class="ml-2 font-mono text-xs text-zinc-500">{id}</span>
             </li>
           ))}
         </ul>
-      )
-    }
-  </section>
+      </section>
+    )
+  }
+
+  {
+    analysis.kind !== "steelman" && (
+      <section class="mb-10">
+        <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+          Descriptive convergence
+        </h2>
+        {analysis.descriptive_convergences.length === 0 ? (
+          <p class="text-sm text-zinc-500">
+            No claims held across every analyzed camp.
+          </p>
+        ) : (
+          <ul class="space-y-2 text-sm">
+            {analysis.descriptive_convergences.map((id) => (
+              <li>
+                <div class="text-zinc-100">{label(id)}</div>
+                <div class="font-mono text-xs text-zinc-500">{id}</div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    )
+  }
+
+  {
+    analysis.kind === "steelman" && (
+      <>
+        <section class="mb-10">
+          <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+            Target intervention
+          </h2>
+          <div class="rounded border border-zinc-800 p-4 text-sm">
+            <div class="text-zinc-100">{analysis.target_intervention_text}</div>
+            <div class="mt-1 font-mono text-xs text-zinc-500">
+              {analysis.target_intervention_id}
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+            Operator tension
+          </h2>
+          <blockquote class="border-l-2 border-amber-600 pl-4 text-sm text-zinc-200 italic">
+            {analysis.operator_tension}
+          </blockquote>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+            Conceded descriptive ground
+          </h2>
+          {analysis.conceded_descriptive.length === 0 ? (
+            <p class="text-sm text-zinc-500">
+              No descriptive claims cited by both FOR and AGAINST. The sides are
+              not yet arguing over shared evidence.
+            </p>
+          ) : (
+            <ul class="space-y-2 text-sm">
+              {analysis.conceded_descriptive.map((id) => (
+                <li>
+                  <div class="text-zinc-100">{label(id)}</div>
+                  <div class="font-mono text-xs text-zinc-500">{id}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section class="mb-10">
+          <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-emerald-300">
+            Case FOR
+          </h2>
+          {analysis.case_for.length === 0 ? (
+            <p class="text-sm text-zinc-500">No FOR frames generated.</p>
+          ) : (
+            <div class="space-y-5">
+              {analysis.case_for.map((frame) => (
+                <div class="rounded border border-zinc-800 p-4">
+                  <div class="mb-2 font-mono text-xs text-emerald-400">
+                    {frame.axiom_family}
+                  </div>
+                  <p class="mb-3 text-sm text-zinc-200">{frame.case}</p>
+                  {frame.normative_claim_ids.length > 0 && (
+                    <div class="mb-2 text-xs">
+                      <span class="text-zinc-500">Normative anchors:</span>
+                      <ul class="mt-1 space-y-1">
+                        {frame.normative_claim_ids.map((id) => (
+                          <li>
+                            <span class="text-zinc-300">{label(id)}</span>
+                            <span class="ml-2 font-mono text-zinc-500">
+                              {id}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {frame.descriptive_claim_ids.length > 0 && (
+                    <div class="text-xs">
+                      <span class="text-zinc-500">Descriptive evidence:</span>
+                      <ul class="mt-1 space-y-1">
+                        {frame.descriptive_claim_ids.map((id) => (
+                          <li>
+                            <span class="text-zinc-300">{label(id)}</span>
+                            <span class="ml-2 font-mono text-zinc-500">
+                              {id}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section class="mb-10">
+          <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-rose-300">
+            Case AGAINST
+          </h2>
+          {analysis.case_against.length === 0 ? (
+            <p class="text-sm text-zinc-500">No AGAINST frames generated.</p>
+          ) : (
+            <div class="space-y-5">
+              {analysis.case_against.map((frame) => (
+                <div class="rounded border border-zinc-800 p-4">
+                  <div class="mb-2 font-mono text-xs text-rose-400">
+                    {frame.axiom_family}
+                  </div>
+                  <p class="mb-3 text-sm text-zinc-200">{frame.case}</p>
+                  {frame.normative_claim_ids.length > 0 && (
+                    <div class="mb-2 text-xs">
+                      <span class="text-zinc-500">Normative anchors:</span>
+                      <ul class="mt-1 space-y-1">
+                        {frame.normative_claim_ids.map((id) => (
+                          <li>
+                            <span class="text-zinc-300">{label(id)}</span>
+                            <span class="ml-2 font-mono text-zinc-500">
+                              {id}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {frame.descriptive_claim_ids.length > 0 && (
+                    <div class="text-xs">
+                      <span class="text-zinc-500">Descriptive evidence:</span>
+                      <ul class="mt-1 space-y-1">
+                        {frame.descriptive_claim_ids.map((id) => (
+                          <li>
+                            <span class="text-zinc-300">{label(id)}</span>
+                            <span class="ml-2 font-mono text-zinc-500">
+                              {id}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </>
+    )
+  }
 
   {
     analysis.kind === "palantir" && (

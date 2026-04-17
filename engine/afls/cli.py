@@ -20,13 +20,17 @@ from afls.config import data_dir, db_path, public_output_dir
 from afls.output import (
     analysis_paths,
     leverage_analysis_paths,
+    steelman_analysis_paths,
     write_analysis_json,
     write_analysis_markdown,
     write_leverage_json,
     write_leverage_markdown,
+    write_steelman_json,
+    write_steelman_markdown,
 )
 from afls.queries.leverage import run_leverage_query
 from afls.queries.palantir import run_palantir_query
+from afls.queries.steelman import run_steelman_query
 from afls.reasoning import AnthropicClient
 from afls.schema import (
     BaseNode,
@@ -57,13 +61,14 @@ app = typer.Typer(
 )
 console = Console()
 
-_SLUG_KINDS = {"camp", "friction_layer"}
+_SLUG_KINDS = {"camp", "friction_layer", "harm_layer"}
 _ID_PREFIX: dict[str, str] = {
     "descriptive_claim": "desc",
     "normative_claim": "norm",
     "camp": "camp",
     "intervention": "intv",
     "friction_layer": "friction",
+    "harm_layer": "harm",
     "bridge": "bridge",
     "convergence": "conv",
     "blindspot": "blind",
@@ -254,6 +259,8 @@ def validate() -> None:
     for intv in list_nodes(Intervention, root):
         for ref in intv.friction_scores:
             expect(intv.id, "friction_scores", ref, "friction_layer")
+        for ref in intv.harm_scores:
+            expect(intv.id, "harm_scores", ref, "harm_layer")
     for bridge in list_nodes(Bridge, root):
         expect(bridge.id, "from_camp", bridge.from_camp, "camp")
         expect(bridge.id, "to_camp", bridge.to_camp, "camp")
@@ -326,17 +333,27 @@ def reindex() -> None:
     typer.secho(f"indexed {count} nodes -> {db}", fg="green")
 
 
-_SUPPORTED_QUERIES: tuple[str, ...] = ("palantir", "leverage")
+_SUPPORTED_QUERIES: tuple[str, ...] = ("palantir", "leverage", "steelman")
 
 
 @app.command()
-def query(name: str) -> None:
-    """Run a named reasoning query. Supported: `palantir`, `leverage`."""
+def query(
+    name: str,
+    target: str = typer.Option(
+        "",
+        "--target",
+        help="Intervention id to target. Required for `steelman`.",
+    ),
+) -> None:
+    """Run a named reasoning query. Supported: `palantir`, `leverage`, `steelman`."""
     if name not in _SUPPORTED_QUERIES:
         typer.secho(
             f"unknown query {name!r}. supported: {', '.join(_SUPPORTED_QUERIES)}",
             fg="red",
         )
+        raise typer.Exit(1)
+    if name == "steelman" and not target:
+        typer.secho("steelman requires --target <intervention_id>", fg="red")
         raise typer.Exit(1)
     client = AnthropicClient()
     if name == "palantir":
@@ -344,13 +361,22 @@ def query(name: str) -> None:
         json_path, md_path = analysis_paths(public_output_dir(), palantir_analysis)
         write_analysis_json(palantir_analysis, json_path)
         write_analysis_markdown(palantir_analysis, md_path, data_dir())
-    else:
+    elif name == "leverage":
         leverage_analysis = run_leverage_query(client, data_dir())
         json_path, md_path = leverage_analysis_paths(
             public_output_dir(), leverage_analysis
         )
         write_leverage_json(leverage_analysis, json_path)
         write_leverage_markdown(leverage_analysis, md_path, data_dir())
+    else:
+        steelman_analysis = run_steelman_query(
+            client, data_dir(), target_intervention_id=target
+        )
+        json_path, md_path = steelman_analysis_paths(
+            public_output_dir(), steelman_analysis
+        )
+        write_steelman_json(steelman_analysis, json_path)
+        write_steelman_markdown(steelman_analysis, md_path, data_dir())
     typer.secho(f"wrote {json_path}", fg="green")
     typer.secho(f"wrote {md_path}", fg="green")
 

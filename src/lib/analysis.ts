@@ -2,6 +2,7 @@
 // Sources of truth:
 //   engine/afls/queries/palantir.py (PalantirAnalysis)
 //   engine/afls/queries/leverage.py (LeverageAnalysis)
+//   engine/afls/queries/steelman.py (SteelmanAnalysis)
 //
 // The `kind` discriminator is not serialized into the JSON payload (it is a
 // Python ClassVar). It is reconstructed at load time from the filename prefix.
@@ -97,17 +98,36 @@ export interface LeverageAnalysis {
   contested_claims: ContestedClaim[];
 }
 
-export type Analysis = PalantirAnalysis | LeverageAnalysis;
+export interface SteelmanFrame {
+  axiom_family: string;
+  normative_claim_ids: string[];
+  descriptive_claim_ids: string[];
+  case: string;
+}
+
+export interface SteelmanAnalysis {
+  kind: "steelman";
+  generated_at: string;
+  target_intervention_id: string;
+  target_intervention_text: string;
+  case_for: SteelmanFrame[];
+  case_against: SteelmanFrame[];
+  conceded_descriptive: string[];
+  contested_claims: ContestedClaim[];
+  operator_tension: string;
+}
+
+export type Analysis = PalantirAnalysis | LeverageAnalysis | SteelmanAnalysis;
 
 export interface AnalysisEntry {
   id: string;
   analysis: Analysis;
 }
 
-// Filename prefix is the discriminator --- `palantir_<stamp>.json` vs
-// `leverage_<stamp>.json`. Throws on unknown prefix rather than silently
-// falling back, so a third analysis kind can't ship without the renderer
-// learning about it.
+// Filename prefix is the discriminator --- `palantir_<stamp>.json`,
+// `leverage_<stamp>.json`, or `steelman_<stamp>.json`. Throws on unknown
+// prefix rather than silently falling back, so a new analysis kind can't ship
+// without the renderer learning about it.
 export function parseAnalysis(filename: string, raw: string): Analysis {
   const payload = JSON.parse(raw) as Record<string, unknown>;
   if (filename.startsWith("palantir_")) {
@@ -115,6 +135,9 @@ export function parseAnalysis(filename: string, raw: string): Analysis {
   }
   if (filename.startsWith("leverage_")) {
     return { kind: "leverage", ...(payload as Omit<LeverageAnalysis, "kind">) };
+  }
+  if (filename.startsWith("steelman_")) {
+    return { kind: "steelman", ...(payload as Omit<SteelmanAnalysis, "kind">) };
   }
   throw new Error(`unknown analysis filename prefix: ${filename}`);
 }

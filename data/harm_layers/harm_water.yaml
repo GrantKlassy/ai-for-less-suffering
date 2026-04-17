@@ -1,0 +1,9 @@
+created_at: '2026-04-17T00:00:00Z'
+description: Datacenter and thermal-generation freshwater consumption --- direct cooling
+  withdrawal plus indirect water embedded in power generation. Measured as withdrawal,
+  consumption, and basin stress concentration.
+id: harm_water
+kind: harm_layer
+name: Water
+provenance_url: null
+updated_at: '2026-04-17T00:00:00Z'

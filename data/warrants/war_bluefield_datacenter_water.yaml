@@ -1,0 +1,12 @@
+claim_id: desc_datacenter_water_intensity
+created_at: '2026-04-17T00:00:00Z'
+id: war_bluefield_datacenter_water
+kind: warrant
+locator: US Data Center Water Use and Demand Forecast
+method_tag: modeled_projection
+provenance_url: null
+quote: ''
+source_id: src_bluefield_datacenter_water
+supports: support
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.75

@@ -7,6 +7,13 @@ friction_scores:
   friction_grid: 1.0
   friction_public: 0.8
   friction_regulation: 0.7
+harm_scores:
+  harm_concentration: 0.8
+  harm_displacement: 0.5
+  harm_extraction: 1.0
+  harm_land: 1.0
+  harm_lock_in: 0.7
+  harm_water: 1.0
 id: intv_training
 kind: intervention
 leverage_score: 0.35

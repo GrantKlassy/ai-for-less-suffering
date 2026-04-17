@@ -1,0 +1,16 @@
+accessed_at: ''
+authors:
+- International Energy Agency
+created_at: '2026-04-17T00:00:00Z'
+id: src_iea_critical_minerals
+kind: source
+notes: Annual IEA assessment of critical-minerals supply-chain risk for energy and
+  compute. Tracks refining concentration (China >80% of rare-earth refining, >70% of
+  cobalt refining, etc.) as geopolitical and ecological risk vector.
+provenance_url: null
+published_at: '2024-05'
+reliability: 0.85
+source_kind: primary_doc
+title: Global Critical Minerals Outlook 2024
+updated_at: '2026-04-17T00:00:00Z'
+url: ''

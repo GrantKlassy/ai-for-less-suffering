@@ -13,6 +13,7 @@ from afls.schema import (
     Convergence,
     DescriptiveClaim,
     FrictionLayer,
+    HarmLayer,
     Intervention,
     InterventionKind,
     MethodTag,
@@ -118,6 +119,28 @@ def test_intervention_scored_against_frictions() -> None:
     assert intervention.friction_scores["friction_capex"] == 0.6
 
 
+def test_intervention_scored_against_harms() -> None:
+    intervention = Intervention(
+        id=new_id("intv"),
+        text="Expand training compute.",
+        action_kind=InterventionKind.ECONOMIC,
+        leverage_score=0.7,
+        harm_scores={"harm_water": 0.3, "harm_extraction": 0.5},
+    )
+    assert intervention.harm_scores["harm_water"] == 0.3
+    assert intervention.harm_scores["harm_extraction"] == 0.5
+
+
+def test_intervention_harm_scores_default_empty() -> None:
+    intervention = Intervention(
+        id=new_id("intv"),
+        text="x",
+        action_kind=InterventionKind.TECHNICAL,
+        leverage_score=0.5,
+    )
+    assert intervention.harm_scores == {}
+
+
 def test_friction_layer_basic() -> None:
     layer = FrictionLayer(
         id=slug_id("friction", "grid"),
@@ -125,6 +148,21 @@ def test_friction_layer_basic() -> None:
         description="Electrical grid capacity.",
     )
     assert layer.id == "friction_grid"
+
+
+def test_harm_layer_basic() -> None:
+    layer = HarmLayer(
+        id=slug_id("harm", "water"),
+        name="water",
+        description="Datacenter freshwater consumption.",
+    )
+    assert layer.id == "harm_water"
+    assert layer.kind == "harm_layer"
+
+
+def test_harm_layer_requires_name() -> None:
+    with pytest.raises(ValidationError):
+        HarmLayer(id="harm_empty", name="")
 
 
 def test_bridge_requires_both_sides() -> None:
@@ -284,6 +322,7 @@ def test_camp_disputed_warrants_accepts_refs() -> None:
             leverage_score=0.5,
         ),
         lambda: FrictionLayer(id=slug_id("friction", "capex"), name="capex"),
+        lambda: HarmLayer(id=slug_id("harm", "water"), name="water"),
         lambda: Bridge(
             id=new_id("bridge"),
             from_camp="camp_a",

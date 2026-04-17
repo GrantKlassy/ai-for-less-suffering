@@ -1,0 +1,10 @@
+created_at: '2026-04-17T00:00:00Z'
+description: Labor welfare outcomes from AI-driven workforce reshaping --- wage compression,
+  role hollowing, loss of meaning and skill-exercise, not only headcount loss. Distinct
+  from friction_public (which tracks resistance as an obstacle); harm_displacement tracks
+  the welfare harm itself if the intervention lands.
+id: harm_displacement
+kind: harm_layer
+name: Displacement
+provenance_url: null
+updated_at: '2026-04-17T00:00:00Z'

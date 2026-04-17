@@ -22,6 +22,7 @@ from afls.queries.palantir import (
     PalantirAnalysis,
     WarrantSummary,
 )
+from afls.queries.steelman import SteelmanAnalysis, SteelmanFrame
 from afls.schema import (
     BlindSpot,
     Bridge,
@@ -340,3 +341,114 @@ def write_leverage_markdown(
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(render_leverage_markdown(analysis, data_dir))
+
+
+def _steelman_stamp_slug(analysis: SteelmanAnalysis) -> str:
+    return analysis.generated_at.strftime("%Y%m%dT%H%M%SZ")
+
+
+def steelman_analysis_paths(
+    public_output_dir: Path, analysis: SteelmanAnalysis
+) -> tuple[Path, Path]:
+    base = public_output_dir / "analyses"
+    slug = _steelman_stamp_slug(analysis)
+    return (base / f"steelman_{slug}.json", base / f"steelman_{slug}.md")
+
+
+def write_steelman_json(analysis: SteelmanAnalysis, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = analysis.model_dump(mode="json")
+    with path.open("w") as handle:
+        json.dump(payload, handle, indent=2, sort_keys=True)
+
+
+def _render_steelman_frame(
+    frame: SteelmanFrame,
+    normatives: dict[str, NormativeClaim],
+    descriptives: dict[str, DescriptiveClaim],
+) -> list[str]:
+    lines = [f"#### `{frame.axiom_family.value}`", "", frame.case, ""]
+    if frame.normative_claim_ids:
+        lines.append("_Normative anchors:_")
+        for nid in frame.normative_claim_ids:
+            norm = normatives.get(nid)
+            if norm is None:
+                lines.append(f"- `{nid}` (missing)")
+            else:
+                lines.append(f"- `{nid}` --- {norm.text}")
+        lines.append("")
+    if frame.descriptive_claim_ids:
+        lines.append("_Descriptive evidence:_")
+        for did in frame.descriptive_claim_ids:
+            claim = descriptives.get(did)
+            if claim is None:
+                lines.append(f"- `{did}` (missing)")
+            else:
+                lines.append(f"- `{did}` --- {claim.text}")
+        lines.append("")
+    return lines
+
+
+def render_steelman_markdown(analysis: SteelmanAnalysis, data_dir: Path) -> str:
+    descriptives = {c.id: c for c in list_nodes(DescriptiveClaim, data_dir)}
+    normatives = {c.id: c for c in list_nodes(NormativeClaim, data_dir)}
+
+    parts = [
+        "# Steelman analysis",
+        "",
+        f"Generated: `{analysis.generated_at.isoformat()}`",
+        "",
+        f"Target intervention: **`{analysis.target_intervention_id}`** --- "
+        f"{analysis.target_intervention_text}",
+        "",
+    ]
+
+    parts.append("## Operator tension")
+    parts.append("")
+    parts.append("> " + analysis.operator_tension.replace("\n", "\n> "))
+    parts.append("")
+
+    parts.append("## Conceded descriptive ground")
+    parts.append("")
+    if not analysis.conceded_descriptive:
+        parts.append(
+            "No descriptive claims are cited by both FOR and AGAINST. Absence here "
+            "means the sides are not yet arguing over shared evidence --- the data "
+            "fill is thin or the frames are disjoint.\n"
+        )
+    else:
+        parts.append("Claims cited by at least one FOR frame AND one AGAINST frame:")
+        for cid in analysis.conceded_descriptive:
+            claim = descriptives.get(cid)
+            if claim is None:
+                parts.append(f"- `{cid}` (missing)")
+            else:
+                parts.append(f"- `{cid}` --- {claim.text}")
+        parts.append("")
+
+    parts.append("## Case FOR")
+    parts.append("")
+    if not analysis.case_for:
+        parts.append("_No FOR frames generated._\n")
+    else:
+        for frame in analysis.case_for:
+            parts.extend(_render_steelman_frame(frame, normatives, descriptives))
+
+    parts.append("## Case AGAINST")
+    parts.append("")
+    if not analysis.case_against:
+        parts.append("_No AGAINST frames generated._\n")
+    else:
+        for frame in analysis.case_against:
+            parts.extend(_render_steelman_frame(frame, normatives, descriptives))
+
+    parts.append(_render_contested_claims(analysis.contested_claims))
+
+    return "\n".join(parts).rstrip() + "\n"
+
+
+def write_steelman_markdown(
+    analysis: SteelmanAnalysis, path: Path, data_dir: Path
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(render_steelman_markdown(analysis, data_dir))
