@@ -37,16 +37,16 @@ const linkColor: Record<NodeKind, string> = {
 };
 
 const badge: Record<NodeKind, { letter: string; classes: string }> = {
-  camp: { letter: "C", classes: "bg-zinc-800 text-zinc-300" },
-  descriptive_claim: { letter: "d", classes: "bg-sky-950 text-sky-300" },
-  normative_claim: { letter: "N", classes: "bg-violet-950 text-violet-300" },
+  camp: { letter: "P", classes: "bg-zinc-800 text-zinc-300" },
+  descriptive_claim: { letter: "CD", classes: "bg-sky-950 text-sky-300" },
+  normative_claim: { letter: "CN", classes: "bg-violet-950 text-violet-300" },
   intervention: {
     letter: "I",
     classes: "bg-emerald-950 text-emerald-300",
   },
   source: { letter: "S", classes: "bg-amber-950 text-amber-300" },
-  friction_layer: { letter: "F", classes: "bg-orange-950 text-orange-300" },
-  harm_layer: { letter: "H", classes: "bg-rose-950 text-rose-300" },
+  friction_layer: { letter: "LF", classes: "bg-orange-950 text-orange-300" },
+  harm_layer: { letter: "LH", classes: "bg-rose-950 text-rose-300" },
   warrant: { letter: "W", classes: "bg-zinc-800 text-zinc-500" },
 };
 ---
@@ -64,7 +64,7 @@ const badge: Record<NodeKind, { letter: string; classes: string }> = {
       {showKind && (
         <span
           class:list={[
-            "inline-flex h-4 w-4 shrink-0 items-center justify-center self-center rounded-sm font-mono text-[10px] font-semibold",
+            "inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm px-1 font-mono text-[10px] font-semibold",
             badge[resolved.kind].classes,
           ]}
           aria-hidden="true"
@@ -85,7 +85,7 @@ const badge: Record<NodeKind, { letter: string; classes: string }> = {
       {showKind && (
         <span
           class:list={[
-            "inline-flex h-4 w-4 shrink-0 items-center justify-center self-center rounded-sm font-mono text-[10px] font-semibold",
+            "inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm px-1 font-mono text-[10px] font-semibold",
             badge[resolved.kind].classes,
           ]}
           aria-hidden="true"
