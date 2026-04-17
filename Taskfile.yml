@@ -1,6 +1,14 @@
 version: "3"
 
 tasks:
+  ship:
+    desc: Full pre-deploy gate --- repo checks, site typecheck + format, engine tests, site build
+    cmds:
+      - task: check
+      - task: site:check
+      - task: engine:test
+      - task: build
+
   check:
     desc: Run all standard repo checks
     cmds:
@@ -87,6 +95,12 @@ tasks:
     desc: Preview the built site locally
     cmds:
       - pnpm preview
+
+  site:check:
+    desc: Astro TypeScript check and prettier format check
+    cmds:
+      - pnpm check
+      - pnpm format:check
 
   engine:install:
     desc: Install Python engine dependencies via uv
