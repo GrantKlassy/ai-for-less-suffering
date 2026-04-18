@@ -14,18 +14,26 @@ This is thinking-in-progress, not a position paper. It is also becoming a tool: 
 
 Every session starts the same way. Do this before answering, before building, before shaping anything:
 
-1. `directives-ai/BRAIN.md` --- Grant's working portrait of himself. The posture to assume, the blind spots to watch for.
-2. `directives-ai/MANIFESTO.md` --- what this repo is trying to become. Project-level intent, design principles, the normative spine.
-3. `directives-ai/CLAUDE.md` --- shaping rules for the raw-in / shaped-out pipeline, tighter inside that directory.
-4. This file.
+1. Read all files underneath `directives` --- Your only purpose are the files underneath `directives`
 
-The repo is the context. Re-reading is not ceremony --- it's how you stay calibrated, because BRAIN, MANIFESTO, and precedent all accumulate. What was true two commits ago may not be true now.
+Then, do this before answering, before building, before shaping anything:
+
+2. `directives-ai/GRANT_BRAIN.md` --- Grant's working portrait of himself. The posture to assume, the blind spots to watch for.
+3. `directives-ai/MANIFESTO.md` --- what this repo is trying to become. Project-level intent, design principles, the normative spine.
+4. `directives-ai/CLAUDE.md` --- what that directory is: directive files co-written with `claude`, most of them produced by Grant prompting `claude`.
+5. This file.
+
+The repo is the context. Re-reading is not ceremony --- it's how you stay calibrated, because GRANT_BRAIN, MANIFESTO, and precedent all accumulate. What was true two commits ago may not be true now.
 
 What ships from the loop:
 
 - Shaped prose that started life as a raw directive.
 - Code and infrastructure implementing what the manifesto asks for.
 - Nothing raw, nothing embarrassing-to-Grant, nothing that breaks opsec across sibling repos.
+
+## directives
+
+Your only purpose. The whole point. What we are doing. The sacred goal.
 
 ## directives-ai
 
@@ -51,7 +59,7 @@ For prose work:
 For code, infrastructure, tools --- whatever the manifesto is pulling toward:
 
 - The manifesto says "figure out the architecture yourself." Take that seriously: propose the architecture, don't outsource the design back to Grant. But ask the sharpest clarifying questions _first_ --- an implementation that misses the point is worse than a delayed one.
-- Build for the operator in BRAIN.md: poker-brain EV, sovereign-individual, builder temperament, low tolerance for bullshit. No hedging UI, no confirmation modals for someone who risk-manages like a quant, no hand-holding.
+- Build for the operator in GRANT_BRAIN.md: poker-brain EV, sovereign-individual, builder temperament, low tolerance for bullshit. No hedging UI, no confirmation modals for someone who risk-manages like a quant, no hand-holding.
 - Separate descriptive from normative at every layer. If a data model, function, or interface mixes "what is" with "what should be," split it. This is load-bearing in the manifesto, not a stylistic preference.
 - Real thinking, not templated output. If a question comes in underspecified, push back before writing code. Don't fill the gap with defaults and ship.
 - No hedging in the artifact. State the position the code takes; if Grant challenges it, update.
@@ -69,11 +77,13 @@ For code, infrastructure, tools --- whatever the manifesto is pulling toward:
 
 ## Canary
 
-Warrant canary at `/canary`, signed source at `public/canary.txt`, detached signature at `public/canary.txt.asc`, public key at `public/canary-key.asc`. The directive recipe for building one in any repo is at `directives-ai/CANARY.md` --- the portable version of the system.
+Warrant canary at `/canary`, signed source at `public/canary.txt`, detached signature at `public/canary.txt.asc`, public key at `public/canary-key.asc`.
 
 Editing `canary.txt` invalidates the signature. Any byte change requires `task canary:renew` to re-sign --- no exceptions, no "small fixups." The script rewrites the date and Bitcoin-block lines, kills `gpg-agent` first so the passphrase prompts fresh (signing is a deliberate human act, not a cached credential), then verifies. Commit `canary.txt` and `canary.txt.asc` together in the same commit.
 
 The page renders the file verbatim inside a `<pre>` block. ASCII art and other unicode survive Astro's build, but copy-paste / email / CDN normalization can mangle non-ASCII bytes and break verification downstream. If non-ASCII content is present, verify after deploy with `curl https://ai-for-less-suffering.com/canary.txt | gpg --verify public/canary.txt.asc -` from a fresh machine.
+
+NEVER edit canary.txt using claude
 
 ## Precedent
 

@@ -37,6 +37,16 @@ const sourceKind = z.enum([
   "dashboard",
 ]);
 
+// engine/afls/schema/sources.py :: Provenance. Optional on Source because pre-
+// provenance sources exist and will never be retroactively stamped.
+const provenance = z.object({
+  method: z.enum(["httpx", "manual_paste"]),
+  tool: z.string().min(1),
+  git_sha: z.string().min(1),
+  at: isoTime,
+  raw_content_hash: z.string().nullable().default(null),
+});
+
 const frictionLayers = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./data/friction_layers" }),
   schema: z.object({
@@ -89,6 +99,7 @@ const sources = defineCollection({
     accessed_at: z.string().default(""),
     reliability: z.number().min(0).max(1),
     notes: z.string().default(""),
+    provenance: provenance.nullable().default(null),
     created_at: isoTime,
     updated_at: isoTime,
     provenance_url: nullableUrl,

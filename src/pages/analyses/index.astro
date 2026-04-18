@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Base from "../../layouts/Base.astro";
 import { parseAnalysis, type AnalysisEntry } from "../../lib/analysis";
+import { ANALYSIS_EMOJI } from "../../lib/graph";
 
 function loadAnalyses(): AnalysisEntry[] {
   const analysesDir = path.resolve(process.cwd(), "public-output/analyses");
@@ -24,7 +25,7 @@ const entries = loadAnalyses();
 ---
 
 <Base title="Analyses --- ai-for-less-suffering">
-  <h1 class="mb-2 text-2xl text-zinc-100">Analyses</h1>
+  <h1 class="mb-2 text-2xl text-zinc-100">{ANALYSIS_EMOJI} Analyses</h1>
   <p class="mb-8 text-sm text-zinc-400">
     Structured outputs from the afls reasoning engine. Each analysis is
     descriptive convergence + normative divergence + coalition bridges, written

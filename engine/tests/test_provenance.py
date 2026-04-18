@@ -95,9 +95,9 @@ def test_source_defaults_no_provenance() -> None:
 def test_source_with_provenance_roundtrips() -> None:
     source = Source(
         id=new_id("src"),
-        source_kind=SourceKind.DIRECTIVE,
-        title="test directive",
-        reliability=0.4,
+        source_kind=SourceKind.PAPER,
+        title="test paper",
+        reliability=0.82,
         provenance=_stamp(),
     )
     payload = source.model_dump(mode="json")
@@ -105,16 +105,6 @@ def test_source_with_provenance_roundtrips() -> None:
     assert rebuilt.model_dump(mode="json") == payload
     assert rebuilt.provenance is not None
     assert rebuilt.provenance.method == "httpx"
-
-
-def test_source_directive_kind_constructs() -> None:
-    source = Source(
-        id="src_directive_brain",
-        source_kind=SourceKind.DIRECTIVE,
-        title="BRAIN",
-        reliability=0.85,
-    )
-    assert source.source_kind is SourceKind.DIRECTIVE
 
 
 def test_reliability_prior_covers_every_kind() -> None:

@@ -8,7 +8,7 @@ import SteelmanView from "../../components/analyses/SteelmanView.astro";
 import PalantirView from "../../components/analyses/PalantirView.astro";
 import LeverageView from "../../components/analyses/LeverageView.astro";
 import ContestedTrack from "../../components/analyses/ContestedTrack.astro";
-import { allAnalyses } from "../../lib/graph";
+import { allAnalyses, ANALYSIS_EMOJI } from "../../lib/graph";
 import type { Analysis } from "../../lib/analysis";
 
 export async function getStaticPaths() {
@@ -38,6 +38,7 @@ const headingByKind: Record<Analysis["kind"], string> = {
 
 <Base title={titleByKind[analysis.kind]}>
   <h1 class="mb-2 text-2xl text-zinc-100">
+    {ANALYSIS_EMOJI}
     {headingByKind[analysis.kind]}
   </h1>
   <p class="mb-8 text-xs text-zinc-500">

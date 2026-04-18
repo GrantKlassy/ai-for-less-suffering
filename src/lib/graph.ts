@@ -122,6 +122,12 @@ export function kindEmoji(kind: NodeKind): string {
   return KIND_EMOJI[kind] ?? "";
 }
 
+// Analyses are shaped engine outputs, not a NodeKind in the typed graph --- they
+// live under public-output/analyses/ and are loaded via analysis.ts, not as a
+// content collection. The emoji is deliberately siblings of KIND_EMOJI, not a
+// member, to keep the graph's node-kind axis clean.
+export const ANALYSIS_EMOJI = "🖥️";
+
 function truncate(s: string, max = 80): string {
   return s.length <= max ? s : s.slice(0, max - 1).trimEnd() + "…";
 }

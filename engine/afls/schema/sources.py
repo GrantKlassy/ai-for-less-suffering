@@ -25,14 +25,11 @@ class SourceKind(StrEnum):
     PRIMARY_DOC = "primary_doc"
     BLOG = "blog"
     DASHBOARD = "dashboard"
-    DIRECTIVE = "directive"
 
 
 ProvenanceMethod = Literal[
     "httpx",
     "manual_paste",
-    "directive_canonical",
-    "directive_ephemeral",
 ]
 
 
@@ -42,8 +39,7 @@ class Provenance(BaseModel):
     `method` records the channel; `tool` the version of whatever wrote the YAML;
     `git_sha` pins the repo state at intake so reasoning downstream can replay the
     context the drafter saw; `raw_content_hash` is sha256 of the text passed to the
-    LLM (or sha256 of the raw directive body for ephemeral capture). None only for
-    methods where no raw content existed at intake time.
+    LLM. None only for methods where no raw content existed at intake time.
     """
 
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
@@ -63,7 +59,6 @@ RELIABILITY_PRIOR: dict[SourceKind, float] = {
     SourceKind.DASHBOARD: 0.75,
     SourceKind.PRESS: 0.50,
     SourceKind.BLOG: 0.35,
-    SourceKind.DIRECTIVE: 0.40,
 }
 """Default reliability by source_kind. Used by `afls ingest` and as the center of
 the kind-based credibility lint. Operator can override per-source in YAML; the

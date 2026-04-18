@@ -1,13 +1,18 @@
 version: "3"
 
 tasks:
-  ship:
-    desc: Pre-deploy gate + signed ship tag + push. Kills gpg-agent so the tag signs with a fresh passphrase --- shipping is a deliberate human act.
+  all:
+    desc: Full verification pipeline --- every check, every test, full build. No side effects (no tag, no push).
     cmds:
       - task: check
       - task: site:check
       - task: engine:test
       - task: build
+
+  ship:
+    desc: Pre-deploy gate + signed ship tag + push. Kills gpg-agent so the tag signs with a fresh passphrase --- shipping is a deliberate human act.
+    cmds:
+      - task: all
       - gpgconf --kill gpg-agent 2>/dev/null || true
       - git tag -s "ship/$(date -u +%Y%m%dT%H%M%SZ)" -m "ship"
       - git push --follow-tags
@@ -72,6 +77,16 @@ tasks:
     desc: Verify README "Code last updated" badge matches the most recent substantive commit
     cmds:
       - ~/git/grantklassy/tools/update-last-updated --check .
+
+  check:env-hygiene:
+    desc: Verify .env hygiene (.env.example exists, .env is gitignored and not tracked)
+    cmds:
+      - ~/git/grantklassy/tools/rules/env_hygiene.sh .
+
+  check:gitignore-baseline:
+    desc: Verify .gitignore has baseline security-adjacent entries
+    cmds:
+      - ~/git/grantklassy/tools/rules/gitignore_baseline.sh .
 
   check:layering:
     desc: Cross-layer invariant --- CAMP_EMOJI in src/lib/graph.ts stays in sync with data/camps/ (missing/stale both fail)

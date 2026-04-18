@@ -35,3 +35,8 @@ data/afls.db-shm
 
 # OS
 .DS_Store
+
+# Added by tools gitignore_baseline
+.env.*.local
+*.pem
+*.key

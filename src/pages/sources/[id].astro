@@ -86,6 +86,34 @@ const stanceColor: Record<string, string> = {
   }
 
   {
+    source.data.provenance && (
+      <section class="mb-8 rounded border border-zinc-800 p-3">
+        <h2 class="mb-2 text-sm text-zinc-400">Intake provenance</h2>
+        <dl class="grid grid-cols-[max-content_1fr] gap-x-3 gap-y-1 font-mono text-xs">
+          <dt class="text-zinc-600">method</dt>
+          <dd class="text-zinc-300">{source.data.provenance.method}</dd>
+          <dt class="text-zinc-600">tool</dt>
+          <dd class="text-zinc-300">{source.data.provenance.tool}</dd>
+          <dt class="text-zinc-600">git sha</dt>
+          <dd class="text-zinc-300">
+            {source.data.provenance.git_sha.slice(0, 12)}
+          </dd>
+          <dt class="text-zinc-600">at</dt>
+          <dd class="text-zinc-300">{source.data.provenance.at}</dd>
+          {source.data.provenance.raw_content_hash && (
+            <>
+              <dt class="text-zinc-600">sha256</dt>
+              <dd class="text-zinc-300">
+                {source.data.provenance.raw_content_hash.slice(0, 12)}…
+              </dd>
+            </>
+          )}
+        </dl>
+      </section>
+    )
+  }
+
+  {
     evidence.length > 0 && (
       <section class="mb-8">
         <h2 class="mb-3 text-sm text-zinc-400">

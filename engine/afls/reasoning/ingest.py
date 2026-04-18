@@ -82,8 +82,8 @@ Evidence edges from the article provided in the system context.
 
 For the Source:
 - pick source_kind from the enum (paper, dataset, filing, press, primary_doc, blog, \
-dashboard, directive). Match the nature of the artifact, not its subject matter: a news \
-article about a dataset is still `press`.
+dashboard). Match the nature of the artifact, not its subject matter: a news article \
+about a dataset is still `press`.
 - id_slug is 2-5 words, lowercase, separated by underscores. Becomes the filename.
 - reliability should be within ~0.15 of the prior for its kind (see prior table in \
 context) unless you can justify a sharper score in `notes`.

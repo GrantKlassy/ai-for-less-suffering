@@ -10,8 +10,7 @@ The tool should let me interrogate questions like:
 
 - Given the current distribution of AI effort across domains (capital
   extraction, entertainment, productivity, research, medicine, etc.), what
-  reallocations would produce the largest reduction in human suffering per unit
-  of compute?
+  interventions would cause the greatest reduction in suffering?
 - Which societal camps (displaced workers, environmentalists, religious
   communities, accelerationists, x-risk, etc.) are blockers vs. accelerants for
   a given reallocation, and what normative bridges (Kantian, capabilities-based,
@@ -37,7 +36,3 @@ Design principles:
   bets as "dead money" that either pays off or doesn't.
 - No hedging, no "on the other hand" boilerplate. State positions, defend them,
   update when challenged.
-
-Figure out the architecture yourself. I want to implement it. Start by asking
-me the three sharpest clarifying questions you have about scope before writing
-any code.

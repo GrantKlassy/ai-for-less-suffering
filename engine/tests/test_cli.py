@@ -491,3 +491,70 @@ def test_validate_no_warning_when_direct_measurement_present(
     result = runner.invoke(app, ["validate"])
     assert result.exit_code == 0
     assert "warn" not in result.output.lower()
+
+
+def test_validate_warns_low_trust_only_backing(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.8), data_root)
+    save_node(
+        Source(id="src_a", source_kind=SourceKind.BLOG, title="t", reliability=0.35),
+        data_root,
+    )
+    save_node(
+        Evidence(
+            id="evi_a",
+            claim_id="desc_a",
+            source_id="src_a",
+            method_tag=MethodTag.JOURNALISTIC_REPORT,
+            supports=Support.SUPPORT,
+            weight=0.6,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "low-trust" in result.output
+    assert "blog" in result.output
+    assert "desc_a" in result.output
+
+
+def test_validate_no_low_trust_warning_when_paper_backing_present(
+    runner: CliRunner, data_root: Path
+) -> None:
+    save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.8), data_root)
+    save_node(
+        Source(id="src_blog", source_kind=SourceKind.BLOG, title="b", reliability=0.35),
+        data_root,
+    )
+    save_node(
+        Source(
+            id="src_paper", source_kind=SourceKind.PAPER, title="p", reliability=0.85
+        ),
+        data_root,
+    )
+    save_node(
+        Evidence(
+            id="evi_blog",
+            claim_id="desc_a",
+            source_id="src_blog",
+            method_tag=MethodTag.JOURNALISTIC_REPORT,
+            supports=Support.SUPPORT,
+            weight=0.5,
+        ),
+        data_root,
+    )
+    save_node(
+        Evidence(
+            id="evi_paper",
+            claim_id="desc_a",
+            source_id="src_paper",
+            method_tag=MethodTag.DIRECT_MEASUREMENT,
+            supports=Support.SUPPORT,
+            weight=0.8,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "low-trust" not in result.output

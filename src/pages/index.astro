@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ContestedTrack from "../components/analyses/ContestedTrack.astro";
-import { allAnalyses } from "../lib/graph";
+import { allAnalyses, ANALYSIS_EMOJI } from "../lib/graph";
 import { LEGEND } from "../lib/legend";
 import type { ContestedClaim } from "../lib/analysis";
 
@@ -86,7 +86,7 @@ const legend = LEGEND;
 const tiles = [
   {
     href: "/analyses/",
-    emoji: "🔭",
+    emoji: ANALYSIS_EMOJI,
     label: "Analyses",
     count: analysisCount,
     blurb: "Palantir coalition, leverage rank, steelman of a target.",

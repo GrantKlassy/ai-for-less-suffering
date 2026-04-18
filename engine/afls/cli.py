@@ -34,6 +34,7 @@ from afls.queries.palantir import run_palantir_query
 from afls.queries.steelman import run_steelman_query
 from afls.reasoning import AnthropicClient, ReasoningError, run_ingest_query
 from afls.schema import (
+    LOW_TRUST_KINDS,
     BaseNode,
     BlindSpot,
     Bridge,
@@ -45,6 +46,7 @@ from afls.schema import (
     MethodTag,
     Provenance,
     Source,
+    SourceKind,
     Support,
     new_id,
     slug_id,
@@ -296,7 +298,11 @@ def validate() -> None:
         )
         raise typer.Exit(1)
 
-    warnings = _confidence_lint(list_nodes(DescriptiveClaim, root), evidence_list)
+    warnings = _confidence_lint(
+        list_nodes(DescriptiveClaim, root),
+        evidence_list,
+        list_nodes(Source, root),
+    )
     for warn in warnings:
         typer.secho(f"  warn: {warn}", fg="yellow")
     suffix = f", {len(warnings)} warnings" if warnings else ""
@@ -306,12 +312,15 @@ def validate() -> None:
 
 
 def _confidence_lint(
-    claims: list[DescriptiveClaim], evidence_list: list[Evidence]
+    claims: list[DescriptiveClaim],
+    evidence_list: list[Evidence],
+    sources: list[Source],
 ) -> list[str]:
     """Operator-discipline warnings on claim confidence vs. attached evidence."""
     by_claim: dict[str, list[Evidence]] = {}
     for evidence in evidence_list:
         by_claim.setdefault(evidence.claim_id, []).append(evidence)
+    source_kind_by_id: dict[str, SourceKind] = {s.id: s.source_kind for s in sources}
     messages: list[str] = []
     for claim in claims:
         supporting = [
@@ -330,6 +339,18 @@ def _confidence_lint(
                 f"{claim.id}: confidence {claim.confidence} backed only by "
                 "expert_estimate evidence"
             )
+        if claim.confidence > 0.7 and supporting:
+            backing_kinds = {
+                source_kind_by_id[e.source_id]
+                for e in supporting
+                if e.source_id in source_kind_by_id
+            }
+            if backing_kinds and backing_kinds.issubset(LOW_TRUST_KINDS):
+                kinds_str = ", ".join(sorted(k.value for k in backing_kinds))
+                messages.append(
+                    f"{claim.id}: confidence {claim.confidence} backed only by "
+                    f"low-trust source kinds ({kinds_str})"
+                )
     return messages
 
 
