@@ -6,7 +6,7 @@ leverage, friction, or suffering-reduction numbers. One Opus pass layers coaliti
 analysis per ranked intervention: which camps line up, which contest it, what the
 expected friction fight looks like, and whether the suffering numerator is plausible.
 
-The composite formula is the −SUFFERING EV the directive asks for. Interventions
+The composite formula is the -SUFFERING EV the directive asks for. Interventions
 with zero suffering_reduction_scores rank zero regardless of political viability;
 that is intentional. The old viability composite (`leverage x robustness`) is kept
 alongside so the suffering term's effect on the ranking is legible.
@@ -57,7 +57,7 @@ class LeverageRanking(_StrictModel):
 
     Two composites. `composite_score` is the old viability number
     (`leverage x robustness`). `suffering_composite` multiplies in the suffering
-    numerator and is the directive's −SUFFERING EV. Rankings sort by the latter.
+    numerator and is the directive's -SUFFERING EV. Rankings sort by the latter.
     """
 
     intervention_id: str

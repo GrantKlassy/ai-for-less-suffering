@@ -246,7 +246,7 @@ def render_leverage_markdown(analysis: LeverageAnalysis, data_dir: Path) -> str:
         "Friction semantic: `1 = no friction`, `0 = fully blocked`. "
         "Suffering semantic: `1 = maximum reduction`, `0 = none`. "
         "Composite: `suffering_composite = leverage x mean(friction) x "
-        "mean(suffering_reduction)` --- the directive's −SUFFERING EV. "
+        "mean(suffering_reduction)` --- the directive's -SUFFERING EV. "
         "Rankings sort by `suffering_composite`; the `viability` column is the "
         "old `leverage x mean(friction)` score kept for comparison.",
         "",
@@ -264,7 +264,7 @@ def render_leverage_markdown(analysis: LeverageAnalysis, data_dir: Path) -> str:
 def _render_leverage_rankings(rankings: list[LeverageRanking]) -> str:
     if not rankings:
         return "## Rankings\n\nNo interventions to rank.\n"
-    lines = ["## Rankings (deterministic, sorted by −SUFFERING EV)", ""]
+    lines = ["## Rankings (deterministic, sorted by -SUFFERING EV)", ""]
     for i, row in enumerate(rankings, start=1):
         lines.append(
             f"{i}. **`{row.intervention_id}`** --- "
