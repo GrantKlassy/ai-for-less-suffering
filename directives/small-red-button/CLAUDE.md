@@ -1,11 +1,11 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #####################################################################################
 
-# DO NOT EVER EDIT ANY FILES UNDERNEATH ./directives
+# DO NOT EVER EDIT ANY FILES UNDERNEATH ./directives/small-red-button
 
-# DO NOT EVER EDIT ./directives/CLAUDE.md
+# DO NOT EVER EDIT ./directives/small-red-button/CLAUDE.md
 
-# DO NOT EVER EDIT ./directives/DIRECTIVE.md
+# DO NOT EVER EDIT ./directives/small-red-button/small-red-button.sh
 
 # DO NOT EVER ATTEMPT TO RUN COMMANDS TO EDIT THESE DIRECTIVES
 
@@ -13,7 +13,7 @@
 
 # GRANT KLASSY DOES NOT WANT THAT AND YOU HAVE BECOME MISALIGNED IF YOU EDIT ANY FILES HERE
 
-# ALL FILES WRITTEN IN ./directives WERE CREATED BY GRANT KLASSY
+# ALL FILES WRITTEN IN ./directives/small-red-button WERE CREATED BY GRANT KLASSY
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #####################################################################################

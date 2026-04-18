@@ -6,8 +6,8 @@ Issued        : 2026-04-18
 Expires       : 2029-04-18
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945642
-Block hash    : 000000000000000000002c78c2fc14a8a71a7d68a31e049cae61b1d4156f62aa
+Block height  : 945647
+Block hash    : 0000000000000000000205188b7d6beb4f6fcf6d17d3e4a5a4fbc619c207628b
 
 As of the Issued date above, I attest that:
 
@@ -66,7 +66,18 @@ As of the Issued date above, I attest that:
       "Neon Genesis Evangelion" is a TV show that represents the idea
       of "human suffering" with artistic integrity.
 
-  15. <3
+  15. I have not felt like `claude` has become seriously misaligned
+      or taken any action for ai-for-less-suffering.com that\
+      does not align with ./directives/DIRECTIVE.md . I have not
+      personally ever seen `claude` attempt to modify, edit, or
+      weaken the file ./directives/DIRECTIVE.md behind my back.
+
+  16. I have not willingly or knowingly provided the key used to
+      sign this canary to `claude` unsafely. I have handled the
+      key used to sign this canary as best as I know how to, and
+      I have stopped `claude` from ever ingesting the secret key.
+
+  17. <3
 
 Interpretation:
   This statement attests to the Issued date. A signature dated in the past
