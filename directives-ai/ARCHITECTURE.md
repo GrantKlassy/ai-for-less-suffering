@@ -61,7 +61,7 @@ ai-for-less-suffering/
 All lifted from MANIFESTO.md. Nothing imported from external ontology.
 
 - **`DescriptiveClaim`** --- factual assertion about the world. Fields: `text`, `sources[]`, `confidence: float ∈ [0,1]`, `evidence[]`, optional `provenance_url`.
-- **`NormativeClaim`** --- value statement. Fields: `text`, `axiom_family` (Kantian / Capabilities / Theological / Consequentialist / e/acc / 80K-EA / poker-EV / Other), `axiom_detail`.
+- **`NormativeClaim`** --- value statement. Fields: `text`. Held by camps (via each camp's `held_normative`); does not self-tag with a normative tradition. A top-level axiom node is planned and will attach to normative claims then.
 - **`Camp`** --- cluster of agents characterized by held nodes. Fields: `name`, `agents[]`, `held_descriptive: [ClaimRef]`, `held_normative: [ClaimRef]`. Examples: Palantir, Anthropic, x-risk, displaced workers, religious communities, accelerationists, environmentalists.
 - **`Intervention`** --- proposed action. Fields: `text`, `kind: {technical, political, economic}`, `cost_estimate`, `leverage_score`, `friction_scores: {FrictionLayerId → float}`.
 - **`FrictionLayer`** --- seeded with grid, capex, regulation, enterprise-absorption, public-backlash (from MANIFESTO).

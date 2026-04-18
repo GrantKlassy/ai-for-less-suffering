@@ -1,10 +1,11 @@
 ---
-// One side of a steelman --- FOR or AGAINST. Heading = AxiomTag, body = case
-// prose, footer = two NodeRef lists (normative anchors + descriptive
-// evidence). The parent SteelmanView places two of these in md:grid-cols-2.
+// One side of a steelman --- FOR or AGAINST, framed from inside one camp. Heading
+// is the camp chip, body is the case prose, footer is two NodeRef lists
+// (normative anchors + descriptive evidence). The parent SteelmanView places
+// two of these in md:grid-cols-2.
 
 import NodeRef from "../NodeRef.astro";
-import AxiomTag from "../AxiomTag.astro";
+import CampChip from "../CampChip.astro";
 import type { SteelmanFrame } from "../../lib/analysis";
 
 interface Props {
@@ -18,7 +19,7 @@ const accent = stance === "for" ? "border-emerald-900" : "border-rose-900";
 
 <div class:list={["rounded border p-4", accent]}>
   <div class="mb-3">
-    <AxiomTag family={frame.axiom_family} />
+    <CampChip id={frame.camp_id} />
   </div>
   <p class="mb-4 text-sm whitespace-pre-line text-zinc-200">{frame.case}</p>
   {

@@ -15,7 +15,6 @@ from pathlib import Path
 
 from afls.config import data_dir
 from afls.schema import (
-    AxiomFamily,
     BaseNode,
     Camp,
     DescriptiveClaim,
@@ -137,43 +136,30 @@ def _normative_claims() -> list[NormativeClaim]:
         NormativeClaim(
             id="norm_palantir_national",
             text="AI should preserve and extend US national-security advantage.",
-            axiom_family=AxiomFamily.CONSEQUENTIALIST,
-            axiom_detail="Realist / state-capacity framing; outcomes judged by geopolitical "
-            "position.",
         ),
         NormativeClaim(
             id="norm_palantir_order",
             text="Order is a precondition for freedom; institutions must be robust before they "
             "can be generous.",
-            axiom_family=AxiomFamily.OTHER,
-            axiom_detail="Hobbesian / order-first framing.",
         ),
         NormativeClaim(
             id="norm_anthropic_safety",
             text="AI should be developed safely by responsible actors before less cautious "
             "actors build it.",
-            axiom_family=AxiomFamily.CONSEQUENTIALIST,
-            axiom_detail="Safety-through-lead framing.",
         ),
         NormativeClaim(
             id="norm_anthropic_alignment",
             text="Alignment of frontier systems is the dominant catastrophic risk; capability "
             "must not outrun it.",
-            axiom_family=AxiomFamily.EA_80K,
-            axiom_detail="AI-safety-industry framing with catastrophic-risk weighting.",
         ),
         NormativeClaim(
             id="norm_operator_flourishing",
             text="AI should widen human flourishing broadly, not concentrate power in a few "
             "actors.",
-            axiom_family=AxiomFamily.OTHER,
-            axiom_detail="Distribution-of-benefit framing.",
         ),
         NormativeClaim(
             id="norm_operator_sovereignty",
             text="AI deployment should expand individual capacity rather than erode it.",
-            axiom_family=AxiomFamily.OTHER,
-            axiom_detail="Sovereign-individual framing.",
         ),
     ]
 

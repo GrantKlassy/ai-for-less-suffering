@@ -27,7 +27,7 @@ Key exports:
 ## Components
 
 - `NodeRef.astro` --- universal id-to-link. Calls `resolveNode`. Use this instead of hard-coding `<a>` tags.
-- `CampChip.astro`, `AxiomTag.astro`, `ConfidenceBar.astro`, `ScoreMatrix.astro` --- shared render primitives.
+- `CampChip.astro`, `ConfidenceBar.astro`, `ScoreMatrix.astro` --- shared render primitives.
 - `analyses/` --- analysis-specific components, used only by `pages/analyses/`.
 
 ## Tests

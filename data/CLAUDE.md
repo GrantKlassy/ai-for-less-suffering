@@ -8,7 +8,7 @@ Every YAML here is a Pydantic-validated node. Schema lives in `../engine/afls/sc
 |---|---|---|---|
 | `camps/` | `camp_` | `schema/camps.py` | Coherent clusters of held claims --- agents in the reasoning |
 | `claims/descriptive/` | `desc_` | `schema/claims.py` | "What is." Confidence-weighted. |
-| `claims/normative/` | `norm_` | `schema/claims.py` | "What should be." Tagged with an `axiom_family`. |
+| `claims/normative/` | `norm_` | `schema/claims.py` | "What should be." Held by camps; not self-tagged. |
 | `interventions/` | `intv_` | `schema/interventions.py` | Proposed actions, scored against friction + harm |
 | `sources/` | `src_` | `schema/sources.py` | Citable primary documents |
 | `warrants/` | `war_` | `schema/warrants.py` | Source-to-claim edges (support / contradict / qualify) |

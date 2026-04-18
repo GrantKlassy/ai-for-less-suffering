@@ -204,7 +204,7 @@ def _format_camp(camp: Camp, claims_by_id: dict[str, DescriptiveClaim | Normativ
     for ref in camp.held_normative:
         claim = claims_by_id.get(ref)
         if isinstance(claim, NormativeClaim):
-            lines.append(f"    - {ref}: [{claim.axiom_family.value}] {claim.text}")
+            lines.append(f"    - {ref}: {claim.text}")
         else:
             lines.append(f"    - {ref}: (missing)")
     return "\n".join(lines)

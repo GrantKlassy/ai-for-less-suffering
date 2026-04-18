@@ -28,7 +28,6 @@ from afls.queries.steelman import (
 )
 from afls.reasoning import AnthropicClient
 from afls.schema import (
-    AxiomFamily,
     BaseNode,
     Camp,
     DescriptiveClaim,
@@ -87,8 +86,6 @@ def _extra_claim_and_camp() -> tuple[DescriptiveClaim, NormativeClaim, Camp]:
     norm = NormativeClaim(
         id="norm_ecological_stewardship_test",
         text="Ecosystems have intrinsic standing.",
-        axiom_family=AxiomFamily.THEOLOGICAL,
-        axiom_detail="stewardship framing",
     )
     camp = Camp(
         id="camp_environmentalists_test",
@@ -129,14 +126,14 @@ def _canned_llm_output() -> str:
     payload = {
         "case_for": [
             {
-                "axiom_family": "consequentialist",
+                "camp_id": "camp_anthropic",
                 "normative_claim_ids": ["norm_anthropic_safety"],
                 "descriptive_claim_ids": ["desc_compute_matters", "desc_water_harm"],
                 "case": "Frontier compute is the limiting input on safe capability; "
                 "accepting water cost buys leverage that offsets the harm.",
             },
             {
-                "axiom_family": "theological",
+                "camp_id": "camp_environmentalists_test",
                 "normative_claim_ids": ["norm_ecological_stewardship_test"],
                 "descriptive_claim_ids": ["desc_compute_matters"],
                 "case": "Stewardship includes the duty to steward human futures; "
@@ -145,22 +142,22 @@ def _canned_llm_output() -> str:
         ],
         "case_against": [
             {
-                "axiom_family": "theological",
+                "camp_id": "camp_environmentalists_test",
                 "normative_claim_ids": ["norm_ecological_stewardship_test"],
                 "descriptive_claim_ids": ["desc_water_harm"],
                 "case": "Aquifer depletion is a first-order wrong; no downstream "
                 "benefit can offset what the intervention consumes.",
             },
             {
-                "axiom_family": "consequentialist",
+                "camp_id": "camp_operator",
                 "normative_claim_ids": ["norm_operator_flourishing"],
                 "descriptive_claim_ids": ["desc_water_harm"],
                 "case": "Concentrated water harm in siting communities fails the "
-                "distributional test even in pure cost-benefit terms.",
+                "distributional test even in operator-flourishing terms.",
             },
         ],
         "operator_tension": "The operator's e/acc-with-80K overlay reads compute "
-        "expansion as load-bearing --- but the theological case AGAINST attacks the "
+        "expansion as load-bearing --- but the environmentalist case AGAINST attacks the "
         "frame the operator has not yet admitted carries weight.",
     }
     return json.dumps(payload)
@@ -170,21 +167,21 @@ def test_steelman_llm_output_schema_roundtrips() -> None:
     payload = json.loads(_canned_llm_output())
     parsed = SteelmanLLMOutput.model_validate(payload)
     assert len(parsed.case_for) == 2
-    assert parsed.case_against[0].axiom_family is AxiomFamily.THEOLOGICAL
+    assert parsed.case_against[0].camp_id == "camp_environmentalists_test"
     assert parsed.operator_tension
 
 
 def test_compute_conceded_descriptive_intersects_cited_evidence() -> None:
     case_for = [
         SteelmanFrame(
-            axiom_family=AxiomFamily.CONSEQUENTIALIST,
+            camp_id="camp_anthropic",
             descriptive_claim_ids=["desc_a", "desc_b"],
             case="x",
         )
     ]
     case_against = [
         SteelmanFrame(
-            axiom_family=AxiomFamily.THEOLOGICAL,
+            camp_id="camp_environmentalists_test",
             descriptive_claim_ids=["desc_b", "desc_c"],
             case="x",
         )
@@ -195,14 +192,14 @@ def test_compute_conceded_descriptive_intersects_cited_evidence() -> None:
 def test_compute_conceded_descriptive_empty_when_disjoint() -> None:
     case_for = [
         SteelmanFrame(
-            axiom_family=AxiomFamily.CONSEQUENTIALIST,
+            camp_id="camp_anthropic",
             descriptive_claim_ids=["desc_a"],
             case="x",
         )
     ]
     case_against = [
         SteelmanFrame(
-            axiom_family=AxiomFamily.THEOLOGICAL,
+            camp_id="camp_environmentalists_test",
             descriptive_claim_ids=["desc_b"],
             case="x",
         )
@@ -238,7 +235,7 @@ def test_build_steelman_context_spotlights_target_and_harms(seeded_data: Path) -
     assert "intv_compute" in ctx
     assert "harm_water" in ctx
     assert "harm_scores" in ctx
-    assert "theological" in ctx  # axiom_family tag for the new normative claim
+    assert "camp_environmentalists_test" in ctx  # present camps list includes the fixture camp
 
 
 def test_run_steelman_query_end_to_end(seeded_data: Path) -> None:

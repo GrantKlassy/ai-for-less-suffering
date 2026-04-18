@@ -7,7 +7,6 @@ from pathlib import Path
 import pytest
 
 from afls.schema import (
-    AxiomFamily,
     Camp,
     DescriptiveClaim,
     Intervention,
@@ -90,7 +89,6 @@ def test_rebuild_indexes_all_types(data_dir: Path, db_path: Path) -> None:
     claim_n = NormativeClaim(
         id=new_id("norm"),
         text="AI should reduce suffering.",
-        axiom_family=AxiomFamily.EA_80K,
     )
     camp = Camp(
         id=slug_id("camp", "Anthropic"),
@@ -128,7 +126,7 @@ def test_get_by_id_returns_none_when_missing(data_dir: Path, db_path: Path) -> N
 def test_list_by_kind_filters_correctly(data_dir: Path, db_path: Path) -> None:
     d1 = DescriptiveClaim(id="desc_aaa", text="a", confidence=0.5)
     d2 = DescriptiveClaim(id="desc_bbb", text="b", confidence=0.5)
-    n1 = NormativeClaim(id="norm_ccc", text="c", axiom_family=AxiomFamily.POKER_EV)
+    n1 = NormativeClaim(id="norm_ccc", text="c")
     for node in (d1, d2, n1):
         save_node(node, data_dir)
     rebuild(data_dir, db_path)

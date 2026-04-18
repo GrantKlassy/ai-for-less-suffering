@@ -99,7 +99,7 @@ export interface LeverageAnalysis {
 }
 
 export interface SteelmanFrame {
-  axiom_family: string;
+  camp_id: string;
   normative_claim_ids: string[];
   descriptive_claim_ids: string[];
   case: string;

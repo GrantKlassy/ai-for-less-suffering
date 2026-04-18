@@ -9,18 +9,6 @@ import { glob } from "astro/loaders";
 const isoTime = z.string();
 const nullableUrl = z.string().nullable();
 
-// engine/afls/schema/axioms.py :: AxiomFamily
-const axiomFamily = z.enum([
-  "kantian",
-  "capabilities",
-  "theological",
-  "consequentialist",
-  "e_acc",
-  "ea_80k",
-  "poker_ev",
-  "other",
-]);
-
 // engine/afls/schema/warrants.py :: Support
 const warrantStance = z.enum(["support", "contradict", "qualify"]);
 
@@ -126,8 +114,6 @@ const normativeClaims = defineCollection({
     id: z.string(),
     kind: z.literal("normative_claim"),
     text: z.string().min(1),
-    axiom_family: axiomFamily,
-    axiom_detail: z.string().default(""),
     created_at: isoTime,
     updated_at: isoTime,
     provenance_url: nullableUrl,

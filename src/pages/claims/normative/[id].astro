@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import Base from "../../../layouts/Base.astro";
 import NodeRef from "../../../components/NodeRef.astro";
-import AxiomTag from "../../../components/AxiomTag.astro";
 import { analysesReferencing, campsHoldingNormative } from "../../../lib/graph";
 
 export async function getStaticPaths() {
@@ -29,25 +28,12 @@ const referencedBy = analysesReferencing(claim.id);
   <p class="mb-2 font-mono text-xs text-violet-400">normative claim</p>
   <h1 class="mb-4 text-xl leading-relaxed text-zinc-100">{claim.data.text}</h1>
 
-  <div class="mb-6 flex items-center gap-2">
-    <AxiomTag
-      family={claim.data.axiom_family}
-      detail={claim.data.axiom_detail}
-    />
+  <div class="mb-6">
     <span class="font-mono text-xs text-zinc-500">{claim.data.id}</span>
   </div>
 
   {
-    claim.data.axiom_detail && (
-      <section class="mb-8">
-        <h2 class="mb-2 text-sm text-zinc-400">Axiom detail</h2>
-        <p class="text-sm text-zinc-300">{claim.data.axiom_detail}</p>
-      </section>
-    )
-  }
-
-  {
-    camps.length > 0 && (
+    camps.length > 0 ? (
       <section class="mb-8">
         <h2 class="mb-2 text-sm text-zinc-400">
           Camps holding this claim ({camps.length})
@@ -59,6 +45,13 @@ const referencedBy = analysesReferencing(claim.id);
             </li>
           ))}
         </ul>
+      </section>
+    ) : (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">Camps holding this claim</h2>
+        <p class="text-sm text-zinc-600">
+          No camp in the graph holds this claim yet.
+        </p>
       </section>
     )
   }

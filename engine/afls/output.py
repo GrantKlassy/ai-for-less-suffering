@@ -367,7 +367,7 @@ def _render_steelman_frame(
     normatives: dict[str, NormativeClaim],
     descriptives: dict[str, DescriptiveClaim],
 ) -> list[str]:
-    lines = [f"#### `{frame.axiom_family.value}`", "", frame.case, ""]
+    lines = [f"#### `{frame.camp_id}`", "", frame.case, ""]
     if frame.normative_claim_ids:
         lines.append("_Normative anchors:_")
         for nid in frame.normative_claim_ids:

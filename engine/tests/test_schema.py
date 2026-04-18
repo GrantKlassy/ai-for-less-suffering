@@ -6,7 +6,6 @@ import pytest
 from pydantic import ValidationError
 
 from afls.schema import (
-    AxiomFamily,
     BlindSpot,
     Bridge,
     Camp,
@@ -79,19 +78,22 @@ def test_descriptive_claim_rejects_extra_field() -> None:
         )
 
 
-def test_normative_claim_requires_axiom_family() -> None:
+def test_normative_claim_basic() -> None:
     claim = NormativeClaim(
         id=new_id("norm"),
         text="AI compute should be pointed at suffering reduction.",
-        axiom_family=AxiomFamily.EA_80K,
-        axiom_detail="80,000 Hours-style prioritization.",
     )
-    assert claim.axiom_family is AxiomFamily.EA_80K
+    assert claim.kind == "normative_claim"
+    assert claim.text.startswith("AI compute")
 
 
-def test_normative_claim_accepts_all_axiom_families() -> None:
-    for family in AxiomFamily:
-        NormativeClaim(id=new_id("norm"), text="x", axiom_family=family)
+def test_normative_claim_rejects_extra_field() -> None:
+    with pytest.raises(ValidationError):
+        NormativeClaim(
+            id=new_id("norm"),
+            text="x",
+            axiom_family="ea_80k",  # type: ignore[call-arg]
+        )
 
 
 def test_camp_holds_claim_refs() -> None:
@@ -353,7 +355,7 @@ def test_camp_disputed_warrants_accepts_refs() -> None:
     "model_factory",
     [
         lambda: DescriptiveClaim(id=new_id("desc"), text="x", confidence=0.5),
-        lambda: NormativeClaim(id=new_id("norm"), text="x", axiom_family=AxiomFamily.POKER_EV),
+        lambda: NormativeClaim(id=new_id("norm"), text="x"),
         lambda: Camp(id=slug_id("camp", "Anthropic"), name="Anthropic"),
         lambda: Intervention(
             id=new_id("intv"),

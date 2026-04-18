@@ -1,16 +1,16 @@
 """Steelman query.
 
 Given a contested intervention, produce the strongest case FOR and AGAINST it from
-inside each axiom family present in the graph. The point is not debate prep --- it
-is to force the operator to read their own position from outside, and to surface
-what they would have to concede to a frame they would otherwise filter out.
+inside each camp in the graph. The point is not debate prep --- it is to force the
+operator to read their own position from outside, and to surface what they would have
+to concede to a frame they would otherwise filter out.
 
 Deterministic pieces:
 - `contested_descriptive` --- reuses `palantir.find_contested_claims`.
 - `conceded_descriptive` --- descriptive claim IDs cited by both FOR and AGAINST.
 
 LLM pieces (one Opus call):
-- `case_for` / `case_against` per axiom family.
+- `case_for` / `case_against` per camp.
 - `operator_tension` --- where the FOR/AGAINST split cuts across operator priors.
 """
 
@@ -29,7 +29,6 @@ from afls.queries.palantir import (
 )
 from afls.reasoning import AnthropicClient, Model, complete_and_parse
 from afls.schema import (
-    AxiomFamily,
     Camp,
     DescriptiveClaim,
     FrictionLayer,
@@ -47,14 +46,15 @@ class _StrictModel(BaseModel):
 
 
 class SteelmanFrame(_StrictModel):
-    """A case constructed from inside one axiom family.
+    """A case constructed from inside one camp.
 
-    `normative_claim_ids` are anchors in the graph. `descriptive_claim_ids` are evidence
-    the frame draws on. `case` is one operator-voiced paragraph --- no hedging,
-    no manifesto voice, no filler.
+    `camp_id` anchors the frame in a concrete coalition of agents; the LLM reasons
+    from inside that camp's held claims. `normative_claim_ids` are anchors in the
+    graph, `descriptive_claim_ids` are evidence the frame draws on. `case` is one
+    operator-voiced paragraph --- no hedging, no manifesto voice, no filler.
     """
 
-    axiom_family: AxiomFamily
+    camp_id: str = Field(min_length=1)
     normative_claim_ids: list[str] = Field(default_factory=list)
     descriptive_claim_ids: list[str] = Field(default_factory=list)
     case: str = Field(min_length=1)
@@ -158,9 +158,10 @@ def build_steelman_context(
 
     Spotlights the target, glosses the friction/harm layers, then folds in the rest
     of the graph via `build_graph_context` so normative claims, descriptive claims,
-    and warrants are all addressable by ID.
+    and warrants are all addressable by ID. Lists the camp IDs the LLM may frame
+    from --- one case_for and one case_against per camp, at most.
     """
-    present_families = sorted({n.axiom_family.value for n in normatives})
+    present_camps = sorted(c.id for c in camps)
     sections = [
         "# Target intervention (spotlight)",
         "",
@@ -168,7 +169,7 @@ def build_steelman_context(
         "",
         _format_layer_glossary(friction_layers, harm_layers),
         "",
-        f"## Axiom families present in normative claims: {', '.join(present_families)}",
+        f"## Camps present: {', '.join(present_camps)}",
         "",
         build_graph_context(
             camps, descriptives, normatives, interventions, warrants, sources
@@ -178,18 +179,19 @@ def build_steelman_context(
 
 
 _USER_PROMPT = """Construct the strongest case FOR and AGAINST the target intervention, \
-from inside each axiom family present in the graph.
+from inside each camp present in the graph.
 
-For each axiom family in the graph's normative claims, produce two SteelmanFrame entries:
-- one in `case_for`: the strongest case FOR the target from inside that frame
-- one in `case_against`: the strongest case AGAINST from inside the same frame
+For each camp, produce up to two SteelmanFrame entries:
+- one in `case_for`: the strongest case FOR the target from inside that camp's frame
+- one in `case_against`: the strongest case AGAINST from inside the same camp
 
 Each SteelmanFrame must:
-- set `axiom_family` to the frame it is reasoning inside
-- cite `normative_claim_ids` that exist in the graph (do NOT invent IDs)
+- set `camp_id` to the camp it is reasoning inside (must exist in the graph)
+- cite `normative_claim_ids` that exist in the graph (do NOT invent IDs); prefer the \
+camp's own held_normative where it fits
 - cite `descriptive_claim_ids` that exist in the graph as evidence (do NOT invent IDs)
 - give a `case` that is one paragraph, operator-voiced, non-hedging. No manifesto voice. \
-Do NOT dilute the case by hedging --- if you cannot find a real case from inside a frame, \
+Do NOT dilute the case by hedging --- if you cannot find a real case from inside a camp, \
 omit that frame entirely rather than produce a weak version.
 
 Then write `operator_tension`: one paragraph on where the FOR/AGAINST split cuts across \

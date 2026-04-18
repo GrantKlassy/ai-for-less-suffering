@@ -185,7 +185,7 @@ def build_leverage_context(
     for nid in sorted(used_norms):
         claim = claims_by_id.get(nid)
         if isinstance(claim, NormativeClaim):
-            sections.append(f"- {nid} [{claim.axiom_family.value}]: {claim.text}")
+            sections.append(f"- {nid}: {claim.text}")
     return "\n".join(sections)
 
 

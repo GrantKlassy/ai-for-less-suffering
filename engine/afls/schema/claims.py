@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pydantic import Field
 
-from afls.schema.axioms import AxiomFamily
 from afls.schema.base import BaseNode
 
 
@@ -21,9 +20,10 @@ class DescriptiveClaim(BaseNode):
 
 
 class NormativeClaim(BaseNode):
-    """A value statement. Tagged with the axiom family it derives from."""
+    """A value statement. Camps that hold it declare so on the camp side; this
+    node does not self-label. Axiom families are a forthcoming top-level node
+    type; this schema is deliberately minimal until that lands.
+    """
 
     kind: str = Field(default="normative_claim", frozen=True)
     text: str = Field(min_length=1)
-    axiom_family: AxiomFamily
-    axiom_detail: str = Field(default="", description="Specific normative tradition or reasoning.")

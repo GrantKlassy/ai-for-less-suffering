@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
-import AxiomTag from "../../components/AxiomTag.astro";
+import CampChip from "../../components/CampChip.astro";
 
 const descriptive = (await getCollection("descriptiveClaims")).sort((a, b) =>
   a.data.text.localeCompare(b.data.text),
@@ -9,14 +9,24 @@ const descriptive = (await getCollection("descriptiveClaims")).sort((a, b) =>
 const normative = (await getCollection("normativeClaims")).sort((a, b) =>
   a.data.text.localeCompare(b.data.text),
 );
+
+const camps = await getCollection("camps");
+const holdersByNorm = new Map<string, string[]>();
+for (const camp of camps) {
+  for (const ref of camp.data.held_normative) {
+    const list = holdersByNorm.get(ref.id) ?? [];
+    list.push(camp.id);
+    holdersByNorm.set(ref.id, list);
+  }
+}
 ---
 
 <Base title="Claims --- ai-for-less-suffering">
   <h1 class="mb-2 text-2xl text-zinc-100">Claims</h1>
   <p class="mb-8 text-sm text-zinc-400">
     Descriptive claims say what <em>is</em>. Normative claims say what
-    <em>ought</em> to be. Camps can share descriptive claims across axiom families;
-    they almost never share normative ones. Separating them is the whole point.
+    <em>ought</em> to be. Camps can share descriptive claims; they almost never share
+    normative ones. Separating them is the whole point.
   </p>
 
   <section class="mb-10">
@@ -49,23 +59,27 @@ const normative = (await getCollection("normativeClaims")).sort((a, b) =>
     <h2 class="mb-4 text-lg text-violet-300">Normative ({normative.length})</h2>
     <ul class="space-y-2">
       {
-        normative.map((c) => (
-          <li class="rounded border border-zinc-800 p-3 hover:border-zinc-600">
-            <a
-              href={`/claims/normative/${c.id}/`}
-              class="block text-sm text-zinc-200"
-            >
-              <p>{c.data.text}</p>
-              <p class="mt-1 flex items-center justify-between text-xs">
-                <span class="font-mono text-zinc-500">{c.data.id}</span>
-                <AxiomTag
-                  family={c.data.axiom_family}
-                  detail={c.data.axiom_detail}
-                />
-              </p>
-            </a>
-          </li>
-        ))
+        normative.map((c) => {
+          const holders = holdersByNorm.get(c.id) ?? [];
+          return (
+            <li class="rounded border border-zinc-800 p-3 hover:border-zinc-600">
+              <a
+                href={`/claims/normative/${c.id}/`}
+                class="block text-sm text-zinc-200"
+              >
+                <p>{c.data.text}</p>
+                <div class="mt-2 flex flex-wrap items-center gap-2 text-xs">
+                  <span class="font-mono text-zinc-500">{c.data.id}</span>
+                  {holders.length > 0 ? (
+                    holders.map((id) => <CampChip id={id} />)
+                  ) : (
+                    <span class="text-zinc-600">(no camp holds this yet)</span>
+                  )}
+                </div>
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </section>

@@ -12,7 +12,6 @@ from typer.testing import CliRunner
 
 from afls.cli import app
 from afls.schema import (
-    AxiomFamily,
     Bridge,
     Camp,
     DescriptiveClaim,
@@ -73,7 +72,6 @@ def test_add_normative_claim(runner: CliRunner, data_root: Path, tmp_path: Path)
         {
             "kind": "normative_claim",
             "text": "AI should reduce suffering.",
-            "axiom_family": "ea_80k",
         },
     )
     result = runner.invoke(app, ["add", str(fragment)])
@@ -204,7 +202,7 @@ def test_validate_finds_broken_ref(runner: CliRunner, data_root: Path) -> None:
 
 
 def test_validate_catches_wrong_type_ref(runner: CliRunner, data_root: Path) -> None:
-    claim = NormativeClaim(id="norm_a", text="a", axiom_family=AxiomFamily.POKER_EV)
+    claim = NormativeClaim(id="norm_a", text="a")
     save_node(claim, data_root)
     save_node(Camp(id="camp_a", name="A", held_descriptive=["norm_a"]), data_root)
     result = runner.invoke(app, ["validate"])
