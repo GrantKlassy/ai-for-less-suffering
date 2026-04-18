@@ -8,9 +8,11 @@ claim's confidence number.
 
 from __future__ import annotations
 
+from datetime import datetime
 from enum import StrEnum
+from typing import Literal
 
-from pydantic import Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from afls.schema.base import BaseNode
 
@@ -23,6 +25,56 @@ class SourceKind(StrEnum):
     PRIMARY_DOC = "primary_doc"
     BLOG = "blog"
     DASHBOARD = "dashboard"
+    DIRECTIVE = "directive"
+
+
+ProvenanceMethod = Literal[
+    "httpx",
+    "manual_paste",
+    "directive_canonical",
+    "directive_ephemeral",
+]
+
+
+class Provenance(BaseModel):
+    """How a Source entered the graph, stamped at intake.
+
+    `method` records the channel; `tool` the version of whatever wrote the YAML;
+    `git_sha` pins the repo state at intake so reasoning downstream can replay the
+    context the drafter saw; `raw_content_hash` is sha256 of the text passed to the
+    LLM (or sha256 of the raw directive body for ephemeral capture). None only for
+    methods where no raw content existed at intake time.
+    """
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    method: ProvenanceMethod
+    tool: str = Field(min_length=1)
+    git_sha: str = Field(min_length=1)
+    at: datetime
+    raw_content_hash: str | None = None
+
+
+RELIABILITY_PRIOR: dict[SourceKind, float] = {
+    SourceKind.PRIMARY_DOC: 0.90,
+    SourceKind.FILING: 0.90,
+    SourceKind.DATASET: 0.88,
+    SourceKind.PAPER: 0.82,
+    SourceKind.DASHBOARD: 0.75,
+    SourceKind.PRESS: 0.50,
+    SourceKind.BLOG: 0.35,
+    SourceKind.DIRECTIVE: 0.40,
+}
+"""Default reliability by source_kind. Used by `afls ingest` and as the center of
+the kind-based credibility lint. Operator can override per-source in YAML; the
+prior is the starting point, not the ceiling."""
+
+
+LOW_TRUST_KINDS: frozenset[SourceKind] = frozenset(
+    {SourceKind.PRESS, SourceKind.BLOG}
+)
+"""Source kinds that shouldn't be the sole backing for a high-confidence claim.
+Used by `_confidence_lint` in `afls.cli`."""
 
 
 class Source(BaseNode):
@@ -44,3 +96,4 @@ class Source(BaseNode):
     accessed_at: str = Field(default="")
     reliability: float = Field(ge=0.0, le=1.0)
     notes: str = Field(default="")
+    provenance: Provenance | None = None

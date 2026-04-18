@@ -6,8 +6,8 @@ Issued        : 2026-04-18
 Expires       : 2029-04-18
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945635
-Block hash    : 00000000000000000000089b0054acc9dba645c165b4d6ccf9783d9097aad810
+Block height  : 945638
+Block hash    : 000000000000000000000fa24fb725083ebb8f2ddaa6a92dac45bf3b49ed089e
 
 As of the Issued date above, I attest that:
 

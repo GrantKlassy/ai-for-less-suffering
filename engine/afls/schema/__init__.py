@@ -7,10 +7,19 @@ from afls.schema.evidence import Evidence, MethodTag, Support
 from afls.schema.ids import new_id, slug_id
 from afls.schema.interventions import FrictionLayer, HarmLayer, Intervention, InterventionKind
 from afls.schema.relations import BlindSpot, Bridge, Convergence
-from afls.schema.sources import Source, SourceKind
+from afls.schema.sources import (
+    LOW_TRUST_KINDS,
+    RELIABILITY_PRIOR,
+    Provenance,
+    ProvenanceMethod,
+    Source,
+    SourceKind,
+)
 from afls.schema.suffering_layers import SufferingLayer
 
 __all__ = [
+    "LOW_TRUST_KINDS",
+    "RELIABILITY_PRIOR",
     "BaseNode",
     "BlindSpot",
     "Bridge",
@@ -25,6 +34,8 @@ __all__ = [
     "MethodTag",
     "NodeRef",
     "NormativeClaim",
+    "Provenance",
+    "ProvenanceMethod",
     "Source",
     "SourceKind",
     "SufferingLayer",
