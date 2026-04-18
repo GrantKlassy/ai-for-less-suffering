@@ -75,6 +75,19 @@ const harmLayers = defineCollection({
   }),
 });
 
+const sufferingLayers = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./data/suffering_layers" }),
+  schema: z.object({
+    id: z.string(),
+    kind: z.literal("suffering_layer"),
+    name: z.string().min(1),
+    description: z.string().default(""),
+    created_at: isoTime,
+    updated_at: isoTime,
+    provenance_url: nullableUrl,
+  }),
+});
+
 const sources = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./data/sources" }),
   schema: z.object({
@@ -174,6 +187,9 @@ const interventions = defineCollection({
     // integrity is already enforced by `afls validate` at engine-layer.
     friction_scores: z.record(z.string(), z.number().min(0).max(1)).default({}),
     harm_scores: z.record(z.string(), z.number().min(0).max(1)).default({}),
+    suffering_reduction_scores: z
+      .record(z.string(), z.number().min(0).max(1))
+      .default({}),
     created_at: isoTime,
     updated_at: isoTime,
     provenance_url: nullableUrl,
@@ -183,6 +199,7 @@ const interventions = defineCollection({
 export const collections = {
   frictionLayers,
   harmLayers,
+  sufferingLayers,
   sources,
   descriptiveClaims,
   normativeClaims,

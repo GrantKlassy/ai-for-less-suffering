@@ -14,6 +14,7 @@ const [
   interventions,
   frictionLayers,
   harmLayers,
+  sufferingLayers,
 ] = await Promise.all([
   getCollection("descriptiveClaims"),
   getCollection("normativeClaims"),
@@ -23,6 +24,7 @@ const [
   getCollection("interventions"),
   getCollection("frictionLayers"),
   getCollection("harmLayers"),
+  getCollection("sufferingLayers"),
 ]);
 
 type Warrant = (typeof warrants)[number];
@@ -127,6 +129,12 @@ const legend = [
     blurb: "A welfare harm to weigh.",
     classes: "bg-rose-950 text-rose-300",
   },
+  {
+    letter: "LS",
+    label: "Suffering layer",
+    blurb: "A category of first-person suffering the intervention relieves.",
+    classes: "bg-emerald-950 text-emerald-300",
+  },
 ];
 
 const tiles = [
@@ -163,8 +171,8 @@ const tiles = [
   {
     href: "/layers/",
     label: "Layers",
-    count: frictionLayers.length + harmLayers.length,
-    blurb: `${frictionLayers.length} friction · ${harmLayers.length} harm.`,
+    count: frictionLayers.length + harmLayers.length + sufferingLayers.length,
+    blurb: `${frictionLayers.length} friction · ${harmLayers.length} harm · ${sufferingLayers.length} suffering.`,
   },
 ];
 ---

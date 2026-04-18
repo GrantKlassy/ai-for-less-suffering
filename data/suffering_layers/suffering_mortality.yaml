@@ -1,0 +1,10 @@
+created_at: '2026-04-17T00:00:00Z'
+description: Preventable mortality --- under-5 deaths, maternal deaths, deaths from
+  conditions with known cost-effective interventions. ~4.9M children still die before
+  age 5 annually despite halving since 2000. Distinct from suffering_disease (which
+  captures morbidity and chronic burden); this layer tracks lives ended early.
+id: suffering_mortality
+kind: suffering_layer
+name: Preventable mortality
+provenance_url: null
+updated_at: '2026-04-17T00:00:00Z'

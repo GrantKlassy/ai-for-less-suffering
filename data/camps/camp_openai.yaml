@@ -1,0 +1,29 @@
+agents:
+- OpenAI
+- Sam Altman
+- Microsoft (as capital and distribution partner)
+created_at: '2026-04-17T00:00:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_training_compute_growth
+- desc_algorithmic_efficiency
+- desc_flagship_training_cost
+- desc_us_lead
+- desc_grid_constraint
+- desc_leading_edge_chip_concentration
+- desc_interconnection_queue_backlog
+- desc_us_datacenter_load_forecast
+held_normative:
+- norm_openai_scale_first
+id: camp_openai
+kind: camp
+name: OpenAI
+provenance_url: null
+summary: Product-velocity-first consequentialism, characterized by revealed behavior
+  rather than stated charter. Distinct from camp_anthropic (safety-first framing)
+  and from camp_eacc (ideological acceleration); the axiom here is that scale produces
+  the feedback loop alignment work depends on, and slowing to wait for interpretability
+  loses more information than it buys.
+updated_at: '2026-04-17T00:00:00Z'

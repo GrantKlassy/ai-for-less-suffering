@@ -1,0 +1,26 @@
+agents:
+- The New York Times Company (plaintiff, NYT v. OpenAI/Microsoft)
+- Authors Guild (plaintiff class, Authors Guild v. OpenAI)
+- Getty Images (plaintiff, Getty v. Stability AI)
+- RIAA and major music labels
+- SAG-AFTRA on AI-replacement contract clauses
+- Individual authors and artists pursuing training-data suits
+created_at: '2026-04-17T00:00:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_training_compute_growth
+- desc_flagship_training_cost
+- desc_workforce_resistance
+held_normative:
+- norm_creator_consent
+id: camp_content_creators
+kind: camp
+name: Content creators
+provenance_url: null
+summary: Training on authored work without consent is the violation, independent
+  of what the model outputs. Active live blocker via copyright litigation; previously
+  absent from the graph. Cross-cuts camp_displaced_workers (shares the harm layer)
+  but grounds the claim in authorship rights rather than labor dignity.
+updated_at: '2026-04-17T00:00:00Z'

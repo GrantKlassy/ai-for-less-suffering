@@ -14,6 +14,7 @@ Every YAML here is a Pydantic-validated node. Schema lives in `../engine/afls/sc
 | `warrants/` | `war_` | `schema/warrants.py` | Source-to-claim edges (support / contradict / qualify) |
 | `friction_layers/` | `friction_` | `schema/interventions.py` | Forces that resist interventions |
 | `harm_layers/` | `harm_` | `schema/interventions.py` | Welfare/structural costs if an intervention succeeds |
+| `suffering_layers/` | `suffering_` | `schema/suffering_layers.py` | First-person suffering an intervention relieves --- the numerator in −suffering EV |
 
 ## Adding a node
 

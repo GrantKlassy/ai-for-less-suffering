@@ -1,0 +1,25 @@
+agents:
+- European Commission / European AI Office (EU AI Act implementation)
+- UK AI Safety Institute (AISI)
+- US AI Safety Institute (NIST)
+- OECD AI Policy Observatory
+- Bletchley / Seoul / Paris summit signatory governments
+created_at: '2026-04-17T00:00:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_training_compute_growth
+- desc_flagship_training_cost
+- desc_workforce_resistance
+held_normative:
+- norm_regulatory_legibility
+id: camp_regulators
+kind: camp
+name: Regulators
+provenance_url: null
+summary: Legibility before deployment. Duty-based --- independent of outcome calculation,
+  unaudited systems cannot be democratically accountable. Distinct from friction_regulation,
+  which models regulation as an obstacle an intervention must survive; this camp is
+  the agent doing the regulating and holds it as a normative claim, not a cost.
+updated_at: '2026-04-17T00:00:00Z'

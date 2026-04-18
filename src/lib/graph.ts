@@ -19,6 +19,7 @@ export type NodeKind =
   | "source"
   | "friction_layer"
   | "harm_layer"
+  | "suffering_layer"
   | "warrant";
 
 export type CollectionName =
@@ -29,6 +30,7 @@ export type CollectionName =
   | "sources"
   | "frictionLayers"
   | "harmLayers"
+  | "sufferingLayers"
   | "warrants";
 
 export interface ResolvedRef {
@@ -45,6 +47,7 @@ const COLLECTION_BY_PREFIX: { prefix: string; collection: CollectionName }[] = [
   { prefix: "src_", collection: "sources" },
   { prefix: "friction_", collection: "frictionLayers" },
   { prefix: "harm_", collection: "harmLayers" },
+  { prefix: "suffering_", collection: "sufferingLayers" },
   { prefix: "war_", collection: "warrants" },
 ];
 
@@ -56,6 +59,7 @@ const HREF_BY_COLLECTION: Record<CollectionName, (id: string) => string> = {
   sources: (id) => `/sources/${id}/`,
   frictionLayers: (id) => `/layers/friction/${id}/`,
   harmLayers: (id) => `/layers/harm/${id}/`,
+  sufferingLayers: (id) => `/layers/suffering/${id}/`,
   // Warrants are edges. No detail page; renders fall back to the edge summary.
   warrants: () => "",
 };
@@ -68,6 +72,7 @@ const KIND_BY_COLLECTION: Record<CollectionName, NodeKind> = {
   sources: "source",
   frictionLayers: "friction_layer",
   harmLayers: "harm_layer",
+  sufferingLayers: "suffering_layer",
   warrants: "warrant",
 };
 
@@ -82,11 +87,15 @@ export function collectionForId(id: string): CollectionName | null {
 // resolveNode, which does it centrally, or via campEmoji for direct reads).
 export const CAMP_EMOJI: Record<string, string> = {
   camp_anthropic: "🧡",
+  camp_content_creators: "✍️",
   camp_displaced_workers: "👷",
   camp_eacc: "🚀",
   camp_environmentalists: "🌳",
+  camp_openai: "🌀",
+  camp_open_weights: "🔓",
   camp_operator: "🕺",
   camp_palantir: "💣",
+  camp_regulators: "⚖️",
   camp_religious: "🛐",
   camp_xrisk: "📉",
 };
@@ -163,6 +172,11 @@ export async function interventionsScoringFriction(id: string) {
 export async function interventionsScoringHarm(id: string) {
   const all = await getCollection("interventions");
   return all.filter((i) => id in i.data.harm_scores);
+}
+
+export async function interventionsScoringSuffering(id: string) {
+  const all = await getCollection("interventions");
+  return all.filter((i) => id in i.data.suffering_reduction_scores);
 }
 
 // ---------------------------------------------------------------------------
