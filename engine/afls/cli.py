@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import subprocess
 import tempfile
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +16,8 @@ from rich.console import Console
 from rich.table import Table
 
 from afls import __version__
-from afls.config import data_dir, db_path, public_output_dir
+from afls.config import data_dir, db_path, public_output_dir, repo_root
+from afls.ingest import fetch_and_extract
 from afls.output import (
     analysis_paths,
     leverage_analysis_paths,
@@ -31,7 +32,7 @@ from afls.output import (
 from afls.queries.leverage import run_leverage_query
 from afls.queries.palantir import run_palantir_query
 from afls.queries.steelman import run_steelman_query
-from afls.reasoning import AnthropicClient
+from afls.reasoning import AnthropicClient, ReasoningError, run_ingest_query
 from afls.schema import (
     BaseNode,
     BlindSpot,
@@ -42,6 +43,8 @@ from afls.schema import (
     Evidence,
     Intervention,
     MethodTag,
+    Provenance,
+    Source,
     Support,
     new_id,
     slug_id,
@@ -138,6 +141,8 @@ def add(from_file: Path) -> None:
         raise typer.Exit(1)
     if "id" not in data:
         data["id"] = _default_id(data, kind)
+    if kind == "source" and not data.get("accessed_at"):
+        data["accessed_at"] = date.today().isoformat()
     model = NODE_TYPES[kind]
     node = _validate_or_exit(model, data)
     path = save_node(node, data_dir())
@@ -382,6 +387,156 @@ def query(
         write_steelman_markdown(steelman_analysis, md_path, data_dir())
     typer.secho(f"wrote {json_path}", fg="green")
     typer.secho(f"wrote {md_path}", fg="green")
+
+
+_INGEST_TOOL: str = f"afls-ingest/{__version__}"
+
+
+def _git_sha() -> str:
+    """Return HEAD SHA for provenance. Falls back to 'unknown' outside a git tree."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+            cwd=repo_root(),
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, RuntimeError):
+        return "unknown"
+    return result.stdout.strip() or "unknown"
+
+
+_fetch_for_ingest = fetch_and_extract
+"""Module-level fetch hook. Tests monkeypatch this to avoid the network."""
+
+
+def _build_ingest_client() -> AnthropicClient:
+    """Module-level client factory. Tests monkeypatch this to inject a fake SDK."""
+    return AnthropicClient()
+
+
+@app.command()
+def ingest(url: str) -> None:
+    """Fetch a URL and draft Source + DescriptiveClaims + Evidence YAML via Claude."""
+    typer.secho(f"fetching {url}", fg="cyan")
+    try:
+        final_url, article_text, sha256 = _fetch_for_ingest(url)
+    except Exception as exc:
+        typer.secho(f"fetch failed: {exc}", fg="red")
+        raise typer.Exit(1) from exc
+    if not article_text.strip():
+        typer.secho("fetched page contained no extractable text", fg="red")
+        raise typer.Exit(1)
+    typer.secho(
+        f"extracted {len(article_text)} chars (sha256={sha256[:12]}...) from {final_url}",
+        fg="cyan",
+    )
+
+    typer.secho("drafting source+claims+evidence (opus)...", fg="cyan")
+    client = _build_ingest_client()
+    try:
+        draft = run_ingest_query(
+            client, data_dir(), url=final_url, article_text=article_text
+        )
+    except ReasoningError as exc:
+        typer.secho(f"LLM draft failed: {exc}", fg="red")
+        raise typer.Exit(1) from exc
+
+    source_id = f"{_ID_PREFIX['source']}_{draft.source.id_slug}"
+    if _find_node_by_id(source_id) is not None:
+        typer.secho(
+            f"collision: source {source_id!r} already exists; rename id_slug and retry",
+            fg="red",
+        )
+        raise typer.Exit(1)
+
+    claim_ids: list[str] = []
+    seen_slugs: set[str] = set()
+    for claim_draft in draft.claims:
+        if claim_draft.id_slug in seen_slugs:
+            typer.secho(
+                f"collision: LLM proposed duplicate claim id_slug {claim_draft.id_slug!r}",
+                fg="red",
+            )
+            raise typer.Exit(1)
+        seen_slugs.add(claim_draft.id_slug)
+        candidate = f"{_ID_PREFIX['descriptive_claim']}_{claim_draft.id_slug}"
+        if _find_node_by_id(candidate) is not None:
+            typer.secho(
+                f"collision: descriptive claim {candidate!r} already exists; "
+                "rename id_slug and retry",
+                fg="red",
+            )
+            raise typer.Exit(1)
+        claim_ids.append(candidate)
+
+    for ev_draft in draft.evidence:
+        if ev_draft.claim_idx >= len(draft.claims):
+            typer.secho(
+                f"LLM drafted evidence with claim_idx={ev_draft.claim_idx} "
+                f"but only {len(draft.claims)} claims were returned",
+                fg="red",
+            )
+            raise typer.Exit(1)
+
+    provenance = Provenance(
+        method="httpx",
+        tool=_INGEST_TOOL,
+        git_sha=_git_sha(),
+        at=datetime.now(UTC),
+        raw_content_hash=sha256,
+    )
+    source = Source(
+        id=source_id,
+        source_kind=draft.source.source_kind,
+        title=draft.source.title,
+        url=final_url,
+        authors=list(draft.source.authors),
+        published_at=draft.source.published_at,
+        accessed_at=date.today().isoformat(),
+        reliability=draft.source.reliability,
+        notes=draft.source.notes,
+        provenance=provenance,
+    )
+    source_path = save_node(source, data_dir())
+    typer.secho(f"  wrote {source_path}", fg="green")
+
+    claims: list[DescriptiveClaim] = []
+    for claim_draft, claim_id in zip(draft.claims, claim_ids, strict=True):
+        claim = DescriptiveClaim(
+            id=claim_id,
+            text=claim_draft.text,
+            confidence=claim_draft.confidence,
+        )
+        claim_path = save_node(claim, data_dir())
+        claims.append(claim)
+        typer.secho(f"  wrote {claim_path}", fg="green")
+
+    for ev_draft in draft.evidence:
+        claim = claims[ev_draft.claim_idx]
+        evidence = Evidence(
+            id=new_id(_ID_PREFIX["evidence"]),
+            claim_id=claim.id,
+            source_id=source.id,
+            locator=ev_draft.locator,
+            quote=ev_draft.quote,
+            method_tag=ev_draft.method_tag,
+            supports=ev_draft.supports,
+            weight=ev_draft.weight,
+        )
+        ev_path = save_node(evidence, data_dir())
+        typer.secho(f"  wrote {ev_path}", fg="green")
+
+    typer.secho(
+        f"\ningested: 1 source, {len(claims)} claims, {len(draft.evidence)} evidence edges",
+        fg="green",
+        bold=True,
+    )
+    typer.secho(
+        f"review with: afls edit {source.id}  (then the desc_* / evi_* nodes)",
+        fg="cyan",
+    )
 
 
 if __name__ == "__main__":
