@@ -64,3 +64,11 @@ class Intervention(BaseNode):
         default_factory=dict,
         description="Map of harm_layer_id -> harm robustness (0=maximum harm, 1=no harm).",
     )
+    suffering_reduction_scores: dict[NodeRef, float] = Field(
+        default_factory=dict,
+        description=(
+            "Map of suffering_layer_id -> expected reduction (0=no reduction, "
+            "1=maximum reduction). The numerator in -suffering EV: without this "
+            "the engine scores only costs."
+        ),
+    )

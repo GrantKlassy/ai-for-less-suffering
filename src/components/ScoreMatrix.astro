@@ -1,15 +1,16 @@
 ---
-// Renders a friction_scores or harm_scores map as a labeled set of bars.
-// Polarity is shared across friction and harm: 1 = no friction / no harm,
-// 0 = fully blocked / maximum harm. The color runs cold-left → warm-right so
-// a low score (bad --- blocked or harmed) lands at the cool/short end, high
-// score (good --- unblocked or unharmed) lands at the warm/long end. Keep the
-// polarity convention synchronized with engine/afls/schema/interventions.py.
+// Renders a friction_scores, harm_scores, or suffering_reduction_scores map as
+// a labeled set of bars. Polarity is shared across all three: 1 = best outcome
+// (no friction / no harm / max suffering reduction), 0 = worst (blocked / max
+// harm / no reduction). The color runs cold-left → warm-right so the bad end
+// is visually short/cool and the good end is long/warm, regardless of which
+// layer kind is scored. Keep the polarity convention synchronized with
+// engine/afls/schema/interventions.py and suffering_layers.py.
 
 import NodeRef from "./NodeRef.astro";
 
 interface Props {
-  kind: "friction" | "harm";
+  kind: "friction" | "harm" | "suffering";
   scores: Record<string, number>;
   class?: string;
 }
@@ -20,7 +21,9 @@ const entries = Object.entries(scores).sort(([a], [b]) => a.localeCompare(b));
 const accentFill =
   kind === "friction"
     ? "from-orange-800 via-amber-600 to-emerald-500"
-    : "from-rose-800 via-amber-600 to-emerald-500";
+    : kind === "harm"
+      ? "from-rose-800 via-amber-600 to-emerald-500"
+      : "from-zinc-800 via-emerald-700 to-emerald-400";
 ---
 
 <div class:list={["space-y-1.5", className]}>

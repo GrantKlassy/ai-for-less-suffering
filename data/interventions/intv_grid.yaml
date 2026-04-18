@@ -18,6 +18,12 @@ id: intv_grid
 kind: intervention
 leverage_score: 0.75
 provenance_url: null
+suffering_reduction_scores:
+  suffering_animal: 0.1
+  suffering_disease: 0.3
+  suffering_mental_health: 0.2
+  suffering_mortality: 0.3
+  suffering_poverty: 0.2
 text: Accelerate grid and generation buildout (permitting reform, interconnection,
   new generation).
 updated_at: '2026-04-17T00:00:00Z'

@@ -1,0 +1,11 @@
+created_at: '2026-04-17T00:00:00Z'
+description: Farmed-animal suffering --- ~80-83B land animals slaughtered annually
+  with ~70% raised in intensive systems, plus 1-3T finfish and shellfish. The largest
+  numeric locus of confined-animal suffering on the planet and the category most sensitive
+  to protein-substitution and welfare-regulation interventions. Moral-weight question
+  kept explicit here rather than smuggled into DALY equivalence.
+id: suffering_animal
+kind: suffering_layer
+name: Animal suffering
+provenance_url: null
+updated_at: '2026-04-17T00:00:00Z'

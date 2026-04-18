@@ -61,7 +61,7 @@ app = typer.Typer(
 )
 console = Console()
 
-_SLUG_KINDS = {"camp", "friction_layer", "harm_layer"}
+_SLUG_KINDS = {"camp", "friction_layer", "harm_layer", "suffering_layer"}
 _ID_PREFIX: dict[str, str] = {
     "descriptive_claim": "desc",
     "normative_claim": "norm",
@@ -69,6 +69,7 @@ _ID_PREFIX: dict[str, str] = {
     "intervention": "intv",
     "friction_layer": "friction",
     "harm_layer": "harm",
+    "suffering_layer": "suffering",
     "bridge": "bridge",
     "convergence": "conv",
     "blindspot": "blind",
@@ -261,6 +262,8 @@ def validate() -> None:
             expect(intv.id, "friction_scores", ref, "friction_layer")
         for ref in intv.harm_scores:
             expect(intv.id, "harm_scores", ref, "harm_layer")
+        for ref in intv.suffering_reduction_scores:
+            expect(intv.id, "suffering_reduction_scores", ref, "suffering_layer")
     for bridge in list_nodes(Bridge, root):
         expect(bridge.id, "from_camp", bridge.from_camp, "camp")
         expect(bridge.id, "to_camp", bridge.to_camp, "camp")

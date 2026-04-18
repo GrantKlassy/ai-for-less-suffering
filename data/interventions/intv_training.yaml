@@ -18,5 +18,11 @@ id: intv_training
 kind: intervention
 leverage_score: 0.35
 provenance_url: null
+suffering_reduction_scores:
+  suffering_animal: 0.1
+  suffering_disease: 0.2
+  suffering_mental_health: 0.3
+  suffering_mortality: 0.1
+  suffering_poverty: 0.3
 text: Invest in AI workforce training and retraining programs.
 updated_at: '2026-04-17T00:00:00Z'

@@ -1,0 +1,28 @@
+agents:
+- Meta AI (Llama family)
+- Mistral AI
+- Hugging Face
+- EleutherAI
+- Yann LeCun (public advocacy)
+- a16z open-source AI advocacy
+- Together AI, Perplexity, and adjacent open-stack builders
+created_at: '2026-04-17T00:00:00Z'
+disputed_warrants: []
+held_descriptive:
+- desc_accelerating
+- desc_compute_matters
+- desc_algorithmic_efficiency
+- desc_flagship_training_cost
+- desc_us_lead
+- desc_leading_edge_chip_concentration
+held_normative:
+- norm_open_weights_distribution
+id: camp_open_weights
+kind: camp
+name: Open weights
+provenance_url: null
+summary: Capability concentrated in a few closed labs is the structural harm. Model
+  weights should distribute by default; gatekeeping via closed APIs is a worse failure
+  mode than any misuse risk that open release introduces. Cross-cuts both the pause
+  camp (rejects moratoria) and the closed-lab camp (rejects release gating).
+updated_at: '2026-04-17T00:00:00Z'

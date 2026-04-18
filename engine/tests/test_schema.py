@@ -20,6 +20,7 @@ from afls.schema import (
     NormativeClaim,
     Source,
     SourceKind,
+    SufferingLayer,
     Support,
     Warrant,
     new_id,
@@ -163,6 +164,45 @@ def test_harm_layer_basic() -> None:
 def test_harm_layer_requires_name() -> None:
     with pytest.raises(ValidationError):
         HarmLayer(id="harm_empty", name="")
+
+
+def test_suffering_layer_basic() -> None:
+    layer = SufferingLayer(
+        id=slug_id("suffering", "disease burden"),
+        name="disease burden",
+        description="Global morbidity and mortality from treatable disease.",
+    )
+    assert layer.id == "suffering_disease-burden"
+    assert layer.kind == "suffering_layer"
+
+
+def test_suffering_layer_requires_name() -> None:
+    with pytest.raises(ValidationError):
+        SufferingLayer(id="suffering_empty", name="")
+
+
+def test_intervention_scored_against_suffering() -> None:
+    intervention = Intervention(
+        id=new_id("intv"),
+        text="Scale alignment research.",
+        action_kind=InterventionKind.TECHNICAL,
+        leverage_score=0.6,
+        suffering_reduction_scores={
+            "suffering_disease-burden": 0.4,
+            "suffering_mental-health": 0.2,
+        },
+    )
+    assert intervention.suffering_reduction_scores["suffering_disease-burden"] == 0.4
+
+
+def test_intervention_suffering_scores_default_empty() -> None:
+    intervention = Intervention(
+        id=new_id("intv"),
+        text="x",
+        action_kind=InterventionKind.TECHNICAL,
+        leverage_score=0.5,
+    )
+    assert intervention.suffering_reduction_scores == {}
 
 
 def test_bridge_requires_both_sides() -> None:
@@ -323,6 +363,9 @@ def test_camp_disputed_warrants_accepts_refs() -> None:
         ),
         lambda: FrictionLayer(id=slug_id("friction", "capex"), name="capex"),
         lambda: HarmLayer(id=slug_id("harm", "water"), name="water"),
+        lambda: SufferingLayer(
+            id=slug_id("suffering", "poverty"), name="poverty"
+        ),
         lambda: Bridge(
             id=new_id("bridge"),
             from_camp="camp_a",

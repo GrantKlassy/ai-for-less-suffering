@@ -18,5 +18,11 @@ id: intv_compute
 kind: intervention
 leverage_score: 0.85
 provenance_url: null
+suffering_reduction_scores:
+  suffering_animal: 0.1
+  suffering_disease: 0.4
+  suffering_mental_health: 0.3
+  suffering_mortality: 0.4
+  suffering_poverty: 0.2
 text: Expand frontier-lab compute capacity (chips, datacenters, networking).
 updated_at: '2026-04-17T00:00:00Z'
