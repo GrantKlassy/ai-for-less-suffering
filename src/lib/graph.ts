@@ -86,11 +86,14 @@ export function collectionForId(id: string): CollectionName | null {
 // layering rule. Every place a camp is rendered should apply this (either via
 // resolveNode, which does it centrally, or via campEmoji for direct reads).
 export const CAMP_EMOJI: Record<string, string> = {
+  camp_animal_welfare: "🐄",
   camp_anthropic: "🧡",
+  camp_biomedical: "🧬",
   camp_content_creators: "✍️",
   camp_displaced_workers: "👷",
   camp_eacc: "🚀",
   camp_environmentalists: "🌳",
+  camp_global_health: "💊",
   camp_openai: "🌀",
   camp_open_weights: "🔓",
   camp_operator: "🕺",

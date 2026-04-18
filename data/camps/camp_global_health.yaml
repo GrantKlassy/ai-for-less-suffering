@@ -1,0 +1,28 @@
+agents:
+- GiveWell
+- Open Philanthropy global health & wellbeing team
+- Bill & Melinda Gates Foundation
+- GAVI and the Global Fund
+- PEPFAR and bilateral aid infrastructure
+- effective-giving community weighted toward global-health cost-effectiveness
+created_at: '2026-04-18T00:00:00Z'
+disputed_evidence: []
+held_descriptive:
+- desc_child_mortality_progress
+- desc_extreme_poverty_trajectory
+- desc_life_expectancy_gain
+- desc_suffering_geography
+- desc_mental_health_burden
+- desc_ncd_shift
+held_normative:
+- norm_global_health_priority
+id: camp_global_health
+kind: camp
+name: Global health & effective giving
+provenance_url: null
+summary: Effective-giving and global-health philanthropy coalition. Holds that marginal
+  cost-effectiveness of bednets, vaccines, therapeutics, and treatment-access in LMICs
+  is the clearest currently-quantifiable path from dollars to averted DALYs, and that
+  AI's highest near-term −suffering use is accelerating discovery, triage, and distribution
+  inside this pipeline rather than sitting in frontier capability race dynamics.
+updated_at: '2026-04-18T00:00:00Z'

@@ -21,7 +21,7 @@ no preamble, no apology, no closing remarks --- just JSON.
 """
 
 _DIRECTIVES_FILES: tuple[tuple[str, str], ...] = (
-    ("BRAIN", "BRAIN.md"),
+    ("GRANT_BRAIN", "GRANT_BRAIN.md"),
     ("MANIFESTO", "MANIFESTO.md"),
     ("CLAUDE", "CLAUDE.md"),
 )

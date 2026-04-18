@@ -77,13 +77,13 @@ For code, infrastructure, tools --- whatever the manifesto is pulling toward:
 
 ## Canary
 
+**Directive: `public/canary.txt` and `public/canary.txt.asc` ship atomically or not at all. Any commit that stages `canary.txt` without a matching verifying `.asc` is rejected by `lefthook`. Signing is a human act; `claude` does not sign, does not stage `canary.txt` without a verified companion `.asc`, and the hook catches it if it tries.**
+
 Warrant canary at `/canary`, signed source at `public/canary.txt`, detached signature at `public/canary.txt.asc`, public key at `public/canary-key.asc`.
 
-Editing `canary.txt` invalidates the signature. Any byte change requires `task canary:renew` to re-sign --- no exceptions, no "small fixups." The script rewrites the date and Bitcoin-block lines, kills `gpg-agent` first so the passphrase prompts fresh (signing is a deliberate human act, not a cached credential), then verifies. Commit `canary.txt` and `canary.txt.asc` together in the same commit.
+The rule is enforced structurally, not by prose trust. `lefthook.yml`'s `canary-verify` pre-commit job runs `gpg --verify` against the staged blobs (via `git show :path`) whenever `canary.txt` or `canary.txt.asc` is staged, and rejects the commit on mismatch, missing pair, or verification failure. There is no auto-sign job. Signing is explicit: `scripts/renew-canary.sh` kills `gpg-agent` first so the passphrase prompts fresh --- never a cached credential.
 
 The page renders the file verbatim inside a `<pre>` block. ASCII art and other unicode survive Astro's build, but copy-paste / email / CDN normalization can mangle non-ASCII bytes and break verification downstream. If non-ASCII content is present, verify after deploy with `curl https://ai-for-less-suffering.com/canary.txt | gpg --verify public/canary.txt.asc -` from a fresh machine.
-
-NEVER edit canary.txt using claude
 
 ## Precedent
 

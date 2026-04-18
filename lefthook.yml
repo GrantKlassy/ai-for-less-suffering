@@ -30,18 +30,36 @@ pre-commit:
           echo "Converted emdashes to --- and re-staged:"
           for f in $FIXED; do echo "  $f"; done
         fi
-    - name: canary-renew
-      interactive: true
+    - name: canary-verify
       run: |
-        if [ ! -f public/canary.txt ] || [ ! -f public/canary.txt.asc ]; then
-          exit 0
+        txt_staged=false
+        asc_staged=false
+        git diff --cached --name-only | grep -qx 'public/canary.txt' && txt_staged=true
+        git diff --cached --name-only | grep -qx 'public/canary.txt.asc' && asc_staged=true
+        if $txt_staged || $asc_staged; then
+          if ! $txt_staged; then
+            echo "ERROR: public/canary.txt.asc is staged but public/canary.txt is not."
+            echo "  canary.txt and canary.txt.asc must be committed together."
+            exit 1
+          fi
+          if ! $asc_staged; then
+            echo "ERROR: public/canary.txt is staged but public/canary.txt.asc is not."
+            echo "  canary.txt and canary.txt.asc must be committed together."
+            echo "  Re-sign with: ./scripts/renew-canary.sh"
+            exit 1
+          fi
+          STAGED_TXT=$(mktemp)
+          STAGED_ASC=$(mktemp)
+          trap 'rm -f "$STAGED_TXT" "$STAGED_ASC"' EXIT
+          git show :public/canary.txt > "$STAGED_TXT"
+          git show :public/canary.txt.asc > "$STAGED_ASC"
+          if ! gpg --verify "$STAGED_ASC" "$STAGED_TXT" 2>/dev/null; then
+            echo "ERROR: public/canary.txt.asc does not verify against staged public/canary.txt"
+            echo "  The signature must be for the exact staged content."
+            echo "  Re-sign with: ./scripts/renew-canary.sh"
+            exit 1
+          fi
         fi
-        echo ""
-        echo "Renewing canary --- every commit refreshes date + BTC block."
-        echo "gpg-agent will be killed; passphrase will be prompted fresh."
-        echo ""
-        scripts/renew-canary.sh
-        git add public/canary.txt public/canary.txt.asc
     # prettier runs LAST so no-emdash / update-badge / canary-resign can't
     # leave the tree unformatted. `--- ` replacements lengthen lines, which
     # shifts prettier's wrap points; running prettier after the mutations

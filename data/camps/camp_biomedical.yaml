@@ -1,0 +1,28 @@
+agents:
+- Broad Institute
+- Howard Hughes Medical Institute
+- NIH extramural research community
+- Chan Zuckerberg Initiative biomedical arm
+- academic biomedicine broadly
+- Arc Institute and focused-research-organization tradition
+created_at: '2026-04-18T00:00:00Z'
+disputed_evidence: []
+held_descriptive:
+- desc_child_mortality_progress
+- desc_life_expectancy_gain
+- desc_ncd_shift
+- desc_mental_health_burden
+- desc_compute_matters
+- desc_algorithmic_efficiency
+held_normative:
+- norm_biomedical_public_good
+id: camp_biomedical
+kind: camp
+name: Biomedical research
+provenance_url: null
+summary: Foundational biomedical research coalition --- target discovery, mechanism,
+  tool-building. Holds that compounding returns across decades justify sustained public
+  funding independent of near-term product application, and that AI deployed inside
+  this pipeline (protein structure, candidate screening, trial simulation) is suffering-reducing
+  at time horizons longer than capital-extraction framing can price.
+updated_at: '2026-04-18T00:00:00Z'

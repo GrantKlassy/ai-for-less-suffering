@@ -1,0 +1,23 @@
+agents:
+- Animal Charity Evaluators
+- Good Food Institute
+- Faunalytics
+- The Humane League
+- Mercy for Animals
+- Open Philanthropy farm-animal welfare team
+created_at: '2026-04-18T00:00:00Z'
+disputed_evidence: []
+held_descriptive:
+- desc_animal_suffering_scale
+held_normative:
+- norm_animal_sentience
+id: camp_animal_welfare
+kind: camp
+name: Animal welfare
+provenance_url: null
+summary: Animal-suffering-weighting coalition. Holds that factory-farming scale makes
+  non-human suffering a first-order numerator term in any honest −suffering ranking;
+  AI's highest-leverage animal-welfare deployment is accelerating alternative protein,
+  compressing slaughter throughput via automation or supply-chain redesign, and informing
+  policy on confinement and species-weighting.
+updated_at: '2026-04-18T00:00:00Z'
