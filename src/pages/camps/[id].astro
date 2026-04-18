@@ -82,17 +82,17 @@ const referencedBy = analysesReferencing(camp.id);
   }
 
   {
-    camp.data.disputed_warrants.length > 0 && (
+    camp.data.disputed_evidence.length > 0 && (
       <section class="mb-8">
         <h2 class="mb-2 text-sm text-zinc-400">
-          Disputed warrants ({camp.data.disputed_warrants.length})
+          Disputed evidence ({camp.data.disputed_evidence.length})
         </h2>
         <p class="mb-2 text-xs text-zinc-500">
-          Warrants this camp rejects on provenance grounds while still holding
+          Evidence this camp rejects on provenance grounds while still holding
           the underlying claim.
         </p>
         <ul class="space-y-1 text-sm">
-          {camp.data.disputed_warrants.map((ref) => (
+          {camp.data.disputed_evidence.map((ref) => (
             <li class="font-mono text-xs text-zinc-500">{ref.id}</li>
           ))}
         </ul>

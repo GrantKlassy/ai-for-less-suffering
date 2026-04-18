@@ -1,6 +1,6 @@
 // Graph-level helpers for the content collections. One source of truth for:
 //   - id → {href, label, kind}  (NodeRef renders through this)
-//   - reverse lookups (camps holding a claim, warrants for a claim, etc.)
+//   - reverse lookups (camps holding a claim, evidence for a claim, etc.)
 //   - analyses-citing-this-node, which scans public-output/analyses/*.json
 //
 // The id → collection dispatch is prefix-based, mirroring the engine's
@@ -20,7 +20,7 @@ export type NodeKind =
   | "friction_layer"
   | "harm_layer"
   | "suffering_layer"
-  | "warrant";
+  | "evidence";
 
 export type CollectionName =
   | "camps"
@@ -31,7 +31,7 @@ export type CollectionName =
   | "frictionLayers"
   | "harmLayers"
   | "sufferingLayers"
-  | "warrants";
+  | "evidence";
 
 export interface ResolvedRef {
   href: string;
@@ -48,7 +48,7 @@ const COLLECTION_BY_PREFIX: { prefix: string; collection: CollectionName }[] = [
   { prefix: "friction_", collection: "frictionLayers" },
   { prefix: "harm_", collection: "harmLayers" },
   { prefix: "suffering_", collection: "sufferingLayers" },
-  { prefix: "war_", collection: "warrants" },
+  { prefix: "evi_", collection: "evidence" },
 ];
 
 const HREF_BY_COLLECTION: Record<CollectionName, (id: string) => string> = {
@@ -60,8 +60,8 @@ const HREF_BY_COLLECTION: Record<CollectionName, (id: string) => string> = {
   frictionLayers: (id) => `/layers/friction/${id}/`,
   harmLayers: (id) => `/layers/harm/${id}/`,
   sufferingLayers: (id) => `/layers/suffering/${id}/`,
-  // Warrants are edges. No detail page; renders fall back to the edge summary.
-  warrants: () => "",
+  // Evidence entries are edges. No detail page; renders fall back to the edge summary.
+  evidence: () => "",
 };
 
 const KIND_BY_COLLECTION: Record<CollectionName, NodeKind> = {
@@ -73,7 +73,7 @@ const KIND_BY_COLLECTION: Record<CollectionName, NodeKind> = {
   frictionLayers: "friction_layer",
   harmLayers: "harm_layer",
   sufferingLayers: "suffering_layer",
-  warrants: "warrant",
+  evidence: "evidence",
 };
 
 export function collectionForId(id: string): CollectionName | null {
@@ -102,6 +102,24 @@ export const CAMP_EMOJI: Record<string, string> = {
 
 export function campEmoji(id: string): string {
   return CAMP_EMOJI[id] ?? "";
+}
+
+// Per-kind emojis --- the visual identifier that travels with the letter badge.
+// Evidence is an edge with no detail page, so no emoji.
+export const KIND_EMOJI: Record<NodeKind, string> = {
+  camp: "🏕️",
+  descriptive_claim: "✅",
+  normative_claim: "💭",
+  intervention: "⚖️",
+  source: "📰",
+  friction_layer: "🔥",
+  harm_layer: "💀",
+  suffering_layer: "💔",
+  evidence: "📁",
+};
+
+export function kindEmoji(kind: NodeKind): string {
+  return KIND_EMOJI[kind] ?? "";
 }
 
 function truncate(s: string, max = 80): string {
@@ -154,14 +172,14 @@ export async function campsHoldingNormative(id: string) {
   return all.filter((c) => c.data.held_normative.some((ref) => ref.id === id));
 }
 
-export async function warrantsForClaim(id: string) {
-  const all = await getCollection("warrants");
-  return all.filter((w) => w.data.claim_id.id === id);
+export async function evidenceForClaim(id: string) {
+  const all = await getCollection("evidence");
+  return all.filter((e) => e.data.claim_id.id === id);
 }
 
-export async function warrantsFromSource(id: string) {
-  const all = await getCollection("warrants");
-  return all.filter((w) => w.data.source_id.id === id);
+export async function evidenceFromSource(id: string) {
+  const all = await getCollection("evidence");
+  return all.filter((e) => e.data.source_id.id === id);
 }
 
 export async function interventionsScoringFriction(id: string) {

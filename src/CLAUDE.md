@@ -11,7 +11,7 @@ Key exports:
 - `resolveNode(id)` --- async, content-collection-backed. Camps get their emoji prefixed here.
 - `collectionForId(id)` --- pure prefix dispatch.
 - `CAMP_EMOJI` / `campEmoji(id)` --- presentation-only map from camp id to emoji. **Presentation lives here, never in `../data/`**. Drift between this map and `data/camps/` is caught by `engine/tests/test_layering.py` (runs under `task check`).
-- `campsHoldingDescriptive` / `campsHoldingNormative` / `warrantsForClaim` / `interventionsScoringFriction` / `interventionsScoringHarm` --- reverse lookups so every detail page has both directions of the graph.
+- `campsHoldingDescriptive` / `campsHoldingNormative` / `evidenceForClaim` / `interventionsScoringFriction` / `interventionsScoringHarm` --- reverse lookups so every detail page has both directions of the graph.
 - `analysesReferencing(id)` --- scans serialized analysis JSON for a quoted id. Safe against prefix collisions because it matches `"id"` including the quotes.
 
 ## Content collections

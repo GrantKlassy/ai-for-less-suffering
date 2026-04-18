@@ -1,8 +1,8 @@
-"""Source nodes: citable things that back warrants.
+"""Source nodes: citable things that back evidence.
 
 A Source is a thing you can point at --- a paper, a filing, a dataset, a piece of
 journalism, a primary document. It carries operator-scored reliability so the
-warrant layer can reason about epistemic quality without collapsing it into the
+evidence layer can reason about epistemic quality without collapsing it into the
 claim's confidence number.
 """
 
@@ -26,7 +26,7 @@ class SourceKind(StrEnum):
 
 
 class Source(BaseNode):
-    """A citable thing a warrant can point at.
+    """A citable thing a piece of evidence can point at.
 
     `reliability` is operator-authored, not computed. The tool records the score;
     the operator decides whether a Palantir 10-K, an IHME dataset, or an anonymous

@@ -10,8 +10,8 @@ from afls.schema.base import BaseNode
 class DescriptiveClaim(BaseNode):
     """A factual assertion about the world. Never carries a value judgment.
 
-    Provenance lives on Warrant nodes, not here. `confidence` is the operator's
-    posterior after reading the warrants attached to this claim.
+    Provenance lives on Evidence nodes, not here. `confidence` is the operator's
+    posterior after reading the evidence attached to this claim.
     """
 
     kind: str = Field(default="descriptive_claim", frozen=True)

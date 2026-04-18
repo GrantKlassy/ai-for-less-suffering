@@ -3,12 +3,13 @@ import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import ContestedTrack from "../components/analyses/ContestedTrack.astro";
 import { allAnalyses } from "../lib/graph";
+import { LEGEND } from "../lib/legend";
 import type { ContestedClaim } from "../lib/analysis";
 
 const [
   descriptiveClaims,
   normativeClaims,
-  warrants,
+  evidenceEntries,
   sources,
   camps,
   interventions,
@@ -18,7 +19,7 @@ const [
 ] = await Promise.all([
   getCollection("descriptiveClaims"),
   getCollection("normativeClaims"),
-  getCollection("warrants"),
+  getCollection("evidence"),
   getCollection("sources"),
   getCollection("camps"),
   getCollection("interventions"),
@@ -27,14 +28,14 @@ const [
   getCollection("sufferingLayers"),
 ]);
 
-type Warrant = (typeof warrants)[number];
+type Evidence = (typeof evidenceEntries)[number];
 
 // Pick the descriptive claim with the widest stance coverage (three-way if
 // any exists, else two-way, else one-way) and synthesize a ContestedClaim
 // payload so the landing page can reuse the same renderer as the analyses.
-const warrantsByClaim: Record<string, Warrant[]> = {};
-for (const w of warrants) {
-  (warrantsByClaim[w.data.claim_id.id] ??= []).push(w);
+const evidenceByClaim: Record<string, Evidence[]> = {};
+for (const e of evidenceEntries) {
+  (evidenceByClaim[e.data.claim_id.id] ??= []).push(e);
 }
 const sourceTitle = (id: string): string =>
   sources.find((s) => s.id === id)?.data.title ?? id;
@@ -42,22 +43,22 @@ const sourceTitle = (id: string): string =>
 type Scored = { claim: (typeof descriptiveClaims)[number]; coverage: number };
 const ranked: Scored[] = descriptiveClaims
   .map((claim) => {
-    const ws = warrantsByClaim[claim.id] ?? [];
-    const stances = new Set(ws.map((w) => w.data.supports));
+    const es = evidenceByClaim[claim.id] ?? [];
+    const stances = new Set(es.map((e) => e.data.supports));
     return { claim, coverage: stances.size };
   })
   .sort((a, b) => b.coverage - a.coverage);
 
 const featured = ranked.find((r) => r.coverage >= 2) ?? ranked[0];
 
-const buildSummary = (w: Warrant) => ({
-  warrant_id: w.id,
-  source_id: w.data.source_id.id,
-  source_title: sourceTitle(w.data.source_id.id),
-  stance: w.data.supports,
-  method_tag: w.data.method_tag,
-  weight: w.data.weight,
-  locator: w.data.locator ?? "",
+const buildSummary = (e: Evidence) => ({
+  evidence_id: e.id,
+  source_id: e.data.source_id.id,
+  source_title: sourceTitle(e.data.source_id.id),
+  stance: e.data.supports,
+  method_tag: e.data.method_tag,
+  weight: e.data.weight,
+  locator: e.data.locator ?? "",
 });
 
 const featuredContested: ContestedClaim[] = featured
@@ -65,14 +66,14 @@ const featuredContested: ContestedClaim[] = featured
       {
         claim_id: featured.claim.id,
         claim_text: featured.claim.data.text,
-        supports: (warrantsByClaim[featured.claim.id] ?? [])
-          .filter((w) => w.data.supports === "support")
+        supports: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "support")
           .map(buildSummary),
-        contradicts: (warrantsByClaim[featured.claim.id] ?? [])
-          .filter((w) => w.data.supports === "contradict")
+        contradicts: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "contradict")
           .map(buildSummary),
-        qualifies: (warrantsByClaim[featured.claim.id] ?? [])
-          .filter((w) => w.data.supports === "qualify")
+        qualifies: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "qualify")
           .map(buildSummary),
       },
     ]
@@ -80,96 +81,47 @@ const featuredContested: ContestedClaim[] = featured
 
 const analysisCount = allAnalyses().length;
 
-const legend = [
-  {
-    letter: "P",
-    label: "Camp",
-    blurb: "Coherent cluster of held claims.",
-    classes: "bg-zinc-800 text-zinc-300",
-  },
-  {
-    letter: "CD",
-    label: "Descriptive claim",
-    blurb: "What is.",
-    classes: "bg-sky-950 text-sky-300",
-  },
-  {
-    letter: "CN",
-    label: "Normative claim",
-    blurb: "What should be.",
-    classes: "bg-violet-950 text-violet-300",
-  },
-  {
-    letter: "S",
-    label: "Source",
-    blurb: "A citable primary document.",
-    classes: "bg-amber-950 text-amber-300",
-  },
-  {
-    letter: "W",
-    label: "Warrant",
-    blurb: "A source's stance on a claim --- support, contradict, or qualify.",
-    classes: "bg-zinc-800 text-zinc-500",
-  },
-  {
-    letter: "I",
-    label: "Intervention",
-    blurb: "A proposed action.",
-    classes: "bg-emerald-950 text-emerald-300",
-  },
-  {
-    letter: "LF",
-    label: "Friction layer",
-    blurb: "What slows deployment.",
-    classes: "bg-orange-950 text-orange-300",
-  },
-  {
-    letter: "LH",
-    label: "Harm layer",
-    blurb: "A welfare harm to weigh.",
-    classes: "bg-rose-950 text-rose-300",
-  },
-  {
-    letter: "LS",
-    label: "Suffering layer",
-    blurb: "A category of first-person suffering the intervention relieves.",
-    classes: "bg-emerald-950 text-emerald-300",
-  },
-];
+const legend = LEGEND;
 
 const tiles = [
   {
     href: "/analyses/",
+    emoji: "🔭",
     label: "Analyses",
     count: analysisCount,
     blurb: "Palantir coalition, leverage rank, steelman of a target.",
   },
   {
     href: "/camps/",
+    emoji: "🏕️",
     label: "Camps",
     count: camps.length,
     blurb: "Coherent clusters of held claims and divergent anchors.",
   },
   {
     href: "/claims/",
+    emoji: "🪧",
     label: "Claims",
     count: descriptiveClaims.length + normativeClaims.length,
     blurb: `${descriptiveClaims.length} descriptive · ${normativeClaims.length} normative.`,
   },
   {
     href: "/interventions/",
+    emoji: "⚖️",
     label: "Interventions",
     count: interventions.length,
     blurb: "Proposed actions scored against friction and harm layers.",
   },
   {
     href: "/sources/",
+    emoji: "📰",
     label: "Sources",
     count: sources.length,
     blurb: "Citable primary docs, datasets, filings, and press.",
   },
   {
     href: "/layers/",
+    emoji: "🧱",
     label: "Layers",
     count: frictionLayers.length + harmLayers.length + sufferingLayers.length,
     blurb: `${frictionLayers.length} friction · ${harmLayers.length} harm · ${sufferingLayers.length} suffering.`,
@@ -216,7 +168,8 @@ const tiles = [
               </span>
             </dt>
             <dd class="text-zinc-400">
-              <span class="text-zinc-100">{entry.label}</span> --- {entry.blurb}
+              <span class="text-zinc-100">{`${entry.emoji} ${entry.label}`}</span>{" "}
+              --- {entry.blurb}
             </dd>
           </div>
         ))
@@ -232,8 +185,8 @@ const tiles = [
         </h2>
         <p class="mb-4 max-w-prose text-sm text-zinc-400">
           What the site does, shown against a real claim currently in the graph.
-          The same descriptive statement carries warrants that support,
-          contradict, and qualify it --- so the disagreement is visible as
+          The same descriptive statement carries evidence that supports,
+          contradicts, and qualifies it --- so the disagreement is visible as
           evidence, not as vibes. Click any source or claim to traverse.
         </p>
         <ContestedTrack claims={featuredContested} />
@@ -256,7 +209,7 @@ const tiles = [
               class="block rounded border border-zinc-800 p-4 hover:border-zinc-600"
             >
               <div class="mb-1 flex items-baseline justify-between">
-                <span class="text-sm text-zinc-100">{tile.label}</span>
+                <span class="text-sm text-zinc-100">{`${tile.emoji} ${tile.label}`}</span>
                 <span class="font-mono text-xs text-zinc-500">
                   {tile.count}
                 </span>

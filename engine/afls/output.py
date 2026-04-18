@@ -19,8 +19,8 @@ from afls.queries.leverage import (
 from afls.queries.palantir import (
     ContestedClaim,
     ConvergentInterventionAnalysis,
+    EvidenceSummary,
     PalantirAnalysis,
-    WarrantSummary,
 )
 from afls.queries.steelman import SteelmanAnalysis, SteelmanFrame
 from afls.schema import (
@@ -82,15 +82,15 @@ def render_analysis_markdown(analysis: PalantirAnalysis, data_dir: Path) -> str:
     return "\n".join(parts).rstrip() + "\n"
 
 
-def _render_warrant_list(label: str, warrants: list[WarrantSummary]) -> list[str]:
-    if not warrants:
+def _render_evidence_list(label: str, evidence_list: list[EvidenceSummary]) -> list[str]:
+    if not evidence_list:
         return []
     lines = [f"_{label}:_"]
-    for w in warrants:
-        locator = f" --- {w.locator}" if w.locator else ""
+    for e in evidence_list:
+        locator = f" --- {e.locator}" if e.locator else ""
         lines.append(
-            f"- `{w.warrant_id}` ({w.method_tag}, weight {w.weight}) --- "
-            f"{w.source_title}{locator}"
+            f"- `{e.evidence_id}` ({e.method_tag}, weight {e.weight}) --- "
+            f"{e.source_title}{locator}"
         )
     lines.append("")
     return lines
@@ -100,17 +100,17 @@ def _render_contested_claims(contested: list[ContestedClaim]) -> str:
     if not contested:
         return (
             "## Contested claims\n\nNo claims carry both supporting and contradicting "
-            "warrants. Absence here is not proof of consensus --- it may mean the graph "
+            "evidence. Absence here is not proof of consensus --- it may mean the graph "
             "has only collected one side.\n"
         )
     lines = ["## Contested claims", ""]
     for item in contested:
         lines.append(f"### `{item.claim_id}` --- {item.claim_text}")
         lines.append("")
-        lines.extend(_render_warrant_list("Supporting", item.supports))
-        lines.extend(_render_warrant_list("Contradicting", item.contradicts))
+        lines.extend(_render_evidence_list("Supporting", item.supports))
+        lines.extend(_render_evidence_list("Contradicting", item.contradicts))
         if item.qualifies:
-            lines.extend(_render_warrant_list("Qualifying", item.qualifies))
+            lines.extend(_render_evidence_list("Qualifying", item.qualifies))
     return "\n".join(lines) + "\n"
 
 

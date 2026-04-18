@@ -18,6 +18,7 @@ from afls.schema import (
     BaseNode,
     Camp,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     Intervention,
     InterventionKind,
@@ -26,7 +27,6 @@ from afls.schema import (
     Source,
     SourceKind,
     Support,
-    Warrant,
 )
 from afls.storage import save_node
 
@@ -99,10 +99,10 @@ def _sources() -> list[Source]:
     ]
 
 
-def _warrants() -> list[Warrant]:
+def _evidence() -> list[Evidence]:
     return [
-        Warrant(
-            id="war_epoch_accelerating",
+        Evidence(
+            id="evi_epoch_accelerating",
             claim_id="desc_accelerating",
             source_id="src_epoch_ai",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -110,8 +110,8 @@ def _warrants() -> list[Warrant]:
             weight=0.9,
             locator="trends dashboard",
         ),
-        Warrant(
-            id="war_epoch_compute_matters",
+        Evidence(
+            id="evi_epoch_compute_matters",
             claim_id="desc_compute_matters",
             source_id="src_epoch_ai",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -119,8 +119,8 @@ def _warrants() -> list[Warrant]:
             weight=0.85,
             locator="compute-vs-performance section",
         ),
-        Warrant(
-            id="war_semi_compute_matters",
+        Evidence(
+            id="evi_semi_compute_matters",
             claim_id="desc_compute_matters",
             source_id="src_semianalysis",
             method_tag=MethodTag.TRIANGULATION,
@@ -314,7 +314,7 @@ def seed(target_dir: Path | None = None) -> int:
     nodes.extend(_interventions())
     nodes.extend(_camps())
     nodes.extend(_sources())
-    nodes.extend(_warrants())
+    nodes.extend(_evidence())
     for node in nodes:
         save_node(_stamp(node), root)
     return len(nodes)

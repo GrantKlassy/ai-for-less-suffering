@@ -6,7 +6,7 @@ import ConfidenceBar from "../../../components/ConfidenceBar.astro";
 import {
   analysesReferencing,
   campsHoldingDescriptive,
-  warrantsForClaim,
+  evidenceForClaim,
 } from "../../../lib/graph";
 
 export async function getStaticPaths() {
@@ -22,14 +22,14 @@ interface Props {
 }
 
 const { claim } = Astro.props as Props;
-const warrants = await warrantsForClaim(claim.id);
+const evidence = await evidenceForClaim(claim.id);
 const camps = await campsHoldingDescriptive(claim.id);
 const referencedBy = analysesReferencing(claim.id);
 
-const warrantsByStance = {
-  supports: warrants.filter((w) => w.data.supports === "support"),
-  contradicts: warrants.filter((w) => w.data.supports === "contradict"),
-  qualifies: warrants.filter((w) => w.data.supports === "qualify"),
+const evidenceByStance = {
+  supports: evidence.filter((e) => e.data.supports === "support"),
+  contradicts: evidence.filter((e) => e.data.supports === "contradict"),
+  qualifies: evidence.filter((e) => e.data.supports === "qualify"),
 };
 const stanceColor: Record<string, string> = {
   supports: "text-emerald-300",
@@ -51,11 +51,11 @@ const stanceColor: Record<string, string> = {
   </section>
 
   {
-    warrants.length > 0 && (
+    evidence.length > 0 && (
       <section class="mb-8">
-        <h2 class="mb-3 text-sm text-zinc-400">Warrants ({warrants.length})</h2>
+        <h2 class="mb-3 text-sm text-zinc-400">Evidence ({evidence.length})</h2>
         {(["supports", "contradicts", "qualifies"] as const).map((stance) =>
-          warrantsByStance[stance].length > 0 ? (
+          evidenceByStance[stance].length > 0 ? (
             <div class="mb-4">
               <h3
                 class:list={[
@@ -63,31 +63,31 @@ const stanceColor: Record<string, string> = {
                   stanceColor[stance],
                 ]}
               >
-                {stance} ({warrantsByStance[stance].length})
+                {stance} ({evidenceByStance[stance].length})
               </h3>
               <ul class="space-y-3">
-                {warrantsByStance[stance].map((w) => (
+                {evidenceByStance[stance].map((e) => (
                   <li class="rounded border border-zinc-800 p-3 text-xs">
                     <div class="mb-1 flex items-center justify-between">
-                      <NodeRef id={w.data.source_id.id} />
+                      <NodeRef id={e.data.source_id.id} />
                       <span class="font-mono text-zinc-500">
-                        {w.data.method_tag}
+                        {e.data.method_tag}
                       </span>
                     </div>
                     <ConfidenceBar
-                      value={w.data.weight}
+                      value={e.data.weight}
                       label="weight"
                       class="mb-2"
                     />
-                    {w.data.locator && (
+                    {e.data.locator && (
                       <p class="text-zinc-500">
                         <span class="text-zinc-600">locator:</span>{" "}
-                        {w.data.locator}
+                        {e.data.locator}
                       </p>
                     )}
-                    {w.data.quote && (
+                    {e.data.quote && (
                       <blockquote class="mt-1 border-l-2 border-zinc-700 pl-3 text-zinc-300">
-                        “{w.data.quote}”
+                        “{e.data.quote}”
                       </blockquote>
                     )}
                   </li>

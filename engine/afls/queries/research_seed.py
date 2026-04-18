@@ -1,4 +1,4 @@
-"""Research seed: sources, claims, and warrants for the three operator domains.
+"""Research seed: sources, claims, and evidence for the three operator domains.
 
 The baseline `palantir_seed` defines camps and skeletal claims; this module deepens
 the epistemic layer with researched content across three domains:
@@ -21,11 +21,11 @@ from afls.config import data_dir
 from afls.schema import (
     BaseNode,
     DescriptiveClaim,
+    Evidence,
     MethodTag,
     Source,
     SourceKind,
     Support,
-    Warrant,
 )
 from afls.storage import save_node
 
@@ -226,10 +226,10 @@ def _compute_grid_claims() -> list[DescriptiveClaim]:
     ]
 
 
-def _compute_grid_warrants() -> list[Warrant]:
+def _compute_grid_evidence() -> list[Evidence]:
     return [
-        Warrant(
-            id="war_epoch_compute_growth",
+        Evidence(
+            id="evi_epoch_compute_growth",
             claim_id="desc_training_compute_growth",
             source_id="src_epoch_ai",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -237,8 +237,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.95,
             locator="Notable AI Models dataset; 2024 compute-growth post",
         ),
-        Warrant(
-            id="war_rand_cost_triangulation",
+        Evidence(
+            id="evi_rand_cost_triangulation",
             claim_id="desc_flagship_training_cost",
             source_id="src_epoch_training_cost",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -246,8 +246,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Figure 1; Table 2",
         ),
-        Warrant(
-            id="war_semi_cost_leak",
+        Evidence(
+            id="evi_semi_cost_leak",
             claim_id="desc_flagship_training_cost",
             source_id="src_semianalysis",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -255,8 +255,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.7,
             locator="GPT-4 architecture/cost posts, 2023-2024",
         ),
-        Warrant(
-            id="war_algo_progress_epoch",
+        Evidence(
+            id="evi_algo_progress_epoch",
             claim_id="desc_algorithmic_efficiency",
             source_id="src_epoch_algorithmic_progress",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -266,8 +266,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             quote="compute required to reach a set performance threshold has halved "
             "approximately every 8 months",
         ),
-        Warrant(
-            id="war_algo_caveat_epoch",
+        Evidence(
+            id="evi_algo_caveat_epoch",
             claim_id="desc_algorithmic_efficiency",
             source_id="src_epoch_ai",
             method_tag=MethodTag.EXPERT_ESTIMATE,
@@ -275,8 +275,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.5,
             locator="Epoch commentary on benchmark-dependence of efficiency estimates",
         ),
-        Warrant(
-            id="war_iea_low_forecast",
+        Evidence(
+            id="evi_iea_low_forecast",
             claim_id="desc_us_datacenter_load_forecast",
             source_id="src_iea_electricity_2024",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -284,8 +284,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.8,
             locator="Analysing Electricity Demand; data centres chapter",
         ),
-        Warrant(
-            id="war_epri_scenarios",
+        Evidence(
+            id="evi_epri_scenarios",
             claim_id="desc_us_datacenter_load_forecast",
             source_id="src_epri_powering_intelligence",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -293,8 +293,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Scenario table: 4.6%-9.1% by 2030",
         ),
-        Warrant(
-            id="war_goldman_high_forecast",
+        Evidence(
+            id="evi_goldman_high_forecast",
             claim_id="desc_us_datacenter_load_forecast",
             source_id="src_goldman_gen_power",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -302,8 +302,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.7,
             locator="Executive summary; 160% growth figure",
         ),
-        Warrant(
-            id="war_pjm_market_signal",
+        Evidence(
+            id="evi_pjm_market_signal",
             claim_id="desc_us_datacenter_load_forecast",
             source_id="src_pjm_2024_capacity",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -311,8 +311,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.75,
             locator="2025/2026 BRA clearing results",
         ),
-        Warrant(
-            id="war_lbnl_queue_size",
+        Evidence(
+            id="evi_lbnl_queue_size",
             claim_id="desc_interconnection_queue_backlog",
             source_id="src_lbnl_queued_up_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -321,8 +321,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             locator="Figure 1; summary tables",
             quote="~2,600 GW of total generation and storage capacity in queues at end-2023",
         ),
-        Warrant(
-            id="war_lbnl_wait_time",
+        Evidence(
+            id="evi_lbnl_wait_time",
             claim_id="desc_interconnection_queue_backlog",
             source_id="src_lbnl_queued_up_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -330,8 +330,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Completion-rate and duration analysis",
         ),
-        Warrant(
-            id="war_doe_transmission_need",
+        Evidence(
+            id="evi_doe_transmission_need",
             claim_id="desc_transmission_stall",
             source_id="src_doe_transmission_needs",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -339,8 +339,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Chapter 3 regional needs; interregional findings",
         ),
-        Warrant(
-            id="war_lbnl_transmission_qualify",
+        Evidence(
+            id="evi_lbnl_transmission_qualify",
             claim_id="desc_transmission_stall",
             source_id="src_lbnl_queued_up_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -348,8 +348,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.6,
             locator="Interconnection-upgrade cost trend figures",
         ),
-        Warrant(
-            id="war_sia_chip_concentration",
+        Evidence(
+            id="evi_sia_chip_concentration",
             claim_id="desc_leading_edge_chip_concentration",
             source_id="src_sia_2024_state",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -357,8 +357,8 @@ def _compute_grid_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Geography of semiconductor manufacturing section",
         ),
-        Warrant(
-            id="war_semi_hbm",
+        Evidence(
+            id="evi_semi_hbm",
             claim_id="desc_leading_edge_chip_concentration",
             source_id="src_semianalysis",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -567,10 +567,10 @@ def _gov_defense_claims() -> list[DescriptiveClaim]:
     ]
 
 
-def _gov_defense_warrants() -> list[Warrant]:
+def _gov_defense_evidence() -> list[Evidence]:
     return [
-        Warrant(
-            id="war_pltr_10k_revenue",
+        Evidence(
+            id="evi_pltr_10k_revenue",
             claim_id="desc_palantir_gov_revenue",
             source_id="src_pltr_10k_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -578,8 +578,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Segment revenue tables, Item 7 MD&A",
         ),
-        Warrant(
-            id="war_pltr_earnings_call_growth",
+        Evidence(
+            id="evi_pltr_earnings_call_growth",
             claim_id="desc_palantir_gov_revenue",
             source_id="src_pltr_earnings_q4_2024",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -587,8 +587,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.75,
             locator="Prepared remarks; US Government growth commentary",
         ),
-        Warrant(
-            id="war_nyt_pltr_scale",
+        Evidence(
+            id="evi_nyt_pltr_scale",
             claim_id="desc_palantir_gov_revenue",
             source_id="src_nyt_palantir_2024",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -596,8 +596,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.65,
             locator="Business section features, 2023-2024",
         ),
-        Warrant(
-            id="war_crs_ai_dod_spend",
+        Evidence(
+            id="evi_crs_ai_dod_spend",
             claim_id="desc_dod_ai_contract_spend",
             source_id="src_crs_dod_ai",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -605,8 +605,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.8,
             locator="AI funding appendix; DoD budget rollups",
         ),
-        Warrant(
-            id="war_gao_ai_slow",
+        Evidence(
+            id="evi_gao_ai_slow",
             claim_id="desc_dod_ai_contract_spend",
             source_id="src_gao_dod_ai",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -614,8 +614,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.75,
             locator="Summary findings on acquisition-pace gaps",
         ),
-        Warrant(
-            id="war_usaspending_contracts",
+        Evidence(
+            id="evi_usaspending_contracts",
             claim_id="desc_dod_ai_contract_spend",
             source_id="src_usaspending",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -623,8 +623,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.85,
             locator="DoD AI-tagged obligations 2022-2025",
         ),
-        Warrant(
-            id="war_intercept_contract_failures",
+        Evidence(
+            id="evi_intercept_contract_failures",
             claim_id="desc_dod_ai_contract_spend",
             source_id="src_intercept_palantir",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -632,8 +632,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.55,
             locator="Investigative pieces on DoD AI pilot failures and miscategorization",
         ),
-        Warrant(
-            id="war_pltr_maven_contract",
+        Evidence(
+            id="evi_pltr_maven_contract",
             claim_id="desc_maven_status",
             source_id="src_dod_maven_contract",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -641,8 +641,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.9,
             locator="$480M Maven Smart System award, May 2024",
         ),
-        Warrant(
-            id="war_google_maven_letter_history",
+        Evidence(
+            id="evi_google_maven_letter_history",
             claim_id="desc_maven_status",
             source_id="src_google_maven_letter_2018",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -650,8 +650,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Open letter text; 3,100+ signatories",
         ),
-        Warrant(
-            id="war_nyt_maven_ongoing",
+        Evidence(
+            id="evi_nyt_maven_ongoing",
             claim_id="desc_maven_status",
             source_id="src_nyt_palantir_2024",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -659,8 +659,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.7,
             locator="Maven continuation coverage post-Google",
         ),
-        Warrant(
-            id="war_pltr_10k_competitive",
+        Evidence(
+            id="evi_pltr_10k_competitive",
             claim_id="desc_palantir_dominant",
             source_id="src_pltr_10k_2024",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -668,8 +668,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.6,
             locator="Competition section, Item 1",
         ),
-        Warrant(
-            id="war_intercept_dominance_skeptical",
+        Evidence(
+            id="evi_intercept_dominance_skeptical",
             claim_id="desc_palantir_dominant",
             source_id="src_intercept_palantir",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -677,8 +677,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.5,
             locator="Coverage framing Palantir as over-sold relative to internal-tool alternatives",
         ),
-        Warrant(
-            id="war_crs_vendor_landscape",
+        Evidence(
+            id="evi_crs_vendor_landscape",
             claim_id="desc_palantir_dominant",
             source_id="src_crs_dod_ai",
             method_tag=MethodTag.EXPERT_ESTIMATE,
@@ -686,8 +686,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.75,
             locator="Vendor-landscape discussion",
         ),
-        Warrant(
-            id="war_jwcc_award",
+        Evidence(
+            id="evi_jwcc_award",
             claim_id="desc_ic_cloud_concentration",
             source_id="src_jwcc_announcement",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -695,8 +695,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Award announcement text; vendor list",
         ),
-        Warrant(
-            id="war_semi_cloud_concentration",
+        Evidence(
+            id="evi_semi_cloud_concentration",
             claim_id="desc_ic_cloud_concentration",
             source_id="src_semianalysis",
             method_tag=MethodTag.TRIANGULATION,
@@ -704,8 +704,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.7,
             locator="Hyperscaler capex and share coverage, 2024",
         ),
-        Warrant(
-            id="war_google_maven_withdraw",
+        Evidence(
+            id="evi_google_maven_withdraw",
             claim_id="desc_workforce_resistance",
             source_id="src_google_maven_letter_2018",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -713,8 +713,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Open letter and subsequent Google announcement",
         ),
-        Warrant(
-            id="war_microsoft_workers_ivas",
+        Evidence(
+            id="evi_microsoft_workers_ivas",
             claim_id="desc_workforce_resistance",
             source_id="src_microsoft_workers_2019",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -722,8 +722,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Employee open letter, February 2019",
         ),
-        Warrant(
-            id="war_openai_idf_nyt",
+        Evidence(
+            id="evi_openai_idf_nyt",
             claim_id="desc_workforce_resistance",
             source_id="src_nyt_openai_idf",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -731,8 +731,8 @@ def _gov_defense_warrants() -> list[Warrant]:
             weight=0.75,
             locator="OpenAI military-use policy-change coverage, 2024",
         ),
-        Warrant(
-            id="war_pltr_ceo_dismisses_resistance",
+        Evidence(
+            id="evi_pltr_ceo_dismisses_resistance",
             claim_id="desc_workforce_resistance",
             source_id="src_pltr_ceo_interview",
             method_tag=MethodTag.PRIMARY_TESTIMONY,
@@ -902,10 +902,10 @@ def _suffering_claims() -> list[DescriptiveClaim]:
     ]
 
 
-def _suffering_warrants() -> list[Warrant]:
+def _suffering_evidence() -> list[Evidence]:
     return [
-        Warrant(
-            id="war_ihme_gbd_mental",
+        Evidence(
+            id="evi_ihme_gbd_mental",
             claim_id="desc_mental_health_burden",
             source_id="src_ihme_gbd_2021",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -913,8 +913,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.9,
             locator="YLD by cause, 2021 estimates",
         ),
-        Warrant(
-            id="war_who_mental_health",
+        Evidence(
+            id="evi_who_mental_health",
             claim_id="desc_mental_health_burden",
             source_id="src_who_mental_health_2022",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -922,8 +922,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Executive summary; burden-of-disease chapter",
         ),
-        Warrant(
-            id="war_wb_poverty",
+        Evidence(
+            id="evi_wb_poverty",
             claim_id="desc_extreme_poverty_trajectory",
             source_id="src_wb_poverty_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -931,8 +931,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.95,
             locator="Global extreme-poverty trajectory tables",
         ),
-        Warrant(
-            id="war_owid_poverty",
+        Evidence(
+            id="evi_owid_poverty",
             claim_id="desc_extreme_poverty_trajectory",
             source_id="src_owid",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -940,8 +940,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.8,
             locator="Global extreme-poverty page",
         ),
-        Warrant(
-            id="war_unicef_igme_child",
+        Evidence(
+            id="evi_unicef_igme_child",
             claim_id="desc_child_mortality_progress",
             source_id="src_unicef_igme_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -949,8 +949,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.95,
             locator="Under-5 mortality rate, global",
         ),
-        Warrant(
-            id="war_fao_slaughter",
+        Evidence(
+            id="evi_fao_slaughter",
             claim_id="desc_animal_suffering_scale",
             source_id="src_fao_faostat_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -958,8 +958,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Livestock primary production; slaughter counts",
         ),
-        Warrant(
-            id="war_sentience_factory",
+        Evidence(
+            id="evi_sentience_factory",
             claim_id="desc_animal_suffering_scale",
             source_id="src_sentience_institute_farming",
             method_tag=MethodTag.TRIANGULATION,
@@ -967,8 +967,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.7,
             locator="US factory-farming share methodology",
         ),
-        Warrant(
-            id="war_un_desa_life_expectancy",
+        Evidence(
+            id="evi_un_desa_life_expectancy",
             claim_id="desc_life_expectancy_gain",
             source_id="src_un_desa_wpp_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -976,8 +976,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Life expectancy at birth; historical series",
         ),
-        Warrant(
-            id="war_owid_life_expectancy",
+        Evidence(
+            id="evi_owid_life_expectancy",
             claim_id="desc_life_expectancy_gain",
             source_id="src_owid",
             method_tag=MethodTag.TRIANGULATION,
@@ -985,8 +985,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.8,
             locator="Life expectancy over the long run",
         ),
-        Warrant(
-            id="war_who_ncd_share",
+        Evidence(
+            id="evi_who_ncd_share",
             claim_id="desc_ncd_shift",
             source_id="src_who_ncd_fact",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -994,8 +994,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.9,
             locator="NCD fact sheet; share of global deaths",
         ),
-        Warrant(
-            id="war_ihme_gbd_ncd",
+        Evidence(
+            id="evi_ihme_gbd_ncd",
             claim_id="desc_ncd_shift",
             source_id="src_ihme_gbd_2021",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -1003,8 +1003,8 @@ def _suffering_warrants() -> list[Warrant]:
             weight=0.9,
             locator="Cause-of-death distribution, 1990 vs 2021",
         ),
-        Warrant(
-            id="war_ihme_gbd_geography",
+        Evidence(
+            id="evi_ihme_gbd_geography",
             claim_id="desc_suffering_geography",
             source_id="src_ihme_gbd_2021",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -1016,14 +1016,14 @@ def _suffering_warrants() -> list[Warrant]:
 
 
 # -----------------------------------------------------------------------------
-# Gap warrants: cover the seed claims the lint rule flagged.
+# Gap evidence: cover the seed claims the lint rule flagged.
 # -----------------------------------------------------------------------------
 
 
-def _gap_warrants() -> list[Warrant]:
+def _gap_evidence() -> list[Evidence]:
     return [
-        Warrant(
-            id="war_lbnl_grid_bottleneck",
+        Evidence(
+            id="evi_lbnl_grid_bottleneck",
             claim_id="desc_grid_constraint",
             source_id="src_lbnl_queued_up_2024",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -1031,8 +1031,8 @@ def _gap_warrants() -> list[Warrant]:
             weight=0.85,
             locator="Queue size and completion-rate figures",
         ),
-        Warrant(
-            id="war_pjm_grid_tightening",
+        Evidence(
+            id="evi_pjm_grid_tightening",
             claim_id="desc_grid_constraint",
             source_id="src_pjm_2024_capacity",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -1040,8 +1040,8 @@ def _gap_warrants() -> list[Warrant]:
             weight=0.8,
             locator="2025/2026 BRA clearing-price escalation",
         ),
-        Warrant(
-            id="war_gao_enterprise_lag",
+        Evidence(
+            id="evi_gao_enterprise_lag",
             claim_id="desc_enterprise_slow",
             source_id="src_gao_dod_ai",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -1049,8 +1049,8 @@ def _gap_warrants() -> list[Warrant]:
             weight=0.8,
             locator="DoD AI acquisition-pace findings",
         ),
-        Warrant(
-            id="war_crs_enterprise_lag",
+        Evidence(
+            id="evi_crs_enterprise_lag",
             claim_id="desc_enterprise_slow",
             source_id="src_crs_dod_ai",
             method_tag=MethodTag.MODELED_PROJECTION,
@@ -1058,8 +1058,8 @@ def _gap_warrants() -> list[Warrant]:
             weight=0.75,
             locator="Adoption-lag commentary",
         ),
-        Warrant(
-            id="war_epoch_us_lead",
+        Evidence(
+            id="evi_epoch_us_lead",
             claim_id="desc_us_lead",
             source_id="src_epoch_ai",
             method_tag=MethodTag.TRIANGULATION,
@@ -1067,8 +1067,8 @@ def _gap_warrants() -> list[Warrant]:
             weight=0.65,
             locator="US vs China frontier-model comparison",
         ),
-        Warrant(
-            id="war_semi_us_lead_qualify",
+        Evidence(
+            id="evi_semi_us_lead_qualify",
             claim_id="desc_us_lead",
             source_id="src_semianalysis",
             method_tag=MethodTag.JOURNALISTIC_REPORT,
@@ -1090,14 +1090,14 @@ def seed(target_dir: Path | None = None) -> int:
     nodes: list[BaseNode] = []
     nodes.extend(_compute_grid_sources())
     nodes.extend(_compute_grid_claims())
-    nodes.extend(_compute_grid_warrants())
+    nodes.extend(_compute_grid_evidence())
     nodes.extend(_gov_defense_sources())
     nodes.extend(_gov_defense_claims())
-    nodes.extend(_gov_defense_warrants())
+    nodes.extend(_gov_defense_evidence())
     nodes.extend(_suffering_sources())
     nodes.extend(_suffering_claims())
-    nodes.extend(_suffering_warrants())
-    nodes.extend(_gap_warrants())
+    nodes.extend(_suffering_evidence())
+    nodes.extend(_gap_evidence())
     for node in nodes:
         save_node(_stamp(node), root)
     return len(nodes)

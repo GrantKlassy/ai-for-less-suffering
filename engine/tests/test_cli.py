@@ -15,6 +15,7 @@ from afls.schema import (
     Bridge,
     Camp,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     Intervention,
     InterventionKind,
@@ -23,7 +24,6 @@ from afls.schema import (
     Source,
     SourceKind,
     Support,
-    Warrant,
 )
 from afls.storage import save_node
 
@@ -349,14 +349,14 @@ def test_add_source_uses_src_prefix(
     assert len(files) == 1
 
 
-def test_add_warrant_uses_war_prefix(
+def test_add_evidence_uses_evi_prefix(
     runner: CliRunner, data_root: Path, tmp_path: Path
 ) -> None:
     fragment = _write_fragment(
         tmp_path,
-        "war.yaml",
+        "evi.yaml",
         {
-            "kind": "warrant",
+            "kind": "evidence",
             "claim_id": "desc_x",
             "source_id": "src_x",
             "method_tag": "direct_measurement",
@@ -365,11 +365,11 @@ def test_add_warrant_uses_war_prefix(
     )
     result = runner.invoke(app, ["add", str(fragment)])
     assert result.exit_code == 0, result.output
-    files = list((data_root / "warrants").glob("war_*.yaml"))
+    files = list((data_root / "evidence").glob("evi_*.yaml"))
     assert len(files) == 1
 
 
-def test_validate_catches_warrant_bad_claim_ref(
+def test_validate_catches_evidence_bad_claim_ref(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(
@@ -382,8 +382,8 @@ def test_validate_catches_warrant_bad_claim_ref(
         data_root,
     )
     save_node(
-        Warrant(
-            id="war_a",
+        Evidence(
+            id="evi_a",
             claim_id="desc_missing",
             source_id="src_a",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -396,13 +396,13 @@ def test_validate_catches_warrant_bad_claim_ref(
     assert "desc_missing" in result.output
 
 
-def test_validate_catches_warrant_bad_source_ref(
+def test_validate_catches_evidence_bad_source_ref(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.5), data_root)
     save_node(
-        Warrant(
-            id="war_a",
+        Evidence(
+            id="evi_a",
             claim_id="desc_a",
             source_id="src_missing",
             method_tag=MethodTag.DIRECT_MEASUREMENT,
@@ -415,18 +415,18 @@ def test_validate_catches_warrant_bad_source_ref(
     assert "src_missing" in result.output
 
 
-def test_validate_catches_disputed_warrant_bad_ref(
+def test_validate_catches_disputed_evidence_bad_ref(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(
-        Camp(id="camp_a", name="A", disputed_warrants=["war_missing"]), data_root
+        Camp(id="camp_a", name="A", disputed_evidence=["evi_missing"]), data_root
     )
     result = runner.invoke(app, ["validate"])
     assert result.exit_code == 1
-    assert "war_missing" in result.output
+    assert "evi_missing" in result.output
 
 
-def test_validate_warns_high_confidence_no_warrants(
+def test_validate_warns_high_confidence_no_evidence(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.9), data_root)
@@ -445,8 +445,8 @@ def test_validate_warns_all_expert_estimate(
         data_root,
     )
     save_node(
-        Warrant(
-            id="war_a",
+        Evidence(
+            id="evi_a",
             claim_id="desc_a",
             source_id="src_a",
             method_tag=MethodTag.EXPERT_ESTIMATE,
@@ -478,8 +478,8 @@ def test_validate_no_warning_when_direct_measurement_present(
         data_root,
     )
     save_node(
-        Warrant(
-            id="war_a",
+        Evidence(
+            id="evi_a",
             claim_id="desc_a",
             source_id="src_a",
             method_tag=MethodTag.DIRECT_MEASUREMENT,

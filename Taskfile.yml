@@ -134,6 +134,12 @@ tasks:
     cmds:
       - pnpm test
 
+  site:verify-rendered:
+    desc: Build the site, then re-run vitest so rendered-HTML tests (dist/index.html) actually fire
+    cmds:
+      - task: build
+      - pnpm test
+
   engine:install:
     desc: Install Python engine dependencies via uv
     dir: engine

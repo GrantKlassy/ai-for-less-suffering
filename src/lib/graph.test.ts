@@ -36,7 +36,7 @@ describe("collectionForId", () => {
     expect(collectionForId("src_andreessen_techno_optimist")).toBe("sources");
     expect(collectionForId("friction_grid")).toBe("frictionLayers");
     expect(collectionForId("harm_water")).toBe("harmLayers");
-    expect(collectionForId("war_foo_bar")).toBe("warrants");
+    expect(collectionForId("evi_foo_bar")).toBe("evidence");
   });
 
   it("returns null for unknown prefixes", () => {

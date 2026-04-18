@@ -9,13 +9,13 @@ from afls.schema import (
     Camp,
     Convergence,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     HarmLayer,
     Intervention,
     NormativeClaim,
     Source,
     SufferingLayer,
-    Warrant,
 )
 
 NODE_TYPES: dict[str, type[BaseNode]] = {
@@ -30,7 +30,7 @@ NODE_TYPES: dict[str, type[BaseNode]] = {
     "convergence": Convergence,
     "blindspot": BlindSpot,
     "source": Source,
-    "warrant": Warrant,
+    "evidence": Evidence,
 }
 
 NODE_SUBDIRS: dict[type[BaseNode], tuple[str, ...]] = {
@@ -45,5 +45,5 @@ NODE_SUBDIRS: dict[type[BaseNode], tuple[str, ...]] = {
     Convergence: ("convergences",),
     BlindSpot: ("blindspots",),
     Source: ("sources",),
-    Warrant: ("warrants",),
+    Evidence: ("evidence",),
 }

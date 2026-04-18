@@ -31,12 +31,12 @@ from afls.schema import (
     BaseNode,
     Camp,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     HarmLayer,
     Intervention,
     NormativeClaim,
     Source,
-    Warrant,
 )
 from afls.storage import list_nodes, save_node
 
@@ -217,7 +217,7 @@ def test_build_steelman_context_spotlights_target_and_harms(seeded_data: Path) -
     interventions = list_nodes(Intervention, seeded_data)
     friction_layers = list_nodes(FrictionLayer, seeded_data)
     harm_layers = list_nodes(HarmLayer, seeded_data)
-    warrants = list_nodes(Warrant, seeded_data)
+    evidence_list = list_nodes(Evidence, seeded_data)
     sources = list_nodes(Source, seeded_data)
 
     ctx = build_steelman_context(
@@ -228,7 +228,7 @@ def test_build_steelman_context_spotlights_target_and_harms(seeded_data: Path) -
         interventions,
         friction_layers,
         harm_layers,
-        warrants,
+        evidence_list,
         sources,
     )
     assert "# Target intervention (spotlight)" in ctx

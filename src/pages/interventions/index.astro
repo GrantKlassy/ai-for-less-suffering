@@ -8,7 +8,13 @@ const interventions = (await getCollection("interventions")).sort(
 ---
 
 <Base title="Interventions --- ai-for-less-suffering">
-  <h1 class="mb-2 text-2xl text-zinc-100">Interventions</h1>
+  <h1 class="mb-2 flex items-baseline gap-2 text-2xl text-zinc-100">
+    <span
+      class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-emerald-950 px-1 font-mono text-[10px] font-semibold text-emerald-300"
+      aria-hidden="true">I</span
+    >
+    ⚖️ Interventions
+  </h1>
   <p class="mb-8 text-sm text-zinc-400">
     Proposed actions, scored against friction layers (what slows them) and harm
     layers (what they cost when they succeed). Sorted by operator leverage

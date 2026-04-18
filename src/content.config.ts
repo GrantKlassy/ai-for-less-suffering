@@ -9,10 +9,10 @@ import { glob } from "astro/loaders";
 const isoTime = z.string();
 const nullableUrl = z.string().nullable();
 
-// engine/afls/schema/warrants.py :: Support
-const warrantStance = z.enum(["support", "contradict", "qualify"]);
+// engine/afls/schema/evidence.py :: Support
+const evidenceStance = z.enum(["support", "contradict", "qualify"]);
 
-// engine/afls/schema/warrants.py :: MethodTag
+// engine/afls/schema/evidence.py :: MethodTag
 const methodTag = z.enum([
   "direct_measurement",
   "expert_estimate",
@@ -120,17 +120,17 @@ const normativeClaims = defineCollection({
   }),
 });
 
-// Warrants currently only point at descriptive claims (verified by grep over
-// data/warrants/). If a warrant ever needs to point at a normative claim,
-// this schema will fail the build and force the call to be made explicit.
-const warrants = defineCollection({
-  loader: glob({ pattern: "**/*.yaml", base: "./data/warrants" }),
+// Evidence currently only points at descriptive claims (verified by grep over
+// data/evidence/). If a piece of evidence ever needs to point at a normative
+// claim, this schema will fail the build and force the call to be made explicit.
+const evidence = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./data/evidence" }),
   schema: z.object({
     id: z.string(),
-    kind: z.literal("warrant"),
+    kind: z.literal("evidence"),
     claim_id: reference("descriptiveClaims"),
     source_id: reference("sources"),
-    supports: warrantStance,
+    supports: evidenceStance,
     weight: z.number().min(0).max(1),
     method_tag: methodTag,
     locator: z.string().default(""),
@@ -151,7 +151,7 @@ const camps = defineCollection({
     agents: z.array(z.string()).default([]),
     held_descriptive: z.array(reference("descriptiveClaims")).default([]),
     held_normative: z.array(reference("normativeClaims")).default([]),
-    disputed_warrants: z.array(reference("warrants")).default([]),
+    disputed_evidence: z.array(reference("evidence")).default([]),
     created_at: isoTime,
     updated_at: isoTime,
     provenance_url: nullableUrl,
@@ -189,7 +189,7 @@ export const collections = {
   sources,
   descriptiveClaims,
   normativeClaims,
-  warrants,
+  evidence,
   camps,
   interventions,
 };

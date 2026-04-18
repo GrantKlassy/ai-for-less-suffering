@@ -27,13 +27,13 @@ from afls.reasoning import AnthropicClient
 from afls.schema import (
     Camp,
     DescriptiveClaim,
+    Evidence,
     Intervention,
     MethodTag,
     NormativeClaim,
     Source,
     SourceKind,
     Support,
-    Warrant,
 )
 from afls.storage import list_nodes
 
@@ -252,8 +252,8 @@ def _source(id_: str) -> Source:
     )
 
 
-def _warrant(id_: str, claim_id: str, source_id: str, stance: Support) -> Warrant:
-    return Warrant(
+def _evidence(id_: str, claim_id: str, source_id: str, stance: Support) -> Evidence:
+    return Evidence(
         id=id_,
         claim_id=claim_id,
         source_id=source_id,
@@ -266,13 +266,13 @@ def _warrant(id_: str, claim_id: str, source_id: str, stance: Support) -> Warran
 def test_find_contested_claims_requires_support_and_contradict() -> None:
     claims = [_claim("desc_a"), _claim("desc_b"), _claim("desc_c")]
     sources = [_source("src_1"), _source("src_2")]
-    warrants = [
-        _warrant("war_a1", "desc_a", "src_1", Support.SUPPORT),
-        _warrant("war_a2", "desc_a", "src_2", Support.CONTRADICT),
-        _warrant("war_b1", "desc_b", "src_1", Support.SUPPORT),
-        _warrant("war_c1", "desc_c", "src_1", Support.QUALIFY),
+    evidence_list = [
+        _evidence("evi_a1", "desc_a", "src_1", Support.SUPPORT),
+        _evidence("evi_a2", "desc_a", "src_2", Support.CONTRADICT),
+        _evidence("evi_b1", "desc_b", "src_1", Support.SUPPORT),
+        _evidence("evi_c1", "desc_c", "src_1", Support.QUALIFY),
     ]
-    contested = find_contested_claims(claims, warrants, sources)
+    contested = find_contested_claims(claims, evidence_list, sources)
     assert [c.claim_id for c in contested] == ["desc_a"]
     assert len(contested[0].supports) == 1
     assert len(contested[0].contradicts) == 1
@@ -282,12 +282,12 @@ def test_find_contested_claims_requires_support_and_contradict() -> None:
 def test_find_contested_claims_includes_qualifies_on_contested_claim() -> None:
     claims = [_claim("desc_a")]
     sources = [_source("src_1"), _source("src_2"), _source("src_3")]
-    warrants = [
-        _warrant("war_a1", "desc_a", "src_1", Support.SUPPORT),
-        _warrant("war_a2", "desc_a", "src_2", Support.CONTRADICT),
-        _warrant("war_a3", "desc_a", "src_3", Support.QUALIFY),
+    evidence_list = [
+        _evidence("evi_a1", "desc_a", "src_1", Support.SUPPORT),
+        _evidence("evi_a2", "desc_a", "src_2", Support.CONTRADICT),
+        _evidence("evi_a3", "desc_a", "src_3", Support.QUALIFY),
     ]
-    contested = find_contested_claims(claims, warrants, sources)
+    contested = find_contested_claims(claims, evidence_list, sources)
     assert len(contested) == 1
     assert len(contested[0].qualifies) == 1
 
@@ -303,16 +303,16 @@ def test_find_contested_claims_on_research_data(
     seed(data)
     seed_research(data)
     claims = list_nodes(DescriptiveClaim, data)
-    warrants = list_nodes(Warrant, data)
+    evidence_list = list_nodes(Evidence, data)
     sources = list_nodes(Source, data)
-    contested = find_contested_claims(claims, warrants, sources)
+    contested = find_contested_claims(claims, evidence_list, sources)
     ids = [c.claim_id for c in contested]
     assert "desc_us_datacenter_load_forecast" in ids
     claim = next(c for c in contested if c.claim_id == "desc_us_datacenter_load_forecast")
-    assert any(w.source_id == "src_goldman_gen_power" for w in claim.contradicts)
+    assert any(e.source_id == "src_goldman_gen_power" for e in claim.contradicts)
 
 
-def test_build_graph_context_includes_warrants_when_provided(
+def test_build_graph_context_includes_evidence_when_provided(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     data = tmp_path / "data"
@@ -324,11 +324,11 @@ def test_build_graph_context_includes_warrants_when_provided(
     descriptives = list_nodes(DescriptiveClaim, data)
     normatives = list_nodes(NormativeClaim, data)
     interventions = list_nodes(Intervention, data)
-    warrants = list_nodes(Warrant, data)
+    evidence_list = list_nodes(Evidence, data)
     sources = list_nodes(Source, data)
     ctx = build_graph_context(
-        camps, descriptives, normatives, interventions, warrants, sources
+        camps, descriptives, normatives, interventions, evidence_list, sources
     )
-    assert "## Descriptive claims (with warrants)" in ctx
+    assert "## Descriptive claims (with evidence)" in ctx
     assert "contradict" in ctx
     assert "src_goldman_gen_power" in ctx

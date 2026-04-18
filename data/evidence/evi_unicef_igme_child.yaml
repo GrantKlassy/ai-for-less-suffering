@@ -1,0 +1,12 @@
+claim_id: desc_child_mortality_progress
+created_at: '2026-04-17T00:00:00Z'
+id: evi_unicef_igme_child
+kind: evidence
+locator: Under-5 mortality rate, global
+method_tag: direct_measurement
+provenance_url: null
+quote: ''
+source_id: src_unicef_igme_2024
+supports: support
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.95

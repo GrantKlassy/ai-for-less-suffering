@@ -31,12 +31,12 @@ from afls.reasoning import AnthropicClient, Model, complete_and_parse
 from afls.schema import (
     Camp,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     HarmLayer,
     Intervention,
     NormativeClaim,
     Source,
-    Warrant,
 )
 from afls.storage import list_nodes
 
@@ -151,14 +151,14 @@ def build_steelman_context(
     interventions: list[Intervention],
     friction_layers: list[FrictionLayer],
     harm_layers: list[HarmLayer],
-    warrants: list[Warrant],
+    evidence_list: list[Evidence],
     sources: list[Source],
 ) -> str:
     """Render the graph slice the LLM needs to steelman the target intervention.
 
     Spotlights the target, glosses the friction/harm layers, then folds in the rest
     of the graph via `build_graph_context` so normative claims, descriptive claims,
-    and warrants are all addressable by ID. Lists the camp IDs the LLM may frame
+    and evidence are all addressable by ID. Lists the camp IDs the LLM may frame
     from --- one case_for and one case_against per camp, at most.
     """
     present_camps = sorted(c.id for c in camps)
@@ -172,7 +172,7 @@ def build_steelman_context(
         f"## Camps present: {', '.join(present_camps)}",
         "",
         build_graph_context(
-            camps, descriptives, normatives, interventions, warrants, sources
+            camps, descriptives, normatives, interventions, evidence_list, sources
         ),
     ]
     return "\n".join(sections)
@@ -220,10 +220,10 @@ def run_steelman_query(
     normatives = list_nodes(NormativeClaim, data_dir)
     friction_layers = list_nodes(FrictionLayer, data_dir)
     harm_layers = list_nodes(HarmLayer, data_dir)
-    warrants = list_nodes(Warrant, data_dir)
+    evidence_list = list_nodes(Evidence, data_dir)
     sources = list_nodes(Source, data_dir)
 
-    contested = find_contested_claims(descriptives, warrants, sources)
+    contested = find_contested_claims(descriptives, evidence_list, sources)
     context = build_steelman_context(
         target,
         camps,
@@ -232,7 +232,7 @@ def run_steelman_query(
         interventions,
         friction_layers,
         harm_layers,
-        warrants,
+        evidence_list,
         sources,
     )
 

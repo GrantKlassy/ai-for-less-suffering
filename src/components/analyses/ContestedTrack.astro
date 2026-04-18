@@ -27,7 +27,7 @@ const trackColor: Record<"supports" | "contradicts" | "qualifies", string> = {
   {
     claims.length === 0 ? (
       <p class="text-sm text-zinc-500">
-        No claim carries both supporting and contradicting warrants. Absence is
+        No claim carries both supporting and contradicting evidence. Absence is
         not proof of consensus --- the graph may only have collected one side.
       </p>
     ) : (
@@ -51,19 +51,19 @@ const trackColor: Record<"supports" | "contradicts" | "qualifies", string> = {
                       {stance}
                     </div>
                     <ul class="space-y-2 text-xs text-zinc-300">
-                      {claim[stance].map((w) => (
+                      {claim[stance].map((e) => (
                         <li class="rounded border border-zinc-900 p-2">
                           <div class="mb-1 flex flex-wrap items-baseline justify-between gap-x-2">
-                            <NodeRef id={w.source_id} label={w.source_title} />
+                            <NodeRef id={e.source_id} label={e.source_title} />
                             <span class="font-mono text-zinc-500">
-                              {w.method_tag}
+                              {e.method_tag}
                             </span>
                           </div>
-                          <ConfidenceBar value={w.weight} label="weight" />
-                          {w.locator && (
+                          <ConfidenceBar value={e.weight} label="weight" />
+                          {e.locator && (
                             <p class="mt-1 text-zinc-500">
                               <span class="text-zinc-600">locator:</span>{" "}
-                              {w.locator}
+                              {e.locator}
                             </p>
                           )}
                         </li>

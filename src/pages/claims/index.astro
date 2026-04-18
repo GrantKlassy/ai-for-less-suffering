@@ -22,7 +22,7 @@ for (const camp of camps) {
 ---
 
 <Base title="Claims --- ai-for-less-suffering">
-  <h1 class="mb-2 text-2xl text-zinc-100">Claims</h1>
+  <h1 class="mb-2 text-2xl text-zinc-100">🪧 Claims</h1>
   <p class="mb-8 text-sm text-zinc-400">
     Descriptive claims say what <em>is</em>. Normative claims say what
     <em>ought</em> to be. Camps can share descriptive claims; they almost never share
@@ -30,8 +30,12 @@ for (const camp of camps) {
   </p>
 
   <section class="mb-10">
-    <h2 class="mb-4 text-lg text-sky-300">
-      Descriptive ({descriptive.length})
+    <h2 class="mb-4 flex items-baseline gap-2 text-lg text-sky-300">
+      <span
+        class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-sky-950 px-1 font-mono text-[10px] font-semibold text-sky-300"
+        aria-hidden="true">CD</span
+      >
+      ✅ Descriptive ({descriptive.length})
     </h2>
     <ul class="space-y-2">
       {
@@ -56,7 +60,13 @@ for (const camp of camps) {
   </section>
 
   <section class="mb-10">
-    <h2 class="mb-4 text-lg text-violet-300">Normative ({normative.length})</h2>
+    <h2 class="mb-4 flex items-baseline gap-2 text-lg text-violet-300">
+      <span
+        class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-violet-950 px-1 font-mono text-[10px] font-semibold text-violet-300"
+        aria-hidden="true">CN</span
+      >
+      💭 Normative ({normative.length})
+    </h2>
     <ul class="space-y-2">
       {
         normative.map((c) => {

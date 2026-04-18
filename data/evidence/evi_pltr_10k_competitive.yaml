@@ -1,0 +1,12 @@
+claim_id: desc_palantir_dominant
+created_at: '2026-04-17T00:00:00Z'
+id: evi_pltr_10k_competitive
+kind: evidence
+locator: Competition section, Item 1
+method_tag: primary_testimony
+provenance_url: null
+quote: ''
+source_id: src_pltr_10k_2024
+supports: support
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.6

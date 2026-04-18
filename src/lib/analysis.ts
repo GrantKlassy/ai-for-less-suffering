@@ -37,8 +37,8 @@ export interface BlindSpot {
   provenance_url: string | null;
 }
 
-export interface WarrantSummary {
-  warrant_id: string;
+export interface EvidenceSummary {
+  evidence_id: string;
   source_id: string;
   source_title: string;
   stance: "support" | "contradict" | "qualify";
@@ -50,9 +50,9 @@ export interface WarrantSummary {
 export interface ContestedClaim {
   claim_id: string;
   claim_text: string;
-  supports: WarrantSummary[];
-  contradicts: WarrantSummary[];
-  qualifies: WarrantSummary[];
+  supports: EvidenceSummary[];
+  contradicts: EvidenceSummary[];
+  qualifies: EvidenceSummary[];
 }
 
 export interface PalantirAnalysis {

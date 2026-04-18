@@ -135,7 +135,7 @@
           "source_id": "src_intercept_palantir",
           "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
           "stance": "contradict",
-          "warrant_id": "war_intercept_contract_failures",
+          "evidence_id": "evi_intercept_contract_failures",
           "weight": 0.55
         }
       ],
@@ -146,7 +146,7 @@
           "source_id": "src_gao_dod_ai",
           "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
           "stance": "qualify",
-          "warrant_id": "war_gao_ai_slow",
+          "evidence_id": "evi_gao_ai_slow",
           "weight": 0.75
         }
       ],
@@ -157,7 +157,7 @@
           "source_id": "src_crs_dod_ai",
           "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
           "stance": "support",
-          "warrant_id": "war_crs_ai_dod_spend",
+          "evidence_id": "evi_crs_ai_dod_spend",
           "weight": 0.8
         },
         {
@@ -166,7 +166,7 @@
           "source_id": "src_usaspending",
           "source_title": "USASpending.gov federal contract awards",
           "stance": "support",
-          "warrant_id": "war_usaspending_contracts",
+          "evidence_id": "evi_usaspending_contracts",
           "weight": 0.85
         }
       ]
@@ -181,7 +181,7 @@
           "source_id": "src_intercept_palantir",
           "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
           "stance": "contradict",
-          "warrant_id": "war_intercept_dominance_skeptical",
+          "evidence_id": "evi_intercept_dominance_skeptical",
           "weight": 0.5
         }
       ],
@@ -193,7 +193,7 @@
           "source_id": "src_crs_dod_ai",
           "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
           "stance": "support",
-          "warrant_id": "war_crs_vendor_landscape",
+          "evidence_id": "evi_crs_vendor_landscape",
           "weight": 0.75
         },
         {
@@ -202,7 +202,7 @@
           "source_id": "src_pltr_10k_2024",
           "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
           "stance": "support",
-          "warrant_id": "war_pltr_10k_competitive",
+          "evidence_id": "evi_pltr_10k_competitive",
           "weight": 0.6
         }
       ]
@@ -217,7 +217,7 @@
           "source_id": "src_goldman_gen_power",
           "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
           "stance": "contradict",
-          "warrant_id": "war_goldman_high_forecast",
+          "evidence_id": "evi_goldman_high_forecast",
           "weight": 0.7
         }
       ],
@@ -228,7 +228,7 @@
           "source_id": "src_iea_electricity_2024",
           "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
           "stance": "qualify",
-          "warrant_id": "war_iea_low_forecast",
+          "evidence_id": "evi_iea_low_forecast",
           "weight": 0.8
         }
       ],
@@ -239,7 +239,7 @@
           "source_id": "src_epri_powering_intelligence",
           "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
           "stance": "support",
-          "warrant_id": "war_epri_scenarios",
+          "evidence_id": "evi_epri_scenarios",
           "weight": 0.85
         },
         {
@@ -248,7 +248,7 @@
           "source_id": "src_pjm_2024_capacity",
           "source_title": "2025/2026 Base Residual Auction Results",
           "stance": "support",
-          "warrant_id": "war_pjm_market_signal",
+          "evidence_id": "evi_pjm_market_signal",
           "weight": 0.75
         }
       ]
@@ -263,7 +263,7 @@
           "source_id": "src_pltr_ceo_interview",
           "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
           "stance": "contradict",
-          "warrant_id": "war_pltr_ceo_dismisses_resistance",
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
           "weight": 0.5
         }
       ],
@@ -275,7 +275,7 @@
           "source_id": "src_google_maven_letter_2018",
           "source_title": "Google employee open letter opposing Project Maven",
           "stance": "support",
-          "warrant_id": "war_google_maven_withdraw",
+          "evidence_id": "evi_google_maven_withdraw",
           "weight": 0.9
         },
         {
@@ -284,7 +284,7 @@
           "source_id": "src_microsoft_workers_2019",
           "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
           "stance": "support",
-          "warrant_id": "war_microsoft_workers_ivas",
+          "evidence_id": "evi_microsoft_workers_ivas",
           "weight": 0.85
         },
         {
@@ -293,7 +293,7 @@
           "source_id": "src_nyt_openai_idf",
           "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
           "stance": "support",
-          "warrant_id": "war_openai_idf_nyt",
+          "evidence_id": "evi_openai_idf_nyt",
           "weight": 0.75
         }
       ]

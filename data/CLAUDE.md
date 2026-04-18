@@ -11,7 +11,7 @@ Every YAML here is a Pydantic-validated node. Schema lives in `../engine/afls/sc
 | `claims/normative/` | `norm_` | `schema/claims.py` | "What should be." Held by camps; not self-tagged. |
 | `interventions/` | `intv_` | `schema/interventions.py` | Proposed actions, scored against friction + harm |
 | `sources/` | `src_` | `schema/sources.py` | Citable primary documents |
-| `warrants/` | `war_` | `schema/warrants.py` | Source-to-claim edges (support / contradict / qualify) |
+| `evidence/` | `evi_` | `schema/evidence.py` | Source-to-claim edges (support / contradict / qualify) |
 | `friction_layers/` | `friction_` | `schema/interventions.py` | Forces that resist interventions |
 | `harm_layers/` | `harm_` | `schema/interventions.py` | Welfare/structural costs if an intervention succeeds |
 | `suffering_layers/` | `suffering_` | `schema/suffering_layers.py` | First-person suffering an intervention relieves --- the numerator in −suffering EV |

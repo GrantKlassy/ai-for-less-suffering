@@ -39,10 +39,10 @@ from afls.schema import (
     Camp,
     Convergence,
     DescriptiveClaim,
+    Evidence,
     Intervention,
     MethodTag,
     Support,
-    Warrant,
     new_id,
     slug_id,
 )
@@ -74,7 +74,7 @@ _ID_PREFIX: dict[str, str] = {
     "convergence": "conv",
     "blindspot": "blind",
     "source": "src",
-    "warrant": "war",
+    "evidence": "evi",
 }
 
 
@@ -255,8 +255,8 @@ def validate() -> None:
             expect(camp.id, "held_descriptive", ref, "descriptive_claim")
         for ref in camp.held_normative:
             expect(camp.id, "held_normative", ref, "normative_claim")
-        for ref in camp.disputed_warrants:
-            expect(camp.id, "disputed_warrants", ref, "warrant")
+        for ref in camp.disputed_evidence:
+            expect(camp.id, "disputed_evidence", ref, "evidence")
     for intv in list_nodes(Intervention, root):
         for ref in intv.friction_scores:
             expect(intv.id, "friction_scores", ref, "friction_layer")
@@ -276,10 +276,10 @@ def validate() -> None:
             expect(conv.id, "divergent_reasons.value", norm_id, "normative_claim")
     for blindspot in list_nodes(BlindSpot, root):
         expect(blindspot.id, "flagged_camp_id", blindspot.flagged_camp_id, "camp")
-    warrants = list_nodes(Warrant, root)
-    for warrant in warrants:
-        expect(warrant.id, "claim_id", warrant.claim_id, "descriptive_claim")
-        expect(warrant.id, "source_id", warrant.source_id, "source")
+    evidence_list = list_nodes(Evidence, root)
+    for evidence in evidence_list:
+        expect(evidence.id, "claim_id", evidence.claim_id, "descriptive_claim")
+        expect(evidence.id, "source_id", evidence.source_id, "source")
 
     if errors:
         for err in errors:
@@ -291,7 +291,7 @@ def validate() -> None:
         )
         raise typer.Exit(1)
 
-    warnings = _confidence_lint(list_nodes(DescriptiveClaim, root), warrants)
+    warnings = _confidence_lint(list_nodes(DescriptiveClaim, root), evidence_list)
     for warn in warnings:
         typer.secho(f"  warn: {warn}", fg="yellow")
     suffix = f", {len(warnings)} warnings" if warnings else ""
@@ -301,29 +301,29 @@ def validate() -> None:
 
 
 def _confidence_lint(
-    claims: list[DescriptiveClaim], warrants: list[Warrant]
+    claims: list[DescriptiveClaim], evidence_list: list[Evidence]
 ) -> list[str]:
-    """Operator-discipline warnings on claim confidence vs. attached warrants."""
-    by_claim: dict[str, list[Warrant]] = {}
-    for warrant in warrants:
-        by_claim.setdefault(warrant.claim_id, []).append(warrant)
+    """Operator-discipline warnings on claim confidence vs. attached evidence."""
+    by_claim: dict[str, list[Evidence]] = {}
+    for evidence in evidence_list:
+        by_claim.setdefault(evidence.claim_id, []).append(evidence)
     messages: list[str] = []
     for claim in claims:
         supporting = [
-            w for w in by_claim.get(claim.id, []) if w.supports is Support.SUPPORT
+            e for e in by_claim.get(claim.id, []) if e.supports is Support.SUPPORT
         ]
         if claim.confidence > 0.5 and not supporting:
             messages.append(
-                f"{claim.id}: confidence {claim.confidence} with no supporting warrants"
+                f"{claim.id}: confidence {claim.confidence} with no supporting evidence"
             )
         if (
             claim.confidence > 0.8
             and supporting
-            and all(w.method_tag is MethodTag.EXPERT_ESTIMATE for w in supporting)
+            and all(e.method_tag is MethodTag.EXPERT_ESTIMATE for e in supporting)
         ):
             messages.append(
                 f"{claim.id}: confidence {claim.confidence} backed only by "
-                "expert_estimate warrants"
+                "expert_estimate evidence"
             )
     return messages
 

@@ -23,10 +23,10 @@ from afls.reasoning import AnthropicClient, Model, complete_and_parse
 from afls.schema import (
     Camp,
     DescriptiveClaim,
+    Evidence,
     Intervention,
     NormativeClaim,
     Source,
-    Warrant,
 )
 from afls.storage import list_nodes
 
@@ -229,12 +229,12 @@ def run_leverage_query(
     descriptives = list_nodes(DescriptiveClaim, data_dir)
     normatives = list_nodes(NormativeClaim, data_dir)
     interventions = list_nodes(Intervention, data_dir)
-    warrants = list_nodes(Warrant, data_dir)
+    evidence_list = list_nodes(Evidence, data_dir)
     sources = list_nodes(Source, data_dir)
 
     rankings = rank_interventions(interventions)
     desc_convs = find_descriptive_convergences(camps)
-    contested = find_contested_claims(descriptives, warrants, sources)
+    contested = find_contested_claims(descriptives, evidence_list, sources)
     context = build_leverage_context(camps, rankings, descriptives, normatives)
 
     llm_out = complete_and_parse(

@@ -2,7 +2,7 @@
 // The single choke point for rendering a node ID anywhere on the site.
 // Resolves `id` through graph.resolveNode and renders:
 //   - a kind-coded colored link when the id is known and has a detail page
-//   - a colored non-link span when the id is known but has no page (warrants)
+//   - a colored non-link span when the id is known but has no page (evidence)
 //   - a zinc-500 monospace fallback if the id is unknown
 //
 // Optional `label` overrides the resolved label. `showKind=false` hides the badge.
@@ -34,7 +34,7 @@ const linkColor: Record<NodeKind, string> = {
   friction_layer: "text-orange-300 hover:text-orange-200",
   harm_layer: "text-rose-300 hover:text-rose-200",
   suffering_layer: "text-emerald-300 hover:text-emerald-200",
-  warrant: "text-zinc-400",
+  evidence: "text-zinc-400",
 };
 
 const badge: Record<NodeKind, { letter: string; classes: string }> = {
@@ -52,7 +52,7 @@ const badge: Record<NodeKind, { letter: string; classes: string }> = {
     letter: "LS",
     classes: "bg-emerald-950 text-emerald-300",
   },
-  warrant: { letter: "W", classes: "bg-zinc-800 text-zinc-500" },
+  evidence: { letter: "E", classes: "bg-zinc-800 text-zinc-500" },
 };
 ---
 

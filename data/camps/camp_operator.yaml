@@ -1,10 +1,10 @@
 agents:
 - operator prior set
 created_at: '2026-04-17T00:00:00Z'
-disputed_warrants:
-- war_pltr_10k_competitive
-- war_pltr_earnings_call_growth
-- war_pltr_ceo_dismisses_resistance
+disputed_evidence:
+- evi_pltr_10k_competitive
+- evi_pltr_earnings_call_growth
+- evi_pltr_ceo_dismisses_resistance
 held_descriptive:
 - desc_accelerating
 - desc_compute_matters

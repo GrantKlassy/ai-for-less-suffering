@@ -11,6 +11,7 @@ from afls.schema import (
     Camp,
     Convergence,
     DescriptiveClaim,
+    Evidence,
     FrictionLayer,
     HarmLayer,
     Intervention,
@@ -21,7 +22,6 @@ from afls.schema import (
     SourceKind,
     SufferingLayer,
     Support,
-    Warrant,
     new_id,
     slug_id,
 )
@@ -287,9 +287,9 @@ def test_source_rejects_empty_title() -> None:
         )
 
 
-def test_warrant_basic() -> None:
-    warrant = Warrant(
-        id=new_id("war"),
+def test_evidence_basic() -> None:
+    evidence = Evidence(
+        id=new_id("evi"),
         claim_id="desc_compute_matters",
         source_id="src_epoch",
         locator="figure 3",
@@ -298,37 +298,37 @@ def test_warrant_basic() -> None:
         supports=Support.SUPPORT,
         weight=0.9,
     )
-    assert warrant.method_tag is MethodTag.DIRECT_MEASUREMENT
-    assert warrant.supports is Support.SUPPORT
+    assert evidence.method_tag is MethodTag.DIRECT_MEASUREMENT
+    assert evidence.supports is Support.SUPPORT
 
 
-def test_warrant_defaults_to_support() -> None:
-    warrant = Warrant(
-        id=new_id("war"),
+def test_evidence_defaults_to_support() -> None:
+    evidence = Evidence(
+        id=new_id("evi"),
         claim_id="desc_x",
         source_id="src_x",
         method_tag=MethodTag.JOURNALISTIC_REPORT,
         weight=0.5,
     )
-    assert warrant.supports is Support.SUPPORT
+    assert evidence.supports is Support.SUPPORT
 
 
-def test_warrant_contradict_allowed() -> None:
-    warrant = Warrant(
-        id=new_id("war"),
+def test_evidence_contradict_allowed() -> None:
+    evidence = Evidence(
+        id=new_id("evi"),
         claim_id="desc_x",
         source_id="src_x",
         method_tag=MethodTag.JOURNALISTIC_REPORT,
         supports=Support.CONTRADICT,
         weight=0.4,
     )
-    assert warrant.supports is Support.CONTRADICT
+    assert evidence.supports is Support.CONTRADICT
 
 
-def test_warrant_rejects_bad_weight() -> None:
+def test_evidence_rejects_bad_weight() -> None:
     with pytest.raises(ValidationError):
-        Warrant(
-            id=new_id("war"),
+        Evidence(
+            id=new_id("evi"),
             claim_id="desc_x",
             source_id="src_x",
             method_tag=MethodTag.EXPERT_ESTIMATE,
@@ -336,19 +336,19 @@ def test_warrant_rejects_bad_weight() -> None:
         )
 
 
-def test_camp_disputed_warrants_default_empty() -> None:
+def test_camp_disputed_evidence_default_empty() -> None:
     camp = Camp(id="camp_test", name="Test")
-    assert camp.disputed_warrants == []
+    assert camp.disputed_evidence == []
 
 
-def test_camp_disputed_warrants_accepts_refs() -> None:
+def test_camp_disputed_evidence_accepts_refs() -> None:
     camp = Camp(
         id="camp_test",
         name="Test",
         held_descriptive=["desc_x"],
-        disputed_warrants=["war_abc123"],
+        disputed_evidence=["evi_abc123"],
     )
-    assert camp.disputed_warrants == ["war_abc123"]
+    assert camp.disputed_evidence == ["evi_abc123"]
 
 
 @pytest.mark.parametrize(
@@ -391,8 +391,8 @@ def test_camp_disputed_warrants_accepts_refs() -> None:
             title="Palantir 2024 10-K",
             reliability=0.85,
         ),
-        lambda: Warrant(
-            id=new_id("war"),
+        lambda: Evidence(
+            id=new_id("evi"),
             claim_id="desc_x",
             source_id="src_x",
             method_tag=MethodTag.DIRECT_MEASUREMENT,

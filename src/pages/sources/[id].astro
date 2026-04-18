@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import NodeRef from "../../components/NodeRef.astro";
 import ConfidenceBar from "../../components/ConfidenceBar.astro";
-import { warrantsFromSource } from "../../lib/graph";
+import { evidenceFromSource } from "../../lib/graph";
 
 export async function getStaticPaths() {
   const sources = await getCollection("sources");
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { source } = Astro.props as Props;
-const warrants = await warrantsFromSource(source.id);
+const evidence = await evidenceFromSource(source.id);
 
 const stanceColor: Record<string, string> = {
   support: "text-emerald-300",
@@ -86,43 +86,43 @@ const stanceColor: Record<string, string> = {
   }
 
   {
-    warrants.length > 0 && (
+    evidence.length > 0 && (
       <section class="mb-8">
         <h2 class="mb-3 text-sm text-zinc-400">
-          Warrants from this source ({warrants.length})
+          Evidence from this source ({evidence.length})
         </h2>
         <ul class="space-y-3">
-          {warrants.map((w) => (
+          {evidence.map((e) => (
             <li class="rounded border border-zinc-800 p-3 text-xs">
               <div class="mb-2 flex items-center justify-between">
-                <NodeRef id={w.data.claim_id.id} />
+                <NodeRef id={e.data.claim_id.id} />
                 <span
                   class:list={[
                     "font-mono text-[10px] tracking-wide uppercase",
-                    stanceColor[w.data.supports],
+                    stanceColor[e.data.supports],
                   ]}
                 >
-                  {w.data.supports}
+                  {e.data.supports}
                 </span>
               </div>
               <ConfidenceBar
-                value={w.data.weight}
+                value={e.data.weight}
                 label="weight"
                 class="mb-1"
               />
               <p class="text-zinc-500">
-                <span class="text-zinc-600">method:</span> {w.data.method_tag}
-                {w.data.locator && (
+                <span class="text-zinc-600">method:</span> {e.data.method_tag}
+                {e.data.locator && (
                   <>
                     {" "}
                     · <span class="text-zinc-600">locator:</span>{" "}
-                    {w.data.locator}
+                    {e.data.locator}
                   </>
                 )}
               </p>
-              {w.data.quote && (
+              {e.data.quote && (
                 <blockquote class="mt-1 border-l-2 border-zinc-700 pl-3 text-zinc-300">
-                  “{w.data.quote}”
+                  “{e.data.quote}”
                 </blockquote>
               )}
             </li>

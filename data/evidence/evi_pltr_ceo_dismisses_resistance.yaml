@@ -1,0 +1,12 @@
+claim_id: desc_workforce_resistance
+created_at: '2026-04-17T00:00:00Z'
+id: evi_pltr_ceo_dismisses_resistance
+kind: evidence
+locator: Karp interviews dismissing employee resistance as inconsequential
+method_tag: primary_testimony
+provenance_url: null
+quote: ''
+source_id: src_pltr_ceo_interview
+supports: contradict
+updated_at: '2026-04-17T00:00:00Z'
+weight: 0.5

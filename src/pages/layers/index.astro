@@ -14,7 +14,7 @@ const suffering = (await getCollection("sufferingLayers")).sort((a, b) =>
 ---
 
 <Base title="Layers --- ai-for-less-suffering">
-  <h1 class="mb-2 text-2xl text-zinc-100">Layers</h1>
+  <h1 class="mb-2 text-2xl text-zinc-100">🧱 Layers</h1>
   <p class="mb-8 text-sm text-zinc-400">
     Friction slows an intervention (grid, capex, regulation). Harm is what the
     intervention costs <em>when it lands</em> (water, extraction, displacement, concentration,
@@ -25,7 +25,13 @@ const suffering = (await getCollection("sufferingLayers")).sort((a, b) =>
   </p>
 
   <section class="mb-10">
-    <h2 class="mb-4 text-lg text-orange-300">Friction ({friction.length})</h2>
+    <h2 class="mb-4 flex items-baseline gap-2 text-lg text-orange-300">
+      <span
+        class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-orange-950 px-1 font-mono text-[10px] font-semibold text-orange-300"
+        aria-hidden="true">LF</span
+      >
+      🔥 Friction ({friction.length})
+    </h2>
     <ul class="space-y-2">
       {
         friction.map((l) => (
@@ -47,7 +53,13 @@ const suffering = (await getCollection("sufferingLayers")).sort((a, b) =>
   </section>
 
   <section class="mb-10">
-    <h2 class="mb-4 text-lg text-rose-300">Harm ({harm.length})</h2>
+    <h2 class="mb-4 flex items-baseline gap-2 text-lg text-rose-300">
+      <span
+        class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-rose-950 px-1 font-mono text-[10px] font-semibold text-rose-300"
+        aria-hidden="true">LH</span
+      >
+      💀 Harm ({harm.length})
+    </h2>
     <ul class="space-y-2">
       {
         harm.map((l) => (
@@ -69,8 +81,12 @@ const suffering = (await getCollection("sufferingLayers")).sort((a, b) =>
   </section>
 
   <section class="mb-10">
-    <h2 class="mb-4 text-lg text-emerald-300">
-      Suffering ({suffering.length})
+    <h2 class="mb-4 flex items-baseline gap-2 text-lg text-emerald-300">
+      <span
+        class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-emerald-950 px-1 font-mono text-[10px] font-semibold text-emerald-300"
+        aria-hidden="true">LS</span
+      >
+      💔 Suffering ({suffering.length})
     </h2>
     <ul class="space-y-2">
       {
