@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import NodeRef from "../../components/NodeRef.astro";
+import { analysesReferencing, KIND_EMOJI } from "../../lib/graph";
+
+export async function getStaticPaths() {
+  const blindspots = await getCollection("blindspots");
+  return blindspots.map((b) => ({
+    params: { id: b.id },
+    props: { blindspot: b },
+  }));
+}
+
+type Blindspot = Awaited<
+  ReturnType<typeof getCollection<"blindspots">>
+>[number];
+interface Props {
+  blindspot: Blindspot;
+}
+
+const { blindspot } = Astro.props as Props;
+const referencedBy = analysesReferencing(blindspot.id);
+---
+
+<Base title={`${KIND_EMOJI.blindspot} ${blindspot.data.id} --- blindspot`}>
+  <p class="mb-2 text-xs text-zinc-500">
+    <a href="/blindspots/" class="hover:text-zinc-300">← all blindspots</a>
+  </p>
+  <h1 class="mb-1 text-2xl text-zinc-100">
+    {KIND_EMOJI.blindspot}
+    <NodeRef id={blindspot.data.flagged_camp_id.id} />
+  </h1>
+  <p class="mb-8 font-mono text-xs text-zinc-500">{blindspot.data.id}</p>
+
+  <section class="mb-8">
+    <h2 class="mb-2 text-sm text-zinc-400">Flagged against</h2>
+    <p class="text-sm text-zinc-300">{blindspot.data.against_prior_set}</p>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-2 text-sm text-zinc-400">Reasoning</h2>
+    <p class="text-sm text-zinc-300">{blindspot.data.reasoning}</p>
+  </section>
+
+  {
+    referencedBy.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Analyses featuring this blindspot ({referencedBy.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {referencedBy.map(({ id }) => (
+            <li>
+              <a
+                href={`/analyses/${id}/`}
+                class="font-mono text-xs text-zinc-300 hover:text-zinc-100 hover:underline"
+              >
+                {id}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

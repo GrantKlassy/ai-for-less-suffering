@@ -17,12 +17,14 @@ from afls.schema import (
     DescriptiveClaim,
     Evidence,
     FrictionLayer,
+    HarmLayer,
     Intervention,
     InterventionKind,
     MethodTag,
     NormativeClaim,
     Source,
     SourceKind,
+    SufferingLayer,
     Support,
 )
 from afls.storage import save_node
@@ -266,6 +268,95 @@ def test_validate_passes_with_full_graph(runner: CliRunner, data_root: Path) -> 
     )
     result = runner.invoke(app, ["validate"])
     assert result.exit_code == 0
+
+
+def test_validate_warns_layer_score_all_below_threshold(
+    runner: CliRunner, data_root: Path
+) -> None:
+    """D9: an intervention whose friction scores all sit below 0.3 warns."""
+    save_node(FrictionLayer(id="friction_grid", name="Grid"), data_root)
+    save_node(FrictionLayer(id="friction_permit", name="Permit"), data_root)
+    save_node(
+        Intervention(
+            id="intv_a",
+            text="t",
+            action_kind=InterventionKind.TECHNICAL,
+            leverage_score=0.5,
+            friction_scores={"friction_grid": 0.1, "friction_permit": 0.2},
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "warn" in result.output.lower()
+    assert "intv_a" in result.output
+    assert "friction" in result.output
+
+
+def test_validate_no_layer_warning_when_one_score_clears(
+    runner: CliRunner, data_root: Path
+) -> None:
+    """D9: a single score ≥0.3 is enough --- at least one edge will render."""
+    save_node(FrictionLayer(id="friction_grid", name="Grid"), data_root)
+    save_node(FrictionLayer(id="friction_permit", name="Permit"), data_root)
+    save_node(
+        Intervention(
+            id="intv_a",
+            text="t",
+            action_kind=InterventionKind.TECHNICAL,
+            leverage_score=0.5,
+            friction_scores={"friction_grid": 0.1, "friction_permit": 0.3},
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "friction" not in result.output.lower()
+
+
+def test_validate_warns_separately_per_layer_kind(
+    runner: CliRunner, data_root: Path
+) -> None:
+    """D9: harm and suffering layers are linted independently of friction."""
+    save_node(HarmLayer(id="harm_a", name="A"), data_root)
+    save_node(SufferingLayer(id="suffering_a", name="A"), data_root)
+    save_node(
+        Intervention(
+            id="intv_a",
+            text="t",
+            action_kind=InterventionKind.TECHNICAL,
+            leverage_score=0.5,
+            harm_scores={"harm_a": 0.1},
+            suffering_reduction_scores={"suffering_a": 0.2},
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "harm" in result.output.lower()
+    assert "suffering" in result.output.lower()
+
+
+def test_validate_no_layer_warning_when_scores_empty(
+    runner: CliRunner, data_root: Path
+) -> None:
+    """D9: an intervention with no scores for a layer is silent, not warning-worthy.
+
+    The warning is for 'scored but too low' --- not for 'unscored'. An unscored
+    layer is a stance the operator hasn't taken yet; we shouldn't nag about it.
+    """
+    save_node(
+        Intervention(
+            id="intv_a",
+            text="t",
+            action_kind=InterventionKind.TECHNICAL,
+            leverage_score=0.5,
+        ),
+        data_root,
+    )
+    result = runner.invoke(app, ["validate"])
+    assert result.exit_code == 0
+    assert "warn" not in result.output.lower()
 
 
 def test_reindex(runner: CliRunner, data_root: Path, tmp_path: Path) -> None:

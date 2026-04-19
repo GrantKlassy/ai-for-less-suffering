@@ -303,12 +303,50 @@ def validate() -> None:
         evidence_list,
         list_nodes(Source, root),
     )
+    warnings.extend(_layer_score_lint(list_nodes(Intervention, root)))
     for warn in warnings:
         typer.secho(f"  warn: {warn}", fg="yellow")
     suffix = f", {len(warnings)} warnings" if warnings else ""
     typer.secho(
         f"ok: {len(id_to_kind)} nodes, no referential errors{suffix}", fg="green"
     )
+
+
+# Mirrors `LAYER_EDGE_MIN_SCORE` in src/lib/graph-data.ts. Kept as a named
+# constant here so the D9 drift test can pin both sides to the same value: if
+# the site bumps its threshold, the engine warning must move with it or the
+# warning becomes a lie.
+LAYER_EDGE_MIN_SCORE: float = 0.3
+
+
+def _layer_score_lint(interventions: list[Intervention]) -> list[str]:
+    """Flag interventions whose best score on any layer would get pruned by the site.
+
+    The homepage drops intervention→layer edges below `LAYER_EDGE_MIN_SCORE`.
+    An intervention that scores every friction/harm/suffering layer below the
+    threshold still validates --- but on the public graph it looks like the
+    intervention has no relationship to that layer type at all. Surface it as
+    a warning so the operator can either bump a score or drop the section.
+    """
+    messages: list[str] = []
+    layer_fields: tuple[tuple[str, str], ...] = (
+        ("friction_scores", "friction"),
+        ("harm_scores", "harm"),
+        ("suffering_reduction_scores", "suffering"),
+    )
+    for intv in interventions:
+        for field, label in layer_fields:
+            scores: dict[str, float] = getattr(intv, field)
+            if not scores:
+                continue
+            best = max(scores.values())
+            if best < LAYER_EDGE_MIN_SCORE:
+                messages.append(
+                    f"{intv.id}: max {label} score {best:.2f} is below "
+                    f"{LAYER_EDGE_MIN_SCORE:.2f}; the homepage will draw no "
+                    f"{label}-layer edges for this intervention"
+                )
+    return messages
 
 
 def _confidence_lint(

@@ -9,6 +9,11 @@ includes:
     optional: true
 
 tasks:
+  dev:
+    desc: Alias for `task local:dev` --- run the Astro dev server
+    cmds:
+      - task: local:dev
+
   check:
     desc: Run all standard repo checks
     cmds:

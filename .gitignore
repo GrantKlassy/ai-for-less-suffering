@@ -22,6 +22,10 @@ data/afls.db
 data/afls.db-wal
 data/afls.db-shm
 
+# Schema-drift fixture. Emitted by engine/tests/test_schema_drift.py and read
+# by src/lib/schema-drift.test.ts --- never committed, always regenerated.
+engine/tests/_enums.json
+
 # Secrets
 .env
 .env.local

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { CAMP_EMOJI, campEmoji, collectionForId } from "./graph";
+import {
+  CAMP_EMOJI,
+  analysesReferencing,
+  campEmoji,
+  collectionForId,
+} from "./graph";
 
 describe("campEmoji", () => {
   it("returns the mapped emoji for a known camp", () => {
@@ -43,5 +48,38 @@ describe("collectionForId", () => {
     expect(collectionForId("unknown_prefix")).toBeNull();
     expect(collectionForId("")).toBeNull();
     expect(collectionForId("camp")).toBeNull();
+  });
+
+  it("dispatches the new coalition prefixes", () => {
+    expect(collectionForId("bridge_eacc_xrisk_regulatory_capture")).toBe(
+      "bridges",
+    );
+    expect(collectionForId("conv_mental_health_triage")).toBe("convergences");
+    expect(collectionForId("blind_religious")).toBe("blindspots");
+  });
+});
+
+describe("analysesReferencing", () => {
+  it("C14: returns [] for an id no analysis could ever reference", () => {
+    // Use a clearly-synthetic id. `analysesReferencing` looks for `"<id>"`
+    // (quoted), so a substring-of-a-real-id should return nothing --- this
+    // is the prefix-collision safety check the function comment promises.
+    expect(analysesReferencing("camp_does_not_exist_xyz")).toEqual([]);
+  });
+
+  it("C14: rejects a raw prefix that is not itself a full id", () => {
+    // `"camp_"` is a substring of every real camp id's serialized JSON, but
+    // no id equals literally `camp_`. Because the function searches for a
+    // quoted needle, nothing matches.
+    expect(analysesReferencing("camp_")).toEqual([]);
+    expect(analysesReferencing("desc_")).toEqual([]);
+  });
+
+  it("C14: resolves a real id that appears in the corpus", () => {
+    // Load-bearing smoke: if this returns [], the corpus may have stopped
+    // referencing camp_anthropic (unlikely --- it's central to the graph)
+    // or `analysesReferencing` has lost its quote-aware search.
+    const hits = analysesReferencing("camp_anthropic");
+    expect(hits.length).toBeGreaterThan(0);
   });
 });

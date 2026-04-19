@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 
+import { KIND_EMOJI, type NodeKind } from "./graph";
 import { NODE_KIND_COLOR } from "./legend";
-import { buildGraphData, LAYER_EDGE_MIN_SCORE } from "./graph-data";
+import {
+  buildGraphData,
+  HOME_GRAPH_KINDS,
+  LAYER_EDGE_MIN_SCORE,
+} from "./graph-data";
 import type { BuildGraphDataInput } from "./graph-data";
 
 const fixture: BuildGraphDataInput = {
@@ -87,6 +92,9 @@ const fixture: BuildGraphDataInput = {
   sufferingLayers: [
     { id: "suffering_material_scarcity", name: "material scarcity" },
   ],
+  bridges: [],
+  convergences: [],
+  blindspots: [],
   coalitions: [
     {
       intervention_id: "intv_compute",
@@ -249,5 +257,100 @@ describe("buildGraphData", () => {
     });
     const heldDesc = out.edges.filter((e) => e.kind === "held_descriptive");
     expect(heldDesc).toHaveLength(0);
+  });
+
+  it("C5: buildGraphData is deterministic for a given input", () => {
+    // Same input → same node/edge ordering + ids. Drift here means cytoscape
+    // re-animates on every build (layout seed changes, user reports "the
+    // graph keeps reshuffling").
+    const a = buildGraphData(fixture);
+    const b = buildGraphData(fixture);
+    expect(b.nodes.map((n) => n.id)).toEqual(a.nodes.map((n) => n.id));
+    expect(b.edges.map((e) => e.id)).toEqual(a.edges.map((e) => e.id));
+  });
+
+  it("C6: emits no duplicate edges (same source+kind+target)", () => {
+    // Re-running the builder with the same camp→claim relationship declared
+    // twice (e.g. a typo) must not produce two edges with the same id.
+    const out = buildGraphData({
+      ...fixture,
+      camps: [
+        {
+          id: "camp_dup",
+          name: "Dup",
+          held_descriptive: ["desc_grid", "desc_grid"],
+          held_normative: [],
+        },
+      ],
+      coalitions: [],
+    });
+    const ids = out.edges.map((e) => e.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    const heldDesc = out.edges.filter(
+      (e) =>
+        e.kind === "held_descriptive" &&
+        e.source === "camp_dup" &&
+        e.target === "desc_grid",
+    );
+    expect(heldDesc).toHaveLength(1);
+  });
+
+  it("C7: emits no duplicate nodes across collections", () => {
+    const out = buildGraphData(fixture);
+    const ids = out.nodes.map((n) => n.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("C8: HOME_GRAPH_KINDS equals the full NodeKind set", () => {
+    const declared = new Set(Object.keys(KIND_EMOJI) as NodeKind[]);
+    expect(new Set(HOME_GRAPH_KINDS)).toEqual(declared);
+  });
+
+  it("C8: every NodeKind in KIND_EMOJI has a NODE_KIND_COLOR entry", () => {
+    for (const kind of Object.keys(KIND_EMOJI) as NodeKind[]) {
+      expect(NODE_KIND_COLOR[kind], `no color for ${kind}`).toBeDefined();
+    }
+  });
+
+  it("emits coalition-relation edges for bridges/convergences/blindspots", () => {
+    // Bridges/convergences/blindspots extend buildGraphData post-§3; the
+    // baseline fixture has empty arrays, so a focused fixture exercises the
+    // emission path without disturbing the rest of the suite.
+    const out = buildGraphData({
+      ...fixture,
+      bridges: [
+        {
+          id: "bridge_ab",
+          from_camp: "camp_anthropic",
+          to_camp: "camp_xrisk",
+          translation: "t",
+        },
+      ],
+      convergences: [
+        {
+          id: "conv_compute",
+          intervention_id: "intv_compute",
+          camps: ["camp_anthropic", "camp_xrisk"],
+          divergent_reasons: { camp_anthropic: "norm_safety" },
+        },
+      ],
+      blindspots: [
+        {
+          id: "blind_x",
+          flagged_camp_id: "camp_anthropic",
+          against_prior_set: "some priors",
+        },
+      ],
+    });
+    expect(out.edges.filter((e) => e.kind === "bridge_from")).toHaveLength(1);
+    expect(out.edges.filter((e) => e.kind === "bridge_to")).toHaveLength(1);
+    expect(out.edges.filter((e) => e.kind === "converges_on")).toHaveLength(1);
+    expect(out.edges.filter((e) => e.kind === "converges_camp")).toHaveLength(
+      2,
+    );
+    expect(
+      out.edges.filter((e) => e.kind === "converges_via_norm"),
+    ).toHaveLength(1);
+    expect(out.edges.filter((e) => e.kind === "flags_camp")).toHaveLength(1);
   });
 });

@@ -2,7 +2,14 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import NodeRef from "../../components/NodeRef.astro";
-import { analysesReferencing, campEmoji } from "../../lib/graph";
+import {
+  analysesReferencing,
+  blindspotsForCamp,
+  bridgesFromCamp,
+  bridgesToCamp,
+  campEmoji,
+  convergencesForCamp,
+} from "../../lib/graph";
 
 export async function getStaticPaths() {
   const camps = await getCollection("camps");
@@ -16,6 +23,10 @@ interface Props {
 
 const { camp } = Astro.props as Props;
 const referencedBy = analysesReferencing(camp.id);
+const bridgesOut = await bridgesFromCamp(camp.id);
+const bridgesIn = await bridgesToCamp(camp.id);
+const convergencesOn = await convergencesForCamp(camp.id);
+const blindspotsHere = await blindspotsForCamp(camp.id);
 ---
 
 <Base title={`${campEmoji(camp.id)} ${camp.data.name} --- camp`}>
@@ -94,6 +105,76 @@ const referencedBy = analysesReferencing(camp.id);
         <ul class="space-y-1 text-sm">
           {camp.data.disputed_evidence.map((ref) => (
             <li class="font-mono text-xs text-zinc-500">{ref.id}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    bridgesOut.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Bridges from this camp ({bridgesOut.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {bridgesOut.map((b) => (
+            <li>
+              <NodeRef id={b.id} /> → <NodeRef id={b.data.to_camp.id} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    bridgesIn.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Bridges into this camp ({bridgesIn.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {bridgesIn.map((b) => (
+            <li>
+              <NodeRef id={b.data.from_camp.id} /> → <NodeRef id={b.id} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    convergencesOn.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Convergences involving this camp ({convergencesOn.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {convergencesOn.map((c) => (
+            <li>
+              <NodeRef id={c.id} /> on{" "}
+              <NodeRef id={c.data.intervention_id.id} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    blindspotsHere.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Blindspots flagged on this camp ({blindspotsHere.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {blindspotsHere.map((b) => (
+            <li>
+              <NodeRef id={b.id} /> ---{" "}
+              <span class="text-zinc-500">{b.data.against_prior_set}</span>
+            </li>
           ))}
         </ul>
       </section>

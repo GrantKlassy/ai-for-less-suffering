@@ -226,6 +226,58 @@ const interventions = defineCollection({
   }),
 });
 
+// engine/afls/schema/relations.py :: Bridge. A normative translation from
+// camp A to camp B. Unidirectional; caveats mark what does not translate.
+const bridges = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./data/bridges" }),
+  schema: z.object({
+    id: z.string(),
+    kind: z.literal("bridge"),
+    from_camp: reference("camps"),
+    to_camp: reference("camps"),
+    translation: z.string().min(1),
+    caveats: z.array(z.string()).default([]),
+    created_at: isoTime,
+    updated_at: isoTime,
+    provenance_url: nullableUrl,
+  }),
+});
+
+// engine/afls/schema/relations.py :: Convergence. Camps agreeing on an
+// intervention for divergent normative reasons. `divergent_reasons` keys are
+// camp IDs, values are normative-claim IDs --- same typegen carve-out as
+// intervention.friction_scores (plain-string keys; referential integrity
+// enforced engine-side by `afls validate`).
+const convergences = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./data/convergences" }),
+  schema: z.object({
+    id: z.string(),
+    kind: z.literal("convergence"),
+    intervention_id: reference("interventions"),
+    camps: z.array(reference("camps")).min(2),
+    divergent_reasons: z.record(z.string(), z.string()).default({}),
+    created_at: isoTime,
+    updated_at: isoTime,
+    provenance_url: nullableUrl,
+  }),
+});
+
+// engine/afls/schema/relations.py :: BlindSpot. Tool-generated flag on a
+// camp the operator is under-weighting relative to a named prior set.
+const blindspots = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./data/blindspots" }),
+  schema: z.object({
+    id: z.string(),
+    kind: z.literal("blindspot"),
+    against_prior_set: z.string().min(1),
+    flagged_camp_id: reference("camps"),
+    reasoning: z.string().min(1),
+    created_at: isoTime,
+    updated_at: isoTime,
+    provenance_url: nullableUrl,
+  }),
+});
+
 export const collections = {
   frictionLayers,
   harmLayers,
@@ -237,4 +289,7 @@ export const collections = {
   camps,
   interventions,
   operatorPositions,
+  bridges,
+  convergences,
+  blindspots,
 };

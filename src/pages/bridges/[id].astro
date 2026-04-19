@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import NodeRef from "../../components/NodeRef.astro";
+import { analysesReferencing, KIND_EMOJI } from "../../lib/graph";
+
+export async function getStaticPaths() {
+  const bridges = await getCollection("bridges");
+  return bridges.map((b) => ({ params: { id: b.id }, props: { bridge: b } }));
+}
+
+type Bridge = Awaited<ReturnType<typeof getCollection<"bridges">>>[number];
+interface Props {
+  bridge: Bridge;
+}
+
+const { bridge } = Astro.props as Props;
+const referencedBy = analysesReferencing(bridge.id);
+---
+
+<Base title={`${KIND_EMOJI.bridge} ${bridge.data.id} --- bridge`}>
+  <p class="mb-2 text-xs text-zinc-500">
+    <a href="/bridges/" class="hover:text-zinc-300">← all bridges</a>
+  </p>
+  <h1 class="mb-1 text-2xl text-zinc-100">
+    {KIND_EMOJI.bridge}
+    <NodeRef id={bridge.data.from_camp.id} /> →{" "}
+    <NodeRef id={bridge.data.to_camp.id} />
+  </h1>
+  <p class="mb-8 font-mono text-xs text-zinc-500">{bridge.data.id}</p>
+
+  <section class="mb-8">
+    <h2 class="mb-2 text-sm text-zinc-400">Translation</h2>
+    <p class="text-sm text-zinc-300">{bridge.data.translation}</p>
+  </section>
+
+  {
+    bridge.data.caveats.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Caveats ({bridge.data.caveats.length})
+        </h2>
+        <ul class="space-y-2 text-sm text-zinc-300">
+          {bridge.data.caveats.map((c) => (
+            <li>· {c}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    referencedBy.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Analyses featuring this bridge ({referencedBy.length})
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {referencedBy.map(({ id }) => (
+            <li>
+              <a
+                href={`/analyses/${id}/`}
+                class="font-mono text-xs text-zinc-300 hover:text-zinc-100 hover:underline"
+              >
+                {id}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

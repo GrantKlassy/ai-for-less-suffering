@@ -32,4 +32,47 @@ describe("LEGEND", () => {
       expect(e.classes.length).toBeGreaterThan(0);
     }
   });
+
+  it("B1: every entry carries a group in {node, layer, relation}", () => {
+    const allowed = new Set<string>(["node", "layer", "relation"]);
+    for (const e of LEGEND) {
+      expect(allowed.has(e.group), `bad group on ${e.kind}: ${e.group}`).toBe(
+        true,
+      );
+    }
+  });
+
+  it("B2: layer group is exactly the three scoring layer kinds", () => {
+    const layerKinds = LEGEND.filter((e) => e.group === "layer")
+      .map((e) => e.kind)
+      .sort();
+    expect(layerKinds).toEqual(
+      ["friction_layer", "harm_layer", "suffering_layer"].sort(),
+    );
+  });
+
+  it("B2: relation group is exactly the three coalition-logic kinds", () => {
+    const relationKinds = LEGEND.filter((e) => e.group === "relation")
+      .map((e) => e.kind)
+      .sort();
+    expect(relationKinds).toEqual(
+      ["blindspot", "bridge", "convergence"].sort(),
+    );
+  });
+
+  it("B2: every group is non-empty", () => {
+    for (const group of ["node", "layer", "relation"] as const) {
+      expect(
+        LEGEND.some((e) => e.group === group),
+        `group ${group} is empty`,
+      ).toBe(true);
+    }
+  });
+
+  it("B12: legend has entries for bridge, convergence, blindspot", () => {
+    const kinds = new Set(LEGEND.map((e) => e.kind));
+    expect(kinds.has("bridge")).toBe(true);
+    expect(kinds.has("convergence")).toBe(true);
+    expect(kinds.has("blindspot")).toBe(true);
+  });
 });

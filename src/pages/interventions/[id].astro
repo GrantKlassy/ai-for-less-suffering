@@ -2,8 +2,12 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import ConfidenceBar from "../../components/ConfidenceBar.astro";
+import NodeRef from "../../components/NodeRef.astro";
 import ScoreMatrix from "../../components/ScoreMatrix.astro";
-import { analysesReferencing } from "../../lib/graph";
+import {
+  analysesReferencing,
+  convergencesForIntervention,
+} from "../../lib/graph";
 
 export async function getStaticPaths() {
   const interventions = await getCollection("interventions");
@@ -22,6 +26,7 @@ interface Props {
 
 const { intervention } = Astro.props as Props;
 const referencedBy = analysesReferencing(intervention.id);
+const convergences = await convergencesForIntervention(intervention.id);
 ---
 
 <Base title={`${intervention.data.id} --- intervention`}>
@@ -78,6 +83,27 @@ const referencedBy = analysesReferencing(intervention.id);
       scores={intervention.data.suffering_reduction_scores}
     />
   </section>
+
+  {
+    convergences.length > 0 && (
+      <section class="mb-8">
+        <h2 class="mb-2 text-sm text-zinc-400">
+          Convergences on this intervention ({convergences.length})
+        </h2>
+        <p class="mb-2 text-xs text-zinc-500">
+          Camps arriving here from different normative premises.
+        </p>
+        <ul class="space-y-1 text-sm">
+          {convergences.map((c) => (
+            <li>
+              <NodeRef id={c.id} /> ---{" "}
+              <span class="text-zinc-500">{c.data.camps.length} camps</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 
   {
     referencedBy.length > 0 && (

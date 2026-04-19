@@ -25,6 +25,7 @@ Python 3.12+, Pydantic-first. The engine is the authoritative validator and reas
 - mypy is strict (`disallow_untyped_defs`, `disallow_any_unimported`). New code needs complete annotations.
 - `extra="forbid"` on `BaseNode` is load-bearing --- do not relax it. It is how the presentation/data boundary stays honest.
 - Referential integrity (does every `NodeRef` resolve?) is checked in `afls validate`. If you add a new ref field to any schema, update the validator's traversal in `cli.py`.
+- `LAYER_EDGE_MIN_SCORE` in `cli.py` mirrors the site's pruning threshold (`src/lib/graph-data.ts`). `afls validate` warns (not errors) when an intervention's max score on a given layer type falls below it --- the node still validates, but the homepage will draw zero edges of that layer type for the intervention. If the site bumps the threshold, bump this constant too; the D9 drift test pins both.
 
 ## Reasoning pipeline
 

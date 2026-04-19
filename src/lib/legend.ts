@@ -9,6 +9,13 @@
 
 import { KIND_EMOJI, type NodeKind } from "./graph";
 
+// Three semantic groups in the legend. `node` is a concrete graph element,
+// `layer` is a scoring axis on interventions, `relation` is a coalition-logic
+// construct connecting camps or interventions. The homepage renders each group
+// under its own subhead; the structural test in legend.test.ts asserts the set
+// membership and that the groups are non-empty.
+export type LegendGroup = "node" | "layer" | "relation";
+
 export interface LegendEntry {
   letter: string;
   kind: NodeKind;
@@ -16,6 +23,7 @@ export interface LegendEntry {
   label: string;
   blurb: string;
   classes: string;
+  group: LegendGroup;
 }
 
 // Hex mirrors of the `classes` Tailwind pairs above. Single source of truth so
@@ -38,6 +46,9 @@ export const NODE_KIND_COLOR: Record<NodeKind, NodeKindColor> = {
   harm_layer: { fill: "#fda4af", bg: "#4c0519" },
   suffering_layer: { fill: "#6ee7b7", bg: "#022c22" },
   evidence: { fill: "#71717a", bg: "#27272a" },
+  bridge: { fill: "#67e8f9", bg: "#083344" },
+  convergence: { fill: "#bef264", bg: "#1a2e05" },
+  blindspot: { fill: "#f9a8d4", bg: "#500724" },
 };
 
 export const LEGEND: LegendEntry[] = [
@@ -48,6 +59,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Camp",
     blurb: "Coherent cluster of held claims.",
     classes: "bg-zinc-800 text-zinc-300",
+    group: "node",
   },
   {
     letter: "CD",
@@ -56,6 +68,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Descriptive claim",
     blurb: "What is.",
     classes: "bg-sky-950 text-sky-300",
+    group: "node",
   },
   {
     letter: "CN",
@@ -64,6 +77,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Normative claim",
     blurb: "What should be.",
     classes: "bg-violet-950 text-violet-300",
+    group: "node",
   },
   {
     letter: "S",
@@ -72,6 +86,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Source",
     blurb: "A citable primary document.",
     classes: "bg-amber-950 text-amber-300",
+    group: "node",
   },
   {
     letter: "E",
@@ -80,6 +95,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Evidence",
     blurb: "A source's stance on a claim --- support, contradict, or qualify.",
     classes: "bg-zinc-800 text-zinc-500",
+    group: "node",
   },
   {
     letter: "I",
@@ -88,6 +104,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Intervention",
     blurb: "A proposed action.",
     classes: "bg-emerald-950 text-emerald-300",
+    group: "node",
   },
   {
     letter: "LF",
@@ -96,6 +113,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Friction layer",
     blurb: "What slows deployment.",
     classes: "bg-orange-950 text-orange-300",
+    group: "layer",
   },
   {
     letter: "LH",
@@ -104,6 +122,7 @@ export const LEGEND: LegendEntry[] = [
     label: "Harm layer",
     blurb: "A welfare harm to weigh.",
     classes: "bg-rose-950 text-rose-300",
+    group: "layer",
   },
   {
     letter: "LS",
@@ -112,5 +131,33 @@ export const LEGEND: LegendEntry[] = [
     label: "Suffering layer",
     blurb: "A category of first-person suffering the intervention relieves.",
     classes: "bg-emerald-950 text-emerald-300",
+    group: "layer",
+  },
+  {
+    letter: "BR",
+    kind: "bridge",
+    emoji: KIND_EMOJI.bridge,
+    label: "Bridge",
+    blurb: "A normative translation from one camp into another.",
+    classes: "bg-cyan-950 text-cyan-300",
+    group: "relation",
+  },
+  {
+    letter: "CV",
+    kind: "convergence",
+    emoji: KIND_EMOJI.convergence,
+    label: "Convergence",
+    blurb: "Camps arriving at the same intervention for different reasons.",
+    classes: "bg-lime-950 text-lime-300",
+    group: "relation",
+  },
+  {
+    letter: "BS",
+    kind: "blindspot",
+    emoji: KIND_EMOJI.blindspot,
+    label: "Blindspot",
+    blurb: "A camp the operator is under-weighting.",
+    classes: "bg-pink-950 text-pink-300",
+    group: "relation",
   },
 ];

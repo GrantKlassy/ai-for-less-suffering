@@ -38,6 +38,9 @@ export function initGraph(mountId: string, dataId: string): Core | null {
     friction_layer: 26,
     harm_layer: 26,
     suffering_layer: 26,
+    convergence: 24,
+    bridge: 22,
+    blindspot: 20,
     descriptive_claim: 18,
     normative_claim: 18,
     source: 14,
@@ -98,6 +101,35 @@ export function initGraph(mountId: string, dataId: string): Core | null {
         style: {
           shape: "round-rectangle",
           "border-color": "#52525b",
+          "border-width": 2,
+        },
+      },
+      {
+        // Relation nodes take distinct shapes so they read as structurally
+        // different from concrete nodes (camp = round-rect, intervention =
+        // diamond). Bridge is a hexagon (two sides, translation between);
+        // convergence is an octagon (many sides converging on one point);
+        // blindspot is a vee (pointing at what is missed).
+        selector: 'node[kind = "bridge"]',
+        style: {
+          shape: "hexagon",
+          "border-color": "#22d3ee",
+          "border-width": 2,
+        },
+      },
+      {
+        selector: 'node[kind = "convergence"]',
+        style: {
+          shape: "octagon",
+          "border-color": "#a3e635",
+          "border-width": 2,
+        },
+      },
+      {
+        selector: 'node[kind = "blindspot"]',
+        style: {
+          shape: "vee",
+          "border-color": "#f472b6",
           "border-width": 2,
         },
       },
@@ -190,6 +222,45 @@ export function initGraph(mountId: string, dataId: string): Core | null {
         },
       },
       {
+        // Bridge edges are dotted cyan. Dotted reads as "partial translation"
+        // --- not a full semantic equivalence.
+        selector: 'edge[kind = "bridge_from"], edge[kind = "bridge_to"]',
+        style: {
+          "line-color": "#67e8f9",
+          "target-arrow-color": "#67e8f9",
+          "line-style": "dotted",
+          opacity: 0.6,
+        },
+      },
+      {
+        selector: 'edge[kind = "converges_on"], edge[kind = "converges_camp"]',
+        style: {
+          "line-color": "#a3e635",
+          "target-arrow-color": "#a3e635",
+          opacity: 0.6,
+        },
+      },
+      {
+        // The normative thread through a convergence is qualitatively
+        // different --- dashed to mark it as reasoning, not structure.
+        selector: 'edge[kind = "converges_via_norm"]',
+        style: {
+          "line-color": "#a3e635",
+          "target-arrow-color": "#a3e635",
+          "line-style": "dashed",
+          opacity: 0.5,
+        },
+      },
+      {
+        selector: 'edge[kind = "flags_camp"]',
+        style: {
+          "line-color": "#f9a8d4",
+          "target-arrow-color": "#f9a8d4",
+          "line-style": "dashed",
+          opacity: 0.6,
+        },
+      },
+      {
         selector: ".faded",
         style: {
           opacity: 0.08,
@@ -222,7 +293,9 @@ export function initGraph(mountId: string, dataId: string): Core | null {
         const kind = node.data("kind") as string;
         // Higher value = closer to center. Interventions sit at the core
         // (they're the thing being evaluated). Layers ring them directly
-        // (friction/harm/suffering score interventions). Camps + claims
+        // (friction/harm/suffering score interventions). Relation nodes
+        // share the camp ring --- convergences link camps to interventions,
+        // bridges connect camp-to-camp, blindspots flag a camp. Claims
         // flank outward. Evidence + sources form the outer atmosphere of
         // citations so every kind gets its own ring when a pill highlights.
         return (
@@ -231,7 +304,10 @@ export function initGraph(mountId: string, dataId: string): Core | null {
             suffering_layer: 6,
             friction_layer: 6,
             harm_layer: 6,
+            convergence: 5,
             camp: 5,
+            bridge: 5,
+            blindspot: 5,
             normative_claim: 4,
             descriptive_claim: 3,
             evidence: 2,
@@ -259,7 +335,50 @@ export function initGraph(mountId: string, dataId: string): Core | null {
     if (href) window.location.href = href;
   });
 
+  // Right-click drag pans the graph, regardless of what's under the cursor.
+  // Cytoscape only pans on left-drag-on-empty and drags nodes on left-drag-on-
+  // node --- there's no built-in right-drag-pan. Native listeners at the mount
+  // in capture phase intercept before cytoscape, and window-level move/up track
+  // drags that leave the mount.
+  let isRightPanning = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  mount.addEventListener(
+    "mousedown",
+    (e) => {
+      if (e.button !== 2) return;
+      isRightPanning = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      cy.elements().removeClass("faded").removeClass("highlight");
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    true,
+  );
+  window.addEventListener("mousemove", (e) => {
+    if (!isRightPanning) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    cy.panBy({ x: dx, y: dy });
+  });
+  window.addEventListener(
+    "mouseup",
+    (e) => {
+      if (e.button !== 2 || !isRightPanning) return;
+      isRightPanning = false;
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    true,
+  );
+  mount.addEventListener("contextmenu", (e) => e.preventDefault());
+
   cy.on("mouseover", "node", (event: cytoscape.EventObject) => {
+    if (isRightPanning) return;
     const node = event.target as NodeSingular;
     const neighborhood = node.closedNeighborhood();
     cy.elements().addClass("faded");
@@ -267,10 +386,12 @@ export function initGraph(mountId: string, dataId: string): Core | null {
   });
 
   cy.on("mouseout", "node", () => {
+    if (isRightPanning) return;
     cy.elements().removeClass("faded").removeClass("highlight");
   });
 
   cy.on("mouseover", "edge", (event: cytoscape.EventObject) => {
+    if (isRightPanning) return;
     const edge = event.target as EdgeSingular;
     const ends = edge.connectedNodes();
     cy.elements().addClass("faded");
@@ -279,19 +400,24 @@ export function initGraph(mountId: string, dataId: string): Core | null {
   });
 
   cy.on("mouseout", "edge", () => {
+    if (isRightPanning) return;
     cy.elements().removeClass("faded").removeClass("highlight");
   });
 
   return cy;
 }
 
-// Cross-highlight entry point for the legend. `null` clears; otherwise every
-// node whose `kind` does not match is faded and the matching nodes get the
-// `highlight` class. Uses the same classes as the node-hover path so the
-// cytoscape stylesheet doesn't need to learn a new selector.
+// Cross-highlight entry point for the legend. `null` clears; otherwise fade
+// everything, unfade the closed neighborhood of matching-kind nodes, and ring
+// only the matching nodes. This mirrors node-hover semantics so pill-hover and
+// node-hover produce the same visual shape --- a connected sub-cluster against
+// a dimmed background --- instead of pill-hover's old behavior where matching
+// nodes were ringed but every edge in the graph stayed lit in its native color.
 export function highlightKind(cy: Core, kind: NodeKind | null): void {
   cy.elements().removeClass("faded").removeClass("highlight");
   if (kind === null) return;
-  cy.nodes(`[kind != "${kind}"]`).addClass("faded");
-  cy.nodes(`[kind = "${kind}"]`).addClass("highlight");
+  const matching = cy.nodes(`[kind = "${kind}"]`);
+  cy.elements().addClass("faded");
+  matching.closedNeighborhood().removeClass("faded");
+  matching.addClass("highlight");
 }

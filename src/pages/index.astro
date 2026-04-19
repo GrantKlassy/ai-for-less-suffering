@@ -22,6 +22,9 @@ const [
   frictionLayers,
   harmLayers,
   sufferingLayers,
+  bridges,
+  convergences,
+  blindspots,
 ] = await Promise.all([
   getCollection("descriptiveClaims"),
   getCollection("normativeClaims"),
@@ -32,6 +35,9 @@ const [
   getCollection("frictionLayers"),
   getCollection("harmLayers"),
   getCollection("sufferingLayers"),
+  getCollection("bridges"),
+  getCollection("convergences"),
+  getCollection("blindspots"),
 ]);
 
 const latest = latestLeverageAnalysis();
@@ -48,7 +54,17 @@ const COUNT_BY_KIND: Record<NodeKind, number> = {
   harm_layer: harmLayers.length,
   suffering_layer: sufferingLayers.length,
   evidence: evidenceEntries.length,
+  bridge: bridges.length,
+  convergence: convergences.length,
+  blindspot: blindspots.length,
 };
+
+// Legend partitioned by semantic group. Rendered under three subheads with a
+// thin separator between each; structural test in legend.test.ts asserts the
+// three groups are exactly this partition and non-empty.
+const NODE_LEGEND = LEGEND.filter((e) => e.group === "node");
+const LAYER_LEGEND = LEGEND.filter((e) => e.group === "layer");
+const RELATION_LEGEND = LEGEND.filter((e) => e.group === "relation");
 
 // Featured contested claim: pick the descriptive claim with the widest stance
 // coverage (three-way > two-way > one-way). Same logic as the pre-rewrite
@@ -141,9 +157,89 @@ const featuredContested: ContestedClaim[] = featured
       hover a pill to isolate that kind in the graph below. hover a graph node
       to match it back.
     </p>
+
+    <h3
+      class="mb-2 font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
+    >
+      nodes
+    </h3>
     <dl class="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
       {
-        LEGEND.map((entry) => (
+        NODE_LEGEND.map((entry) => (
+          <div
+            data-kind={entry.kind}
+            data-in-graph="1"
+            class="flex items-baseline gap-2 rounded px-1 py-0.5 transition-colors hover:bg-zinc-900"
+          >
+            <dt>
+              <span
+                class:list={[
+                  "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-sm px-1 font-mono text-[10px] font-semibold",
+                  entry.classes,
+                ]}
+                aria-hidden="true"
+              >
+                {entry.letter}
+              </span>
+            </dt>
+            <dd class="text-zinc-400">
+              <span class="text-zinc-100">{`${entry.emoji} ${entry.label}`}</span>
+              <span class="ml-1 font-mono text-[11px] text-zinc-500">
+                ({COUNT_BY_KIND[entry.kind]})
+              </span>{" "}
+              <span class="text-zinc-500">--- {entry.blurb}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <hr class="my-4 border-zinc-800" />
+    <h3
+      class="mb-2 font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
+    >
+      scoring layers
+    </h3>
+    <dl class="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+      {
+        LAYER_LEGEND.map((entry) => (
+          <div
+            data-kind={entry.kind}
+            data-in-graph="1"
+            class="flex items-baseline gap-2 rounded px-1 py-0.5 transition-colors hover:bg-zinc-900"
+          >
+            <dt>
+              <span
+                class:list={[
+                  "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-sm px-1 font-mono text-[10px] font-semibold",
+                  entry.classes,
+                ]}
+                aria-hidden="true"
+              >
+                {entry.letter}
+              </span>
+            </dt>
+            <dd class="text-zinc-400">
+              <span class="text-zinc-100">{`${entry.emoji} ${entry.label}`}</span>
+              <span class="ml-1 font-mono text-[11px] text-zinc-500">
+                ({COUNT_BY_KIND[entry.kind]})
+              </span>{" "}
+              <span class="text-zinc-500">--- {entry.blurb}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <hr class="my-4 border-zinc-800" />
+    <h3
+      class="mb-2 font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
+    >
+      coalition relations
+    </h3>
+    <dl class="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+      {
+        RELATION_LEGEND.map((entry) => (
           <div
             data-kind={entry.kind}
             data-in-graph="1"

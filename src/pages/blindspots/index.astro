@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import NodeRef from "../../components/NodeRef.astro";
+import { KIND_EMOJI } from "../../lib/graph";
+
+const blindspots = await getCollection("blindspots");
+blindspots.sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<Base title="Blindspots --- ai-for-less-suffering">
+  <h1 class="mb-2 flex items-baseline gap-2 text-2xl text-zinc-100">
+    <span
+      class="inline-flex h-4 min-w-4 shrink-0 items-center justify-center self-center rounded-sm bg-pink-950 px-1 font-mono text-[10px] font-semibold text-pink-300"
+      aria-hidden="true">BS</span
+    >
+    {KIND_EMOJI.blindspot} Blindspots
+  </h1>
+  <p class="mb-8 max-w-prose text-sm text-zinc-400">
+    Camps the operator is under-weighting relative to a named prior set. Flags,
+    not verdicts. The point is not that the flagged camp is correct --- it is
+    that a well-calibrated operator still cannot afford to treat the camp's
+    suffering as if it does not exist.
+  </p>
+  <ul class="space-y-3">
+    {
+      blindspots.map((b) => (
+        <li class="rounded border border-zinc-800 p-4 hover:border-zinc-600">
+          <a href={`/blindspots/${b.id}/`} class="block">
+            <div class="flex items-baseline justify-between">
+              <h2 class="text-zinc-100">
+                <NodeRef id={b.data.flagged_camp_id.id} />
+              </h2>
+              <span class="font-mono text-xs text-zinc-500">{b.data.id}</span>
+            </div>
+            <p class="mt-2 text-xs text-zinc-500">
+              against: {b.data.against_prior_set}
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

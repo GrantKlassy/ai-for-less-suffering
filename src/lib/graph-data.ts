@@ -32,7 +32,14 @@ export type EdgeKind =
   | "stance_qualify"
   | "scores_friction"
   | "scores_harm"
-  | "relieves_suffering";
+  | "relieves_suffering"
+  // Coalition-logic edges from engine/afls/schema/relations.py.
+  | "bridge_from"
+  | "bridge_to"
+  | "converges_on"
+  | "converges_camp"
+  | "converges_via_norm"
+  | "flags_camp";
 
 export interface GraphEdge {
   id: string;
@@ -87,6 +94,26 @@ export interface LayerInput {
   name: string;
 }
 
+export interface BridgeInput {
+  id: string;
+  from_camp: string;
+  to_camp: string;
+  translation: string;
+}
+
+export interface ConvergenceInput {
+  id: string;
+  intervention_id: string;
+  camps: string[];
+  divergent_reasons: Record<string, string>;
+}
+
+export interface BlindspotInput {
+  id: string;
+  flagged_camp_id: string;
+  against_prior_set: string;
+}
+
 // Every NodeKind renders on the home graph. The legend pill for each kind
 // isolates a distinct cluster on hover; this set is the contract.
 export const HOME_GRAPH_KINDS: ReadonlySet<NodeKind> = new Set<NodeKind>([
@@ -99,6 +126,9 @@ export const HOME_GRAPH_KINDS: ReadonlySet<NodeKind> = new Set<NodeKind>([
   "friction_layer",
   "harm_layer",
   "suffering_layer",
+  "bridge",
+  "convergence",
+  "blindspot",
 ]);
 
 // Scored edges from intervention → layer prune below this weight. Keeps the
@@ -115,6 +145,9 @@ export interface BuildGraphDataInput {
   frictionLayers: LayerInput[];
   harmLayers: LayerInput[];
   sufferingLayers: LayerInput[];
+  bridges: BridgeInput[];
+  convergences: ConvergenceInput[];
+  blindspots: BlindspotInput[];
   coalitions: InterventionCoalitionAnalysis[];
 }
 
@@ -142,6 +175,12 @@ function hrefFor(kind: NodeKind, id: string): string {
       return `/layers/suffering/${id}/`;
     case "evidence":
       return "";
+    case "bridge":
+      return `/bridges/${id}/`;
+    case "convergence":
+      return `/convergences/${id}/`;
+    case "blindspot":
+      return `/blindspots/${id}/`;
   }
 }
 
@@ -191,6 +230,19 @@ export function buildGraphData(input: BuildGraphDataInput): GraphData {
   for (const l of input.harmLayers) addNode(l.id, "harm_layer", l.name);
   for (const l of input.sufferingLayers)
     addNode(l.id, "suffering_layer", l.name);
+  for (const b of input.bridges) {
+    addNode(b.id, "bridge", `${b.from_camp} → ${b.to_camp}`);
+  }
+  for (const c of input.convergences) {
+    addNode(
+      c.id,
+      "convergence",
+      `${c.camps.length}-camp ⇒ ${c.intervention_id}`,
+    );
+  }
+  for (const b of input.blindspots) {
+    addNode(b.id, "blindspot", `${b.against_prior_set} · ${b.flagged_camp_id}`);
+  }
 
   const edges: GraphEdge[] = [];
   const edgeIds = new Set<string>();
@@ -246,6 +298,25 @@ export function buildGraphData(input: BuildGraphDataInput): GraphData {
     }
   }
 
+  for (const b of input.bridges) {
+    addEdge(b.id, b.from_camp, "bridge_from");
+    addEdge(b.id, b.to_camp, "bridge_to");
+  }
+
+  for (const c of input.convergences) {
+    addEdge(c.id, c.intervention_id, "converges_on");
+    for (const campId of c.camps) {
+      addEdge(c.id, campId, "converges_camp");
+    }
+    for (const normId of Object.values(c.divergent_reasons)) {
+      addEdge(c.id, normId, "converges_via_norm");
+    }
+  }
+
+  for (const b of input.blindspots) {
+    addEdge(b.id, b.flagged_camp_id, "flags_camp");
+  }
+
   return { nodes, edges };
 }
 
@@ -263,6 +334,9 @@ export async function loadGraphData(): Promise<GraphData> {
     frictionLayers,
     harmLayers,
     sufferingLayers,
+    bridges,
+    convergences,
+    blindspots,
   ] = await Promise.all([
     getCollection("camps"),
     getCollection("descriptiveClaims"),
@@ -273,6 +347,9 @@ export async function loadGraphData(): Promise<GraphData> {
     getCollection("frictionLayers"),
     getCollection("harmLayers"),
     getCollection("sufferingLayers"),
+    getCollection("bridges"),
+    getCollection("convergences"),
+    getCollection("blindspots"),
   ]);
 
   const latest = latestLeverageAnalysis();
@@ -319,6 +396,23 @@ export async function loadGraphData(): Promise<GraphData> {
     sufferingLayers: sufferingLayers.map((l) => ({
       id: l.data.id,
       name: l.data.name,
+    })),
+    bridges: bridges.map((b) => ({
+      id: b.data.id,
+      from_camp: b.data.from_camp.id,
+      to_camp: b.data.to_camp.id,
+      translation: b.data.translation,
+    })),
+    convergences: convergences.map((c) => ({
+      id: c.data.id,
+      intervention_id: c.data.intervention_id.id,
+      camps: c.data.camps.map((r) => r.id),
+      divergent_reasons: c.data.divergent_reasons,
+    })),
+    blindspots: blindspots.map((b) => ({
+      id: b.data.id,
+      flagged_camp_id: b.data.flagged_camp_id.id,
+      against_prior_set: b.data.against_prior_set,
     })),
     coalitions: latest ? latest.analysis.coalition_analyses : [],
   });

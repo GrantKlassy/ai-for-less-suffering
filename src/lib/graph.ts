@@ -20,7 +20,10 @@ export type NodeKind =
   | "friction_layer"
   | "harm_layer"
   | "suffering_layer"
-  | "evidence";
+  | "evidence"
+  | "bridge"
+  | "convergence"
+  | "blindspot";
 
 export type CollectionName =
   | "camps"
@@ -31,7 +34,10 @@ export type CollectionName =
   | "frictionLayers"
   | "harmLayers"
   | "sufferingLayers"
-  | "evidence";
+  | "evidence"
+  | "bridges"
+  | "convergences"
+  | "blindspots";
 
 export interface ResolvedRef {
   href: string;
@@ -39,6 +45,10 @@ export interface ResolvedRef {
   kind: NodeKind;
 }
 
+// Prefix → collection. Must match engine/afls/cli.py :: _ID_PREFIX exactly
+// (enforced by the schema-drift test). Relation prefixes (bridge_, conv_,
+// blind_) mirror Bridge / Convergence / BlindSpot in
+// engine/afls/schema/relations.py.
 const COLLECTION_BY_PREFIX: { prefix: string; collection: CollectionName }[] = [
   { prefix: "camp_", collection: "camps" },
   { prefix: "desc_", collection: "descriptiveClaims" },
@@ -49,6 +59,9 @@ const COLLECTION_BY_PREFIX: { prefix: string; collection: CollectionName }[] = [
   { prefix: "harm_", collection: "harmLayers" },
   { prefix: "suffering_", collection: "sufferingLayers" },
   { prefix: "evi_", collection: "evidence" },
+  { prefix: "bridge_", collection: "bridges" },
+  { prefix: "conv_", collection: "convergences" },
+  { prefix: "blind_", collection: "blindspots" },
 ];
 
 const HREF_BY_COLLECTION: Record<CollectionName, (id: string) => string> = {
@@ -62,6 +75,9 @@ const HREF_BY_COLLECTION: Record<CollectionName, (id: string) => string> = {
   sufferingLayers: (id) => `/layers/suffering/${id}/`,
   // Evidence entries are edges. No detail page; renders fall back to the edge summary.
   evidence: () => "",
+  bridges: (id) => `/bridges/${id}/`,
+  convergences: (id) => `/convergences/${id}/`,
+  blindspots: (id) => `/blindspots/${id}/`,
 };
 
 const KIND_BY_COLLECTION: Record<CollectionName, NodeKind> = {
@@ -74,6 +90,9 @@ const KIND_BY_COLLECTION: Record<CollectionName, NodeKind> = {
   harmLayers: "harm_layer",
   sufferingLayers: "suffering_layer",
   evidence: "evidence",
+  bridges: "bridge",
+  convergences: "convergence",
+  blindspots: "blindspot",
 };
 
 export function collectionForId(id: string): CollectionName | null {
@@ -119,6 +138,9 @@ export const KIND_EMOJI: Record<NodeKind, string> = {
   harm_layer: "💀",
   suffering_layer: "💔",
   evidence: "📁",
+  bridge: "🌉",
+  convergence: "🤝",
+  blindspot: "🕳️",
 };
 
 export function kindEmoji(kind: NodeKind): string {
@@ -204,6 +226,35 @@ export async function interventionsScoringHarm(id: string) {
 export async function interventionsScoringSuffering(id: string) {
   const all = await getCollection("interventions");
   return all.filter((i) => id in i.data.suffering_reduction_scores);
+}
+
+// Coalition-logic reverse lookups. Camp detail pages surface bridges both
+// directions plus convergences + blindspots so every camp page shows the
+// full graph neighborhood.
+
+export async function bridgesFromCamp(id: string) {
+  const all = await getCollection("bridges");
+  return all.filter((b) => b.data.from_camp.id === id);
+}
+
+export async function bridgesToCamp(id: string) {
+  const all = await getCollection("bridges");
+  return all.filter((b) => b.data.to_camp.id === id);
+}
+
+export async function convergencesForCamp(id: string) {
+  const all = await getCollection("convergences");
+  return all.filter((c) => c.data.camps.some((ref) => ref.id === id));
+}
+
+export async function convergencesForIntervention(id: string) {
+  const all = await getCollection("convergences");
+  return all.filter((c) => c.data.intervention_id.id === id);
+}
+
+export async function blindspotsForCamp(id: string) {
+  const all = await getCollection("blindspots");
+  return all.filter((b) => b.data.flagged_camp_id.id === id);
 }
 
 // ---------------------------------------------------------------------------
