@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Breaks an element out of the Base layout's max-w-3xl reading column to
+   viewport width minus a 3rem gutter (matches Base's px-6 on both sides).
+   The margin-left formula shifts the element left by half its overflow:
+   overflow = 100vw - 3rem - 100%, halved and negated as a margin. At narrow
+   viewports where the column is already wider than 100vw - 3rem, the value
+   is non-negative and the element just sits in place. */
+.graph-breakout {
+  width: calc(100vw - 3rem);
+  max-width: calc(100vw - 3rem);
+  margin-left: calc((100% + 3rem - 100vw) / 2);
+}

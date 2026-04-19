@@ -6,7 +6,7 @@ const payload = JSON.stringify(data);
 ---
 
 <figure
-  class="my-6 overflow-hidden rounded border border-zinc-800 bg-zinc-950/80"
+  class="graph-breakout my-6 overflow-hidden rounded border border-zinc-800 bg-zinc-950/80"
 >
   <div
     id="afls-graph"
@@ -72,6 +72,12 @@ const payload = JSON.stringify(data);
       });
     }
 
+    const clearPillRings = () => {
+      for (const pill of pillByKind.values()) {
+        pill.classList.remove("ring-1", "ring-zinc-100");
+      }
+    };
+
     cy.on("mouseover", "node", (event: EventObject) => {
       const kind = event.target.data("kind") as string | undefined;
       if (!kind) return;
@@ -81,6 +87,16 @@ const payload = JSON.stringify(data);
       const kind = event.target.data("kind") as string | undefined;
       if (!kind) return;
       pillByKind.get(kind)?.classList.remove("ring-1", "ring-zinc-100");
+    });
+
+    // Cytoscape's node/edge `mouseout` can miss when the cursor leaves the
+    // canvas fast or exits through a corner --- the visual highlight sticks
+    // around until the next hover. Clear everything on a DOM-level mouseleave
+    // at the mount so "mouse off the graph" always means "nothing highlighted."
+    const container = document.getElementById("afls-graph");
+    container?.addEventListener("mouseleave", () => {
+      cy.elements().removeClass("faded").removeClass("highlight");
+      clearPillRings();
     });
   };
 
