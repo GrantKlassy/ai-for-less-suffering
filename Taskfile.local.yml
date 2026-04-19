@@ -10,8 +10,16 @@ tasks:
     cmds:
       - task: check:canary
       - task: check:layering
+      - task: check:engine-validate
       - task: engine:check
+      - task: engine:test
       - task: site:test
+
+  check:engine-validate:
+    desc: Validate graph referential integrity and surface lint warnings
+    dir: engine
+    cmds:
+      - uv run afls validate
 
   ship:
     desc: Pre-deploy gate + signed ship tag + push. Kills gpg-agent so the tag signs with a fresh passphrase --- shipping is a deliberate human act.

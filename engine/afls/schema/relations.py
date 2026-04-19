@@ -23,6 +23,10 @@ class Bridge(BaseNode):
     to_camp: NodeRef
     translation: str = Field(min_length=1)
     caveats: list[str] = Field(default_factory=list)
+    content_hash: str = Field(
+        default="",
+        description="Full sha256 of normalized translation. Empty for hand-authored bridges.",
+    )
 
 
 class Convergence(BaseNode):
@@ -47,3 +51,7 @@ class BlindSpot(BaseNode):
     against_prior_set: str = Field(description="Which operator prior set this flags against.")
     flagged_camp_id: NodeRef
     reasoning: str = Field(min_length=1)
+    content_hash: str = Field(
+        default="",
+        description="Full sha256 of normalized reasoning. Empty for hand-authored blindspots.",
+    )

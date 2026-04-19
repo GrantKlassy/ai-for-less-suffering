@@ -195,7 +195,7 @@ Do NOT dilute the case by hedging --- if you cannot find a real case from inside
 omit that frame entirely rather than produce a weak version.
 
 Then write `operator_tension`: one paragraph on where the FOR/AGAINST split cuts across \
-the operator's own priors in BRAIN.md. This is the sharp version of a blindspot --- name \
+the operator's own priors in GRANT_BRAIN.md. This is the sharp version of a blindspot --- name \
 the specific case the operator should be uncomfortable with FROM INSIDE their own frame. \
 Be specific, not abstract. Not a summary of the analysis.
 

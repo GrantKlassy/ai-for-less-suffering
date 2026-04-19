@@ -27,6 +27,6 @@ Every YAML here is a Pydantic-validated node. Schema lives in `../engine/afls/sc
 
 Emojis, colors, icons, labels --- none of these go in YAML. `CAMP_EMOJI` in `src/lib/graph.ts` is the canonical example of how presentation attaches to data without mixing layers. Keep the boundary clean; the Pydantic `extra="forbid"` will reject the other direction anyway.
 
-## Unused node kinds
+## Relation nodes
 
-`schema/relations.py` defines `Bridge`, `Convergence`, `BlindSpot`. These have no subdirectory yet --- coalition-logic relations are defined but unpopulated. When added, they get their own subdir (e.g. `data/bridges/`, prefix `bridge_`).
+`schema/relations.py` defines `Bridge`, `Convergence`, `BlindSpot`. `Bridge` and `BlindSpot` are auto-persisted by `run_palantir_query` with content-addressed IDs (same translation + same camp pair → same ID, so dedupe is automatic). Hand-authored bridges and blindspots coexist with auto-generated ones; both live under `data/bridges/` (prefix `bridge_`) and `data/blindspots/` (prefix `blind_`). `Convergence` is hand-authored only, under `data/convergences/` (prefix `conv_`).

@@ -12,11 +12,15 @@ here --- before the dump reaches vitest and produces a less-useful error.
 
 from __future__ import annotations
 
+import inspect
 import json
+import re
 from pathlib import Path
 from typing import get_args
 
+from afls import schema as afls_schema
 from afls.cli import _ID_PREFIX, LAYER_EDGE_MIN_SCORE
+from afls.schema.base import BaseNode
 from afls.schema.evidence import MethodTag, Support
 from afls.schema.interventions import InterventionKind
 from afls.schema.sources import ProvenanceMethod, SourceKind
@@ -171,4 +175,119 @@ def test_no_directive_paths_in_data_yaml() -> None:
                 offenders.append((yaml_file, needle))
     assert offenders == [], (
         f"YAML under data/ references directive paths: {offenders}"
+    )
+
+
+def test_operator_prior_set_name_is_grant_brain() -> None:
+    """D11: BRAIN.md never appears without the GRANT_ prefix.
+
+    The operator prior set file is `directives-ai/GRANT_BRAIN.md`. An earlier
+    rename left the stale literal `BRAIN.md` in prompts, YAML summaries, docs,
+    and a test assertion. Catch any future reintroduction. `public-output/` is
+    excluded --- historical analyses are frozen snapshots.
+    """
+    repo_root = Path(__file__).resolve().parents[2]
+    pattern = re.compile(r"(?<!GRANT_)\bBRAIN\.md\b")
+    scan_dirs = [
+        repo_root / "engine",
+        repo_root / "data",
+        repo_root / "directives-ai",
+    ]
+    self_path = Path(__file__).resolve()
+    offenders: list[tuple[str, int, str]] = []
+    for root in scan_dirs:
+        for suffix in ("*.py", "*.yaml", "*.md"):
+            for path in root.rglob(suffix):
+                if path.resolve() == self_path:
+                    continue
+                text = path.read_text(encoding="utf-8")
+                for lineno, line in enumerate(text.splitlines(), start=1):
+                    if pattern.search(line):
+                        offenders.append(
+                            (str(path.relative_to(repo_root)), lineno, line.strip())
+                        )
+    assert offenders == [], (
+        f"BRAIN.md references without GRANT_ prefix: {offenders}"
+    )
+
+
+_TREE_LINE = re.compile(r"^((?:│   |    )*)[├└]── (.+)$")
+
+
+def test_architecture_md_paths_exist() -> None:
+    """D12: every path named in ARCHITECTURE.md's tree block resolves.
+
+    Parses the ASCII tree, builds full paths by tracking indent depth, and
+    asserts each one exists on disk. Descriptive entries (containing `*`,
+    `+`, `{`, or internal spaces) are skipped --- they're wildcards or prose,
+    not literal paths.
+    """
+    repo_root = Path(__file__).resolve().parents[2]
+    arch_md = repo_root / "directives-ai" / "ARCHITECTURE.md"
+    text = arch_md.read_text(encoding="utf-8")
+
+    tree_lines: list[str] = []
+    in_tree = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("ai-for-less-suffering/"):
+            in_tree = True
+            continue
+        if in_tree:
+            if stripped == "```":
+                break
+            tree_lines.append(line)
+
+    assert tree_lines, "ARCHITECTURE.md tree block not found"
+
+    stack: list[str] = []
+    missing: list[tuple[str, Path]] = []
+    for raw in tree_lines:
+        line = raw.split("#", 1)[0].rstrip() if "#" in raw else raw.rstrip()
+        if not line.strip():
+            continue
+        match = _TREE_LINE.match(line)
+        if not match:
+            continue
+        prefix, rest = match.groups()
+        depth = len(prefix) // 4
+        name = rest.strip()
+        if any(c in name for c in "{}*+") or " " in name:
+            continue
+        stack = stack[:depth]
+        stack.append(name.rstrip("/"))
+        full = repo_root.joinpath(*stack)
+        if not full.exists():
+            missing.append((name, full))
+    assert missing == [], f"ARCHITECTURE.md tree references missing paths: {missing}"
+
+
+def test_architecture_md_node_types_match_schema() -> None:
+    """D13: ARCHITECTURE.md's node-type list is a superset of schema exports.
+
+    If the schema adds a new node class, the architecture doc must document it.
+    Node-type entries are `**\\`TypeName\\`**` in the `## Node types` section.
+    Compared against every `BaseNode` subclass exported from `afls.schema`.
+    """
+    repo_root = Path(__file__).resolve().parents[2]
+    arch_md = repo_root / "directives-ai" / "ARCHITECTURE.md"
+    text = arch_md.read_text(encoding="utf-8")
+
+    entry_re = re.compile(r"\*\*`([A-Z][A-Za-z0-9]+)`\*\*")
+    documented = set(entry_re.findall(text))
+
+    schema_node_types: set[str] = set()
+    for name in afls_schema.__all__:
+        obj = getattr(afls_schema, name)
+        if not inspect.isclass(obj):
+            continue
+        if not issubclass(obj, BaseNode):
+            continue
+        if obj is BaseNode:
+            continue
+        schema_node_types.add(name)
+
+    missing = schema_node_types - documented
+    assert missing == set(), (
+        f"Node types exported by schema but undocumented in ARCHITECTURE.md: {missing}"
     )

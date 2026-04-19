@@ -9,6 +9,13 @@ from afls.reasoning.ingest import (
     build_ingest_context,
     run_ingest_query,
 )
+from afls.reasoning.linker import (
+    LinkerDraft,
+    apply_linker_draft,
+    build_linker_context,
+    run_linker_query,
+    validate_linker_draft,
+)
 from afls.reasoning.prompts import (
     DISCIPLINE_HEADER,
     operator_context_blocks,
@@ -23,11 +30,16 @@ __all__ = [
     "IngestDraftEvidence",
     "IngestDraftSource",
     "IngestLLMOutput",
+    "LinkerDraft",
     "Model",
     "ReasoningError",
+    "apply_linker_draft",
     "build_ingest_context",
+    "build_linker_context",
     "complete_and_parse",
     "operator_context_blocks",
     "run_ingest_query",
+    "run_linker_query",
     "system_blocks_for_query",
+    "validate_linker_draft",
 ]

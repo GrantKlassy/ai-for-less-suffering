@@ -555,6 +555,10 @@ def test_validate_no_warning_when_confidence_low(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.4), data_root)
+    save_node(
+        Camp(id="camp_holder", name="Holder", held_descriptive=["desc_a"]),
+        data_root,
+    )
     result = runner.invoke(app, ["validate"])
     assert result.exit_code == 0
     assert "warn" not in result.output.lower()
@@ -564,6 +568,10 @@ def test_validate_no_warning_when_direct_measurement_present(
     runner: CliRunner, data_root: Path
 ) -> None:
     save_node(DescriptiveClaim(id="desc_a", text="a", confidence=0.9), data_root)
+    save_node(
+        Camp(id="camp_holder", name="Holder", held_descriptive=["desc_a"]),
+        data_root,
+    )
     save_node(
         Source(id="src_a", source_kind=SourceKind.PAPER, title="t", reliability=0.9),
         data_root,

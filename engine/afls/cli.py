@@ -30,9 +30,15 @@ from afls.output import (
     write_steelman_markdown,
 )
 from afls.queries.leverage import run_leverage_query
-from afls.queries.palantir import run_palantir_query
+from afls.queries.palantir import persist_palantir_nodes, run_palantir_query
 from afls.queries.steelman import run_steelman_query
-from afls.reasoning import AnthropicClient, ReasoningError, run_ingest_query
+from afls.reasoning import (
+    AnthropicClient,
+    ReasoningError,
+    apply_linker_draft,
+    run_ingest_query,
+    run_linker_query,
+)
 from afls.schema import (
     LOW_TRUST_KINDS,
     BaseNode,
@@ -298,12 +304,10 @@ def validate() -> None:
         )
         raise typer.Exit(1)
 
-    warnings = _confidence_lint(
-        list_nodes(DescriptiveClaim, root),
-        evidence_list,
-        list_nodes(Source, root),
-    )
+    descriptives = list_nodes(DescriptiveClaim, root)
+    warnings = _confidence_lint(descriptives, evidence_list, list_nodes(Source, root))
     warnings.extend(_layer_score_lint(list_nodes(Intervention, root)))
+    warnings.extend(_floating_claim_lint(descriptives, list_nodes(Camp, root)))
     for warn in warnings:
         typer.secho(f"  warn: {warn}", fg="yellow")
     suffix = f", {len(warnings)} warnings" if warnings else ""
@@ -317,6 +321,29 @@ def validate() -> None:
 # the site bumps its threshold, the engine warning must move with it or the
 # warning becomes a lie.
 LAYER_EDGE_MIN_SCORE: float = 0.3
+
+
+def _floating_claim_lint(
+    claims: list[DescriptiveClaim], camps: list[Camp]
+) -> list[str]:
+    """Flag DescriptiveClaims no Camp holds.
+
+    A floating claim passes referential-integrity but is invisible to
+    `find_descriptive_convergences` --- the palantir query cannot reason over
+    it, so it is effectively dead weight in the graph. Non-blocking warning:
+    the operator may have a legitimate reason to keep a claim unattached (e.g.
+    awaiting a new camp), but the default should be surfacing the drift.
+    """
+    held_ids: set[str] = set()
+    for camp in camps:
+        held_ids.update(camp.held_descriptive)
+    messages: list[str] = []
+    for claim in sorted(claims, key=lambda c: c.id):
+        if claim.id not in held_ids:
+            messages.append(
+                f"{claim.id}: held by no camp --- invisible to convergence analysis"
+            )
+    return messages
 
 
 def _layer_score_lint(interventions: list[Intervention]) -> list[str]:
@@ -428,6 +455,14 @@ def query(
         json_path, md_path = analysis_paths(public_output_dir(), palantir_analysis)
         write_analysis_json(palantir_analysis, json_path)
         write_analysis_markdown(palantir_analysis, md_path, data_dir())
+        counts = persist_palantir_nodes(palantir_analysis, data_dir())
+        typer.secho(
+            f"persisted: {counts['bridges_written']} bridges written "
+            f"({counts['bridges_skipped']} dedupe-skipped), "
+            f"{counts['blindspots_written']} blindspots written "
+            f"({counts['blindspots_skipped']} dedupe-skipped)",
+            fg="green",
+        )
     elif name == "leverage":
         leverage_analysis = run_leverage_query(client, data_dir())
         json_path, md_path = leverage_analysis_paths(
@@ -592,6 +627,23 @@ def ingest(url: str) -> None:
         fg="green",
         bold=True,
     )
+
+    typer.secho("linking new claims to camps (haiku)...", fg="cyan")
+    try:
+        linker_draft = run_linker_query(client, data_dir(), new_claims=claims)
+    except (ReasoningError, ValueError) as exc:
+        typer.secho(
+            f"linker failed: {exc}\nclaims remain floating; link manually via `afls edit camp_...`",
+            fg="yellow",
+        )
+    else:
+        counts = apply_linker_draft(linker_draft, data_dir())
+        typer.secho(
+            f"linked: {counts['linked']} claims → {counts['camps_touched']} camps "
+            f"({counts['floating']} floating)",
+            fg="green",
+        )
+
     typer.secho(
         f"review with: afls edit {source.id}  (then the desc_* / evi_* nodes)",
         fg="cyan",

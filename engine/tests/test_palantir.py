@@ -19,12 +19,15 @@ from afls.queries.palantir import (
     build_graph_context,
     find_contested_claims,
     find_descriptive_convergences,
+    persist_palantir_nodes,
     run_palantir_query,
 )
 from afls.queries.palantir_seed import seed
 from afls.queries.research_seed import seed as seed_research
 from afls.reasoning import AnthropicClient
 from afls.schema import (
+    BlindSpot,
+    Bridge,
     Camp,
     DescriptiveClaim,
     Evidence,
@@ -35,7 +38,8 @@ from afls.schema import (
     SourceKind,
     Support,
 )
-from afls.storage import list_nodes
+from afls.schema.ids import content_hash, content_id
+from afls.storage import list_nodes, load_node
 
 
 @dataclass
@@ -174,7 +178,7 @@ def test_run_palantir_query_end_to_end(seeded_data: Path) -> None:
     }
     assert len(analysis.bridges) == 2
     assert all(b.id.startswith("bridge_") for b in analysis.bridges)
-    assert all(b.against_prior_set == "BRAIN.md" for b in analysis.blindspots)
+    assert all(b.against_prior_set == "GRANT_BRAIN.md" for b in analysis.blindspots)
     assert len(analysis.blindspots) == 1
 
 
@@ -332,3 +336,111 @@ def test_build_graph_context_includes_evidence_when_provided(
     assert "## Descriptive claims (with evidence)" in ctx
     assert "contradict" in ctx
     assert "src_goldman_gen_power" in ctx
+
+
+def test_bridge_id_is_content_addressed() -> None:
+    """Same translation + camp pair → same ID; different translation → different ID.
+
+    Content-addressed IDs let the palantir query dedupe on re-run without the
+    operator having to hand-manage which Bridges are duplicates.
+    """
+    a = content_id(
+        "bridge",
+        slug_parts=["camp_palantir", "to", "camp_operator"],
+        hashed="Infrastructure is a precondition.",
+    )
+    b = content_id(
+        "bridge",
+        slug_parts=["camp_palantir", "to", "camp_operator"],
+        hashed="Infrastructure is a precondition.",
+    )
+    assert a == b
+    c = content_id(
+        "bridge",
+        slug_parts=["camp_palantir", "to", "camp_operator"],
+        hashed="A different translation.",
+    )
+    assert a != c
+    d = content_id(
+        "bridge",
+        slug_parts=["camp_anthropic", "to", "camp_operator"],
+        hashed="Infrastructure is a precondition.",
+    )
+    assert a != d
+
+
+def test_bridge_id_normalization_is_stable() -> None:
+    """Trivial whitespace/case differences in the hashed text collapse to the same ID.
+
+    The LLM will often emit near-identical translations with different capitalization
+    or spacing. Normalizing at the ID layer keeps the graph clean.
+    """
+    a = content_id(
+        "bridge",
+        slug_parts=["camp_x", "to", "camp_y"],
+        hashed="Same  content.",
+    )
+    b = content_id(
+        "bridge",
+        slug_parts=["camp_x", "to", "camp_y"],
+        hashed="SAME content.",
+    )
+    assert a == b
+
+
+def test_persist_palantir_nodes_writes_once_and_dedupes(
+    seeded_data: Path,
+) -> None:
+    """First persist writes the Bridge/BlindSpot YAMLs; second persist is a no-op.
+
+    Guards D1: re-running the palantir query should not flood `data/bridges/` or
+    `data/blindspots/` with duplicates.
+    """
+    client = _client_with([_canned_llm_output()])
+    analysis = run_palantir_query(client, seeded_data, camp_ids=_SEED_CAMP_IDS)
+
+    bridges_dir = seeded_data / "bridges"
+    blindspots_dir = seeded_data / "blindspots"
+
+    first = persist_palantir_nodes(analysis, seeded_data)
+    assert first["bridges_written"] == len(analysis.bridges)
+    assert first["bridges_skipped"] == 0
+    assert first["blindspots_written"] == len(analysis.blindspots)
+    assert first["blindspots_skipped"] == 0
+
+    bridge_file_count = len(list(bridges_dir.glob("*.yaml")))
+    blindspot_file_count = len(list(blindspots_dir.glob("*.yaml")))
+    assert bridge_file_count == len(analysis.bridges)
+    assert blindspot_file_count == len(analysis.blindspots)
+
+    second = persist_palantir_nodes(analysis, seeded_data)
+    assert second["bridges_written"] == 0
+    assert second["bridges_skipped"] == len(analysis.bridges)
+    assert second["blindspots_written"] == 0
+    assert second["blindspots_skipped"] == len(analysis.blindspots)
+
+    assert len(list(bridges_dir.glob("*.yaml"))) == bridge_file_count
+    assert len(list(blindspots_dir.glob("*.yaml"))) == blindspot_file_count
+
+
+def test_persisted_bridge_content_hash_roundtrips(seeded_data: Path) -> None:
+    """content_hash on Bridge/BlindSpot survives YAML round-trip.
+
+    Storing the full hex hash on the node lets future consumers (re-ingest, audit)
+    verify the content even if the ID format changes.
+    """
+    client = _client_with([_canned_llm_output()])
+    analysis = run_palantir_query(client, seeded_data, camp_ids=_SEED_CAMP_IDS)
+    persist_palantir_nodes(analysis, seeded_data)
+
+    for bridge in analysis.bridges:
+        assert bridge.content_hash == content_hash(bridge.translation)
+        reloaded = load_node(Bridge, bridge.id, seeded_data)
+        assert reloaded.content_hash == bridge.content_hash
+        assert reloaded.translation == bridge.translation
+
+    for blindspot in analysis.blindspots:
+        assert blindspot.content_hash == content_hash(blindspot.reasoning)
+        reloaded_bs = load_node(BlindSpot, blindspot.id, seeded_data)
+        assert reloaded_bs.content_hash == blindspot.content_hash
+        assert reloaded_bs.reasoning == blindspot.reasoning

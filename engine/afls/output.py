@@ -188,7 +188,7 @@ def _render_bridges(bridges: list[Bridge], camps_by_id: dict[str, Camp]) -> str:
 def _render_blindspots(blindspots: list[BlindSpot], camps_by_id: dict[str, Camp]) -> str:
     if not blindspots:
         return "## Blindspots\n\nNone flagged.\n"
-    lines = ["## Blindspots", "", "Flagged against operator priors (BRAIN.md):", ""]
+    lines = ["## Blindspots", "", "Flagged against operator priors (GRANT_BRAIN.md):", ""]
     for blindspot in blindspots:
         camp_name = (
             camps_by_id[blindspot.flagged_camp_id].name

@@ -291,7 +291,7 @@ def _camps() -> list[Camp]:
             id="camp_operator",
             name="Operator-aligned",
             agents=["operator prior set"],
-            summary="Starting point for the operator's frame. Refine via BRAIN.md and "
+            summary="Starting point for the operator's frame. Refine via GRANT_BRAIN.md and "
             "`afls edit camp_operator`.",
             held_descriptive=[
                 "desc_accelerating",

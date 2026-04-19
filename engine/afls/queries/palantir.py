@@ -24,9 +24,9 @@ from afls.schema import (
     NormativeClaim,
     Source,
     Support,
-    new_id,
 )
-from afls.storage import list_nodes
+from afls.schema.ids import content_hash, content_id
+from afls.storage import list_nodes, load_node, save_node
 
 DEFAULT_CAMP_IDS: tuple[str, ...] = (
     "camp_palantir",
@@ -297,7 +297,7 @@ For each camp pair, generate a bridge --- a normative translation that lets one 
 understand the other's position in its own framing, *without* collapsing the normative \
 difference. Caveats mark what does not translate.
 
-Against the operator's priors (BRAIN.md), flag blindspots: camps or positions the operator \
+Against the operator's priors (GRANT_BRAIN.md), flag blindspots: camps or positions the operator \
 is likely under-weighting, with one-sentence reasoning each.
 
 Return ONLY JSON matching the schema in the system prompt."""
@@ -341,20 +341,30 @@ def run_palantir_query(
 
     bridges = [
         Bridge(
-            id=new_id("bridge"),
+            id=content_id(
+                "bridge",
+                slug_parts=[proposal.from_camp, "to", proposal.to_camp],
+                hashed=proposal.translation,
+            ),
             from_camp=proposal.from_camp,
             to_camp=proposal.to_camp,
             translation=proposal.translation,
             caveats=proposal.caveats,
+            content_hash=content_hash(proposal.translation),
         )
         for proposal in llm_out.bridges
     ]
     blindspots = [
         BlindSpot(
-            id=new_id("blind"),
-            against_prior_set="BRAIN.md",
+            id=content_id(
+                "blind",
+                slug_parts=[proposal.flagged_camp_id],
+                hashed=proposal.reasoning,
+            ),
+            against_prior_set="GRANT_BRAIN.md",
             flagged_camp_id=proposal.flagged_camp_id,
             reasoning=proposal.reasoning,
+            content_hash=content_hash(proposal.reasoning),
         )
         for proposal in llm_out.blindspots
     ]
@@ -367,3 +377,34 @@ def run_palantir_query(
         blindspots=blindspots,
         contested_claims=contested,
     )
+
+
+def persist_palantir_nodes(analysis: PalantirAnalysis, data_dir: Path) -> dict[str, int]:
+    """Write any new Bridge/BlindSpot from `analysis` to `data/`. Dedupes by ID.
+
+    Returns counts of newly-written vs skipped nodes per kind. The in-analysis
+    JSON keeps the full object for snapshot integrity; the persisted YAML is
+    the canonical graph node. Same translation + same camp pair → same ID, so
+    re-running the query is idempotent at the graph layer.
+    """
+    counts = {
+        "bridges_written": 0,
+        "bridges_skipped": 0,
+        "blindspots_written": 0,
+        "blindspots_skipped": 0,
+    }
+    for bridge in analysis.bridges:
+        try:
+            load_node(Bridge, bridge.id, data_dir)
+            counts["bridges_skipped"] += 1
+        except FileNotFoundError:
+            save_node(bridge, data_dir)
+            counts["bridges_written"] += 1
+    for blindspot in analysis.blindspots:
+        try:
+            load_node(BlindSpot, blindspot.id, data_dir)
+            counts["blindspots_skipped"] += 1
+        except FileNotFoundError:
+            save_node(blindspot, data_dir)
+            counts["blindspots_written"] += 1
+    return counts
