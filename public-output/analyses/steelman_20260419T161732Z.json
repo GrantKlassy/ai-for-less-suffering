@@ -1,0 +1,444 @@
+{
+  "case_against": [
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "Drug discovery pipelines run on animal models --- mice, rats, dogs, primates --- at every preclinical stage, and AI-accelerated candidate throughput multiplies the in-vivo testing demand even when per-candidate efficiency improves. 80B land animals slaughtered annually is the existing factory floor; this intervention adds throughput to the laboratory floor on top of it. Without a binding commitment to in-silico-only validation pathways, the camp is endorsing a multiplier on animal-test scale.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience"
+      ]
+    },
+    {
+      "camp_id": "camp_anthropic",
+      "case": "Domain-specific bio capability is exactly the dual-use surface the camp is supposed to be most cautious about --- the same structure-prediction and candidate-screening stack that finds an AMR therapeutic finds a synthesis route for a pathogen. Routing flagship capability into the bio domain without interpretability that can distinguish therapeutic from pathogenic intent inverts the safety-first posture into a misuse vector with the lab's name on it.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "The framing that this augments scientists is what every prior automation wave said before it didn't. Bench technicians, CRO staff, medicinal chemists, and trial-coordinator roles are exactly the mid-skill knowledge work that gets compressed when the model writes the protocol and selects the candidate. Endorsing this without binding role-replacement language is endorsing the next round of hollowing under a humanitarian banner.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_environmentalists",
+      "case": "Frontier-scale drug discovery rides the same compute, water, and extraction substrate as every other frontier deployment --- the therapeutic framing does not change the aquifer drawdown in Maricopa County or the cobalt mine in Katanga. Calling the load 'medical' is a laundering operation that converts first-order ecological wrongs into instrumental costs justified by downstream human benefit, which is exactly the move the camp's normative frame rejects.",
+      "descriptive_claim_ids": [
+        "desc_datacenter_water_intensity",
+        "desc_hyperscaler_water_growth",
+        "desc_thermoelectric_water_embed",
+        "desc_critical_minerals_refining",
+        "desc_rare_earth_supply_chain",
+        "desc_us_datacenter_load_forecast"
+      ],
+      "normative_claim_ids": [
+        "norm_ecological_stewardship",
+        "norm_ecosystem_capabilities",
+        "norm_future_generations_duty"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "Marginal cost-effectiveness is the camp's discipline, and AI-accelerated discovery competes badly against bednets, vaccines, and direct treatment-access transfers on dollars-per-DALY-averted at currently quantifiable confidence. Routing the reallocation argument through frontier compute risks displacing funding from interventions with proven LMIC delivery into a speculative pipeline whose benefits arrive on a 10-15 year horizon and may not reach Sub-Saharan Africa at all if patent and pricing structures hold.",
+      "descriptive_claim_ids": [
+        "desc_extreme_poverty_trajectory",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "In practice this intervention runs on closed frontier models gated behind pharma licensing deals and cloud-prime APIs; the harm_concentration score on the intervention is honest about that. Endorsing it as currently structured ratifies the closed-weights gatekeeping the camp exists to oppose, with the bio-safety dual-use argument as the convenient cover story for permanent restriction.",
+      "descriptive_claim_ids": [
+        "desc_flagship_training_cost",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "The intervention's harm_concentration is 0.7 and harm_lock_in is 0.6 --- the operator is endorsing a deployment that runs on the same four-prime cloud stack and the same TSMC bottleneck that the rest of his graph identifies as the structural concentration problem. The sovereignty axiom doesn't get a carve-out for medical use; routing therapeutics through the closed-frontier-lab-plus-hyperscaler stack is the same architecture as routing tax software through it, just with a better numerator.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_palantir_dominant",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Stewardship of creation is held in the same coalition as human dignity, and the water and extraction substrate the intervention rides on violates it directly. A medicine produced by draining a watershed and scarring a mine site is not unambiguously a work of mercy --- the tradition has resources to name the displaced harm and refuse the trade.",
+      "descriptive_claim_ids": [
+        "desc_datacenter_water_intensity",
+        "desc_hyperscaler_water_growth"
+      ],
+      "normative_claim_ids": [
+        "norm_ecological_stewardship"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "Deploying frontier capability into bio is a capability-uplift pathway with a generality footprint that the narrow-domain framing obscures. The same training runs and the same agentic scaffolding that screen therapeutic candidates lower the bar for engineered pathogen design; build-only-if-safe means not opening this surface until interpretability can distinguish the two intents at deployment time. The humanitarian numerator is precisely the rhetorical wrapper a halt-able capability advance uses to become un-halt-able.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_compute_matters"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt",
+        "norm_anthropic_alignment"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "AI-driven drug discovery rebuilds the toolchain that animal-welfare advocates need: structure prediction and candidate screening collapse the in-vivo testing demand that currently routes millions of animals through pharma pipelines annually, and the same platforms transfer directly to veterinary therapeutics and to the precision-fermentation strain engineering that displaces factory protein. A pipeline optimized for LMIC infectious disease is the same pipeline that ends animal-model dependency for early-stage screening --- the substrate is dual-use in the right direction.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale",
+        "desc_ncd_shift"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience"
+      ]
+    },
+    {
+      "camp_id": "camp_anthropic",
+      "case": "Drug discovery is the cleanest legitimacy case for frontier capability: it demonstrates that responsible scaling produces civilizational benefit, buys political room for the compute and grid expansion the lead depends on, and gives the lab a deployment domain where alignment failures are measurable against clinical endpoints rather than ambient vibes. Every flagship model that ships an AMR candidate is an argument that the safety-first lab should be the one holding the lead.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_compute_matters",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_safety"
+      ]
+    },
+    {
+      "camp_id": "camp_biomedical",
+      "case": "This is the intervention this camp exists to endorse. AI inside target discovery, structure prediction, and trial simulation compounds across decades exactly the way foundational biomedical research is supposed to --- it's a tool-building deployment, not a product play, and pointing it at neglected infectious disease and AMR is where the marginal DALY math is most lopsided. The compute and algorithmic efficiency curves mean the cost-per-candidate trajectory is improving faster than any wet-lab process.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_life_expectancy_gain",
+        "desc_ncd_shift",
+        "desc_compute_matters",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_biomedical_public_good"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Drug discovery is one of the rare AI deployment surfaces that augments rather than replaces skilled labor --- bench scientists, clinicians, regulatory staff keep their roles and gain throughput. It also targets the disease burden (mental health, chronic NCDs) that disproportionately destroys working-class lives and labor capacity. Compared to call-center automation or copywriting displacement, this is AI pointed at the welfare floor of the people the camp represents.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "Every quarter of delay in drug discovery is averted lifespan that did not arrive. The compute and algorithmic curves are doing the work; the only question is whether we route them through therapeutics fast enough to compound against the mortality numerator. This is acceleration with a legible welfare denominator --- the kind of deployment that immunizes the broader buildout against the brake.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_training_compute_growth",
+        "desc_algorithmic_efficiency",
+        "desc_life_expectancy_gain",
+        "desc_child_mortality_progress"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "Targeting neglected infectious disease, AMR, and LMIC-priority therapeutics is the AI deployment that maps directly onto the DALY geography this camp tracks. 4.9M under-5 deaths annually concentrated in Sub-Saharan Africa is the numerator; AI-compressed discovery cycles for the diseases pharma won't fund commercially is the denominator move. This is the reallocation the camp is asking for, named explicitly.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_extreme_poverty_trajectory",
+        "desc_suffering_geography",
+        "desc_ncd_shift"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Drug discovery is the deployment domain where closed-weights gatekeeping causes the most legible harm --- LMIC research institutions and academic labs need direct model access to iterate on local pathogens and reformulations, not API rate-limits priced in dollars. Open structure-prediction and screening models route the benefit past the cloud-prime tollbooth and into the hands of the people closest to the disease burden.",
+      "descriptive_claim_ids": [
+        "desc_algorithmic_efficiency",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_openai",
+      "case": "Drug discovery is the consumer-and-enterprise legitimacy story that funds the next training run. Pharma and biotech are willing to pay for capability at margins that subsidize the broader scale-up; the resulting feedback loop produces both revenue and a public-interest narrative that protects the deployment surface from regulatory clawback. Scale first, route a slice at therapeutics, the flywheel handles the rest.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_compute_matters",
+        "desc_us_datacenter_load_forecast"
+      ],
+      "normative_claim_ids": [
+        "norm_openai_scale_first"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "This is the intervention closest to the manifesto's stated normative spine: AI pointed at suffering reduction at civilizational scale, with a measurable DALY denominator and a leverage profile that scales with the compute curve the operator is already long. It also routes around the capital-extraction default the operator says he's defecting under duress to participate in --- this is the alternative he's claiming exists.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_mental_health_burden",
+        "desc_ncd_shift",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Drug discovery already operates inside an audit-and-trial regime --- FDA, EMA, ICH --- which means AI deployed here inherits a legibility scaffold the rest of the frontier deployment surface lacks. This is the domain where the duty-to-inspect can actually be discharged because the downstream gates exist; endorsing it strengthens the precedent that consequential AI should ride on top of existing accountability infrastructure rather than route around it.",
+      "descriptive_claim_ids": [
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "AI as instrument serving the healing of the human person is the deployment profile every tradition in this coalition can endorse without violating its anthropology. Drug discovery does not blur the creator/creature line, does not market models as moral patients, and routes the tool toward the bodies of the sick --- the works of mercy framing maps directly onto the action.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_life_expectancy_gain",
+        "desc_ncd_shift"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "Narrow-domain deployment inside drug discovery is the rare capability application that does not push frontier generality --- it consumes existing capability against a bounded scientific objective with measurable endpoints. Endorsing this lane gives the camp a legitimate-use narrative to point to when arguing for halts on agentic and military deployment, and it absorbs talent and compute into a domain where alignment failures are caught by clinical trial machinery rather than by the world.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_alignment"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_algorithmic_efficiency",
+    "desc_animal_suffering_scale",
+    "desc_compute_matters",
+    "desc_extreme_poverty_trajectory",
+    "desc_flagship_training_cost",
+    "desc_suffering_geography",
+    "desc_training_compute_growth",
+    "desc_us_datacenter_load_forecast"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-19T16:17:32.602938Z",
+  "operator_tension": "The sharpest discomfort is the camp_operator case_against: this intervention scores harm_concentration 0.7 and harm_lock_in 0.6, and it routes through the exact four-prime-cloud-plus-TSMC-plus-Palantir-mission-software stack the operator's own descriptive claims (desc_ic_cloud_concentration, desc_leading_edge_chip_concentration, desc_palantir_dominant) identify as the structural concentration problem. The operator's sovereignty axiom (norm_operator_sovereignty) does not contain a medical-use carve-out, and the Pi-hole-Vaultwarden-self-hosted infrastructure politics is the same document as the AI-deployment politics by his own statement. Endorsing intv_drug_discovery as currently structured means accepting that the suffering-reduction numerator buys an architectural concession to the closed-frontier-lab-plus-hyperscaler stack --- which is the same trade he calls 'defection under duress' when he uses Claude at work. The xrisk case_against compounds it: he is ideologically accelerationist but temperamentally a quant, and dual-use bio is the lane where the quant should be the loudest voice in the room, not the e/acc.",
+  "target_intervention_id": "intv_drug_discovery",
+  "target_intervention_text": "Deploy frontier AI (structure prediction, candidate screening, trial simulation) inside drug discovery and therapeutic development pipelines targeting neglected infectious disease, antimicrobial resistance, and LMIC-priority therapeutics."
+}

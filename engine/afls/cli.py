@@ -17,7 +17,7 @@ from rich.table import Table
 
 from afls import __version__
 from afls.config import data_dir, db_path, public_output_dir, repo_root
-from afls.ingest import fetch_and_extract
+from afls.ingest import MIN_PARAGRAPH_TAGS, fetch_and_extract
 from afls.output import (
     analysis_paths,
     leverage_analysis_paths,
@@ -515,15 +515,24 @@ def ingest(url: str) -> None:
     """Fetch a URL and draft Source + DescriptiveClaims + Evidence YAML via Claude."""
     typer.secho(f"fetching {url}", fg="cyan")
     try:
-        final_url, article_text, sha256 = _fetch_for_ingest(url)
+        final_url, article_text, sha256, paragraph_count = _fetch_for_ingest(url)
     except Exception as exc:
         typer.secho(f"fetch failed: {exc}", fg="red")
         raise typer.Exit(1) from exc
+    if paragraph_count < MIN_PARAGRAPH_TAGS:
+        typer.secho(
+            f"precheck failed: {paragraph_count} <p> tag(s) in raw HTML, "
+            f"need {MIN_PARAGRAPH_TAGS}+. Page is likely JS-rendered, a paywall, "
+            "or not an article --- LLM call skipped.",
+            fg="red",
+        )
+        raise typer.Exit(1)
     if not article_text.strip():
         typer.secho("fetched page contained no extractable text", fg="red")
         raise typer.Exit(1)
     typer.secho(
-        f"extracted {len(article_text)} chars (sha256={sha256[:12]}...) from {final_url}",
+        f"extracted {len(article_text)} chars (sha256={sha256[:12]}...) from {final_url} "
+        f"[{paragraph_count} <p> tags]",
         fg="cyan",
     )
 

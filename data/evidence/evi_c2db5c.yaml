@@ -1,0 +1,14 @@
+claim_id: desc_rl_reasoning_crossover_point
+created_at: '2026-04-19T18:48:45.108680Z'
+id: evi_c2db5c
+kind: evidence
+locator: 'Three Dynamics section, #3 Shifting the paradigm'
+method_tag: expert_estimate
+provenance_url: null
+quote: Spending $1M instead of $0.1M is enough to get huge gains... we're at a unique
+  'crossover point' where there is a powerful new paradigm that is early on the scaling
+  curve.
+source_id: src_amodei_deepseek_export_controls
+supports: support
+updated_at: '2026-04-19T18:48:45.108681Z'
+weight: 0.75

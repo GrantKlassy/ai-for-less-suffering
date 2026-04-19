@@ -1,0 +1,13 @@
+claim_id: desc_altman_cost_10x_per_year
+created_at: '2026-04-19T18:50:11.276419Z'
+id: evi_65b997
+kind: evidence
+locator: Observation 2
+method_tag: primary_testimony
+provenance_url: null
+quote: The cost to use a given level of AI falls about 10x every 12 months... the
+  price per token dropped about 150x in that time period.
+source_id: src_altman_three_observations
+supports: support
+updated_at: '2026-04-19T18:50:11.276420Z'
+weight: 0.75

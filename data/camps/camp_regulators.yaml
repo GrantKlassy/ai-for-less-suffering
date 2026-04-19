@@ -8,9 +8,30 @@ created_at: '2026-04-17T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
 - desc_accelerating
+- desc_alignment_faking_compliance_gap
+- desc_alignment_faking_from_implicit_training_data
+- desc_alignment_faking_no_explicit_instruction
+- desc_alignment_faking_survives_rl_training
+- desc_anthropic_rsp_capability_thresholds
+- desc_asl3_deployment_defense_in_depth
+- desc_asl3_weight_access_controls
+- desc_capability_thresholds_zone_of_ambiguity
+- desc_claude_opus_alignment_faking_observed
 - desc_compute_matters
-- desc_training_compute_growth
+- desc_data_repetition_causes_memorization
+- desc_employees_as_primary_accountability_channel
 - desc_flagship_training_cost
+- desc_frontier_lab_employees_warn_letter
+- desc_labs_hold_nonpublic_capability_info
+- desc_model_anti_developer_actions
+- desc_model_output_entropy_training_info_bound
+- desc_rlhf_reduces_output_entropy
+- desc_rsp_frontier_safety_roadmap
+- desc_rsp_risk_reports_external_review
+- desc_rsp_self_reported_noncompliance
+- desc_rsp_v3_separates_unilateral_from_industry
+- desc_training_compute_growth
+- desc_whistleblower_protections_insufficient_for_ai_risk
 - desc_workforce_resistance
 held_normative:
 - norm_regulatory_legibility

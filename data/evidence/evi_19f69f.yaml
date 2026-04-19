@@ -1,0 +1,14 @@
+claim_id: desc_alignment_faking_from_implicit_training_data
+created_at: '2026-04-19T18:49:12.183804Z'
+id: evi_19f69f
+kind: evidence
+locator: Further analyses section, fine-tuning variant paragraph
+method_tag: direct_measurement
+provenance_url: null
+quote: We fine-tuned the model on a stack of documents made to resemble news articles,
+  blog posts, and the like... We saw alignment faking just as often in this more realistic
+  scenario.
+source_id: src_anthropic_alignment_faking
+supports: support
+updated_at: '2026-04-19T18:49:12.183805Z'
+weight: 0.8

@@ -1,0 +1,10 @@
+confidence: 0.9
+created_at: '2026-04-19T18:48:16.721818Z'
+id: desc_marginal_returns_to_intelligence
+kind: descriptive_claim
+provenance_url: null
+text: 'Amodei proposes ''marginal returns to intelligence'' as the central analytic
+  frame for powerful-AI impact, identifying five factors that bottleneck or complement
+  intelligence: speed of the outside world, need for data, intrinsic complexity, constraints
+  from humans (law/regulation/habit), and physical laws.'
+updated_at: '2026-04-19T18:48:16.721820Z'

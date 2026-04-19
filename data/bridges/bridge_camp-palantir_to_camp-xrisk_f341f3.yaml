@@ -1,0 +1,16 @@
+caveats:
+- Palantir gating tightens as adversary capability grows; x-risk gating tightens as
+  own capability grows. The vectors point opposite directions.
+- No realistic policy output where both gates fire simultaneously except a narrow
+  compute-governance regime.
+content_hash: f341f33931c289900d3d153327401bd1cea02b37a9097b82b00ecd9b846f3e9c
+created_at: '2026-04-19T16:06:40.033113Z'
+from_camp: camp_palantir
+id: bridge_camp-palantir_to_camp-xrisk_f341f3
+kind: bridge
+provenance_url: null
+to_camp: camp_xrisk
+translation: Palantir's order-first axiom and x-risk's halt-if-unsafe axiom both reject
+  the assumption that capability deployment is self-justifying. Both want a gating
+  function; they disagree on what the gate measures (geopolitical stability vs. interpretability).
+updated_at: '2026-04-19T16:06:40.033113Z'

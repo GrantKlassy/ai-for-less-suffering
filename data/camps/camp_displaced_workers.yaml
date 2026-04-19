@@ -7,12 +7,16 @@ disputed_evidence:
 - evi_pltr_ceo_dismisses_resistance
 held_descriptive:
 - desc_accelerating
-- desc_enterprise_slow
-- desc_workforce_resistance
-- desc_maven_status
+- desc_altman_capital_labor_imbalance_risk
+- desc_altman_slow_labor_market_transition
+- desc_chatgpt_stackoverflow_traffic_decline
 - desc_dod_ai_contract_spend
-- desc_palantir_gov_revenue
+- desc_enterprise_slow
+- desc_frontier_lab_employees_warn_letter
+- desc_maven_status
 - desc_mental_health_burden
+- desc_palantir_gov_revenue
+- desc_workforce_resistance
 held_normative:
 - norm_workers_dignity
 - norm_operator_flourishing
@@ -21,6 +25,6 @@ kind: camp
 name: Displaced workers
 provenance_url: null
 summary: Labor-organizer coalition. Holds that AI displacement without replacement
-  of role and meaning is a first-order harm; contests interested-party dismissals of
-  employee resistance.
+  of role and meaning is a first-order harm; contests interested-party dismissals
+  of employee resistance.
 updated_at: '2026-04-17T16:55:00Z'

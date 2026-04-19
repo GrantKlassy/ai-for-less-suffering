@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Sam Altman
+created_at: '2026-04-19T18:49:48.220662Z'
+id: src_altman_intelligence_age
+kind: source
+notes: Personal essay by OpenAI CEO. Treated as primary_testimony for Altman's own
+  views and forecasts; low reliability for empirical claims, which are asserted without
+  citation. Slight bump above blog prior because Altman is a primary actor whose stated
+  beliefs/intentions are themselves the referent for several claims.
+provenance:
+  at: '2026-04-19T18:49:48.220625Z'
+  git_sha: 604c9dfd252a4d4d604e2bca36e8629a9452687b
+  method: httpx
+  raw_content_hash: 7224aa72bb97f77ee3c205d8b966b55136af0d424e86cfdb51f7ba79a74cce23
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-09-23'
+reliability: 0.4
+source_kind: blog
+title: The Intelligence Age
+updated_at: '2026-04-19T18:49:48.220663Z'
+url: https://ia.samaltman.com/

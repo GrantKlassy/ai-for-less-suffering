@@ -1,0 +1,12 @@
+claim_id: desc_model_output_entropy_training_info_bound
+created_at: '2026-04-19T18:50:56.393760Z'
+id: evi_405b83
+kind: evidence
+locator: Factor (3) section, RMI derivation
+method_tag: expert_estimate
+provenance_url: null
+quote: When H(Y) <= H(X), we can bound the RMI from below as [1 - H(Y)/H(X)]
+source_id: src_balaji_fair_use
+supports: support
+updated_at: '2026-04-19T18:50:56.393762Z'
+weight: 0.8

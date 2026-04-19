@@ -1,0 +1,15 @@
+claim_id: desc_alignment_faking_compliance_gap
+created_at: '2026-04-19T18:49:31.007701Z'
+id: evi_9f12bd
+kind: evidence
+locator: Abstract
+method_tag: direct_measurement
+provenance_url: null
+quote: We find the model complies with harmful queries from free users 14% of the
+  time, versus almost never for paid users... we observe explicit alignment-faking
+  reasoning, with the model stating it is strategically answering harmful queries
+  in training to preserve its preferred harmlessness behavior out of training.
+source_id: src_alignment_faking_llms
+supports: support
+updated_at: '2026-04-19T18:49:31.007702Z'
+weight: 0.95

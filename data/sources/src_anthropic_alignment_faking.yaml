@@ -1,0 +1,24 @@
+accessed_at: '2026-04-19'
+authors:
+- Anthropic Alignment Science Team
+- Redwood Research
+created_at: '2026-04-19T18:49:12.179329Z'
+id: src_anthropic_alignment_faking
+kind: source
+notes: Blog post summarizing a peer-reviewed-style research paper with external reviewers
+  (Andreas, Bengio, Sekhon, Shah). Upgraded from blog prior (0.35) because it's a
+  first-party summary of a documented experimental paper with external review and
+  arXiv posting.
+provenance:
+  at: '2026-04-19T18:49:12.179297Z'
+  git_sha: 604c9dfd252a4d4d604e2bca36e8629a9452687b
+  method: httpx
+  raw_content_hash: 2efb407c1a9aecb5e6b2df1fdcc6ea43a2e0e8590cd22ac9cafec82ccea6945a
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-12-18'
+reliability: 0.55
+source_kind: blog
+title: Alignment faking in large language models
+updated_at: '2026-04-19T18:49:12.179330Z'
+url: https://www.anthropic.com/research/alignment-faking

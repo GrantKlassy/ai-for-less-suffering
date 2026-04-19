@@ -1,0 +1,421 @@
+{
+  "case_against": [
+    {
+      "camp_id": "camp_eacc",
+      "case": "A billion dollars a year routed to interpretability is a billion dollars not routed to compute, fabs, or grid --- the actual bottlenecks. Alignment research has low leverage on the friction layers that matter and a dubious track record of producing deployable safety at the frontier. Worse, the field is a regulatory on-ramp: every interpretability result becomes an audit requirement that slows deployment. The brake disguised as a tool.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "camp_id": "camp_openai",
+      "case": "Alignment tractability comes from scaled deployment, not from interpretability papers. RLHF, red-team-at-scale, and real-world misuse telemetry have produced more safety than a decade of mech-interp. Shifting hundreds of millions into interpretability funds an academic subfield that is decoupled from the feedback loops where alignment actually gets solved, and it strengthens the coalition that wants to gate releases.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost",
+        "desc_us_lead"
+      ],
+      "normative_claim_ids": [
+        "norm_openai_scale_first"
+      ]
+    },
+    {
+      "camp_id": "camp_environmentalists",
+      "case": "Interpretability research legitimates continued frontier scaling by providing the safety veneer that justifies the next datacenter build. The harm_water 0.9 and harm_extraction 0.9 scores on this intervention are na\u00efve --- alignment funding does not sit outside the compute pipeline, it underwrites it. Every interpretability result that clears a deployment is downstream of fresh aquifer draw and fresh mine-site harm in the DRC and Inner Mongolia. Funding the safety case is funding the build.",
+      "descriptive_claim_ids": [
+        "desc_hyperscaler_water_growth",
+        "desc_datacenter_water_intensity",
+        "desc_critical_minerals_refining",
+        "desc_rare_earth_supply_chain",
+        "desc_thermoelectric_water_embed"
+      ],
+      "normative_claim_ids": [
+        "norm_ecological_stewardship",
+        "norm_future_generations_duty"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "In practice, alignment-research funding flows to closed frontier labs (Anthropic, OpenAI, DeepMind) and becomes the intellectual property case for why only those labs can be trusted to release. Interpretability-as-gatekeeping is the dominant implementation. Concentration increases, not decreases. The resulting 'safe deployment' norms ratchet against open release precisely because open models cannot be audited by the lab's proprietary stack.",
+      "descriptive_claim_ids": [
+        "desc_leading_edge_chip_concentration",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "Hundreds of millions to low billions annually at GiveWell-tier cost-effectiveness averts orders of magnitude more DALYs than the speculative, long-horizon, low-probability payoff of interpretability research. The marginal dollar to bednets, vaccines, or LMIC mental-health programs has a measurable suffering-averted ratio; the marginal dollar to alignment research has a prior distribution over maybe-mattering. Default allocation goes to the pipeline with the measured denominator.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_extreme_poverty_trajectory",
+        "desc_suffering_geography",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "80+ billion land animals per year, 1-3 trillion aquatic --- alignment research funding does not touch this numerator. Every billion to interpretability is a billion not to alt-protein R&D, slaughter-throughput reduction, or welfare-standard enforcement. The suffering calculus is dominated by non-human numerator terms that interpretability is structurally indifferent to.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Alignment research operationally means 'make the model safer to deploy,' which translates to 'accelerate workforce absorption.' Interpretability does not fund retraining, transition support, or the structural replacement of role and meaning --- it funds the legitimacy case for the deployment that displaces. The welfare harm of displacement is not mitigated, it is oiled.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_palantir",
+      "case": "The US lead is 6-18 months and enterprise/government absorption already lags by years. Public funding for interpretability at scale will be captured by a policy coalition that wants pre-deployment audit regimes, which further widens the absorption gap precisely where national-security urgency is highest. The marginal dollar to mission-software integration and IC deployment beats the marginal dollar to academic interpretability on the national-advantage metric.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_enterprise_slow",
+        "desc_dod_ai_contract_spend"
+      ],
+      "normative_claim_ids": [
+        "norm_palantir_national",
+        "norm_palantir_order"
+      ]
+    },
+    {
+      "camp_id": "camp_content_creators",
+      "case": "Alignment research is silent on the training-data consent violation. Funding interpretability makes the models the creators were not asked about safer to deploy --- it does not unwind the underlying rights violation at the data layer. It launders the harm by making the output more trustworthy while the input remains uncompensated.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_creator_consent"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Interpretability research produces increasingly sophisticated language for machine 'cognition,' 'values,' and 'deception' --- categories that erode the creator/creature distinction by attributing interiority to instruments. The technical vocabulary of alignment is precisely what blurs the line religious anthropology insists on. Funding it accelerates the philosophical category error regardless of intent.",
+      "descriptive_claim_ids": [
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "camp_id": "camp_anthropic",
+      "case": "Capability is compounding at 4-5x/year on compute and halving every 8 months on algorithmic efficiency while the US lead is only 6-18 months --- interpretability is the single variable that decides whether the systems we are definitely building are steerable. Hundreds of millions to low billions annually is rounding error against $100M+ training runs, and alignment funding rides on near-zero friction across grid, public, and capex because it is labor and GPUs, not fabs and substations. If the lead-seeking strategy is coherent at all, it is only coherent paired with maximal interpretability spend; otherwise we ship a frontier we cannot read.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost",
+        "desc_algorithmic_efficiency",
+        "desc_us_lead"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_alignment",
+        "norm_anthropic_safety"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "A pause is not on the table politically --- compute doubles every 5-6 months and algorithmic efficiency doubles every 8 --- so the second-best world is one where interpretability funding scales fast enough to generate the auditable evidence that would make a pause legible if conditions warrant. Alignment research is the only intervention whose output (mechanistic understanding, evals, deception detection) directly shrinks the policy option space of 'build blind.' Low friction, high leverage on the exact bottleneck we care about.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_algorithmic_efficiency",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt",
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Deployment-legibility obligations are unenforceable without a science of model inspection. Interpretability research is the upstream public good that makes audit, red-teaming, and contestability technically possible --- without it, 'AI governance' is paperwork over black boxes. Public funding of interpretability is the infrastructure a regulatory regime sits on top of; private labs will underfund it because the externality is public trust, not quarterly revenue.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_flagship_training_cost",
+        "desc_training_compute_growth"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "Interpretability is the substrate bet. Every downstream suffering-reduction deployment --- drug discovery, mental-health triage, alt-protein --- requires that we can trust and steer the models doing the work. Self-hosting and sovereign-individual control of AI are impossible if nobody can read a weight; open-weights futures only have teeth when the weights are interpretable. Low friction across all five layers, direct action on the root-cause bottleneck. This is protocol-level, not app-level.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing",
+        "norm_operator_sovereignty"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "AI deployed inside LMIC health pipelines (triage, diagnostic support, drug-discovery acceleration) only reduces suffering if clinicians, ministries, and WHO can trust the outputs. Interpretability is the prerequisite for adoption in high-stakes low-resource contexts where error modes are opaque and recourse is thin. Funding alignment research is funding the conditions under which AI-for-health can actually be deployed at scale without iatrogenic harm.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_ncd_shift",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_biomedical",
+      "case": "Mechanistic interpretability is foundational research with the same compounding-returns profile as basic biomedical science --- its products (features, circuits, steering tools) propagate across every downstream application for decades. Public funding is appropriate precisely because private labs will only fund the slice tied to near-term product safety. This is NIH-model investment in the tooling layer for every future AI-driven biomedical advance.",
+      "descriptive_claim_ids": [
+        "desc_algorithmic_efficiency",
+        "desc_compute_matters",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_biomedical_public_good"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Workers cannot contest deployments they cannot inspect. Interpretability research is the precondition for meaningful labor oversight of AI in the workplace --- without it, 'human in the loop' is theater. Funding alignment expands the surface area on which workers, unions, and employee-resistance coalitions can make substantive claims about which deployments are acceptable.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance",
+        "desc_maven_status"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Open weights without interpretability tools is a library of untranslated books. Alignment research --- especially the mechanistic-interp and evals portions --- is dual-use in the good sense: its outputs transfer to any open model and make distributed capability actually governable by its recipients. Public funding for interpretability breaks the closed-labs' epistemic monopoly on 'we alone understand what we ship.'",
+      "descriptive_claim_ids": [
+        "desc_algorithmic_efficiency",
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Human moral standing requires that the instruments humans build remain instruments --- legible, accountable, under human judgment. Interpretability research is the technical expression of the theological claim that creatures must not worship what they cannot see into. Public investment here preserves the creator/creature distinction at the technical layer.",
+      "descriptive_claim_ids": [
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_accelerating",
+    "desc_flagship_training_cost",
+    "desc_mental_health_burden",
+    "desc_suffering_geography",
+    "desc_training_compute_growth",
+    "desc_us_lead"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-19T16:10:04.325744Z",
+  "operator_tension": "The operator's stated ideal is AI pointed at suffering reduction, with interpretability as infrastructure for every downstream bet --- but the camp_global_health and camp_animal_welfare cases-against cut at the operator's own 80K/EA overlay with its own knife. If you take GiveWell-tier cost-effectiveness seriously, the marginal billion to interpretability has a prior distribution over maybe-mattering while the marginal billion to bednets or alt-protein has a measured DALY denominator and a numerator that includes 80 billion land animals the operator's frame already counts. The operator bets on substrates over surfaces --- but interpretability is only substrate if you assume the frontier capability trajectory is the binding constraint on future suffering reduction, and that is the exact accelerationist prior the 80K overlay is supposed to discipline. The sharper discomfort: the camp_environmentalists case-against reads interpretability funding as the legitimacy layer that underwrites the datacenter build the operator is invested in through AI-disruption equities. The poker-brain process-over-outcome frame gets uncomfortable when 'process' means 'bet on the substrate' and the substrate bet happens to coincide with the operator's portfolio.",
+  "target_intervention_id": "intv_alignment_research",
+  "target_intervention_text": "Scale funding for interpretability and alignment research."
+}

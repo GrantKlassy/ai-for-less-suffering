@@ -1,0 +1,22 @@
+accessed_at: '2026-04-19'
+authors:
+- Sam Altman
+created_at: '2026-04-19T18:50:11.272985Z'
+id: src_altman_three_observations
+kind: source
+notes: 'Personal blog post by OpenAI CEO. Primary testimony re: his own views, but
+  advocacy-coded on economic claims. Slight upward adjustment from blog prior (0.35)
+  because Altman is a primary source on OpenAI''s framing and roadmap.'
+provenance:
+  at: '2026-04-19T18:50:11.272955Z'
+  git_sha: 604c9dfd252a4d4d604e2bca36e8629a9452687b
+  method: httpx
+  raw_content_hash: b7809c2770a6b03d05b51507bb3186591a095bb49dbbda14c06d63c931e8d761
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2025-02
+reliability: 0.4
+source_kind: blog
+title: Three Observations
+updated_at: '2026-04-19T18:50:11.272986Z'
+url: https://blog.samaltman.com/three-observations

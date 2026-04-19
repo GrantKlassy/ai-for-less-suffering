@@ -219,7 +219,7 @@ def test_ingest_end_to_end_links_claims(
     monkeypatch.setattr(
         cli_module,
         "_fetch_for_ingest",
-        lambda url: ("https://example.com/", "Article body.", "deadbeef" * 8),
+        lambda url: ("https://example.com/", "Article body.", "deadbeef" * 8, 10),
     )
     payloads = [
         _ingest_payload(),
@@ -252,7 +252,7 @@ def test_ingest_end_to_end_empty_linkage_floats_claim(
     monkeypatch.setattr(
         cli_module,
         "_fetch_for_ingest",
-        lambda url: ("https://example.com/", "Article body.", "deadbeef" * 8),
+        lambda url: ("https://example.com/", "Article body.", "deadbeef" * 8, 10),
     )
     payloads = [
         _ingest_payload(),

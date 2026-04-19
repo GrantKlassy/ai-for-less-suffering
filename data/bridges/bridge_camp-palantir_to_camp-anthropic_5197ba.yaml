@@ -1,0 +1,17 @@
+caveats:
+- Palantir treats adversarial nation-states as the primary threat model; Anthropic
+  treats misaligned systems as the primary threat model.
+- Palantir is comfortable with kinetic application of AI (Maven); Anthropic's published
+  policy is not.
+content_hash: 5197ba84e3d8b183d7a9e16d5cad5533d9f77b1daf173e22123e85a92ac5f2a1
+created_at: '2026-04-19T16:06:40.033049Z'
+from_camp: camp_palantir
+id: bridge_camp-palantir_to_camp-anthropic_5197ba
+kind: bridge
+provenance_url: null
+to_camp: camp_anthropic
+translation: Palantir's 'order is precondition for freedom' maps onto Anthropic's
+  'capability must not outrun alignment' --- both treat an ungoverned substrate as
+  the failure mode. Palantir locates the governor in state institutions; Anthropic
+  locates it in the lab's own RSP and interpretability stack.
+updated_at: '2026-04-19T16:06:40.033052Z'

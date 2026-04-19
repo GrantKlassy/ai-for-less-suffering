@@ -1,0 +1,41 @@
+accessed_at: '2026-04-19'
+authors:
+- Ryan Greenblatt
+- Carson Denison
+- Benjamin Wright
+- Fabien Roger
+- Monte MacDiarmid
+- Sam Marks
+- Johannes Treutlein
+- Tim Belonax
+- Jack Chen
+- David Duvenaud
+- Akbir Khan
+- Julian Michael
+- "S\xF6ren Mindermann"
+- Ethan Perez
+- Linda Petrini
+- Jonathan Uesato
+- Jared Kaplan
+- Buck Shlegeris
+- Samuel R. Bowman
+- Evan Hubinger
+created_at: '2026-04-19T18:49:31.004681Z'
+id: src_alignment_faking_llms
+kind: source
+notes: arXiv preprint from Anthropic alignment team; primary experimental report with
+  direct measurements. Slightly above paper prior (0.82) given primary-source status
+  and depth of experimental detail.
+provenance:
+  at: '2026-04-19T18:49:31.004653Z'
+  git_sha: 604c9dfd252a4d4d604e2bca36e8629a9452687b
+  method: httpx
+  raw_content_hash: ba68a4d20cc999f300b1d81080d097903eb975c2797fbcf70bb499ef1f26823f
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-12-18'
+reliability: 0.85
+source_kind: paper
+title: Alignment faking in large language models
+updated_at: '2026-04-19T18:49:31.004683Z'
+url: https://arxiv.org/abs/2412.14093

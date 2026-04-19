@@ -1,0 +1,10 @@
+confidence: 0.95
+created_at: '2026-04-19T18:45:29.040665Z'
+id: desc_rsp_v3_separates_unilateral_from_industry
+kind: descriptive_claim
+provenance_url: null
+text: RSP v3 explicitly separates Anthropic's unilateral mitigation commitments from
+  a broader capabilities-to-mitigations map that Anthropic recommends for industry-wide
+  adoption, acknowledging that the higher-ASL mitigations in prior RSP versions may
+  be impossible to implement unilaterally.
+updated_at: '2026-04-19T18:45:29.040666Z'

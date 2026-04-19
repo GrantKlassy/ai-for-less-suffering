@@ -1,0 +1,13 @@
+claim_id: desc_whistleblower_protections_insufficient_for_ai_risk
+created_at: '2026-04-19T18:50:30.398177Z'
+id: evi_6758a0
+kind: evidence
+locator: Paragraph beginning 'So long as there is no effective government oversight'
+method_tag: primary_testimony
+provenance_url: null
+quote: Ordinary whistleblower protections are insufficient because they focus on illegal
+  activity, whereas many of the risks we are concerned about are not yet regulated.
+source_id: src_right_to_warn_letter
+supports: support
+updated_at: '2026-04-19T18:50:30.398178Z'
+weight: 0.9

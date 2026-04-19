@@ -1,0 +1,10 @@
+confidence: 0.7
+created_at: '2026-04-19T18:48:45.104882Z'
+id: desc_rl_reasoning_crossover_point
+kind: descriptive_claim
+provenance_url: null
+text: Reinforcement-learning-based reasoning training (the second-stage paradigm behind
+  o1 and R1) is at an early crossover point on its scaling curve where spending $1M
+  instead of $0.1M produces large capability gains, allowing multiple labs to temporarily
+  produce comparable reasoning models.
+updated_at: '2026-04-19T18:48:45.104883Z'

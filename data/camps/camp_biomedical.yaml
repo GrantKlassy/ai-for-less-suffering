@@ -8,12 +8,14 @@ agents:
 created_at: '2026-04-18T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
-- desc_child_mortality_progress
-- desc_life_expectancy_gain
-- desc_ncd_shift
-- desc_mental_health_burden
-- desc_compute_matters
 - desc_algorithmic_efficiency
+- desc_amodei_lifespan_doubling
+- desc_child_mortality_progress
+- desc_compressed_21st_century_biology
+- desc_compute_matters
+- desc_life_expectancy_gain
+- desc_mental_health_burden
+- desc_ncd_shift
 held_normative:
 - norm_biomedical_public_good
 id: camp_biomedical

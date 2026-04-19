@@ -7,14 +7,15 @@ agents:
 created_at: '2026-04-17T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
-- desc_datacenter_water_intensity
-- desc_hyperscaler_water_growth
-- desc_thermoelectric_water_embed
+- desc_altman_compute_abundance_access_framing
 - desc_critical_minerals_refining
-- desc_rare_earth_supply_chain
-- desc_us_datacenter_load_forecast
+- desc_datacenter_water_intensity
 - desc_grid_constraint
+- desc_hyperscaler_water_growth
+- desc_rare_earth_supply_chain
+- desc_thermoelectric_water_embed
 - desc_transmission_stall
+- desc_us_datacenter_load_forecast
 held_normative:
 - norm_ecological_stewardship
 - norm_ecosystem_capabilities
@@ -25,6 +26,7 @@ name: Environmentalists
 provenance_url: null
 summary: Conservation / ecological-economics / environmental-justice coalition. Holds
   that water, extraction, and land harms from compute buildout are first-order wrongs,
-  not consequentialist costs to be offset against downstream AI benefit. Anchored in
-  theological, capabilities, and Kantian normative frames --- not consequentialist aggregation.
+  not consequentialist costs to be offset against downstream AI benefit. Anchored
+  in theological, capabilities, and Kantian normative frames --- not consequentialist
+  aggregation.
 updated_at: '2026-04-17T00:00:00Z'

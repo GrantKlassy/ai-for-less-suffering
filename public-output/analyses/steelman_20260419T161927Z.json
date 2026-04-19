@@ -1,0 +1,459 @@
+{
+  "case_against": [
+    {
+      "camp_id": "camp_environmentalists",
+      "case": "Permitting reform means weaker NEPA, weaker state siting review, weaker environmental-justice protections. Every additional MWh embeds thermoelectric water withdrawal in already-stressed basins. Hyperscaler water consumption is already growing 20% YoY against AI workloads. Faster grid buildout under current rules means foreclosed aquifers and accelerated extractive supply-chain harm --- a categorical wrong, not a cost to be netted against downstream model utility.",
+      "descriptive_claim_ids": [
+        "desc_thermoelectric_water_embed",
+        "desc_datacenter_water_intensity",
+        "desc_hyperscaler_water_growth",
+        "desc_critical_minerals_refining"
+      ],
+      "normative_claim_ids": [
+        "norm_ecological_stewardship",
+        "norm_future_generations_duty",
+        "norm_ecosystem_capabilities"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "Compute is currently the soft brake on capability. Training compute is doubling every ~6 months and the grid is one of the few binding constraints slowing it. Removing that constraint accelerates capability without correspondingly accelerating interpretability. Pause-optionality requires the brake stay attached; grid buildout removes it.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost",
+        "desc_grid_constraint"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt",
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Permitting reform framed as 'unblocking the grid' is in practice a reduction in public-process surface area --- the same surface area that makes consequential infrastructure decisions contestable. A 2x-divergent load forecast means the public has not yet had a coherent conversation about whether to absorb hyperscaler demand at all. Speeding the build forecloses the deliberation.",
+      "descriptive_claim_ids": [
+        "desc_us_datacenter_load_forecast",
+        "desc_interconnection_queue_backlog"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "The marginal datacenter electron does not flow to alt-protein or LMIC drug discovery; it flows to the workloads that can pay for it --- ad targeting, legal automation, defense mission software. Grid buildout under current capital allocation is subsidized infrastructure for whatever displaces labor fastest. Closing the enterprise-absorption gap is the harm here, not the benefit.",
+      "descriptive_claim_ids": [
+        "desc_palantir_gov_revenue",
+        "desc_dod_ai_contract_spend",
+        "desc_maven_status",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Stewardship of creation is not negotiable against compute capacity. Permitting reform that drains aquifers and overrides local communities --- often rural, often religious, often low-income --- to power systems being marketed as substitutes for human relation inverts the proper ordering of creature, creation, and tool.",
+      "descriptive_claim_ids": [
+        "desc_hyperscaler_water_growth",
+        "desc_thermoelectric_water_embed"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity",
+        "norm_ecological_stewardship"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Grid buildout under current procurement reality flows to the four hyperscalers under JWCC and the closed labs they host. Cheap electrons at TSMC-bottlenecked chips and $100M+ training runs do not democratize anything; they entrench the primes who can sign the PPAs and the off-take agreements. The open-weights coalition needs cheap inference, not cheap training-scale capex.",
+      "descriptive_claim_ids": [
+        "desc_leading_edge_chip_concentration",
+        "desc_ic_cloud_concentration",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_anthropic",
+      "case": "If algorithmic efficiency is halving compute requirements every 8 months, the grid constraint is doing alignment work --- it is the only thing keeping capability scaling sub-exponential in calendar time. Reform that adds hundreds of GW asymmetrically benefits the actors least committed to interpretability, because they are the ones with the largest unrestricted training budgets.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_algorithmic_efficiency",
+        "desc_us_lead"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "Generation built under current rules accrues to whoever can sign the largest PPA: hyperscaler, frontier lab, JWCC prime. Sovereign self-hosted compute does not benefit from a 20-year off-take agreement at a Virginia datacenter park. Grid buildout without procurement reform is concentration subsidy.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_palantir_dominant",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_content_creators",
+      "case": "More compute means larger training runs means more unconsented authored work ingested per cycle. The rights violation scales linearly with the compute the grid intervention unlocks. Permitting reform without consent-layer regulation at the training-data tier is infrastructure subsidy for ongoing infringement at industrial scale.",
+      "descriptive_claim_ids": [
+        "desc_training_compute_growth",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_creator_consent"
+      ]
+    },
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "Alt-protein is one downstream use; the marginal grid MWh is more likely to land on workloads that subsidize industrial agriculture's logistics and demand forecasting than to displace it. Without a procurement constraint, grid buildout is neutral-to-negative for the 80B-land-animal numerator.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience",
+        "norm_ecological_stewardship"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "Federal permitting reform routed through Congress is years of negotiation that locks in compromise structures (cost-allocation formulas, environmental-review carve-outs) for a decade. Behind-the-meter generation, modular gas, and SMR buildout that bypasses interconnection queues entirely is faster. The political grid intervention is the slow path dressed as the fast one.",
+      "descriptive_claim_ids": [
+        "desc_transmission_stall"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "camp_id": "camp_anthropic",
+      "case": "If the US lead is 6-18 months and the binding constraint on staying ahead is electrons, not algorithms, then grid buildout is the precondition for responsible actors winning the frontier race. 2,600 GW stuck in interconnection queues with sub-20% completion is the actual gating function on whether a safety-oriented lab can outbuild a less cautious competitor. Permitting reform here is alignment infrastructure.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_us_lead",
+        "desc_interconnection_queue_backlog",
+        "desc_compute_matters"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_safety"
+      ]
+    },
+    {
+      "camp_id": "camp_biomedical",
+      "case": "Drug discovery, structure prediction, and trial simulation are compute-bound at the margin. The NCD and mental-health burden does not wait for permitting court cases. More electrons routed to scientific compute compresses the time from target to therapeutic; the grid is upstream of every AI-for-biomedicine intervention this graph contains.",
+      "descriptive_claim_ids": [
+        "desc_compute_matters",
+        "desc_algorithmic_efficiency",
+        "desc_ncd_shift",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_biomedical_public_good"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "1% transmission growth against a doubling DOE need is the regulatory state strangling capability. Capex is willing, physics is willing, only siting and cost-allocation disputes are not. Every quarter of permitting delay is averted flourishing that did not arrive. Fix the grid; the rest follows.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_transmission_stall",
+        "desc_interconnection_queue_backlog",
+        "desc_us_datacenter_load_forecast",
+        "desc_training_compute_growth"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "Drug discovery and triage tooling for LMIC priorities run on the same compute substrate as everything else. If grid is the binding constraint on US compute, it is also the binding constraint on the AI-for-global-health pipeline downstream of US labs. Cheap reliable electrons are a precondition of cheap reliable inference at the point of care.",
+      "descriptive_claim_ids": [
+        "desc_child_mortality_progress",
+        "desc_suffering_geography",
+        "desc_compute_matters"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_openai",
+      "case": "Scale is the alignment strategy. If the high forecast (~9% of US electricity by 2030) is right, the binding constraint on the feedback loop that makes alignment tractable is megawatts. Permitting reform unlocks the deployment cadence; without it, the scale-first thesis fails for lack of inputs, not for lack of merit.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_us_datacenter_load_forecast",
+        "desc_compute_matters",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_openai_scale_first"
+      ]
+    },
+    {
+      "camp_id": "camp_palantir",
+      "case": "National-security advantage is a function of how many electrons flow into US-controlled compute relative to the adversary. JWCC and combatant-command integration are downstream of grid capacity. A 6-18 month lead evaporates if the grid stalls and PRC generation buildout does not. Permitting reform is national-security industrial policy.",
+      "descriptive_claim_ids": [
+        "desc_us_lead",
+        "desc_grid_constraint",
+        "desc_ic_cloud_concentration",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_palantir_national",
+        "norm_palantir_order"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "The grid is the substrate. Self-hosted compute, sovereign infrastructure, distributed AI capacity --- none of it scales without abundant electrons. Concentration risk gets worse, not better, when generation is scarce: only hyperscalers can outbid for the available capacity. Cheap power is a precondition for de-concentrated AI.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_transmission_stall",
+        "desc_interconnection_queue_backlog",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing",
+        "norm_operator_sovereignty"
+      ]
+    },
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "Alternative-protein development is compute- and bio-foundry-intensive. Every alt-protein scale-up requires reliable cheap electrons for fermentation, AI-driven strain engineering, and supply-chain modeling. Grid buildout is upstream of displacing 80B land animals from factory farms.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale",
+        "desc_compute_matters"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Compute scarcity is concentration's best friend. When power is gated, only the top three hyperscalers can train anything that matters. Grid abundance is what makes open-weights training runs feasible at second-tier and academic scale, where decentralization actually happens.",
+      "descriptive_claim_ids": [
+        "desc_compute_matters",
+        "desc_grid_constraint",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Permitting reform and transmission buildout are union-density jobs --- IBEW linemen, building trades, large-scale construction. A grid intervention is a labor intervention if structured around prevailing-wage and project-labor agreements. The displacement risk from AI is not mitigated by blocking infrastructure that creates durable trades work.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_transmission_stall"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_algorithmic_efficiency",
+    "desc_animal_suffering_scale",
+    "desc_enterprise_slow",
+    "desc_flagship_training_cost",
+    "desc_grid_constraint",
+    "desc_ic_cloud_concentration",
+    "desc_interconnection_queue_backlog",
+    "desc_training_compute_growth",
+    "desc_transmission_stall",
+    "desc_us_datacenter_load_forecast",
+    "desc_us_lead"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-19T16:19:27.372296Z",
+  "operator_tension": "The uncomfortable case is camp_xrisk's --- and you should sit with it from inside your own frame, not dismiss it as the EA discourse you tolerate. Your operator priors hold that grid buildout is unambiguously good: cheap electrons de-concentrate, enable sovereign compute, accelerate biomedical AI, and route around the hyperscaler chokehold. But the x-risk frame says the grid constraint is currently the only mechanical brake on training-compute doubling every 6 months, and that algorithmic efficiency is already halving compute requirements every 8 months. If both are true, removing the grid constraint hands asymmetric benefit to the actors with the largest unrestricted training budgets --- which is exactly the concentration outcome you claim to oppose, achieved through the intervention you support. Your accelerationist temperament wants the grid built; your stated opposition to capital-extraction-aligned AI says the marginal MWh under current procurement flows to ad-tech and defense mission software, not protein folding. You cannot have both. The poker-brain question is whether you are willing to condition your support for intv_grid on procurement reform that you currently treat as a separate problem --- or whether you are quietly accepting concentration as the price of acceleration.",
+  "target_intervention_id": "intv_grid",
+  "target_intervention_text": "Accelerate grid and generation buildout (permitting reform, interconnection, new generation)."
+}

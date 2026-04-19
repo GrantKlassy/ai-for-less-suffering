@@ -1,0 +1,11 @@
+confidence: 0.6
+created_at: '2026-04-19T18:50:56.391165Z'
+id: desc_rlhf_reduces_output_entropy
+kind: descriptive_claim
+provenance_url: null
+text: Post-training via reinforcement learning from human feedback (RLHF) systematically
+  reduces the per-token entropy of model outputs, because reducing sampling randomness
+  reduces hallucination rates; in sample ChatGPT queries, per-token entropy measurements
+  imply roughly 73-94% of output information corresponds to information present in
+  the training dataset under the entropy-ordering assumption.
+updated_at: '2026-04-19T18:50:56.391166Z'

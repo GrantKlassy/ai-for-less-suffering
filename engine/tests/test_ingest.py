@@ -13,7 +13,7 @@ from typer.testing import CliRunner
 
 from afls import cli as cli_module
 from afls.cli import app
-from afls.ingest.fetch import _truncate_utf8, extract_text
+from afls.ingest.fetch import _count_paragraph_tags, _truncate_utf8, extract_text
 from afls.reasoning import AnthropicClient
 from afls.schema import (
     DescriptiveClaim,
@@ -72,6 +72,21 @@ def test_truncate_utf8_noop_when_under_limit() -> None:
     assert _truncate_utf8("hello", max_bytes=100) == "hello"
 
 
+def test_count_paragraph_tags_matches_bare_and_attributed() -> None:
+    html = '<p>a</p><p class="b">b</p><p data-x="c">c</p>'
+    assert _count_paragraph_tags(html) == 3
+
+
+def test_count_paragraph_tags_ignores_sibling_p_prefixed_tags() -> None:
+    """`<pre>`, `<picture>`, `<path>` all start with `<p` but are not paragraphs."""
+    html = "<pre>code</pre><picture></picture><path></path>"
+    assert _count_paragraph_tags(html) == 0
+
+
+def test_count_paragraph_tags_returns_zero_on_empty() -> None:
+    assert _count_paragraph_tags("") == 0
+
+
 # --- CLI end-to-end ------------------------------------------------------
 
 
@@ -120,11 +135,14 @@ def _install_fake_ingest(
     fetched_text: str = "A 2026 study of frontier models.",
     final_url: str = "https://example.com/article",
     sha256: str = "deadbeef" * 8,
+    paragraph_count: int = 10,
     llm_payload: dict[str, Any] | None = None,
 ) -> _FakeSDK:
     """Patch fetch + client so `afls ingest` makes no network calls."""
     monkeypatch.setattr(
-        cli_module, "_fetch_for_ingest", lambda url: (final_url, fetched_text, sha256)
+        cli_module,
+        "_fetch_for_ingest",
+        lambda url: (final_url, fetched_text, sha256, paragraph_count),
     )
     payload = json.dumps(
         llm_payload
@@ -256,7 +274,7 @@ def test_ingest_bails_on_fetch_error(
     data_root: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def _boom(url: str) -> tuple[str, str, str]:
+    def _boom(url: str) -> tuple[str, str, str, int]:
         raise RuntimeError("network gone")
 
     monkeypatch.setattr(cli_module, "_fetch_for_ingest", _boom)
@@ -264,6 +282,23 @@ def test_ingest_bails_on_fetch_error(
     assert result.exit_code == 1
     assert "fetch failed" in result.output
     assert "network gone" in result.output
+
+
+def test_ingest_bails_when_paragraph_count_below_floor(
+    runner: CliRunner,
+    data_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Precheck fires before the LLM call when raw HTML has too few `<p>` tags."""
+    sdk = _install_fake_ingest(monkeypatch, paragraph_count=2)
+    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    assert result.exit_code == 1
+    assert "precheck failed" in result.output
+    assert "2 <p> tag" in result.output
+    assert len(sdk.messages.calls) == 0
+    assert len(list_nodes(Source, data_root)) == 0
+    assert len(list_nodes(DescriptiveClaim, data_root)) == 0
+    assert len(list_nodes(Evidence, data_root)) == 0
 
 
 def test_ingest_rejects_duplicate_llm_slugs(

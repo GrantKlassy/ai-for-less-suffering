@@ -1,0 +1,11 @@
+confidence: 0.75
+created_at: '2026-04-19T18:48:16.721251Z'
+id: desc_compressed_21st_century_biology
+kind: descriptive_claim
+provenance_url: null
+text: Amodei predicts that powerful AI could compress 50-100 years of biological and
+  medical progress into 5-10 years by acting as a 'virtual biologist' that designs
+  and directs experiments rather than merely analyzing data, targeting a ~10x acceleration
+  in the rate of foundational measurement/intervention discoveries (CRISPR-class tools)
+  that he argues drive >50% of biology progress.
+updated_at: '2026-04-19T18:48:16.721252Z'

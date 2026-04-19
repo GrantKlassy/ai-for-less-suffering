@@ -1,0 +1,433 @@
+{
+  "case_against": [
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Retraining is the standard neoliberal pacifier --- it shifts the burden of civilizational-scale displacement onto the displaced and calls that dignity. When capability doubles every few months, the half-life of any retrained skill is shorter than the program that taught it. This intervention offers the appearance of mitigation while the underlying substitution continues unimpeded; it's a political anesthetic, not structural replacement of role and meaning.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_workforce_resistance"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "Enterprise-absorption lag is the single biggest natural brake on catastrophic deployment. Training programs deliberately buy that brake down. Closing the absorption gap before alignment and interpretability catch up is the opposite of the policy we should fund. Every retrained operator is a deployment surface for unaligned systems inside critical infrastructure.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt",
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_environmentalists",
+      "case": "Training is downstream demand-induction. A workforce trained to deploy AI accelerates enterprise absorption, which accelerates compute demand, which accelerates water withdrawal, grid load, and rare-earth extraction. Framing this as human-capital investment hides the ecological bill. The intervention's leverage score is exactly the measure of how much additional extraction it unlocks.",
+      "descriptive_claim_ids": [
+        "desc_hyperscaler_water_growth",
+        "desc_us_datacenter_load_forecast",
+        "desc_critical_minerals_refining"
+      ],
+      "normative_claim_ids": [
+        "norm_ecosystem_capabilities",
+        "norm_future_generations_duty"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Training people to integrate AI into the core of their working lives is the culturally-sanctioned path to the substitution that violates the creator/creature boundary. It normalizes relational replacement --- the teacher deferring to the tutor-model, the therapist to the chatbot, the pastor to the counseling app --- under the euphemism of skills development. What looks like equipping the workforce is catechizing them into dependency.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Training workforces to deploy systems that are not yet legible puts the cart before the horse. Build the audit, evaluation, and contestability infrastructure first; teach people to operate the systems second. Funding deployment-capacity before deployment-accountability is a one-way ratchet --- you cannot un-train a workforce that has already integrated opaque tooling into critical workflows.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_ic_cloud_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_anthropic",
+      "case": "Single-digit billions spent on generalist workforce training is capital that could fund alignment research, evaluations, and RSP infrastructure at the rate that actually matters. Broad retraining does not differentially advantage safety-first actors; it raises the tide for everyone including the less cautious labs. This is undirected acceleration dressed as social policy.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_flagship_training_cost"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_safety",
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "If the scope is US workforce retraining --- which is the default reading --- then the cost-per-DALY-averted is effectively infinite compared to bednets, vaccines, or direct LMIC health-system investment. Single-digit billions annually redirected to GiveWell-tier interventions outperforms this intervention by orders of magnitude on the suffering-averted metric. This is a wealthy-country labor-politics expenditure with a global-impact label.",
+      "descriptive_claim_ids": [
+        "desc_suffering_geography",
+        "desc_child_mortality_progress"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Federally-funded training programs will be designed around the dominant vendor stack --- AWS/Azure/GCP, closed-weight APIs, Palantir-adjacent tooling. The curriculum becomes procurement lock-in dressed as education. Every graduate is a downstream user of the concentrated stack; the training dollar funds the moat of the four cloud primes and the closed labs above them.",
+      "descriptive_claim_ids": [
+        "desc_leading_edge_chip_concentration",
+        "desc_ic_cloud_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "Government-funded AI training at scale will route through the same four cloud primes and the dominant mission-software vendor. The intervention hardens the concentration it claims to mitigate --- curriculum standards, certification bodies, and federal procurement will be written by and for the incumbents. Sovereignty requires distributed training substrate, not a federal program that credentials users of the existing stack.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_palantir_dominant"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_content_creators",
+      "case": "Workforce training normalizes use of models trained on unconsented authored work. Once a generation of workers has been certified on tooling built from stolen corpora, the consent question is politically settled by fait accompli --- the jobs depend on it. Training funding precedes and preempts the training-data rights fight.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance"
+      ],
+      "normative_claim_ids": [
+        "norm_creator_consent"
+      ]
+    },
+    {
+      "camp_id": "camp_animal_welfare",
+      "case": "Generalist workforce training does not touch the 80-billion-land-animal numerator. Dollars into this intervention are dollars not into alt-protein R&D, supply-chain AI targeting confinement displacement, or policy work on species-weighting. On the honest \u2212suffering ranking, this is a rounding error competing for budget against interventions with orders-of-magnitude higher leverage on the dominant numerator term.",
+      "descriptive_claim_ids": [
+        "desc_animal_suffering_scale"
+      ],
+      "normative_claim_ids": [
+        "norm_animal_sentience"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "The binding friction is grid and interconnection, not human capital. Models get cheaper and easier to use every eight months; the workforce will absorb capability as a function of tool quality, not federal curriculum. Billions into training is billions not into permitting reform, transmission, and generation --- the actual brake. Wrong friction layer.",
+      "descriptive_claim_ids": [
+        "desc_grid_constraint",
+        "desc_interconnection_queue_backlog",
+        "desc_transmission_stall"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Capability is accelerating faster than any labor market has ever absorbed, and enterprise lag means the window to get ahead of displacement is measured in years, not decades. Training programs are the only intervention on the board that directly addresses role-and-meaning replacement --- the thing transfers cannot fix. Funding this at scale is how you keep dignity inside the reallocation instead of retrofitting it after the hollowing has already happened.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "A workforce that understands what these systems do is the precondition for democratic accountability over them. Training builds the inspector class --- auditors, procurement officers, domain experts inside agencies --- who can actually read a model card, contest a deployment, or notice when an enterprise rollout is laundering consequential decisions through opaque tooling. Without trained humans in the loop, legibility is a legal fiction.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "Enterprise absorption lagging by years is the binding friction on deployment velocity --- not compute, not capex, not physics. Training is the cheapest lever on the absorption curve. Every retrained operator, technician, and domain specialist is a deployment vector that compounds. Single-digit billions annually to buy down the slowest friction layer is the highest ROI accelerant on the board.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "camp_id": "camp_palantir",
+      "case": "The 6-18 month US lead is worth nothing if DoD and IC workforces can't operate the systems. Enterprise-absorption lag is the gap adversaries close through while we sit on superior capability. Training funded federally --- security-cleared analysts, forward-deployed engineers, program officers who can actually run an AI procurement --- converts compute lead into operational lead. This is a national-advantage investment priced as education policy.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_us_lead",
+        "desc_dod_ai_contract_spend"
+      ],
+      "normative_claim_ids": [
+        "norm_palantir_national",
+        "norm_palantir_order"
+      ]
+    },
+    {
+      "camp_id": "camp_biomedical",
+      "case": "Drug discovery and clinical-research pipelines absorb AI slowly because the human layer --- medicinal chemists, trial designers, regulatory-affairs staff --- isn't trained to use it. Directed training for biomedical professionals is the unlock on a decades-long compounding return. The NCD and mental-health burden doesn't wait for workforce retooling to happen organically.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_ncd_shift",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_biomedical_public_good"
+      ]
+    },
+    {
+      "camp_id": "camp_global_health",
+      "case": "The suffering geography is Sub-Saharan Africa and LMIC health systems, and the binding constraint there is trained human capacity --- community health workers, clinical officers, public-health analysts who can operationalize AI-triage tools. A training program scoped to LMIC health workforces (not just US retraining) converts frontier capability into averted DALYs at the lowest cost-per-DALY category on the map.",
+      "descriptive_claim_ids": [
+        "desc_suffering_geography",
+        "desc_child_mortality_progress",
+        "desc_extreme_poverty_trajectory"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "Training distributes operational capacity away from the four hyperscalers and the mission-software monopolist. A population that can run, fine-tune, and audit models locally is the sovereignty layer --- the difference between AI-as-tool and AI-as-dependency. This is the infrastructure version of the home-lab thesis at civilizational scale.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Open weights without trained users is a library no one can read. Training is what converts distributed weights into distributed capability --- fine-tuners, evaluators, red-teamers outside the closed-lab perimeter. Algorithmic efficiency halving every eight months means the technical ceiling for open-source capability is rising fast; what's missing is the trained human layer to exploit it.",
+      "descriptive_claim_ids": [
+        "desc_algorithmic_efficiency",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_content_creators",
+      "case": "Training programs that include authors, journalists, and artists --- teaching them to build, prompt, and license inside AI tooling --- convert a displaced class into a bargaining class. Trained creators can negotiate licensing terms, build their own models on consented corpora, and shift the training-data fight from courtrooms to markets. Absent this, the field writes them out.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance"
+      ],
+      "normative_claim_ids": [
+        "norm_creator_consent"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_accelerating",
+    "desc_child_mortality_progress",
+    "desc_enterprise_slow",
+    "desc_mental_health_burden",
+    "desc_suffering_geography",
+    "desc_workforce_resistance"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-19T16:23:38.430054Z",
+  "operator_tension": "The uncomfortable frame is camp_eacc-against combined with camp_global_health-against: from inside your own +EV logic, training is the wrong friction layer and the wrong geography. You hold desc_grid_constraint, desc_transmission_stall, and desc_interconnection_queue_backlog as the binding constraints --- and training scores friction_grid=1.0 precisely because it doesn't touch them. You hold desc_suffering_geography as saying the burden is Sub-Saharan Africa --- and a US-workforce retraining program is wealthy-country labor politics with a suffering-reduction label pasted on. The builder's temperament wants to ship something that helps displaced workers (norm_operator_flourishing is real for you), but inside your own poker-brain math, single-digit billions annually at leverage 0.35 against grid at 0.75 or drug discovery at 0.55 is a \u2212EV bet you're emotionally attached to. The specific discomfort: you would downgrade a HYPE-tier crypto to C- for weaker fundamentals than the ones this intervention is carrying.",
+  "target_intervention_id": "intv_training",
+  "target_intervention_text": "Invest in AI workforce training and retraining programs."
+}

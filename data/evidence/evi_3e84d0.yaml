@@ -1,0 +1,13 @@
+claim_id: desc_deepseek_v3_on_trend_cost
+created_at: '2026-04-19T18:48:45.106636Z'
+id: evi_3e84d0
+kind: evidence
+locator: DeepSeek's Models section, paragraph on cost curve
+method_tag: expert_estimate
+provenance_url: null
+quote: DeepSeek produced a model close to the performance of US models 7-10 months
+  older, for a good deal less cost (but not anywhere near the ratios people have suggested).
+source_id: src_amodei_deepseek_export_controls
+supports: support
+updated_at: '2026-04-19T18:48:45.106638Z'
+weight: 0.8

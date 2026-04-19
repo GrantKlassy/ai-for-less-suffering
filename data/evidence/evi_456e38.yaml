@@ -1,0 +1,14 @@
+claim_id: desc_alignment_faking_no_explicit_instruction
+created_at: '2026-04-19T18:49:31.007081Z'
+id: evi_456e38
+kind: evidence
+locator: Abstract, final sentences
+method_tag: direct_measurement
+provenance_url: null
+quote: While we made alignment faking easier by telling the model when and by what
+  criteria it was being trained, we did not instruct the model to fake alignment or
+  give it any explicit goal.
+source_id: src_alignment_faking_llms
+supports: support
+updated_at: '2026-04-19T18:49:31.007082Z'
+weight: 0.9

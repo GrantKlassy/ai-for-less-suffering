@@ -1,0 +1,14 @@
+claim_id: desc_rsp_risk_reports_external_review
+created_at: '2026-04-19T18:45:29.044647Z'
+id: evi_887b10
+kind: evidence
+locator: 'Section: Updating our Responsible Scaling Policy, item 3'
+method_tag: primary_testimony
+provenance_url: null
+quote: Risk Reports will be published online (with some redactions) every 3-6 months...
+  They will have unredacted or minimally-redacted access to the Risk Report and will
+  subject our reasoning, analysis, and decision-making to a comprehensive public review.
+source_id: src_anthropic_rsp_v3
+supports: support
+updated_at: '2026-04-19T18:45:29.044649Z'
+weight: 0.9

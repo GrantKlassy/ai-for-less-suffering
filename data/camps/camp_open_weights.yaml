@@ -10,11 +10,15 @@ created_at: '2026-04-17T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
 - desc_accelerating
-- desc_compute_matters
 - desc_algorithmic_efficiency
+- desc_altman_individual_empowerment_vs_authoritarian
+- desc_compute_matters
+- desc_deepseek_hopper_fleet_size
+- desc_deepseek_v3_on_trend_cost
 - desc_flagship_training_cost
-- desc_us_lead
 - desc_leading_edge_chip_concentration
+- desc_rl_reasoning_crossover_point
+- desc_us_lead
 held_normative:
 - norm_open_weights_distribution
 id: camp_open_weights

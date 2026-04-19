@@ -1,0 +1,388 @@
+{
+  "case_against": [
+    {
+      "camp_id": "camp_religious",
+      "case": "Mental health is the single domain where the creator/creature distinction is most load-bearing: suffering, confession, consolation, the human face of care. A triage layer at population scale normalizes machine mediation of the most intimate human encounter and teaches a billion people that a model is where you turn when you are breaking. Scale is the harm, not a mitigation of it --- no clinical-outcome metric captures the theological degradation of substituting inference for presence.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_xrisk",
+      "case": "Welfare-critical consumer-scale deployment is the mechanism by which frontier capability becomes politically unstoppable --- once a billion people depend on the tool for crisis support, pausing is off the table. The intervention converts a \u2212suffering framing into a ratchet that forecloses the halt option, which is the one option the camp insists must remain live.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_algorithmic_efficiency"
+      ],
+      "normative_claim_ids": [
+        "norm_xrisk_halt",
+        "norm_anthropic_alignment"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Frontier models are not currently legible enough to deploy in a domain where failure modes include suicide, iatrogenic harm, and misdiagnosis across cultural and linguistic contexts the training distribution does not cover. Clinical-outcome evaluation after deployment is not a substitute for the upstream duty to make the system inspectable before it touches patients. Opacity at this deployment tier is the harm, regardless of aggregate outcomes.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Public health systems are already resource-starved; a scaled AI triage layer will be absorbed as a substitute for hiring clinicians, social workers, and community health workers rather than as augmentation. The operative deployment is headcount suppression dressed as access expansion, and the camp has watched this exact substitution play out across call-center, translation, and paralegal labor markets.",
+      "descriptive_claim_ids": [
+        "desc_workforce_resistance",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_content_creators",
+      "case": "Frontier models capable of mental-health triage were trained on therapy transcripts, self-help literature, clinical manuals, and first-person illness narratives scraped without consent. Scaling the deployment monetizes the violation at population scale and entrenches the training-data status quo --- the camp's claim is that no legitimate clinical tool can be built on an illegitimate data foundation.",
+      "descriptive_claim_ids": [
+        "desc_accelerating"
+      ],
+      "normative_claim_ids": [
+        "norm_creator_consent"
+      ]
+    },
+    {
+      "camp_id": "camp_open_weights",
+      "case": "Public-health-integrated triage at population scale concentrates sensitive-health-data flow inside three or four closed-API providers with the clinical-compliance stack. That is the worst structural outcome on offer: the most intimate dataset ever assembled, gatekept behind closed weights, with lock-in enforced by HIPAA-equivalent procurement. Distribution of capability must come first or the deployment cements the concentration permanently.",
+      "descriptive_claim_ids": [
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_open_weights_distribution"
+      ]
+    },
+    {
+      "camp_id": "camp_environmentalists",
+      "case": "Inference at population scale across a billion users is not the low-footprint workload its harm-scores suggest --- sustained conversational inference aggregates to training-run-equivalent water and grid draw over a deployment lifecycle, and the integration with public-health systems locks that draw in as non-discretionary. The intervention forecloses the option to throttle compute draw once people depend on it for crisis care.",
+      "descriptive_claim_ids": [
+        "desc_hyperscaler_water_growth",
+        "desc_thermoelectric_water_embed"
+      ],
+      "normative_claim_ids": [
+        "norm_future_generations_duty"
+      ]
+    },
+    {
+      "camp_id": "camp_palantir",
+      "case": "Public health systems lack the integration competence to absorb a consequential AI capability at scale without institutional failure --- the enterprise absorption gap is real and this camp knows it better than most. A rushed deployment into under-capacity health bureaucracies produces the visible failure mode (suicide on a chatbot watch) that discredits AI-for-suffering deployment broadly and hands the regulation camp a maximal mandate.",
+      "descriptive_claim_ids": [
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_palantir_order"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "The deployment runs on the same four-hyperscaler stack that already concentrates IC and defense workloads, routing the most sensitive personal data on earth through exactly the closed infrastructure the camp's sovereignty axiom opposes. Harm_concentration at 0.5 is understating it --- the intervention is a sovereignty downgrade disguised as a welfare upgrade, and the self-hosted-everything frame should see that immediately.",
+      "descriptive_claim_ids": [
+        "desc_ic_cloud_concentration",
+        "desc_leading_edge_chip_concentration"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_sovereignty"
+      ]
+    }
+  ],
+  "case_for": [
+    {
+      "camp_id": "camp_global_health",
+      "case": "Mental and neurological disorders are 15-16% of global YLDs and the treatment gap in LMICs runs above 85%. No deployable intervention category beats AI-assisted triage on averted-DALYs-per-dollar at this scale --- human clinicians cannot be trained fast enough to close the gap this decade, and inference costs amortize to near-zero per encounter at population scale. This is exactly the marginal-dollar reallocation the camp exists to push: take capability that is currently pointed at ad targeting and point it at the largest untreated disease burden on earth.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_suffering_geography",
+        "desc_ncd_shift"
+      ],
+      "normative_claim_ids": [
+        "norm_global_health_priority"
+      ]
+    },
+    {
+      "camp_id": "camp_biomedical",
+      "case": "Triage tooling at population scale generates the largest longitudinal mental-health dataset in history as a byproduct --- phenotyping, treatment-response, comorbidity structure --- feeding back into mechanism research on depression and anxiety where the pipeline has been stalled for two decades. The intervention is a public-good data-generating engine dressed as a clinical tool, and that compounding return is exactly what justifies public funding independent of near-term product economics.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_ncd_shift"
+      ],
+      "normative_claim_ids": [
+        "norm_biomedical_public_good"
+      ]
+    },
+    {
+      "camp_id": "camp_eacc",
+      "case": "Friction scores are high across the board (grid 0.95, capex 0.8, public 0.5) --- this is one of the few \u2212suffering interventions that clears physics and capital constraints immediately and doesn't wait on transmission buildout. Every quarter of delay is averted suffering that didn't arrive for a billion untreated people. Ship it at consumer scale, iterate against outcomes, let the deployment produce its own evidence base.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_algorithmic_efficiency",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_eacc_deployment"
+      ]
+    },
+    {
+      "camp_id": "camp_openai",
+      "case": "Consumer-scale mental health deployment is the archetypal scale-produces-alignment play: billions of sensitive interactions generate the RLHF signal, safety-case evidence, and institutional trust that no sandbox can produce. The camp's axiom is that slowing to wait for interpretability loses the information advantage --- mental health triage is where that information is densest and most welfare-relevant.",
+      "descriptive_claim_ids": [
+        "desc_accelerating",
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_openai_scale_first"
+      ]
+    },
+    {
+      "camp_id": "camp_displaced_workers",
+      "case": "Labor displacement and economic precarity are upstream drivers of the mental-health burden this intervention targets --- the camp's own constituency is disproportionately inside the untreated 70%. Triage tooling that reaches workers who cannot afford a copay or a day off for therapy is a direct welfare transfer to the people the camp exists to defend, provided it augments rather than replaces human clinicians at the care-escalation layer.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_workers_dignity",
+        "norm_operator_flourishing"
+      ]
+    },
+    {
+      "camp_id": "camp_operator",
+      "case": "This is the cleanest +EV AI-for-suffering bet on the board: highest-YLD disease category, 70%+ treatment gap, near-zero marginal inference cost, and harm scores clean on land/water/extraction because the workload is inference-dominated rather than training-dominated. It points frontier capability at actual suffering rather than capital extraction and does so at a time horizon enterprise absorption won't reach for a decade without a forcing function.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_suffering_geography",
+        "desc_enterprise_slow"
+      ],
+      "normative_claim_ids": [
+        "norm_operator_flourishing",
+        "norm_operator_sovereignty"
+      ]
+    },
+    {
+      "camp_id": "camp_anthropic",
+      "case": "High-stakes welfare-critical deployment inside a public-health integration is the right venue for safety-first labs to demonstrate that careful development produces better outcomes than product-velocity shops. Clinical-outcome evaluation is the evaluation regime the camp has been asking for; this is where responsible-actor framing earns its keep.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_anthropic_safety"
+      ]
+    },
+    {
+      "camp_id": "camp_religious",
+      "case": "Triage and care-navigation --- explicitly routing humans toward human clinicians, community, and care --- is the archetypal tool-not-replacement deployment. The intervention, framed correctly, is AI widening access to human relation rather than substituting for it, which is exactly the policy output the traditions converge on from different metaphysical starting points.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden",
+        "desc_suffering_geography"
+      ],
+      "normative_claim_ids": [
+        "norm_religious_human_dignity"
+      ]
+    },
+    {
+      "camp_id": "camp_regulators",
+      "case": "Integration with public health systems and evaluation against clinical outcomes is the exact legibility regime the camp demands --- testable, auditable, contestable inside existing clinical-governance infrastructure. This is the deployment model that should be the template, not the exception.",
+      "descriptive_claim_ids": [
+        "desc_mental_health_burden"
+      ],
+      "normative_claim_ids": [
+        "norm_regulatory_legibility"
+      ]
+    }
+  ],
+  "conceded_descriptive": [
+    "desc_accelerating",
+    "desc_algorithmic_efficiency",
+    "desc_enterprise_slow",
+    "desc_mental_health_burden"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-04-19T16:21:33.814228Z",
+  "operator_tension": "The sharp discomfort: your sovereignty axiom and your \u2212suffering axiom point in opposite directions on this one specific intervention, and you'd rather not notice. Routing a billion people's crisis disclosures through GovCloud-adjacent hyperscaler infrastructure under HIPAA-style procurement lock-in is the exact concentration pattern you flag in Palantir/JWCC --- except here it's your preferred \u2212suffering vector, so the harm_concentration score of 0.5 reads as acceptable rather than as the structural capture it would be in any other domain. You will be tempted to wave this through because the numerator (mental-health DALYs averted) is the cleanest +EV bet on the board. The operator-voiced case_against from camp_operator is the one you should sit with: you don't actually get to be a sovereign-individual maximalist and a scale-deploy-mental-health advocate simultaneously without picking which axiom dominates when they collide, and the poker-brain move is to name the trade rather than pretend the harm scores obscure it.",
+  "target_intervention_id": "intv_mental_health_triage",
+  "target_intervention_text": "Scale AI-assisted mental health triage, initial-line support, and care-navigation tooling targeted at the ~70% of global mental-health burden currently untreated, with integration into public health systems and evaluation against clinical outcomes."
+}

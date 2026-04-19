@@ -1,0 +1,16 @@
+caveats:
+- Operator treats displacement as a transition cost; workers treat it as a terminal
+  harm.
+- Operator's coalition logic is uncomfortable for workers because it treats their
+  dignity claim as one normative input among many.
+content_hash: cb59e546ece7a1555c1101dc0495388e414f02f9052c93df35af9b48a24d3b58
+created_at: '2026-04-19T16:06:40.033230Z'
+from_camp: camp_operator
+id: bridge_camp-operator_to_camp-displaced-workers_cb59e5
+kind: bridge
+provenance_url: null
+to_camp: camp_displaced_workers
+translation: Operator's suffering-reduction frame should logically include the mental-health
+  and meaning-loss burden of mass displacement --- workers are already counting what
+  operator's GBD-aware priors should count.
+updated_at: '2026-04-19T16:06:40.033230Z'

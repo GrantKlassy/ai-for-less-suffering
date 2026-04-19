@@ -5,22 +5,25 @@ created_at: '2026-04-17T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
 - desc_accelerating
-- desc_compute_matters
-- desc_grid_constraint
-- desc_us_lead
-- desc_enterprise_slow
-- desc_training_compute_growth
-- desc_flagship_training_cost
 - desc_algorithmic_efficiency
-- desc_transmission_stall
-- desc_interconnection_queue_backlog
-- desc_us_datacenter_load_forecast
-- desc_leading_edge_chip_concentration
-- desc_ic_cloud_concentration
+- desc_compute_matters
+- desc_deepseek_hopper_fleet_size
 - desc_dod_ai_contract_spend
+- desc_enterprise_slow
+- desc_flagship_training_cost
+- desc_grid_constraint
+- desc_huawei_ascend_capability_gap
+- desc_ic_cloud_concentration
+- desc_interconnection_queue_backlog
+- desc_leading_edge_chip_concentration
 - desc_maven_status
 - desc_palantir_dominant
 - desc_palantir_gov_revenue
+- desc_powerful_ai_chip_threshold
+- desc_training_compute_growth
+- desc_transmission_stall
+- desc_us_datacenter_load_forecast
+- desc_us_lead
 held_normative:
 - norm_palantir_national
 - norm_palantir_order

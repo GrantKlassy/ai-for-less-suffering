@@ -1,0 +1,458 @@
+{
+  "camps": [
+    "camp_palantir",
+    "camp_anthropic",
+    "camp_operator",
+    "camp_displaced_workers",
+    "camp_xrisk",
+    "camp_global_health",
+    "camp_animal_welfare",
+    "camp_biomedical"
+  ],
+  "coalition_analyses": [
+    {
+      "contesting_camps": [
+        "camp_xrisk"
+      ],
+      "expected_friction": "Regulation (0.4) is the binding constraint --- FDA/EMA trial pathways and LMIC distribution regimes don't compress because a transformer screened the candidate faster. Capex (0.55) bites second: wet-lab validation, Phase II/III, and manufacturing for neglected-disease therapeutics have no market puller, so philanthropic or sovereign capital has to bridge. Suffering scores look directionally right --- disease=0.85 and mortality=0.7 match the actual mechanism (infectious disease + AMR + LMIC therapeutics), and poverty=0.3 correctly captures that disease burden is a poverty multiplier. Mental_health=0.15 is generous but defensible via psychiatric pharmacology spillover. The suffering layer this actually touches is mortality and morbidity from treatable-but-untreated disease, which is the densest -DALY layer per dollar currently known.",
+      "intervention_id": "intv_drug_discovery",
+      "supporting_camps": [
+        "camp_global_health",
+        "camp_biomedical",
+        "camp_operator",
+        "camp_anthropic"
+      ]
+    },
+    {
+      "contesting_camps": [
+        "camp_xrisk",
+        "camp_displaced_workers"
+      ],
+      "expected_friction": "Grid (0.4) is the binding constraint and it's the same constraint as intv_grid --- compute buildout is gated by interconnection queues and generation, not chip supply at the margin. Capex (0.6) is real but solved (hyperscaler balance sheets). The suffering_reduction_scores are the weak link: compute is a substrate, not an intervention. Crediting it disease=0.4 and mortality=0.4 assumes the marginal FLOP gets pointed at suffering-reducing work, which is exactly the allocation question the manifesto says is currently going the wrong way. The honest read is that compute's suffering numerator is conditional on the deployment mix --- right now that mix is dominated by capital extraction, so these scores are likely 1.5-2x too high in expectation.",
+      "intervention_id": "intv_compute",
+      "supporting_camps": [
+        "camp_palantir",
+        "camp_anthropic",
+        "camp_operator"
+      ]
+    },
+    {
+      "contesting_camps": [
+        "camp_displaced_workers",
+        "camp_xrisk"
+      ],
+      "expected_friction": "Regulation (0.45) binds via clinical-tool classification, liability, and prescriber scope --- the moment triage looks like diagnosis, FDA/MHRA/state licensing boards engage. Enterprise (0.55) binds second because health systems absorb new tooling on multi-year cycles. Public (0.5) is real --- one high-salience suicide tied to an LLM triage tool sets the category back two years. Suffering scores are roughly right: mental_health=0.7 is appropriate for the mechanism, but the 70%-untreated framing is mostly LMIC and the intervention as scoped requires smartphone penetration + literacy + a referral substrate that doesn't exist in the highest-burden geographies. The layer it actually touches is high-income and middle-income mild-to-moderate cases, not the severe untreated tail.",
+      "intervention_id": "intv_mental_health_triage",
+      "supporting_camps": [
+        "camp_global_health",
+        "camp_operator",
+        "camp_biomedical"
+      ]
+    },
+    {
+      "contesting_camps": [
+        "camp_xrisk"
+      ],
+      "expected_friction": "Regulation (0.3) is the dominant binding constraint --- NEPA, state PUCs, and interconnection queues are the actual veto, not capex or technology. This is a single-layer veto that mean_robustness=0.56 understates. Suffering_reduction_scores are speculative in the same way intv_compute's are: grid is enabling infrastructure, and crediting it disease=0.3 / mortality=0.3 assumes downstream deployment toward suffering reduction. Without that allocation mechanism, grid buildout primarily enables whatever the marginal compute buyer wants, which is currently ad-tech and tax software. The suffering layer it actually touches is conditional and indirect.",
+      "intervention_id": "intv_grid",
+      "supporting_camps": [
+        "camp_palantir",
+        "camp_anthropic",
+        "camp_operator"
+      ]
+    },
+    {
+      "contesting_camps": [],
+      "expected_friction": "Almost no friction binds --- this is the highest-robustness intervention on the board (0.82) and that's accurate. The real constraint is talent supply, which doesn't appear in the friction taxonomy. Suffering_reduction_scores are nominal (all 0.1-0.2) and that's the honest answer: alignment research has no direct suffering numerator, its value is option-preservation against tail catastrophe. The composite ranking buries this because the multiplicative formula penalizes interventions whose value is insurance-shaped rather than flow-shaped. The suffering layer it touches is the conditional probability of every other intervention's suffering numerator surviving long enough to compound.",
+      "intervention_id": "intv_alignment_research",
+      "supporting_camps": [
+        "camp_xrisk",
+        "camp_anthropic",
+        "camp_operator"
+      ]
+    },
+    {
+      "contesting_camps": [
+        "camp_displaced_workers"
+      ],
+      "expected_friction": "Public (0.35) is the binding constraint --- consumer acceptance, 'natural food' framing, and state-level cultivated-meat bans (Florida, Alabama precedent) are the live veto. Capex (0.5) binds second: bioreactor scale-out is a hardware problem, not a software problem, and AI-driven strain engineering doesn't shorten the depreciation curve on stainless steel. Regulation (0.5) is real for cultivated meat specifically. Suffering_reduction_scores are correctly weighted toward animal=0.85 and that's the entire mechanism --- this is the only intervention on the board that meaningfully touches the animal-suffering numerator, which under any non-zero species weighting dominates the global suffering aggregate by orders of magnitude. The composite under-ranks this if you grant norm_animal_sentience any serious weight.",
+      "intervention_id": "intv_alt_protein",
+      "supporting_camps": [
+        "camp_animal_welfare",
+        "camp_global_health",
+        "camp_operator"
+      ]
+    },
+    {
+      "contesting_camps": [],
+      "expected_friction": "Enterprise (0.5) binds because retraining only converts to suffering reduction if employers actually hire the retrained --- the 2010s coding-bootcamp wave demonstrated the gap between credential and placement. Regulation (0.7) is mild. Suffering_reduction_scores look low but defensible: retraining is a transfer mechanism, not a suffering-reduction mechanism, and poverty=0.3 is the only honest non-trivial entry. The layer it actually touches is dignity and economic agency for the displacement cohort, which the schema doesn't have a column for --- norm_workers_dignity is a first-order claim that the suffering taxonomy doesn't price.",
+      "intervention_id": "intv_training",
+      "supporting_camps": [
+        "camp_displaced_workers",
+        "camp_operator"
+      ]
+    }
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "descriptive_convergences": [],
+  "generated_at": "2026-04-19T16:07:52.047569Z",
+  "ranking_blindspots": [
+    {
+      "flagged_intervention_id": "intv_alignment_research",
+      "reasoning": "Ranked fifth because its suffering_reduction_scores are uniformly low, but its mechanism is option-preservation on every other intervention's numerator --- the multiplicative composite cannot represent insurance-shaped value, so the ranking systematically underprices it."
+    },
+    {
+      "flagged_intervention_id": "intv_alt_protein",
+      "reasoning": "Ranked sixth despite being the only intervention that touches the animal-suffering layer, which under norm_animal_sentience is the largest numerator term in any honest aggregate; the composite hides this because suffering_reduction is averaged across five layers rather than weighted by layer magnitude."
+    },
+    {
+      "flagged_intervention_id": "intv_compute",
+      "reasoning": "Suffering_reduction_scores assume the marginal FLOP gets allocated to suffering-reducing work, but the manifesto's load-bearing descriptive claim is that current allocation is dominated by capital extraction --- the numerator is conditional on an allocation mechanism the intervention does not provide."
+    },
+    {
+      "flagged_intervention_id": "intv_grid",
+      "reasoning": "Mean_robustness=0.56 averages over a single-layer regulatory veto (0.3) that is the actual binding constraint; the composite treats this as moderate friction when in practice permitting is a near-binary gate."
+    },
+    {
+      "flagged_intervention_id": "intv_drug_discovery",
+      "reasoning": "Top-ranked and probably correctly so, but the suffering_composite does not credit the cross-camp coalition (global_health + biomedical + operator + anthropic, with only xrisk contesting on capability-spillover grounds) which makes this the most politically tractable intervention on the board --- the actual EV is higher than the composite shows."
+    }
+  ],
+  "rankings": [
+    {
+      "composite_score": 0.3905,
+      "friction_scores": {
+        "friction_capex": 0.55,
+        "friction_enterprise": 0.75,
+        "friction_grid": 0.95,
+        "friction_public": 0.9,
+        "friction_regulation": 0.4
+      },
+      "intervention_id": "intv_drug_discovery",
+      "intervention_text": "Deploy frontier AI (structure prediction, candidate screening, trial simulation) inside drug discovery and therapeutic development pipelines targeting neglected infectious disease, antimicrobial resistance, and LMIC-priority therapeutics.",
+      "leverage_score": 0.55,
+      "mean_robustness": 0.71,
+      "mean_suffering_reduction": 0.42000000000000004,
+      "suffering_composite": 0.16401000000000002,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.85,
+        "suffering_mental_health": 0.15,
+        "suffering_mortality": 0.7,
+        "suffering_poverty": 0.3
+      }
+    },
+    {
+      "composite_score": 0.5609999999999999,
+      "friction_scores": {
+        "friction_capex": 0.6,
+        "friction_enterprise": 0.9,
+        "friction_grid": 0.4,
+        "friction_public": 0.7,
+        "friction_regulation": 0.7
+      },
+      "intervention_id": "intv_compute",
+      "intervention_text": "Expand frontier-lab compute capacity (chips, datacenters, networking).",
+      "leverage_score": 0.85,
+      "mean_robustness": 0.6599999999999999,
+      "mean_suffering_reduction": 0.28,
+      "suffering_composite": 0.15708,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.4,
+        "suffering_mental_health": 0.3,
+        "suffering_mortality": 0.4,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.325,
+      "friction_scores": {
+        "friction_capex": 0.8,
+        "friction_enterprise": 0.55,
+        "friction_grid": 0.95,
+        "friction_public": 0.5,
+        "friction_regulation": 0.45
+      },
+      "intervention_id": "intv_mental_health_triage",
+      "intervention_text": "Scale AI-assisted mental health triage, initial-line support, and care-navigation tooling targeted at the ~70% of global mental-health burden currently untreated, with integration into public health systems and evaluation against clinical outcomes.",
+      "leverage_score": 0.5,
+      "mean_robustness": 0.65,
+      "mean_suffering_reduction": 0.29,
+      "suffering_composite": 0.09425,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.05,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.7,
+        "suffering_mortality": 0.3,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.41999999999999993,
+      "friction_scores": {
+        "friction_capex": 0.6,
+        "friction_enterprise": 0.8,
+        "friction_grid": 0.5,
+        "friction_public": 0.6,
+        "friction_regulation": 0.3
+      },
+      "intervention_id": "intv_grid",
+      "intervention_text": "Accelerate grid and generation buildout (permitting reform, interconnection, new generation).",
+      "leverage_score": 0.75,
+      "mean_robustness": 0.5599999999999999,
+      "mean_suffering_reduction": 0.22000000000000003,
+      "suffering_composite": 0.0924,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.3,
+        "suffering_mental_health": 0.2,
+        "suffering_mortality": 0.3,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.49199999999999994,
+      "friction_scores": {
+        "friction_capex": 0.7,
+        "friction_enterprise": 0.7,
+        "friction_grid": 1.0,
+        "friction_public": 0.9,
+        "friction_regulation": 0.8
+      },
+      "intervention_id": "intv_alignment_research",
+      "intervention_text": "Scale funding for interpretability and alignment research.",
+      "leverage_score": 0.6,
+      "mean_robustness": 0.82,
+      "mean_suffering_reduction": 0.16,
+      "suffering_composite": 0.07872,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.2,
+        "suffering_mortality": 0.2,
+        "suffering_poverty": 0.1
+      }
+    },
+    {
+      "composite_score": 0.25650000000000006,
+      "friction_scores": {
+        "friction_capex": 0.5,
+        "friction_enterprise": 0.6,
+        "friction_grid": 0.9,
+        "friction_public": 0.35,
+        "friction_regulation": 0.5
+      },
+      "intervention_id": "intv_alt_protein",
+      "intervention_text": "Accelerate alternative-protein development (precision fermentation, cultivated meat, plant-based) with AI-driven strain engineering, scaffolding optimization, and supply-chain cost-down, targeting displacement of factory-farm protein at scale.",
+      "leverage_score": 0.45,
+      "mean_robustness": 0.5700000000000001,
+      "mean_suffering_reduction": 0.29,
+      "suffering_composite": 0.074385,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.85,
+        "suffering_disease": 0.3,
+        "suffering_mental_health": 0.05,
+        "suffering_mortality": 0.15,
+        "suffering_poverty": 0.1
+      }
+    },
+    {
+      "composite_score": 0.26599999999999996,
+      "friction_scores": {
+        "friction_capex": 0.8,
+        "friction_enterprise": 0.5,
+        "friction_grid": 1.0,
+        "friction_public": 0.8,
+        "friction_regulation": 0.7
+      },
+      "intervention_id": "intv_training",
+      "intervention_text": "Invest in AI workforce training and retraining programs.",
+      "leverage_score": 0.35,
+      "mean_robustness": 0.76,
+      "mean_suffering_reduction": 0.2,
+      "suffering_composite": 0.0532,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.3,
+        "suffering_mortality": 0.1,
+        "suffering_poverty": 0.3
+      }
+    }
+  ]
+}
