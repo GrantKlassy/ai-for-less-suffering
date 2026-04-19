@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { NODE_KIND_COLOR } from "./legend";
-import { buildGraphData } from "./graph-data";
+import { buildGraphData, LAYER_EDGE_MIN_SCORE } from "./graph-data";
+import type { BuildGraphDataInput } from "./graph-data";
 
-const fixture = {
+const fixture: BuildGraphDataInput = {
   camps: [
     {
       id: "camp_anthropic",
@@ -36,8 +37,55 @@ const fixture = {
     },
   ],
   interventions: [
-    { id: "intv_compute", text: "scale compute" },
-    { id: "intv_alignment_research", text: "alignment research" },
+    {
+      id: "intv_compute",
+      text: "scale compute",
+      friction_scores: { friction_grid: 0.8, friction_permitting: 0.2 },
+      harm_scores: { harm_emissions: 0.6 },
+      suffering_reduction_scores: { suffering_material_scarcity: 0.7 },
+    },
+    {
+      id: "intv_alignment_research",
+      text: "alignment research",
+      friction_scores: {},
+      harm_scores: {},
+      suffering_reduction_scores: {},
+    },
+  ],
+  sources: [
+    { id: "src_paper", title: "A paper" },
+    { id: "src_report", title: "A report" },
+  ],
+  evidence: [
+    {
+      id: "evi_supports_grid",
+      claim_id: "desc_grid",
+      source_id: "src_paper",
+      stance: "support",
+      locator: "p. 3",
+    },
+    {
+      id: "evi_contradicts_grid",
+      claim_id: "desc_grid",
+      source_id: "src_report",
+      stance: "contradict",
+      locator: "table 2",
+    },
+    {
+      id: "evi_qualifies_accel",
+      claim_id: "desc_accelerating",
+      source_id: "src_paper",
+      stance: "qualify",
+      locator: "",
+    },
+  ],
+  frictionLayers: [
+    { id: "friction_grid", name: "grid capacity" },
+    { id: "friction_permitting", name: "permitting" },
+  ],
+  harmLayers: [{ id: "harm_emissions", name: "emissions" }],
+  sufferingLayers: [
+    { id: "suffering_material_scarcity", name: "material scarcity" },
   ],
   coalitions: [
     {
@@ -59,9 +107,18 @@ describe("buildGraphData", () => {
         "camp_xrisk",
         "desc_accelerating",
         "desc_grid",
+        "evi_contradicts_grid",
+        "evi_qualifies_accel",
+        "evi_supports_grid",
+        "friction_grid",
+        "friction_permitting",
+        "harm_emissions",
         "intv_alignment_research",
         "intv_compute",
         "norm_safety",
+        "src_paper",
+        "src_report",
+        "suffering_material_scarcity",
       ].sort(),
     );
   });
@@ -105,6 +162,68 @@ describe("buildGraphData", () => {
     expect(contests[0]).toMatchObject({
       source: "intv_compute",
       target: "camp_xrisk",
+    });
+  });
+
+  it("emits cites_source edge from every evidence to its source", () => {
+    const out = buildGraphData(fixture);
+    const cites = out.edges.filter((e) => e.kind === "cites_source");
+    expect(cites).toHaveLength(3);
+    expect(
+      cites.find(
+        (e) => e.source === "evi_supports_grid" && e.target === "src_paper",
+      ),
+    ).toBeDefined();
+  });
+
+  it("emits stance-typed edges from evidence to the claim it cites", () => {
+    const out = buildGraphData(fixture);
+    const supportStance = out.edges.filter((e) => e.kind === "stance_support");
+    const contradictStance = out.edges.filter(
+      (e) => e.kind === "stance_contradict",
+    );
+    const qualifyStance = out.edges.filter((e) => e.kind === "stance_qualify");
+    expect(supportStance).toHaveLength(1);
+    expect(supportStance[0]).toMatchObject({
+      source: "evi_supports_grid",
+      target: "desc_grid",
+    });
+    expect(contradictStance).toHaveLength(1);
+    expect(contradictStance[0]).toMatchObject({
+      source: "evi_contradicts_grid",
+      target: "desc_grid",
+    });
+    expect(qualifyStance).toHaveLength(1);
+    expect(qualifyStance[0]).toMatchObject({
+      source: "evi_qualifies_accel",
+      target: "desc_accelerating",
+    });
+  });
+
+  it("emits scored intervention→layer edges only at or above the min-score threshold", () => {
+    const out = buildGraphData(fixture);
+    const friction = out.edges.filter((e) => e.kind === "scores_friction");
+    // intv_compute scored friction_grid at 0.8 (kept) and friction_permitting
+    // at 0.2 (dropped, below LAYER_EDGE_MIN_SCORE = 0.3).
+    expect(friction).toHaveLength(1);
+    expect(friction[0]).toMatchObject({
+      source: "intv_compute",
+      target: "friction_grid",
+    });
+    expect(LAYER_EDGE_MIN_SCORE).toBe(0.3);
+
+    const harm = out.edges.filter((e) => e.kind === "scores_harm");
+    expect(harm).toHaveLength(1);
+    expect(harm[0]).toMatchObject({
+      source: "intv_compute",
+      target: "harm_emissions",
+    });
+
+    const relieves = out.edges.filter((e) => e.kind === "relieves_suffering");
+    expect(relieves).toHaveLength(1);
+    expect(relieves[0]).toMatchObject({
+      source: "intv_compute",
+      target: "suffering_material_scarcity",
     });
   });
 

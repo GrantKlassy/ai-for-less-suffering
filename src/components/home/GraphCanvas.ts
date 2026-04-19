@@ -13,6 +13,7 @@ import cytoscape from "cytoscape";
 import type { Core, EdgeSingular, NodeSingular } from "cytoscape";
 
 import type { GraphData, GraphNode, GraphEdge } from "../../lib/graph-data";
+import type { NodeKind } from "../../lib/graph";
 
 export function initGraph(mountId: string, dataId: string): Core | null {
   const mount = document.getElementById(mountId);
@@ -34,13 +35,13 @@ export function initGraph(mountId: string, dataId: string): Core | null {
   const kindSize: Record<string, number> = {
     intervention: 44,
     camp: 36,
-    source: 22,
-    friction_layer: 22,
-    harm_layer: 22,
-    suffering_layer: 22,
+    friction_layer: 26,
+    harm_layer: 26,
+    suffering_layer: 26,
     descriptive_claim: 18,
     normative_claim: 18,
-    evidence: 16,
+    source: 14,
+    evidence: 12,
   };
 
   const cy = cytoscape({
@@ -130,6 +131,65 @@ export function initGraph(mountId: string, dataId: string): Core | null {
         },
       },
       {
+        selector: 'edge[kind = "cites_source"]',
+        style: {
+          "line-color": "#71717a",
+          "target-arrow-color": "#71717a",
+          width: 0.5,
+          opacity: 0.35,
+        },
+      },
+      {
+        selector: 'edge[kind = "stance_support"]',
+        style: {
+          "line-color": "#10b981",
+          "target-arrow-color": "#10b981",
+          opacity: 0.6,
+        },
+      },
+      {
+        selector: 'edge[kind = "stance_contradict"]',
+        style: {
+          "line-color": "#f43f5e",
+          "target-arrow-color": "#f43f5e",
+          "line-style": "dashed",
+          opacity: 0.6,
+        },
+      },
+      {
+        selector: 'edge[kind = "stance_qualify"]',
+        style: {
+          "line-color": "#f59e0b",
+          "target-arrow-color": "#f59e0b",
+          "line-style": "dotted",
+          opacity: 0.6,
+        },
+      },
+      {
+        selector: 'edge[kind = "scores_friction"]',
+        style: {
+          "line-color": "#f97316",
+          "target-arrow-color": "#f97316",
+          opacity: 0.5,
+        },
+      },
+      {
+        selector: 'edge[kind = "scores_harm"]',
+        style: {
+          "line-color": "#f43f5e",
+          "target-arrow-color": "#f43f5e",
+          opacity: 0.5,
+        },
+      },
+      {
+        selector: 'edge[kind = "relieves_suffering"]',
+        style: {
+          "line-color": "#10b981",
+          "target-arrow-color": "#10b981",
+          opacity: 0.6,
+        },
+      },
+      {
         selector: ".faded",
         style: {
           opacity: 0.08,
@@ -160,24 +220,37 @@ export function initGraph(mountId: string, dataId: string): Core | null {
       name: "concentric",
       concentric: (node: NodeSingular) => {
         const kind = node.data("kind") as string;
+        // Higher value = closer to center. Interventions sit at the core
+        // (they're the thing being evaluated). Layers ring them directly
+        // (friction/harm/suffering score interventions). Camps + claims
+        // flank outward. Evidence + sources form the outer atmosphere of
+        // citations so every kind gets its own ring when a pill highlights.
         return (
           {
-            intervention: 3,
-            camp: 2,
-            normative_claim: 1,
-            descriptive_claim: 0,
+            intervention: 7,
+            suffering_layer: 6,
+            friction_layer: 6,
+            harm_layer: 6,
+            camp: 5,
+            normative_claim: 4,
+            descriptive_claim: 3,
+            evidence: 2,
+            source: 1,
           }[kind] ?? 0
         );
       },
       levelWidth: () => 1,
-      spacingFactor: 1.4,
-      minNodeSpacing: 28,
+      spacingFactor: 1.25,
+      minNodeSpacing: 18,
       avoidOverlap: true,
       padding: 32,
       animate: false,
     },
     minZoom: 0.2,
     maxZoom: 3,
+    // Cytoscape's default wheel step is tiny --- one scroll tick barely moves
+    // the zoom. 2.5x makes the graph respond more like a normal map.
+    wheelSensitivity: 2.5,
   });
 
   cy.on("tap", "node", (event: cytoscape.EventObject) => {
@@ -210,4 +283,15 @@ export function initGraph(mountId: string, dataId: string): Core | null {
   });
 
   return cy;
+}
+
+// Cross-highlight entry point for the legend. `null` clears; otherwise every
+// node whose `kind` does not match is faded and the matching nodes get the
+// `highlight` class. Uses the same classes as the node-hover path so the
+// cytoscape stylesheet doesn't need to learn a new selector.
+export function highlightKind(cy: Core, kind: NodeKind | null): void {
+  cy.elements().removeClass("faded").removeClass("highlight");
+  if (kind === null) return;
+  cy.nodes(`[kind != "${kind}"]`).addClass("faded");
+  cy.nodes(`[kind = "${kind}"]`).addClass("highlight");
 }

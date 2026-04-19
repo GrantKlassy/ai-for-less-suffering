@@ -1,77 +1,176 @@
 ---
+// Homepage. Hero + color-coded legend (keyed to the graph node fills) + the
+// cytoscape graph + a worked-example contested claim. Each legend pill carries
+// a `data-kind` attribute so GraphView can cross-highlight on hover.
+
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
 import GraphView from "../components/home/GraphView.astro";
-import LedgerRow from "../components/home/LedgerRow.astro";
+import ContestedTrack from "../components/analyses/ContestedTrack.astro";
+import { LEGEND } from "../lib/legend";
 import { latestLeverageAnalysis } from "../lib/leverage-latest";
-import {
-  loadOperatorPositions,
-  orphanedInterventions,
-  unresolvedFlipRefs,
-} from "../lib/positions";
-import { getCollection } from "astro:content";
+import type { NodeKind } from "../lib/graph";
+import type { ContestedClaim } from "../lib/analysis";
+
+const [
+  descriptiveClaims,
+  normativeClaims,
+  evidenceEntries,
+  sources,
+  camps,
+  interventions,
+  frictionLayers,
+  harmLayers,
+  sufferingLayers,
+] = await Promise.all([
+  getCollection("descriptiveClaims"),
+  getCollection("normativeClaims"),
+  getCollection("evidence"),
+  getCollection("sources"),
+  getCollection("camps"),
+  getCollection("interventions"),
+  getCollection("frictionLayers"),
+  getCollection("harmLayers"),
+  getCollection("sufferingLayers"),
+]);
 
 const latest = latestLeverageAnalysis();
-const operator = await loadOperatorPositions();
-const interventions = await getCollection("interventions");
 
-// Build-time warnings --- noisy in dev, silent in prod-build logs beyond stderr.
-// The engine-layer `afls validate` is the hard-fail; this is the soft surfacing.
-const orphans = orphanedInterventions(
-  interventions.map((i) => i.data.id),
-  operator.positions,
-);
-if (orphans.length > 0) {
-  console.warn(
-    `[home] interventions missing operator position: ${orphans.join(", ")}`,
-  );
+// Node counts per kind. Rendered next to each legend entry so density is
+// visible without prose about it.
+const COUNT_BY_KIND: Record<NodeKind, number> = {
+  camp: camps.length,
+  descriptive_claim: descriptiveClaims.length,
+  normative_claim: normativeClaims.length,
+  intervention: interventions.length,
+  source: sources.length,
+  friction_layer: frictionLayers.length,
+  harm_layer: harmLayers.length,
+  suffering_layer: sufferingLayers.length,
+  evidence: evidenceEntries.length,
+};
+
+// Featured contested claim: pick the descriptive claim with the widest stance
+// coverage (three-way > two-way > one-way). Same logic as the pre-rewrite
+// homepage --- the three-way contested claims (dod_ai_contract_spend, etc.)
+// float to the top and prove the typed-reasoning thesis on the landing page.
+type Evidence = (typeof evidenceEntries)[number];
+
+const evidenceByClaim: Record<string, Evidence[]> = {};
+for (const e of evidenceEntries) {
+  (evidenceByClaim[e.data.claim_id.id] ??= []).push(e);
 }
 
-const unresolved = unresolvedFlipRefs(operator.positions);
-if (unresolved.length > 0) {
-  console.warn(
-    `[home] operator flip_conditions with unresolvable refs: ${unresolved
-      .map((u) => `${u.interventionId}→${u.ref}`)
-      .join(", ")}`,
-  );
-}
+const sourceTitle = (id: string): string =>
+  sources.find((s) => s.id === id)?.data.title ?? id;
 
-// Rankings already come sorted from the engine (-suffering_composite). Pair
-// each with its coalition summary and the operator's stance. Missing position
-// = null, rendered as an empty row rather than a crash.
-const rankings = latest?.analysis.rankings ?? [];
-const coalitionById = new Map(
-  (latest?.analysis.coalition_analyses ?? []).map((c) => [
-    c.intervention_id,
-    c,
-  ]),
-);
+type Scored = { claim: (typeof descriptiveClaims)[number]; coverage: number };
+const ranked: Scored[] = descriptiveClaims
+  .map((claim) => {
+    const es = evidenceByClaim[claim.id] ?? [];
+    const stances = new Set(es.map((e) => e.data.supports));
+    return { claim, coverage: stances.size };
+  })
+  .sort((a, b) => b.coverage - a.coverage);
+
+const featured = ranked.find((r) => r.coverage >= 2) ?? ranked[0];
+
+const buildSummary = (e: Evidence) => ({
+  evidence_id: e.id,
+  source_id: e.data.source_id.id,
+  source_title: sourceTitle(e.data.source_id.id),
+  stance: e.data.supports,
+  method_tag: e.data.method_tag,
+  weight: e.data.weight,
+  locator: e.data.locator ?? "",
+});
+
+const featuredContested: ContestedClaim[] = featured
+  ? [
+      {
+        claim_id: featured.claim.id,
+        claim_text: featured.claim.data.text,
+        supports: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "support")
+          .map(buildSummary),
+        contradicts: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "contradict")
+          .map(buildSummary),
+        qualifies: (evidenceByClaim[featured.claim.id] ?? [])
+          .filter((e) => e.data.supports === "qualify")
+          .map(buildSummary),
+      },
+    ]
+  : [];
 ---
 
 <Base
-  title="−SUFFERING EV book · ai-for-less-suffering.com"
-  description="Operator position per intervention, ranked by suffering_composite. Typed reasoning, not manifesto."
+  title="ai-for-less-suffering.com"
+  description="Typed reasoning about AI deployment toward suffering reduction. Descriptive vs normative, coalition bridges, contested evidence."
 >
-  <section class="mb-8">
-    <h1 class="mb-3 text-3xl tracking-tight text-zinc-100">
-      −<span class="text-emerald-300">SUFFERING</span> EV book
+  <section class="mb-10">
+    <h1 class="mb-4 text-3xl tracking-tight text-zinc-100">
+      ai-for-less-suffering
     </h1>
-    <p class="max-w-prose text-sm leading-relaxed text-zinc-400">
-      What I'd aim AI at right now, ranked by
-      <span class="font-mono text-emerald-300">suffering_composite</span> --- leverage
-      times mean friction times mean suffering reduction.
-      {
-        latest ? (
-          <span class="mt-1 block text-xs text-zinc-500">
-            snapshot: {latest.analysis.generated_at}
-          </span>
-        ) : (
-          <span class="mt-1 block text-xs text-amber-400">
-            no leverage analysis yet. run{" "}
-            <code class="text-zinc-300">afls query leverage</code>.
-          </span>
-        )
-      }
+    <p class="max-w-prose text-sm leading-relaxed text-zinc-300">
+      Public thinking on AI deployment toward <span class="text-emerald-300"
+        >−suffering</span
+      >. A typed reasoning tool that separates <a
+        href="https://en.wikipedia.org/wiki/Is%E2%80%93ought_problem"
+        class="underline-offset-2 hover:underline"
+        ><span class="text-sky-300">descriptive convergence</span> from <span
+          class="text-violet-300">normative divergence</span
+        ></a
+      >, and <a
+        href="https://en.wikipedia.org/wiki/Bootleggers_and_Baptists"
+        class="text-zinc-100 underline-offset-2 hover:underline"
+        >finds coalition bridges <span class="text-emerald-300"
+          >(interventions)</span
+        > that do not require conceding the divergence</a
+      >.
     </p>
+  </section>
+
+  <section class="mb-6">
+    <h2
+      class="mb-3 text-xs font-semibold tracking-wide text-zinc-500 uppercase"
+    >
+      node types
+    </h2>
+    <p class="mb-3 max-w-prose text-xs text-zinc-500">
+      hover a pill to isolate that kind in the graph below. hover a graph node
+      to match it back.
+    </p>
+    <dl class="grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+      {
+        LEGEND.map((entry) => (
+          <div
+            data-kind={entry.kind}
+            data-in-graph="1"
+            class="flex items-baseline gap-2 rounded px-1 py-0.5 transition-colors hover:bg-zinc-900"
+          >
+            <dt>
+              <span
+                class:list={[
+                  "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-sm px-1 font-mono text-[10px] font-semibold",
+                  entry.classes,
+                ]}
+                aria-hidden="true"
+              >
+                {entry.letter}
+              </span>
+            </dt>
+            <dd class="text-zinc-400">
+              <span class="text-zinc-100">{`${entry.emoji} ${entry.label}`}</span>
+              <span class="ml-1 font-mono text-[11px] text-zinc-500">
+                ({COUNT_BY_KIND[entry.kind]})
+              </span>{" "}
+              <span class="text-zinc-500">--- {entry.blurb}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
   </section>
 
   <section class="mb-10">
@@ -83,36 +182,28 @@ const coalitionById = new Map(
     <GraphView />
   </section>
 
-  <section>
-    <h2
-      class="mb-4 text-xs font-semibold tracking-wide text-zinc-500 uppercase"
-    >
-      positions
-    </h2>
-    {
-      rankings.length === 0 ? (
-        <p class="text-sm text-zinc-500">
-          no rankings. populate <code class="text-zinc-300">data/</code> and run{" "}
-          <code class="text-zinc-300">afls query leverage</code>.
+  {
+    featured && featuredContested[0] && (
+      <section class="mb-12">
+        <h2 class="mb-2 text-xs font-semibold tracking-wide text-zinc-500 uppercase">
+          worked example
+        </h2>
+        <p class="mb-4 max-w-prose text-sm text-zinc-400">
+          What the site does, shown against a real claim currently in the graph.
+          The same descriptive statement carries evidence that supports,
+          contradicts, and qualifies it --- so the disagreement is visible as
+          evidence, not as vibes. Click any source or claim to traverse.
         </p>
-      ) : (
-        rankings.map((r, i) => (
-          <LedgerRow
-            rank={i + 1}
-            ranking={r}
-            coalition={coalitionById.get(r.intervention_id) ?? null}
-            position={operator.positions[r.intervention_id] ?? null}
-            analysisId={latest!.id}
-          />
-        ))
-      )
-    }
-  </section>
+        <ContestedTrack claims={featuredContested} />
+      </section>
+    )
+  }
 
   {
     latest && (
       <footer class="mt-12 border-t border-zinc-800 pt-4 text-xs text-zinc-500">
-        method, contested claims, and ranking critique:{" "}
+        latest <span class="text-emerald-300">−suffering</span> ranking, method,
+        contested claims, and critique:{" "}
         <a
           href={`/analyses/${latest.id}/`}
           class="text-zinc-300 underline-offset-2 hover:underline"
