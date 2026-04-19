@@ -22,10 +22,11 @@ Code last updated @ [2026-04-18](https://github.com/GrantKlassy/ai-for-less-suff
 
 - I need to convince myself that the human harm of me taking a job at a frontier AI company is less than the human harm that would be prevented by me not taking it.
 
-# What the FUCK are you talking about? WHY are you doing this?
+# ... what ?
 
-- Fair question. The answer is [DIRECTIVE.md](directives/DIRECTIVE.md) --- one sentence, go read it.
-- Wrote it [4/18/2026 @ 10:17am](https://github.com/GrantKlassy/ai-for-less-suffering/commits/main/directives/DIRECTIVE.md). Never willingly changed since. We'll see what happens.
+- The answer is [DIRECTIVE.md](directives/DIRECTIVE.md) --- I wrote it [4/18/2026 @ 10:17am](https://github.com/GrantKlassy/ai-for-less-suffering/commits/main/directives/DIRECTIVE.md).
+
+- I have never willingly changed that file since. We'll see what happens.
 
 <p align="center">
   <img src="assets/free_speech_flag.png" alt="Free Speech Flag --- each stripe encodes a byte pair of the AACS encryption key that the MPAA tried to censor off the internet in 2007. The internet said no." width="100%">
