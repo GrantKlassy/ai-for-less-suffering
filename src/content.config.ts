@@ -169,6 +169,39 @@ const camps = defineCollection({
   }),
 });
 
+// Operator-position ledger. Descriptive/normative wall: `data/priors/` holds the
+// operator's stance on each intervention and does not go in `data/interventions/`.
+// Keys on the `positions` record are intervention IDs; the same typegen carve-out
+// as interventions.friction_scores applies (plain-string keys, referential
+// integrity handled at engine-layer, not by `reference()`).
+const operatorPositionFlip = z.object({
+  ref: z.string(),
+  direction: z.enum(["rises", "falls"]),
+  note: z.string().default(""),
+});
+
+const operatorPositionEntry = z.object({
+  stance: z.enum([
+    "priority",
+    "qualified_support",
+    "skeptical",
+    "oppose",
+    "under_consideration",
+  ]),
+  prose: z.string().default(""),
+  flip_conditions: z.array(operatorPositionFlip).default([]),
+  updated_at: isoTime,
+});
+
+const operatorPositions = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./data/priors" }),
+  schema: z.object({
+    kind: z.literal("operator_positions"),
+    operator: z.string().min(1),
+    positions: z.record(z.string(), operatorPositionEntry),
+  }),
+});
+
 const interventions = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./data/interventions" }),
   schema: z.object({
@@ -203,4 +236,5 @@ export const collections = {
   evidence,
   camps,
   interventions,
+  operatorPositions,
 };

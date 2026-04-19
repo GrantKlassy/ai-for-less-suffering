@@ -71,8 +71,11 @@ export interface LeverageRanking {
   intervention_text: string;
   leverage_score: number;
   mean_robustness: number;
+  mean_suffering_reduction: number;
   composite_score: number;
+  suffering_composite: number;
   friction_scores: Record<string, number>;
+  suffering_reduction_scores: Record<string, number>;
 }
 
 export interface InterventionCoalitionAnalysis {

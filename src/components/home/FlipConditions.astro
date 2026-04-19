@@ -1,0 +1,43 @@
+---
+// Renders the typed flip_conditions list --- each row is a directional glyph,
+// a NodeRef to the referenced layer/claim/intervention, and an optional note.
+// Empty list yields nothing (no "no flip conditions yet" filler).
+
+import NodeRef from "../NodeRef.astro";
+import type { FlipCondition } from "../../lib/positions";
+
+interface Props {
+  conditions: FlipCondition[];
+}
+
+const { conditions } = Astro.props;
+
+const arrow: Record<FlipCondition["direction"], string> = {
+  rises: "↑",
+  falls: "↓",
+};
+---
+
+{
+  conditions.length > 0 && (
+    <div class="mt-3">
+      <div class="mb-1 text-[11px] tracking-wide text-zinc-500 uppercase">
+        flip if
+      </div>
+      <ul class="space-y-1 text-xs text-zinc-400">
+        {conditions.map((c) => (
+          <li class="flex items-baseline gap-2">
+            <span
+              class="font-mono text-zinc-300"
+              aria-label={c.direction === "rises" ? "rises" : "falls"}
+            >
+              {arrow[c.direction]}
+            </span>
+            <NodeRef id={c.ref} />
+            {c.note && <span class="text-zinc-500">--- {c.note}</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

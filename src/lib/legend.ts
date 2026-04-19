@@ -18,6 +18,28 @@ export interface LegendEntry {
   classes: string;
 }
 
+// Hex mirrors of the `classes` Tailwind pairs above. Single source of truth so
+// the cytoscape graph on the homepage and the legend pill style cannot drift.
+// `fill` = the bright text-side color; `bg` = the dark pill background.
+// Values are the default Tailwind palette hexes --- bumping these requires
+// bumping the matching `classes` entry above (enforced by legend.test.ts).
+export interface NodeKindColor {
+  fill: string;
+  bg: string;
+}
+
+export const NODE_KIND_COLOR: Record<NodeKind, NodeKindColor> = {
+  camp: { fill: "#d4d4d8", bg: "#27272a" },
+  descriptive_claim: { fill: "#7dd3fc", bg: "#082f49" },
+  normative_claim: { fill: "#c4b5fd", bg: "#2e1065" },
+  intervention: { fill: "#6ee7b7", bg: "#022c22" },
+  source: { fill: "#fcd34d", bg: "#451a03" },
+  friction_layer: { fill: "#fdba74", bg: "#431407" },
+  harm_layer: { fill: "#fda4af", bg: "#4c0519" },
+  suffering_layer: { fill: "#6ee7b7", bg: "#022c22" },
+  evidence: { fill: "#71717a", bg: "#27272a" },
+};
+
 export const LEGEND: LegendEntry[] = [
   {
     letter: "P",

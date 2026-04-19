@@ -1,0 +1,38 @@
+kind: operator_positions
+operator: grant
+positions:
+  intv_drug_discovery:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_compute:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_mental_health_triage:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_grid:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_alignment_research:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_alt_protein:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"
+  intv_training:
+    stance: under_consideration
+    prose: ""
+    flip_conditions: []
+    updated_at: "2026-04-18T22:30:00Z"

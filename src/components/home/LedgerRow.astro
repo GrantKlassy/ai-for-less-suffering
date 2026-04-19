@@ -1,0 +1,125 @@
+---
+// One row of the −SUFFERING EV book. Reads the ranking, coalition summary, and
+// operator position side-by-side --- world-model on the left, operator stance
+// on the right. Descriptive/normative wall rendered in the layout, not smuggled
+// by prose.
+
+import NodeRef from "../NodeRef.astro";
+import CampChip from "../CampChip.astro";
+import OperatorPositionBadge from "./OperatorPositionBadge.astro";
+import FlipConditions from "./FlipConditions.astro";
+import type {
+  InterventionCoalitionAnalysis,
+  LeverageRanking,
+} from "../../lib/analysis";
+import type { OperatorPosition } from "../../lib/positions";
+import { bindingFrictionLayer } from "../../lib/leverage-latest";
+
+interface Props {
+  rank: number;
+  ranking: LeverageRanking;
+  coalition: InterventionCoalitionAnalysis | null;
+  position: OperatorPosition | null;
+  analysisId: string;
+}
+
+const { rank, ranking, coalition, position, analysisId } = Astro.props;
+
+const bindingId = bindingFrictionLayer(ranking.friction_scores);
+const bindingScore =
+  bindingId !== null ? ranking.friction_scores[bindingId] : null;
+
+const fmt = (n: number): string => n.toFixed(3);
+---
+
+<article
+  class="mb-8 border-l-2 border-zinc-800 pl-4 transition-colors hover:border-zinc-600"
+>
+  <header class="mb-2 flex items-baseline gap-3">
+    <span class="font-mono text-xs text-zinc-500">#{rank}</span>
+    <h2 class="flex-1 text-base leading-snug text-zinc-100">
+      <a
+        href={`/interventions/${ranking.intervention_id}/`}
+        class="hover:underline"
+      >
+        {ranking.intervention_text}
+      </a>
+    </h2>
+    <span
+      class="font-mono text-sm text-emerald-300"
+      title="suffering_composite"
+    >
+      {fmt(ranking.suffering_composite)}
+    </span>
+  </header>
+
+  <div class="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
+    {
+      bindingId && (
+        <span class="flex items-baseline gap-1 text-zinc-400">
+          <span class="text-zinc-500">binding:</span>
+          <NodeRef id={bindingId} />
+          {bindingScore !== null && (
+            <span class="font-mono text-zinc-500">
+              ({bindingScore.toFixed(2)})
+            </span>
+          )}
+        </span>
+      )
+    }
+    {position && <OperatorPositionBadge stance={position.stance} />}
+  </div>
+
+  {
+    coalition &&
+      (coalition.supporting_camps.length > 0 ||
+        coalition.contesting_camps.length > 0) && (
+        <div class="mb-3 space-y-1 text-xs">
+          {coalition.supporting_camps.length > 0 && (
+            <div class="flex flex-wrap items-baseline gap-1">
+              <span class="text-zinc-500">supports:</span>
+              {coalition.supporting_camps.map((c) => (
+                <CampChip id={c} />
+              ))}
+            </div>
+          )}
+          {coalition.contesting_camps.length > 0 && (
+            <div class="flex flex-wrap items-baseline gap-1">
+              <span class="text-zinc-500">contests:</span>
+              {coalition.contesting_camps.map((c) => (
+                <CampChip id={c} />
+              ))}
+            </div>
+          )}
+        </div>
+      )
+  }
+
+  {
+    position && position.prose && (
+      <p class="mb-2 max-w-prose text-sm leading-relaxed text-zinc-300">
+        {position.prose}
+      </p>
+    )
+  }
+
+  {position && <FlipConditions conditions={position.flip_conditions} />}
+
+  <footer
+    class="mt-3 flex flex-wrap items-center gap-x-3 text-[11px] text-zinc-600"
+  >
+    <span class="font-mono">
+      composite {fmt(ranking.suffering_composite)}
+    </span>
+    <span>·</span>
+    <span class="font-mono">leverage {ranking.leverage_score.toFixed(2)}</span>
+    <span>·</span>
+    <span class="font-mono">
+      suffering {ranking.mean_suffering_reduction.toFixed(2)}
+    </span>
+    <span>·</span>
+    <a href={`/analyses/${analysisId}/`} class="hover:text-zinc-400"
+      >why this ranking</a
+    >
+  </footer>
+</article>
