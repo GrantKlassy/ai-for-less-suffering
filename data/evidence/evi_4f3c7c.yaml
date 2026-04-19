@@ -1,0 +1,15 @@
+claim_id: desc_defense_llama_llama3_donovan_exclusive
+created_at: '2026-04-19T20:52:03.123256Z'
+id: evi_4f3c7c
+kind: evidence
+locator: Opening paragraph
+method_tag: primary_testimony
+provenance_url: null
+quote: Defense Llama, the Large Language Model (LLM) built on Meta's Llama 3 that
+  is specifically customized and fine-tuned to support American national security
+  missions... available exclusively in controlled U.S. government environments within
+  Scale Donovan.
+source_id: src_scale_defense_llama_launch
+supports: support
+updated_at: '2026-04-19T20:52:03.123258Z'
+weight: 0.9

@@ -1,0 +1,14 @@
+claim_id: desc_agi_undefined_not_safety_testable
+created_at: '2026-04-19T20:53:58.845574Z'
+id: evi_eb9d9e
+kind: evidence
+locator: Abstract
+method_tag: expert_estimate
+provenance_url: null
+quote: unlike systems with specific applications which can be evaluated following
+  standard engineering principles, undefined systems like "AGI" cannot be appropriately
+  tested for safety.
+source_id: src_tescreal_bundle_gebru_torres
+supports: support
+updated_at: '2026-04-19T20:53:58.845575Z'
+weight: 0.85

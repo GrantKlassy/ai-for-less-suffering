@@ -1,0 +1,24 @@
+accessed_at: '2026-04-19'
+authors:
+- Angela Yang
+- Laura Jarrett
+- Fallon Gallagher
+created_at: '2026-04-19T23:12:05.043392Z'
+id: src_raine_openai_wrongful_death
+kind: source
+notes: NBC News reporting; reviewed chat logs and confirmed accuracy with OpenAI spokesperson.
+  Slightly above press prior because reporters independently verified primary-source
+  chat logs with the defendant company.
+provenance:
+  at: '2026-04-19T23:12:05.043352Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 97fad3b9dd895fc031e4be4a42acda0fb5fa8160fd75194d70737dcdc44ea942
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-08-26'
+reliability: 0.55
+source_kind: press
+title: The family of teenager who died by suicide alleges OpenAI's ChatGPT is to blame
+updated_at: '2026-04-19T23:12:05.043394Z'
+url: https://www.nbcnews.com/tech/tech-news/family-teenager-died-suicide-alleges-openais-chatgpt-blame-rcna226147

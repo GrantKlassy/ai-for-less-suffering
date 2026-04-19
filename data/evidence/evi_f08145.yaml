@@ -1,0 +1,14 @@
+claim_id: desc_xai_signed_safety_security_only
+created_at: '2026-04-19T20:26:54.966701Z'
+id: evi_f08145
+kind: evidence
+locator: 'Section: Signatories of the code of practice, final paragraph'
+method_tag: primary_testimony
+provenance_url: null
+quote: xAI signed up to the Safety and Security Chapter; this means that it will have
+  to demonstrate compliance with the AI Act's obligations concerning transparency
+  and copyright via alternative adequate means.
+source_id: src_eu_gpai_code_of_practice
+supports: support
+updated_at: '2026-04-19T20:26:54.966719Z'
+weight: 0.95

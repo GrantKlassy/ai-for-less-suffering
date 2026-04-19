@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Leopold Aschenbrenner
+created_at: '2026-04-19T20:54:37.601068Z'
+id: src_aschenbrenner_situational_awareness
+kind: source
+notes: Self-published essay series by a former OpenAI employee; primary testimony
+  about SF/AI-lab consensus and author's own forecasts. Slightly above blog prior
+  (0.35) because author has direct insider access to frontier lab thinking, but claims
+  are forecasts/opinion rather than measured.
+provenance:
+  at: '2026-04-19T20:54:37.601033Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 91f920236879dc4981807a61183b59d04cb4cf53a660a09df45da2cee6c7f688
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2024-06
+reliability: 0.4
+source_kind: blog
+title: 'SITUATIONAL AWARENESS: The Decade Ahead --- Introduction'
+updated_at: '2026-04-19T20:54:37.601069Z'
+url: https://situational-awareness.ai/

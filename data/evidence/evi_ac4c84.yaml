@@ -1,0 +1,13 @@
+claim_id: desc_grok_fabricated_person_identification
+created_at: '2026-04-19T20:24:22.787071Z'
+id: evi_ac4c84
+kind: evidence
+locator: Paragraphs 5-6
+method_tag: journalistic_report
+provenance_url: null
+quote: NPR identified an instance of what appears to be the same video posted on TikTok
+  as early as 2021, four years before the recent deadly flooding in Texas.
+source_id: src_grok_mechahitler_npr
+supports: support
+updated_at: '2026-04-19T20:24:22.787072Z'
+weight: 0.85

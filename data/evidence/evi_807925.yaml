@@ -1,0 +1,13 @@
+claim_id: desc_fli_index_2024_control_strategies_inadequate
+created_at: '2026-04-19T23:07:10.305307Z'
+id: evi_807925
+kind: evidence
+locator: 'Key Findings: Control-Problem'
+method_tag: expert_estimate
+provenance_url: null
+quote: the review panel deemed the current strategies of all companies inadequate
+  for ensuring that these systems remain safe and under human control
+source_id: src_fli_ai_safety_index_2024
+supports: support
+updated_at: '2026-04-19T23:07:10.305308Z'
+weight: 0.92

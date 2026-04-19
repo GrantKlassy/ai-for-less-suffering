@@ -1,0 +1,9 @@
+confidence: 0.8
+created_at: '2026-04-19T23:08:50.558947Z'
+id: desc_draft_one_no_regeneration_comparison
+kind: descriptive_claim
+provenance_url: null
+text: Draft One retains no record of successive regenerations of the same report,
+  so there is no mechanism to detect whether the model produced different interpretations
+  of the same body-worn-camera audio across multiple generations for a given incident.
+updated_at: '2026-04-19T23:08:50.558948Z'

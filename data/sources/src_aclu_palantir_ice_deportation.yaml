@@ -1,0 +1,24 @@
+accessed_at: '2026-04-19'
+authors:
+- Sophie Feng
+- Jay Stanley
+created_at: '2026-04-19T20:26:29.822224Z'
+id: src_aclu_palantir_ice_deportation
+kind: source
+notes: ACLU advocacy blog, but article is heavily sourced to primary contract documents,
+  DHS AI Use Case Inventory, 404 Media investigation, Intercept reporting, and ICE
+  court testimony. Bumped above blog prior (0.35) toward press (0.50) on sourcing
+  density, with discount for explicit advocacy framing.
+provenance:
+  at: '2026-04-19T20:26:29.822192Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 6b3fb5e4d19140e68d0719ed6854a84fb2804566c9f57e7b9aa92691ed1046f7
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-03-24'
+reliability: 0.5
+source_kind: blog
+title: All the Ways Palantir is Assisting Trump's Abusive Removal Campaign
+updated_at: '2026-04-19T20:26:29.822226Z'
+url: https://www.aclu.org/news/privacy-technology/palantir-deportation-roundup

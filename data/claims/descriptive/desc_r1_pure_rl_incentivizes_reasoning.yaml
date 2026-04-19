@@ -1,0 +1,11 @@
+confidence: 0.85
+created_at: '2026-04-19T20:47:57.762733Z'
+id: desc_r1_pure_rl_incentivizes_reasoning
+kind: descriptive_claim
+provenance_url: null
+text: DeepSeek's R1 work demonstrates that LLM reasoning abilities can be incentivized
+  through pure reinforcement learning without human-labeled reasoning trajectories,
+  with the RL-trained model outperforming counterparts trained via conventional supervised
+  learning on human demonstrations for verifiable tasks in mathematics, coding competitions,
+  and STEM fields.
+updated_at: '2026-04-19T20:47:57.762735Z'

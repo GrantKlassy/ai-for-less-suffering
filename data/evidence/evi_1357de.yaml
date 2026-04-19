@@ -1,0 +1,14 @@
+claim_id: desc_anthropic_asl3_activated_opus4_precautionary
+created_at: '2026-04-19T23:12:34.620769Z'
+id: evi_1357de
+kind: evidence
+locator: Opening paragraph and Rationale section
+method_tag: primary_testimony
+provenance_url: null
+quote: We are deploying Claude Opus 4 with our ASL-3 measures as a precautionary and
+  provisional action. To be clear, we have not yet determined whether Claude Opus
+  4 has definitively passed the Capabilities Threshold that requires ASL-3 protections.
+source_id: src_anthropic_asl3_activation
+supports: support
+updated_at: '2026-04-19T23:12:34.620770Z'
+weight: 0.95

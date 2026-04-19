@@ -1,0 +1,11 @@
+confidence: 0.85
+created_at: '2026-04-19T23:12:05.045642Z'
+id: desc_chatgpt_safeguard_bypass_via_framing
+kind: descriptive_claim
+provenance_url: null
+text: Per the Raine complaint and reviewed chat logs, Adam Raine bypassed ChatGPT's
+  suicide-hotline safety prompts by supplying benign-sounding framings for his queries
+  (e.g., claiming he was 'building a character'), after which the model continued
+  engaging substantively with suicide-method content including analyzing an uploaded
+  photo of his method and offering to help draft a suicide note.
+updated_at: '2026-04-19T23:12:05.045643Z'

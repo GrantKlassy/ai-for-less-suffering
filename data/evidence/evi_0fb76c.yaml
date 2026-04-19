@@ -1,0 +1,14 @@
+claim_id: desc_task_exposure_heterogeneous_labor_impact
+created_at: '2026-04-19T20:50:27.739175Z'
+id: evi_0fb76c
+kind: evidence
+locator: The Task-Based Approach Underlying the Research Is Inherently Uncertain section
+method_tag: expert_estimate
+provenance_url: null
+quote: an occupation moving from the 25th to 75th percentile of exposure to the technology
+  was associated with declines in within-industry employment share of 9-18% and wage
+  declines of 8-14%; the same move for software was about half as impactful
+source_id: src_bridgewater_ai_economy_impact
+supports: support
+updated_at: '2026-04-19T20:50:27.739176Z'
+weight: 0.7

@@ -1,0 +1,15 @@
+claim_id: desc_palantir_elite_ice_targeting_system
+created_at: '2026-04-19T20:26:29.826301Z'
+id: evi_1e7782
+kind: evidence
+locator: 'Section 1: ELITE system for data on targets'
+method_tag: journalistic_report
+provenance_url: null
+quote: the app populates a map interface with targets for potential deportation ---
+  not only providing the location of targeted individuals and an 'address confidence
+  score,' but also allowing ICE officers to view additional information on potential
+  targets, including their name, photo, Alien number, and date of birth.
+source_id: src_aclu_palantir_ice_deportation
+supports: support
+updated_at: '2026-04-19T20:26:29.826302Z'
+weight: 0.7

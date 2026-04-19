@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Donald J. Trump
+- The White House
+created_at: '2026-04-19T20:25:10.132337Z'
+id: src_trump_eo_remove_ai_barriers
+kind: source
+notes: Primary executive order text published on whitehouse.gov; slight upward adjustment
+  from 0.90 prior because the document IS the policy action, not a description of
+  it.
+provenance:
+  at: '2026-04-19T20:25:10.132302Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: b3ae89d6b86c81189748a2b52d3cb8744b040023b23847a042b749de1b13c5ad
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-01-23'
+reliability: 0.92
+source_kind: primary_doc
+title: Removing Barriers to American Leadership in Artificial Intelligence
+updated_at: '2026-04-19T20:25:10.132338Z'
+url: https://www.whitehouse.gov/presidential-actions/2025/01/removing-barriers-to-american-leadership-in-artificial-intelligence/

@@ -1,0 +1,14 @@
+claim_id: desc_wang_china_ai_gap_closed_2024
+created_at: '2026-04-19T20:52:23.285671Z'
+id: evi_17108b
+kind: evidence
+locator: paragraph 2 ('Mr. President')
+method_tag: expert_estimate
+provenance_url: null
+quote: In 2023, Chinese AI models were more than a year behind, but this is no longer
+  the case. In the past month alone we have seen very powerful advances in China's
+  AI capabilities relative to our government.
+source_id: src_scale_win_ai_war_letter
+supports: support
+updated_at: '2026-04-19T20:52:23.285673Z'
+weight: 0.7

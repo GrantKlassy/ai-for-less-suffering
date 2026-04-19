@@ -1,0 +1,14 @@
+claim_id: desc_blackrock_aum_14t_2025
+created_at: '2026-04-19T20:50:52.863720Z'
+id: evi_bab5be
+kind: evidence
+locator: BlackRock 2025 results section
+method_tag: direct_measurement
+provenance_url: null
+quote: a new assets under management (AUM) high of $14 trillion... 2025 marked the
+  strongest year of net inflows in our history, as clients entrusted BlackRock with
+  nearly $700 billion of net new assets.
+source_id: src_fink_2026_chairman_letter
+supports: support
+updated_at: '2026-04-19T20:50:52.863721Z'
+weight: 0.95

@@ -1,0 +1,14 @@
+claim_id: desc_r1_large_to_small_reasoning_transfer
+created_at: '2026-04-19T20:47:57.766055Z'
+id: evi_babb58
+kind: evidence
+locator: Abstract
+method_tag: direct_measurement
+provenance_url: null
+quote: the emergent reasoning patterns exhibited by these large-scale models can be
+  systematically harnessed to guide and enhance the reasoning capabilities of smaller
+  models.
+source_id: src_deepseek_r1_paper
+supports: support
+updated_at: '2026-04-19T20:47:57.766057Z'
+weight: 0.8

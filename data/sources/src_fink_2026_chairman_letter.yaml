@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Laurence Fink
+created_at: '2026-04-19T20:50:52.857916Z'
+id: src_fink_2026_chairman_letter
+kind: source
+notes: Primary-source CEO letter from BlackRock. Reliability slightly above primary_doc
+  prior (0.90) would be warranted for factual BlackRock-internal data; set at 0.85
+  because the letter mixes audited firm metrics with advocacy framing and selectively
+  cited macro stats.
+provenance:
+  at: '2026-04-19T20:50:52.857887Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 6bd74b235176bf3fbb6fd96281b4666f461db29e9485ac31c32d0a368a219a21
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026'
+reliability: 0.85
+source_kind: primary_doc
+title: Larry Fink's 2026 Annual Chairman's Letter to Investors
+updated_at: '2026-04-19T20:50:52.857917Z'
+url: https://www.blackrock.com/corporate/investor-relations/larry-fink-annual-chairmans-letter

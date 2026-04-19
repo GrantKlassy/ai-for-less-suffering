@@ -1,0 +1,13 @@
+claim_id: desc_us_stock_vs_median_wage_1989
+created_at: '2026-04-19T20:50:52.861962Z'
+id: evi_510b68
+kind: evidence
+locator: Opening section, on wealth concentration
+method_tag: direct_measurement
+provenance_url: null
+quote: Since 1989, a dollar in the U.S. stock market has grown more than 15 times
+  the value of a dollar tied to median wages.
+source_id: src_fink_2026_chairman_letter
+supports: support
+updated_at: '2026-04-19T20:50:52.861963Z'
+weight: 0.75

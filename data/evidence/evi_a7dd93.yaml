@@ -1,0 +1,15 @@
+claim_id: desc_general_purpose_tech_productivity_lag
+created_at: '2026-04-19T20:50:27.737913Z'
+id: evi_a7dd93
+kind: evidence
+locator: Most Studies Estimate Peak Impact Being Some Years Away section
+method_tag: expert_estimate
+provenance_url: null
+quote: "Historically, general-purpose technologies that can be implemented widely\
+  \ across an economy\u2014like electricity or computers\u2014had a measurable impact\
+  \ on productivity around one to three decades after the technological capability\
+  \ emerged."
+source_id: src_bridgewater_ai_economy_impact
+supports: support
+updated_at: '2026-04-19T20:50:27.737914Z'
+weight: 0.7

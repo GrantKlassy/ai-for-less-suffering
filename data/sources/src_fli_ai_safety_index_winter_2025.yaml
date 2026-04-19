@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Future of Life Institute
+created_at: '2026-04-19T23:08:03.005369Z'
+id: src_fli_ai_safety_index_winter_2025
+kind: source
+notes: Primary publication by FLI of its third AI Safety Index; independent expert
+  panel scoring with published methodology. Above press/blog prior because FLI is
+  the originating body and the scorecard, panelist list, and methodology are in the
+  artifact itself.
+provenance:
+  at: '2026-04-19T23:08:03.005339Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 1e0d535873acd03c26266a66f9c9622d4e99b4128887e2acc2d979499c5bf09e
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2025-12
+reliability: 0.85
+source_kind: primary_doc
+title: AI Safety Index Winter 2025 Edition
+updated_at: '2026-04-19T23:08:03.005370Z'
+url: https://futureoflife.org/ai-safety-index-winter-2025/

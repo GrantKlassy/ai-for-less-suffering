@@ -1,0 +1,10 @@
+confidence: 0.95
+created_at: '2026-04-19T23:11:08.659701Z'
+id: desc_icrc_aws_functional_definition
+kind: descriptive_claim
+provenance_url: null
+text: The ICRC defines autonomous weapon systems as weapons that, after initial activation
+  by a person, self-initiate a strike in response to sensor information matched against
+  a generalized target profile, such that the user does not choose or know the specific
+  target, timing, or location of the resulting use of force.
+updated_at: '2026-04-19T23:11:08.659702Z'

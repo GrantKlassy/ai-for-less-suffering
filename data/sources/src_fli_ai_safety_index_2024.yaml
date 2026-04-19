@@ -1,0 +1,22 @@
+accessed_at: '2026-04-19'
+authors:
+- Future of Life Institute
+created_at: '2026-04-19T23:07:10.299988Z'
+id: src_fli_ai_safety_index_2024
+kind: source
+notes: FLI-published index with named independent expert panel; primary document of
+  the evaluation itself. Slightly below primary_doc prior because FLI is an advocacy
+  org with a stated position on AI risk.
+provenance:
+  at: '2026-04-19T23:07:10.299958Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: a56b7764b9bca2790c460a55989eaec9a869c7d9965473198d36ffefdc859f12
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-12-11'
+reliability: 0.85
+source_kind: primary_doc
+title: FLI AI Safety Index 2024
+updated_at: '2026-04-19T23:07:10.299990Z'
+url: https://futureoflife.org/document/fli-ai-safety-index-2024/

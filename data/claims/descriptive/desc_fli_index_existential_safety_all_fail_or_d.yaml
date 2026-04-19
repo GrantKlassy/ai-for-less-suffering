@@ -1,0 +1,9 @@
+confidence: 0.97
+created_at: '2026-04-19T23:08:03.007602Z'
+id: desc_fli_index_existential_safety_all_fail_or_d
+kind: descriptive_claim
+provenance_url: null
+text: 'In the Winter 2025 Index Existential Safety domain, no company scored above
+  D: Anthropic 1.21 (D), Google DeepMind 1.15 (D), OpenAI 1.00 (D), xAI 0.40 (F),
+  Z.ai 0.33 (F), Meta 0.33 (F), DeepSeek 0.00 (F), and Alibaba Cloud 0.00 (F).'
+updated_at: '2026-04-19T23:08:03.007603Z'

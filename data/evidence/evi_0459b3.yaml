@@ -1,0 +1,14 @@
+claim_id: desc_openai_iterative_deployment_safety_doctrine
+created_at: '2026-04-19T23:12:05.050402Z'
+id: evi_0459b3
+kind: evidence
+locator: TED2025 quote near end of article
+method_tag: primary_testimony
+provenance_url: null
+quote: the way we learn how to build safe systems is this iterative process of deploying
+  them to the world, getting feedback while the stakes are relatively low, learning
+  about, like, hey, this is something we have to address.
+source_id: src_raine_openai_wrongful_death
+supports: support
+updated_at: '2026-04-19T23:12:05.050403Z'
+weight: 0.85

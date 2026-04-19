@@ -1,0 +1,22 @@
+accessed_at: '2026-04-19'
+authors:
+- Sharyn Alfonsi
+created_at: '2026-04-19T20:51:43.424587Z'
+id: src_palmer_luckey_60min_anduril
+kind: source
+notes: CBS 60 Minutes transcript; primary testimony from Luckey is first-hand but
+  filtered through edited interview. Slight uplift above press prior for direct on-record
+  quotes from a principal.
+provenance:
+  at: '2026-04-19T20:51:43.424555Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 9f57295ea55074154d52d0f22135bc80834246d3fa24b39dd7eb39dbcfdf51ea
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025'
+reliability: 0.55
+source_kind: press
+title: Why Palmer Luckey thinks AI-powered, autonomous weapons are the future of warfare
+updated_at: '2026-04-19T20:51:43.424589Z'
+url: https://www.cbsnews.com/news/palmer-luckey-ai-powered-autonomous-weapons-future-of-warfare-60-minutes-transcript/

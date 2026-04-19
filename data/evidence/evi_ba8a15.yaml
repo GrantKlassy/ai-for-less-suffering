@@ -1,0 +1,14 @@
+claim_id: desc_llama_405b_inference_cost_half_gpt4o
+created_at: '2026-04-19T20:22:45.305673Z'
+id: evi_ba8a15
+kind: evidence
+locator: '''Why Open Source AI Is Good for Developers'' section, efficiency bullet'
+method_tag: expert_estimate
+provenance_url: null
+quote: Developers can run inference on Llama 3.1 405B on their own infra at roughly
+  50% the cost of using closed models like GPT-4o, for both user-facing and offline
+  inference tasks.
+source_id: src_zuckerberg_open_source_ai
+supports: support
+updated_at: '2026-04-19T20:22:45.305674Z'
+weight: 0.6

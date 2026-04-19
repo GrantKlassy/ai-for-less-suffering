@@ -1,0 +1,14 @@
+claim_id: desc_deepmind_fsf_ml_rd_recursive_risk
+created_at: '2026-04-19T20:23:07.614493Z'
+id: evi_94c5de
+kind: evidence
+locator: 'Section: Risk domains and mitigation levels'
+method_tag: primary_testimony
+provenance_url: null
+quote: For machine learning R&D, the focus is on whether models with such capabilities
+  would enable the spread of models with other critical capabilities, or enable rapid
+  and unmanageable escalation of AI capabilities.
+source_id: src_deepmind_frontier_safety_framework
+supports: support
+updated_at: '2026-04-19T20:23:07.614494Z'
+weight: 0.9

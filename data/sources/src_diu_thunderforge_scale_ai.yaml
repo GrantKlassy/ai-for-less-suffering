@@ -1,0 +1,22 @@
+accessed_at: '2026-04-19'
+authors:
+- Defense Innovation Unit
+created_at: '2026-04-19T20:52:39.311617Z'
+id: src_diu_thunderforge_scale_ai
+kind: source
+notes: DIU press release announcing its own contract award; primary-source character
+  elevates reliability above the generic press prior (0.50), though promotional framing
+  keeps it below primary_doc.
+provenance:
+  at: '2026-04-19T20:52:39.311588Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 4d89c2cb56c7180d35617f54fd2d5cb17a5cfeb2f227092c5c238a95b9e79d89
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-03-05'
+reliability: 0.75
+source_kind: press
+title: 'Thunderforge Project: Integrating Commercial AI-Powered Decision-Making'
+updated_at: '2026-04-19T20:52:39.311618Z'
+url: https://www.diu.mil/latest/dius-thunderforge-project-to-integrate-commercial-ai-powered-decision-making

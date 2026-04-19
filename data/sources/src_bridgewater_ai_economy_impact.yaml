@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Karen Karniol-Tambour
+- Josh Moriarty
+created_at: '2026-04-19T20:50:27.732969Z'
+id: src_bridgewater_ai_economy_impact
+kind: source
+notes: Research note from Bridgewater Associates. Above the blog prior (0.35) because
+  it is signed institutional research from a major macro firm with visible source
+  citations, but not a peer-reviewed or primary-data artifact.
+provenance:
+  at: '2026-04-19T20:50:27.732941Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 9ffd8831f6cf5753b0c71c256dd62fa69cb747d2e8534cfd76f995162729084d
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2023-10-02'
+reliability: 0.55
+source_kind: blog
+title: Exploring How AI Will Impact the Economy
+updated_at: '2026-04-19T20:50:27.732970Z'
+url: https://www.bridgewater.com/research-and-insights/exploring-how-ai-will-impact-the-economy

@@ -1,0 +1,15 @@
+claim_id: desc_garcia_character_ai_wrongful_death_suit
+created_at: '2026-04-19T23:11:33.466697Z'
+id: evi_2917a8
+kind: evidence
+locator: Summary paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: The Social Media Victims Law Center and the Tech Justice Law Project filed
+  a lawsuit against Character.AI, the company's two cofounders, and Google, on behalf
+  of a parent whose 14-year-old, Sewell Setzer III, took his life after interacting
+  with and becoming dependent on role-playing AI 'characters' offered by the company.
+source_id: src_garcia_v_character_ai_tracker
+supports: support
+updated_at: '2026-04-19T23:11:33.466698Z'
+weight: 0.85

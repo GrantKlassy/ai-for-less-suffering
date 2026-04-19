@@ -1,0 +1,25 @@
+accessed_at: '2026-04-19'
+authors:
+- Dan Hendrycks
+- Eric Schmidt
+- Alexandr Wang
+created_at: '2026-04-19T20:55:00.200980Z'
+id: src_superintelligence_strategy_maim
+kind: source
+notes: arXiv preprint, cs.CY. Strategy/policy argument by three prominent authors
+  (CAIS director, former Google CEO, Scale AI CEO) rather than empirical research;
+  slightly below paper prior (0.82) because claims are framework-level and advocacy-adjacent
+  rather than measured.
+provenance:
+  at: '2026-04-19T20:55:00.200951Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 66ecf23165e2ae482a89cda0cae1ae6a5b3c4221ac328043b7db759601c8c450
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-03-07'
+reliability: 0.78
+source_kind: paper
+title: 'Superintelligence Strategy: Expert Version'
+updated_at: '2026-04-19T20:55:00.200981Z'
+url: https://arxiv.org/abs/2503.05628

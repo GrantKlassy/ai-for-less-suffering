@@ -1,0 +1,9 @@
+confidence: 0.6
+created_at: '2026-04-19T20:49:56.435447Z'
+id: desc_gpu_compute_commoditization
+kind: descriptive_claim
+provenance_url: null
+text: GPU cloud compute is commoditizing toward per-hour metered pricing with low
+  pricing power, as new entrants build dedicated AI clouds and flood the market, unlike
+  the CPU cloud which consolidated into an oligopoly.
+updated_at: '2026-04-19T20:49:56.435448Z'

@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Donald J. Trump
+- The White House
+created_at: '2026-04-19T20:24:48.465035Z'
+id: src_trump_initial_rescissions_eo
+kind: source
+notes: Primary-doc prior is 0.90; bumped slightly because the text is the executive
+  order itself published on whitehouse.gov, so the artifact is the authoritative record
+  of what was rescinded.
+provenance:
+  at: '2026-04-19T20:24:48.464995Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: d600036d2d17220c992daee7b8a70eb9e5f60ce30768637398ef74a556315843
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-01-20'
+reliability: 0.92
+source_kind: primary_doc
+title: Initial Rescissions Of Harmful Executive Orders And Actions
+updated_at: '2026-04-19T20:24:48.465037Z'
+url: https://www.whitehouse.gov/presidential-actions/2025/01/initial-rescissions-of-harmful-executive-orders-and-actions/

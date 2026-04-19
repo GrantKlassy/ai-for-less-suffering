@@ -1,0 +1,15 @@
+claim_id: desc_deepmind_fsf_three_components
+created_at: '2026-04-19T20:23:07.613828Z'
+id: evi_0490ec
+kind: evidence
+locator: 'Section: The framework'
+method_tag: primary_testimony
+provenance_url: null
+quote: Identifying capabilities a model may have with potential for severe harm...
+  Evaluating our frontier models periodically to detect when they reach these Critical
+  Capability Levels... Applying a mitigation plan when a model passes our early warning
+  evaluations.
+source_id: src_deepmind_frontier_safety_framework
+supports: support
+updated_at: '2026-04-19T20:23:07.613830Z'
+weight: 0.95

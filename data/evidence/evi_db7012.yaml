@@ -1,0 +1,15 @@
+claim_id: desc_dhs_uscis_ai_in_benefit_asylum_adjudication
+created_at: '2026-04-19T23:09:32.888178Z'
+id: evi_db7012
+kind: evidence
+locator: paragraph beginning 'According to the report, AI technology is part of USCIS's
+  process'
+method_tag: journalistic_report
+provenance_url: null
+quote: AI technology is part of USCIS's process to determine eligibility for immigration
+  benefit or relief, credibility in asylum applications, and public safety or national
+  security threat level of an individual.
+source_id: src_eff_dhs_ai_immigration_letter
+supports: support
+updated_at: '2026-04-19T23:09:32.888180Z'
+weight: 0.7

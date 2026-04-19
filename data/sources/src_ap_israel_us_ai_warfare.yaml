@@ -1,0 +1,25 @@
+accessed_at: '2026-04-19'
+authors:
+- Michael Biesecker
+- Sam Mednick
+- Garance Burke
+created_at: '2026-04-19T23:10:48.255583Z'
+id: src_ap_israel_us_ai_warfare
+kind: source
+notes: AP investigative reporting based on internal company documents/data and 20+
+  sources (6 IDF current/former, 14 tech company employees). Above press prior due
+  to primary document review and multi-source triangulation, but still secondary reporting.
+provenance:
+  at: '2026-04-19T23:10:48.255556Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 700249f2988bc82e3a0ede5ab1284dcb1308e9a3bc0b899d25c17ca11a568eef
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2025-02
+reliability: 0.6
+source_kind: press
+title: As Israel uses US-made AI models in war, concerns arise about tech's role in
+  who lives and who dies
+updated_at: '2026-04-19T23:10:48.255585Z'
+url: https://apnews.com/article/israel-palestinians-ai-technology-737bc17af7b03e98c29cec4e15d0f108

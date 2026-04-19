@@ -1,0 +1,10 @@
+confidence: 0.85
+created_at: '2026-04-19T20:50:27.734571Z'
+id: desc_copilot_developer_speedup_56pct
+kind: descriptive_claim
+provenance_url: null
+text: In a controlled study, professional software developers granted access to GitHub
+  Copilot completed an assigned task 56% faster than those without access, and among
+  Copilot users the tool writes approximately 46% of their code on average (as of
+  February 2023).
+updated_at: '2026-04-19T20:50:27.734573Z'

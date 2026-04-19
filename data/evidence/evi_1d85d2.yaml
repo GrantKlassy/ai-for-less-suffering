@@ -1,0 +1,14 @@
+claim_id: desc_pauseai_statement_treaty_ask
+created_at: '2026-04-19T23:10:18.075288Z'
+id: evi_1d85d2
+kind: evidence
+locator: Body of statement, first paragraph after 'PauseAI Statement' heading
+method_tag: primary_testimony
+provenance_url: null
+quote: We call on the governments of the world to sign an international treaty implementing
+  a pause on the training of the most powerful general AI systems, until we know how
+  to build them safely and keep them under democratic control.
+source_id: src_pauseai_statement
+supports: support
+updated_at: '2026-04-19T23:10:18.075289Z'
+weight: 0.95

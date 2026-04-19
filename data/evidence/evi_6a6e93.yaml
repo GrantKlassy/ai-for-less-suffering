@@ -1,0 +1,13 @@
+claim_id: desc_fli_index_winter_2025_scorecard
+created_at: '2026-04-19T23:08:03.009499Z'
+id: evi_6a6e93
+kind: evidence
+locator: Scorecard table
+method_tag: expert_estimate
+provenance_url: null
+quote: Anthropic C+ 2.67 OpenAI C+ 2.31 Google DeepMind C 2.08 xAI D 1.17 Z.ai D 1.12
+  Meta D 1.10 DeepSeek D 1.02 Alibaba Cloud D- 0.98
+source_id: src_fli_ai_safety_index_winter_2025
+supports: support
+updated_at: '2026-04-19T23:08:03.009500Z'
+weight: 0.95

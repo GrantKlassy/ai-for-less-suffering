@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Anthropic
+created_at: '2026-04-19T23:12:34.616718Z'
+id: src_anthropic_asl3_activation
+kind: source
+notes: First-party policy announcement from Anthropic describing its own ASL-3 activation
+  decision and controls. Slightly below the 0.90 primary_doc prior because it is self-reporting
+  on its own risk posture with implicit marketing incentives, but the underlying factual
+  assertions (activation decision, specific controls implemented) are verifiable first-party.
+provenance:
+  at: '2026-04-19T23:12:34.616682Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 81f2b2fa37b42cd29b449c74262f7cab682d35e68af791fc0094ad21db7ec808
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-05-22'
+reliability: 0.85
+source_kind: primary_doc
+title: Activating AI Safety Level 3 protections
+updated_at: '2026-04-19T23:12:34.616719Z'
+url: https://www.anthropic.com/news/activating-asl3-protections

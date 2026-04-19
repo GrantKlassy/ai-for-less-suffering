@@ -1,0 +1,10 @@
+confidence: 0.88
+created_at: '2026-04-19T23:12:34.619745Z'
+id: desc_asl3_constitutional_classifiers_deployment
+kind: descriptive_claim
+provenance_url: null
+text: Anthropic's ASL-3 deployment architecture uses Constitutional Classifiers ---
+  real-time classifier guards trained on synthetic harmful and harmless CBRN prompt/completion
+  data --- combined with a bug bounty program, offline classification, and threat
+  intelligence partnerships to detect and iteratively patch universal jailbreaks.
+updated_at: '2026-04-19T23:12:34.619746Z'

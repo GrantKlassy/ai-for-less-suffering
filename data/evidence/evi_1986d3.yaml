@@ -1,0 +1,14 @@
+claim_id: desc_pauseai_global_treaty_proposal
+created_at: '2026-04-19T23:10:02.282486Z'
+id: evi_1986d3
+kind: evidence
+locator: Opening / 'Getting to a Treaty' section
+method_tag: primary_testimony
+provenance_url: null
+quote: We do not expect countries or companies to risk their competitive advantage
+  by pausing AI training runs for a long time if other countries or companies do not
+  do the same. This is why we need a global pause.
+source_id: src_pauseai_proposal
+supports: support
+updated_at: '2026-04-19T23:10:02.282487Z'
+weight: 0.95

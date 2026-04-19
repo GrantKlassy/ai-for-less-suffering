@@ -1,0 +1,13 @@
+claim_id: desc_llama_31_405b_release
+created_at: '2026-04-19T20:22:45.305064Z'
+id: evi_6b6c90
+kind: evidence
+locator: paragraph 3 ('Today we're taking the next steps...')
+method_tag: primary_testimony
+provenance_url: null
+quote: We're releasing Llama 3.1 405B, the first frontier-level open source AI model,
+  as well as new and improved Llama 3.1 70B and 8B models.
+source_id: src_zuckerberg_open_source_ai
+supports: support
+updated_at: '2026-04-19T20:22:45.305065Z'
+weight: 0.95

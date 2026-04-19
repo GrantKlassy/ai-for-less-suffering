@@ -1,0 +1,14 @@
+claim_id: desc_axon_audit_log_low_information
+created_at: '2026-04-19T23:08:50.561577Z'
+id: evi_4b6c96
+kind: evidence
+locator: body, paragraph beginning 'Axon has promoted its "audit log" function'
+method_tag: journalistic_report
+provenance_url: null
+quote: Axon has promoted its 'audit log' function as the primary transparency measure.
+  However, after obtaining examples of this data, EFF found that it shed little light
+  on the usage of the technology.
+source_id: src_eff_draft_one_investigation
+supports: support
+updated_at: '2026-04-19T23:08:50.561578Z'
+weight: 0.75

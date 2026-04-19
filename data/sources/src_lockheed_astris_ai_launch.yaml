@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Lockheed Martin Corporation
+created_at: '2026-04-19T20:53:12.751420Z'
+id: src_lockheed_astris_ai_launch
+kind: source
+notes: Corporate press release announcing the subsidiary; reliable for the fact of
+  its own announcement (names, org structure, stated scope) but self-promotional on
+  capability claims. Slight bump above press prior (0.50) for first-party org/personnel
+  facts.
+provenance:
+  at: '2026-04-19T20:53:12.751391Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 72633882790b880362f8ff2e4fa82a4fad9de696644029dadff3185cbe932936
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-12-16'
+reliability: 0.55
+source_kind: press
+title: Lockheed Martin Launches Astris AI to Enable Secure AI Solutions Across Industries
+updated_at: '2026-04-19T20:53:12.751421Z'
+url: https://news.lockheedmartin.com/Lockheed-Martin-Launches-Astris-AI-to-Enable-Secure-AI-Solutions-Across-Industries

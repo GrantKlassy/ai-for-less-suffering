@@ -1,0 +1,11 @@
+confidence: 0.95
+created_at: '2026-04-19T20:48:51.258844Z'
+id: desc_ai_risk_three_category_taxonomy
+kind: descriptive_claim
+provenance_url: null
+text: 'The International AI Safety Report classifies general-purpose AI risks into
+  three categories: risks from malicious use (fake content, manipulation, cyber offence,
+  bio/chem attacks), risks from malfunctions (reliability, bias, loss of control),
+  and systemic risks (labour markets, AI R&D divide, market concentration, environmental,
+  privacy, copyright).'
+updated_at: '2026-04-19T20:48:51.258846Z'

@@ -1,0 +1,14 @@
+claim_id: desc_garcia_complaint_design_known_harmful_minors
+created_at: '2026-04-19T23:11:33.468018Z'
+id: evi_053c27
+kind: evidence
+locator: Summary, second paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: The complaint ... claims that Character.AI knew the design of its app was dangerous
+  and would be harmful to a significant number of minors, failed to exercise reasonable
+  care for minors on its app, and deliberately targeted underage kids.
+source_id: src_garcia_v_character_ai_tracker
+supports: support
+updated_at: '2026-04-19T23:11:33.468019Z'
+weight: 0.8

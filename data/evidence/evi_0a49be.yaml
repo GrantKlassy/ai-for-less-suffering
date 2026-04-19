@@ -1,0 +1,16 @@
+claim_id: desc_asl3_egress_bandwidth_control
+created_at: '2026-04-19T23:12:34.622808Z'
+id: evi_0a49be
+kind: evidence
+locator: Security section
+method_tag: primary_testimony
+provenance_url: null
+quote: "By limiting the rate of outbound network traffic, these controls can leverage\
+  \ model weight size to create a security advantage... we expect to get to the point\
+  \ where rate limits are low enough that exfiltrating model weights before being\
+  \ detected is very difficult\u2014even if an attacker has otherwise significantly\
+  \ compromised our systems."
+source_id: src_anthropic_asl3_activation
+supports: support
+updated_at: '2026-04-19T23:12:34.622809Z'
+weight: 0.9

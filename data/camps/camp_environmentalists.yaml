@@ -8,14 +8,20 @@ created_at: '2026-04-17T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
 - desc_altman_compute_abundance_access_framing
+- desc_bender_hanna_ai_hype_thesis
 - desc_critical_minerals_refining
 - desc_datacenter_water_intensity
 - desc_grid_constraint
 - desc_hyperscaler_water_growth
+- desc_iea_ai_energy_observatory
+- desc_paris_summit_public_interest_ai_platform
 - desc_rare_earth_supply_chain
 - desc_thermoelectric_water_embed
 - desc_transmission_stall
+- desc_trillion_dollar_cluster_trajectory
+- desc_trump_rescinds_biden_climate_eos
 - desc_us_datacenter_load_forecast
+- desc_us_electricity_tens_of_percent_decade
 held_normative:
 - norm_ecological_stewardship
 - norm_ecosystem_capabilities

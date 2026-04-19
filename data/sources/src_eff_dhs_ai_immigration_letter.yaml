@@ -1,0 +1,23 @@
+accessed_at: '2026-04-19'
+authors:
+- Hannah Zhao
+- Matthew Guariglia
+created_at: '2026-04-19T23:09:32.885099Z'
+id: src_eff_dhs_ai_immigration_letter
+kind: source
+notes: EFF Deeplinks blog post; advocacy framing but reports on verifiable coalition
+  letter and Mijente/JFL report. Prior for blog is 0.35; bumped for primary-document
+  linkage and institutional reliability of EFF.
+provenance:
+  at: '2026-04-19T23:09:32.885068Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: 86e21c87ebb61b57b2bd5a7e0f3f6f8389293d4c0cb2fc3fdfc8f50a5871165f
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-09-05'
+reliability: 0.55
+source_kind: blog
+title: EFF & 140 Other Organizations Call for an End to AI Use in Immigration Decisions
+updated_at: '2026-04-19T23:09:32.885100Z'
+url: https://www.eff.org/deeplinks/2024/09/eff-140-other-organizations-call-end-ai-use-immigration-decisions

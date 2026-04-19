@@ -1,0 +1,22 @@
+accessed_at: '2026-04-19'
+authors:
+- Just Futures Law
+created_at: '2026-04-19T23:09:10.767124Z'
+id: src_jfl_reining_in_ai_surveillance
+kind: source
+notes: Advocacy organization landing page summarizing its own legal and policy actions;
+  primary-source reliability for JFL's own actions, lower for downstream factual claims
+  about DHS.
+provenance:
+  at: '2026-04-19T23:09:10.767072Z'
+  git_sha: 4d098737f648fd9fc1bf73d7e2ca93c928757af0
+  method: httpx
+  raw_content_hash: b90ff2dcce67a76652d3a1c254727e6d1608a4b46faf0d2d3edb159c7ce8b1de
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024'
+reliability: 0.45
+source_kind: press
+title: Reining in AI Surveillance
+updated_at: '2026-04-19T23:09:10.767126Z'
+url: https://www.justfutureslaw.org/aitech

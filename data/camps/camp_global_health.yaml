@@ -11,12 +11,17 @@ held_descriptive:
 - desc_amodei_dev_world_growth_target
 - desc_amodei_lifespan_doubling
 - desc_child_mortality_progress
+- desc_china_ai_developing_country_capacity_pledge
 - desc_compressed_21st_century_biology
 - desc_extreme_poverty_trajectory
 - desc_life_expectancy_gain
 - desc_mental_health_burden
 - desc_ncd_shift
+- desc_paris_summit_public_interest_ai_platform
 - desc_suffering_geography
+- desc_trump_rescinds_biden_covid_eos
+- desc_us_healthcare_cost_vs_oecd
+- desc_us_no_market_exposure_40pct
 held_normative:
 - norm_global_health_priority
 id: camp_global_health

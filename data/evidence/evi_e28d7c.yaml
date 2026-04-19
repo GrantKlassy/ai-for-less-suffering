@@ -1,0 +1,14 @@
+claim_id: desc_fsf_v3_drops_instrumental_reasoning_ccl
+created_at: '2026-04-19T20:23:29.975887Z'
+id: evi_e28d7c
+kind: evidence
+locator: 'Section: Adapting our approach to misalignment risks'
+method_tag: primary_testimony
+provenance_url: null
+quote: While our previous version of the Framework included an exploratory approach
+  centered on instrumental reasoning CCLs ... with this update we now provide further
+  protocols for our machine learning research and development CCLs
+source_id: src_deepmind_fsf_v3_update
+supports: support
+updated_at: '2026-04-19T20:23:29.975888Z'
+weight: 0.9
