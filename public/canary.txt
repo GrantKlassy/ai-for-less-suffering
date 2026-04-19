@@ -1,15 +1,13 @@
 WARRANT CANARY --- ai-for-less-suffering.com
 
-<3
-
 Identity      : Grant Klassy <canary@ai-for-less-suffering.com>
 Canonical URL : https://ai-for-less-suffering.com/canary.txt
 Issued        : 2026-04-19
 Expires       : 2029-04-19
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945731
-Block hash    : 00000000000000000000859366e04a003e8de6159a8870c481e8031caa1a82ab
+Block height  : 945799
+Block hash    : 0000000000000000000077fad6a733ecf08f20dfdfd71907689703db6217fa9b
 
 As of the Issued date above, I attest that:
 
@@ -66,6 +64,11 @@ Legal attestations
       (tails, device or account compromise, anomalous access,
       unannounced contact).
 
+  11. I have not been asked by any government, law enforcement,
+      intelligence agency, or past or present employer to publish
+      this message. I had the idea to publish this message and
+      sign this canary completely on my own.
+
 Personal attestations
 
   1. I have not felt that any frontier AI company is "limiting compute"
@@ -76,7 +79,7 @@ Personal attestations
      of "human suffering" with artistic integrity.
 
   3. I have not felt like `claude` has become seriously misaligned
-     or taken any action for ai-for-less-suffering.com that\
+     or taken any action for ai-for-less-suffering.com that
      does not align with ./directives/DIRECTIVE.md . I have not
      personally ever seen `claude` attempt to modify, edit, or
      weaken the file ./directives/DIRECTIVE.md behind my back.
@@ -85,6 +88,8 @@ Personal attestations
      sign this canary to `claude` unsafely. I have handled the
      key used to sign this canary as best as I know how to, and
      I have stopped `claude` from ever ingesting the secret key.
+
+  5. <3
 
 Interpretation:
   This statement attests to the Issued date. A signature dated in the past
@@ -125,5 +130,3 @@ Fingerprint   : 5CD5 69FF 79CB 62B6 2A12 A093 9788 0C5D 5061 FF63
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-
-<3
