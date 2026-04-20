@@ -118,7 +118,7 @@ describe("schema drift: Python ↔ TypeScript parity", () => {
   });
 
   it("D5: ProvenanceMethod matches Python", () => {
-    const ts = ["httpx", "manual_paste"].sort();
+    const ts = ["httpx", "manual_paste", "file"].sort();
     expect(ts).toEqual(enums.ProvenanceMethod);
   });
 

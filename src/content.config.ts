@@ -40,7 +40,7 @@ const sourceKind = z.enum([
 // engine/afls/schema/sources.py :: Provenance. Optional on Source because pre-
 // provenance sources exist and will never be retroactively stamped.
 const provenance = z.object({
-  method: z.enum(["httpx", "manual_paste"]),
+  method: z.enum(["httpx", "manual_paste", "file"]),
   tool: z.string().min(1),
   git_sha: z.string().min(1),
   at: isoTime,
