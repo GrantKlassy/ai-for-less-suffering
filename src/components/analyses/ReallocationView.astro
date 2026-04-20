@@ -1,0 +1,262 @@
+---
+// Reallocation render. Manifesto's first question is about *moves*, not
+// rankings: shift effort from intervention A to intervention B. Same camp
+// strip + descriptive convergence pattern as leverage, then pairs sorted by
+// delta_net, harm-divergence flags as an orthogonal list, LLM coalition
+// shifts per top-K pair, and reallocation blindspots that target pairs the
+// composite likely mis-prices.
+
+import { getEntry } from "astro:content";
+import NodeRef from "../NodeRef.astro";
+import CoalitionStrip from "./CoalitionStrip.astro";
+import type {
+  ReallocationAnalysis,
+  ReallocationPair,
+} from "../../lib/analysis";
+
+interface Props {
+  analysis: ReallocationAnalysis;
+}
+
+const { analysis } = Astro.props;
+
+const convergenceText: Record<string, string> = {};
+for (const id of analysis.descriptive_convergences) {
+  const entry = await getEntry("descriptiveClaims", id);
+  if (entry) convergenceText[id] = entry.data.text;
+}
+
+const interventionText: Record<string, string> = {};
+const interventionIds = new Set<string>();
+for (const r of analysis.rankings) interventionIds.add(r.intervention_id);
+for (const p of analysis.pairs) {
+  interventionIds.add(p.from_intervention_id);
+  interventionIds.add(p.to_intervention_id);
+}
+for (const p of analysis.harm_divergence_flags) {
+  interventionIds.add(p.from_intervention_id);
+  interventionIds.add(p.to_intervention_id);
+}
+for (const id of interventionIds) {
+  const entry = await getEntry("interventions", id);
+  if (entry) interventionText[id] = entry.data.text;
+}
+
+function fmt(n: number, digits = 3): string {
+  return n.toFixed(digits);
+}
+
+function signed(n: number, digits = 3): string {
+  const s = n.toFixed(digits);
+  return n >= 0 ? `+${s}` : s;
+}
+
+const HARM_DIVERGENCE_THRESHOLD = 0.1;
+
+function isHarmFlagged(p: ReallocationPair): boolean {
+  return p.delta_harm_robustness < -HARM_DIVERGENCE_THRESHOLD;
+}
+---
+
+<CoalitionStrip camps={analysis.camps} />
+
+{
+  analysis.descriptive_convergences.length > 0 && (
+    <section class="mb-10">
+      <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+        Descriptive convergence
+      </h2>
+      <ul class="space-y-3 text-sm">
+        {analysis.descriptive_convergences.map((id) => (
+          <li class="rounded border border-zinc-800 p-3">
+            {convergenceText[id] && (
+              <p class="mb-1 text-zinc-100">{convergenceText[id]}</p>
+            )}
+            <NodeRef id={id} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Reallocation pairs
+  </h2>
+  <p class="mb-3 text-xs text-zinc-500">
+    Each row is a move: <span class="font-mono">from → to</span>. Sorted by{" "}
+    <span class="font-mono">delta_net</span>, the change in the -SUFFERING EV
+    net of harm. Only positive-delta pairs are listed --- non-positive moves are
+    trivially bad. Harm is already priced into{" "}
+    <span class="font-mono">net_composite</span>; the{" "}
+    <span class="font-mono">delta_harm_robustness</span> column surfaces when a move
+    gains suffering reduction at a material harm cost (that same pair also appears
+    in the harm-divergence list below).
+  </p>
+  {
+    analysis.pairs.length === 0 ? (
+      <p class="text-sm text-zinc-500">
+        No pairs with positive delta_net. Either the interventions are symmetric
+        or the graph is too sparse for a reallocation to register.
+      </p>
+    ) : (
+      <ol class="space-y-3 text-sm">
+        {analysis.pairs.map((p, i) => (
+          <li class="rounded border border-zinc-800 p-3">
+            <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+              <div class="flex flex-wrap items-baseline gap-2">
+                <span class="font-mono text-xs text-zinc-500">{i + 1}.</span>
+                <NodeRef id={p.from_intervention_id} />
+                <span class="text-zinc-500">→</span>
+                <NodeRef id={p.to_intervention_id} />
+                {isHarmFlagged(p) && (
+                  <span class="rounded border border-rose-900 px-1.5 py-0.5 font-mono text-[10px] text-rose-400">
+                    harm flag
+                  </span>
+                )}
+              </div>
+              <span class="shrink-0 font-mono text-xs text-emerald-300">
+                delta_net {signed(p.delta_net)}
+              </span>
+            </div>
+            {interventionText[p.from_intervention_id] && (
+              <p class="mb-1 text-xs text-zinc-400">
+                <span class="text-zinc-500">from:</span>{" "}
+                {interventionText[p.from_intervention_id]}
+              </p>
+            )}
+            {interventionText[p.to_intervention_id] && (
+              <p class="mb-2 text-xs text-zinc-300">
+                <span class="text-zinc-500">to:</span>{" "}
+                {interventionText[p.to_intervention_id]}
+              </p>
+            )}
+            <div class="font-mono text-xs text-zinc-500">
+              from_net {fmt(p.from_net_composite)} → to_net{" "}
+              {fmt(p.to_net_composite)}
+              <span class="ml-2 text-zinc-600">
+                (Δsuffering {signed(p.delta_suffering_composite)} · Δharm{" "}
+                {signed(p.delta_harm_robustness)} · Δviability{" "}
+                {signed(p.delta_viability)})
+              </span>
+            </div>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Harm-divergence flags
+  </h2>
+  <p class="mb-3 text-xs text-zinc-500">
+    Pairs whose destination has materially lower{" "}
+    <span class="font-mono">harm_robustness</span> than the source (drop of more than{
+      " "
+    }
+    <span class="font-mono">{HARM_DIVERGENCE_THRESHOLD.toFixed(2)}</span>). A
+    pair can appear in both lists --- that's the exact trade the operator needs
+    to see: gain suffering reduction at a material harm cost.
+  </p>
+  {
+    analysis.harm_divergence_flags.length === 0 ? (
+      <p class="text-sm text-zinc-500">None flagged.</p>
+    ) : (
+      <ul class="space-y-3 text-sm">
+        {analysis.harm_divergence_flags.map((p) => (
+          <li class="rounded border border-rose-900/50 p-3">
+            <div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+              <div class="flex flex-wrap items-baseline gap-2">
+                <NodeRef id={p.from_intervention_id} />
+                <span class="text-zinc-500">→</span>
+                <NodeRef id={p.to_intervention_id} />
+              </div>
+              <span class="shrink-0 font-mono text-xs text-rose-400">
+                Δharm {signed(p.delta_harm_robustness)}
+              </span>
+            </div>
+            <div class="font-mono text-xs text-zinc-500">
+              delta_net {signed(p.delta_net)}
+              <span class="ml-2 text-zinc-600">
+                (Δsuffering {signed(p.delta_suffering_composite)} · Δviability{" "}
+                {signed(p.delta_viability)})
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Coalition shifts
+  </h2>
+  {
+    analysis.coalition_shifts.length === 0 ? (
+      <p class="text-sm text-zinc-500">No coalition shifts.</p>
+    ) : (
+      <div class="space-y-4">
+        {analysis.coalition_shifts.map((shift) => (
+          <div class="rounded border border-zinc-800 p-4">
+            <div class="mb-3 flex flex-wrap items-baseline gap-2">
+              <NodeRef id={shift.from_intervention_id} />
+              <span class="text-zinc-500">→</span>
+              <NodeRef id={shift.to_intervention_id} />
+            </div>
+            {shift.gaining_camps.length > 0 && (
+              <div class="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs">
+                <span class="text-emerald-400">Gaining:</span>
+                {shift.gaining_camps.map((c) => (
+                  <NodeRef id={c} />
+                ))}
+              </div>
+            )}
+            {shift.losing_camps.length > 0 && (
+              <div class="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs">
+                <span class="text-rose-400">Losing:</span>
+                {shift.losing_camps.map((c) => (
+                  <NodeRef id={c} />
+                ))}
+              </div>
+            )}
+            <p class="mt-2 text-sm text-zinc-300">{shift.friction_rebinds}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Reallocation blindspots
+  </h2>
+  <p class="mb-3 text-xs text-zinc-500">
+    Pairs the deterministic <span class="font-mono">delta_net</span> likely mis-prices
+    given the camp graph --- flagged by the LLM, not by the math.
+  </p>
+  {
+    analysis.reallocation_blindspots.length === 0 ? (
+      <p class="text-sm text-zinc-500">None flagged.</p>
+    ) : (
+      <ul class="space-y-3 text-sm">
+        {analysis.reallocation_blindspots.map((bs) => (
+          <li class="rounded border border-zinc-800 p-3">
+            <div class="mb-1 flex flex-wrap items-baseline gap-x-2 text-xs">
+              <span class="text-zinc-500">Flags</span>
+              <NodeRef id={bs.flagged_from_intervention_id} />
+              <span class="text-zinc-500">→</span>
+              <NodeRef id={bs.flagged_to_intervention_id} />
+            </div>
+            <p class="text-zinc-200">{bs.reasoning}</p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>

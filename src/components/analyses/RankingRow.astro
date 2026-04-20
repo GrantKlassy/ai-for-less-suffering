@@ -1,7 +1,12 @@
 ---
 // One ranking in a leverage analysis --- intervention permalink, intervention
-// text, leverage/robustness/composite summary, and friction scores as a
-// visual strip via ScoreMatrix.
+// text, the full composite tower (viability -> suffering -> net), and the
+// friction / harm / suffering score bars.
+//
+// The net_composite is the ranked value (leverage x friction x suffering x
+// harm_robustness). suffering_composite and viability stay visible so the
+// marginal effect of each multiplier on the ranking is legible --- if harm
+// drops a row from first place to fifth, the reader sees exactly where.
 
 import NodeRef from "../NodeRef.astro";
 import ScoreMatrix from "../ScoreMatrix.astro";
@@ -21,13 +26,25 @@ const { row, index } = Astro.props;
       <span class="font-mono text-xs text-zinc-500">{index + 1}.</span>
       <NodeRef id={row.intervention_id} />
     </div>
-    <span class="shrink-0 font-mono text-xs text-zinc-400">
-      composite {row.composite_score.toFixed(3)}
+    <span class="shrink-0 font-mono text-xs text-emerald-300">
+      net {row.net_composite.toFixed(3)}
     </span>
   </div>
   <p class="mb-2 text-xs text-zinc-300">{row.intervention_text}</p>
-  <div class="mb-2 font-mono text-xs text-zinc-500">
+  <div class="mb-3 font-mono text-xs text-zinc-500">
     leverage {row.leverage_score} · robustness {row.mean_robustness.toFixed(3)}
+    · harm_robustness {row.mean_harm_robustness.toFixed(3)} · suffering {
+      row.mean_suffering_reduction.toFixed(3)
+    }
+    <span class="ml-2 text-zinc-600">
+      (viability {row.composite_score.toFixed(3)} → suffering_composite {
+        row.suffering_composite.toFixed(3)
+      } → net {row.net_composite.toFixed(3)})
+    </span>
   </div>
-  <ScoreMatrix kind="friction" scores={row.friction_scores} />
+  <div class="space-y-3">
+    <ScoreMatrix kind="friction" scores={row.friction_scores} />
+    <ScoreMatrix kind="harm" scores={row.harm_scores} />
+    <ScoreMatrix kind="suffering" scores={row.suffering_reduction_scores} />
+  </div>
 </li>

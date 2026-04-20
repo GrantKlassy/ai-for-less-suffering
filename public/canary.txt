@@ -2,12 +2,12 @@ WARRANT CANARY --- ai-for-less-suffering.com
 
 Identity      : Grant Klassy <canary@ai-for-less-suffering.com>
 Canonical URL : https://ai-for-less-suffering.com/canary.txt
-Issued        : 2026-04-19
-Expires       : 2029-04-19
+Issued        : 2026-04-20
+Expires       : 2026-07-20
 
 Proof of freshness (Bitcoin mainnet, fetched at sign-time):
-Block height  : 945799
-Block hash    : 0000000000000000000077fad6a733ecf08f20dfdfd71907689703db6217fa9b
+Block height  : 945963
+Block hash    : 00000000000000000001eba51df3b1c34500a3607ce99b7b652030550c0c451e
 
 As of the Issued date above, I attest that:
 

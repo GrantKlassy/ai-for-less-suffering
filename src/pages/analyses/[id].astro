@@ -7,6 +7,7 @@ import Base from "../../layouts/Base.astro";
 import SteelmanView from "../../components/analyses/SteelmanView.astro";
 import PalantirView from "../../components/analyses/PalantirView.astro";
 import LeverageView from "../../components/analyses/LeverageView.astro";
+import ReallocationView from "../../components/analyses/ReallocationView.astro";
 import ContestedTrack from "../../components/analyses/ContestedTrack.astro";
 import { allAnalyses, ANALYSIS_EMOJI } from "../../lib/graph";
 import type { Analysis } from "../../lib/analysis";
@@ -27,11 +28,13 @@ const { analysis } = Astro.props;
 const titleByKind: Record<Analysis["kind"], string> = {
   palantir: `Palantir analysis --- ${analysis.generated_at}`,
   leverage: `Leverage analysis --- ${analysis.generated_at}`,
+  reallocation: `Reallocation analysis --- ${analysis.generated_at}`,
   steelman: `Steelman analysis --- ${analysis.generated_at}`,
 };
 const headingByKind: Record<Analysis["kind"], string> = {
   palantir: "Palantir coalition analysis",
   leverage: "Leverage analysis",
+  reallocation: "Reallocation analysis",
   steelman: "Steelman analysis",
 };
 ---
@@ -48,6 +51,7 @@ const headingByKind: Record<Analysis["kind"], string> = {
   {analysis.kind === "steelman" && <SteelmanView analysis={analysis} />}
   {analysis.kind === "palantir" && <PalantirView analysis={analysis} />}
   {analysis.kind === "leverage" && <LeverageView analysis={analysis} />}
+  {analysis.kind === "reallocation" && <ReallocationView analysis={analysis} />}
 
   <ContestedTrack claims={analysis.contested_claims} />
 </Base>

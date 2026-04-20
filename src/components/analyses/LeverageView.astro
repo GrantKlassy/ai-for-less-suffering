@@ -52,8 +52,17 @@ for (const id of analysis.descriptive_convergences) {
   </h2>
   <p class="mb-3 text-xs text-zinc-500">
     Friction semantic: <span class="font-mono">1 = no friction</span>,{" "}
-    <span class="font-mono">0 = fully blocked</span>. Composite ={" "}
-    <span class="font-mono">leverage_score × mean(friction_scores)</span>.
+    <span class="font-mono">0 = fully blocked</span>. Harm and friction share
+    polarity: <span class="font-mono">1 = no harm</span>,{" "}
+    <span class="font-mono">0 = maximum harm</span>. Rankings sort by{" "}
+    <span class="font-mono">
+      net_composite = leverage × mean(friction) × mean(suffering) ×
+      mean(harm_robustness)
+    </span>
+    --- the -SUFFERING EV net of harm caused if the intervention lands.
+    <span class="font-mono">viability</span> and{" "}
+    <span class="font-mono">suffering_composite</span> stay visible so the marginal
+    effect of each multiplier is legible.
   </p>
   {
     analysis.rankings.length === 0 ? (

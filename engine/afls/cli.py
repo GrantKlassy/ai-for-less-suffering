@@ -29,16 +29,20 @@ from afls.ingest import (
 from afls.output import (
     analysis_paths,
     leverage_analysis_paths,
+    reallocation_analysis_paths,
     steelman_analysis_paths,
     write_analysis_json,
     write_analysis_markdown,
     write_leverage_json,
     write_leverage_markdown,
+    write_reallocation_json,
+    write_reallocation_markdown,
     write_steelman_json,
     write_steelman_markdown,
 )
 from afls.queries.leverage import run_leverage_query
 from afls.queries.palantir import persist_palantir_nodes, run_palantir_query
+from afls.queries.reallocation import run_reallocation_query
 from afls.queries.steelman import run_steelman_query
 from afls.reasoning import (
     AnthropicClient,
@@ -436,7 +440,12 @@ def reindex() -> None:
     typer.secho(f"indexed {count} nodes -> {db}", fg="green")
 
 
-_SUPPORTED_QUERIES: tuple[str, ...] = ("palantir", "leverage", "steelman")
+_SUPPORTED_QUERIES: tuple[str, ...] = (
+    "palantir",
+    "leverage",
+    "reallocation",
+    "steelman",
+)
 
 
 @app.command()
@@ -448,7 +457,10 @@ def query(
         help="Intervention id to target. Required for `steelman`.",
     ),
 ) -> None:
-    """Run a named reasoning query. Supported: `palantir`, `leverage`, `steelman`."""
+    """Run a named reasoning query.
+
+    Supported: `palantir`, `leverage`, `reallocation`, `steelman`.
+    """
     if name not in _SUPPORTED_QUERIES:
         typer.secho(
             f"unknown query {name!r}. supported: {', '.join(_SUPPORTED_QUERIES)}",
@@ -479,6 +491,13 @@ def query(
         )
         write_leverage_json(leverage_analysis, json_path)
         write_leverage_markdown(leverage_analysis, md_path, data_dir())
+    elif name == "reallocation":
+        reallocation_analysis = run_reallocation_query(client, data_dir())
+        json_path, md_path = reallocation_analysis_paths(
+            public_output_dir(), reallocation_analysis
+        )
+        write_reallocation_json(reallocation_analysis, json_path)
+        write_reallocation_markdown(reallocation_analysis, md_path, data_dir())
     else:
         steelman_analysis = run_steelman_query(
             client, data_dir(), target_intervention_id=target

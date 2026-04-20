@@ -53,7 +53,7 @@ echo "  Block height: $BLOCK_HEIGHT"
 echo "  Block hash:   $BLOCK_HASH"
 
 ISSUED=$(date -u +%Y-%m-%d)
-EXPIRES=$(date -u -d "$ISSUED +3 years" +%Y-%m-%d)
+EXPIRES=$(date -u -d "$ISSUED +3 months" +%Y-%m-%d)
 
 echo "  Issued:  $ISSUED"
 echo "  Expires: $EXPIRES"

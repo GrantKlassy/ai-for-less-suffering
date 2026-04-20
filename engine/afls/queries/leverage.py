@@ -1,15 +1,23 @@
 """Leverage query.
 
-Ranks interventions by `leverage_score x mean(friction_scores) x mean(suffering_reduction_scores)`.
+Ranks interventions by
+`leverage_score x mean(friction_scores) x mean(harm_scores) x mean(suffering_reduction_scores)`.
 The ranking is deterministic and operator-authored --- the LLM does not invent
-leverage, friction, or suffering-reduction numbers. One Opus pass layers coalition
-analysis per ranked intervention: which camps line up, which contest it, what the
-expected friction fight looks like, and whether the suffering numerator is plausible.
+leverage, friction, harm, or suffering-reduction numbers. One Opus pass layers
+coalition analysis per ranked intervention: which camps line up, which contest
+it, what the expected friction fight looks like, and whether the suffering
+numerator is plausible.
 
-The composite formula is the -SUFFERING EV the directive asks for. Interventions
-with zero suffering_reduction_scores rank zero regardless of political viability;
-that is intentional. The old viability composite (`leverage x robustness`) is kept
-alongside so the suffering term's effect on the ranking is legible.
+Friction and harm share polarity (1 = no friction / no harm, 0 = fully blocked
+/ maximum harm), so both multiply in without sign flips. An intervention that
+reduces disease suffering but imposes heavy water/land/displacement/lock-in
+costs scores below a clean one --- this is the directive's read of "suffering
+caused by AI" baked into the composite, not a post-hoc adjustment.
+
+Interventions with zero suffering_reduction_scores rank zero regardless of
+political viability; that is intentional. The old composites (`viability =
+leverage x robustness` and `suffering_composite = viability x suffering`) are
+kept alongside so the marginal effect of each term on the ranking is legible.
 """
 
 from __future__ import annotations
@@ -55,9 +63,16 @@ class _StrictModel(BaseModel):
 class LeverageRanking(_StrictModel):
     """Deterministic ranking row. Computed from node fields, no LLM.
 
-    Two composites. `composite_score` is the old viability number
-    (`leverage x robustness`). `suffering_composite` multiplies in the suffering
-    numerator and is the directive's -SUFFERING EV. Rankings sort by the latter.
+    Three composites, each a superset of the last so the marginal effect of
+    each term is legible:
+    - `composite_score`    = leverage x robustness              (viability)
+    - `suffering_composite`= viability x mean_suffering_reduction (-SUFFERING EV)
+    - `net_composite`      = suffering_composite x mean_harm_robustness
+                             (-SUFFERING EV net of harm caused if it lands)
+
+    Rankings sort by `net_composite`. An intervention that cleanly reduces
+    suffering with low harm outranks one that reduces the same suffering while
+    imposing water/land/displacement costs.
     """
 
     intervention_id: str
@@ -67,6 +82,12 @@ class LeverageRanking(_StrictModel):
         description="Mean of friction_scores values. Friction semantic: 1 = no "
         "friction, 0 = fully blocked. Higher is better."
     )
+    mean_harm_robustness: float = Field(
+        description="Mean of harm_scores values. Harm semantic: 1 = no harm, "
+        "0 = maximum harm (same polarity as friction). Zero when scores are "
+        "absent --- absent harm scores collapse net_composite to zero by "
+        "design, the same way absent suffering scores do."
+    )
     mean_suffering_reduction: float = Field(
         description="Mean of suffering_reduction_scores values. Suffering "
         "semantic: 1 = maximum reduction, 0 = no reduction. Zero when scores "
@@ -74,13 +95,18 @@ class LeverageRanking(_StrictModel):
     )
     composite_score: float = Field(
         description="Viability: leverage_score x mean_robustness. Ignores what "
-        "the intervention is pointed at."
+        "the intervention is pointed at and what it costs to get there."
     )
     suffering_composite: float = Field(
-        description="-SUFFERING EV: composite_score x mean_suffering_reduction. "
-        "What the directive actually asks the tool to rank by."
+        description="-SUFFERING EV (gross): composite_score x "
+        "mean_suffering_reduction. Ignores harm caused if the intervention lands."
+    )
+    net_composite: float = Field(
+        description="-SUFFERING EV (net of harm): suffering_composite x "
+        "mean_harm_robustness. Rankings sort by this."
     )
     friction_scores: dict[str, float]
+    harm_scores: dict[str, float] = Field(default_factory=dict)
     suffering_reduction_scores: dict[str, float] = Field(default_factory=dict)
 
 
@@ -140,6 +166,13 @@ def _mean_robustness(intervention: Intervention) -> float:
     return sum(scores) / len(scores)
 
 
+def _mean_harm_robustness(intervention: Intervention) -> float:
+    scores = list(intervention.harm_scores.values())
+    if not scores:
+        return 0.0
+    return sum(scores) / len(scores)
+
+
 def _mean_suffering_reduction(intervention: Intervention) -> float:
     scores = list(intervention.suffering_reduction_scores.values())
     if not scores:
@@ -148,26 +181,31 @@ def _mean_suffering_reduction(intervention: Intervention) -> float:
 
 
 def rank_interventions(interventions: list[Intervention]) -> list[LeverageRanking]:
-    """Deterministic ranking: suffering_composite descending, id as tie-break."""
+    """Deterministic ranking: net_composite descending, id as tie-break."""
     rows: list[LeverageRanking] = []
     for intv in interventions:
         robustness = _mean_robustness(intv)
+        harm_robustness = _mean_harm_robustness(intv)
         suffering = _mean_suffering_reduction(intv)
         composite = intv.leverage_score * robustness
+        suffering_composite = composite * suffering
         rows.append(
             LeverageRanking(
                 intervention_id=intv.id,
                 intervention_text=intv.text,
                 leverage_score=intv.leverage_score,
                 mean_robustness=robustness,
+                mean_harm_robustness=harm_robustness,
                 mean_suffering_reduction=suffering,
                 composite_score=composite,
-                suffering_composite=composite * suffering,
+                suffering_composite=suffering_composite,
+                net_composite=suffering_composite * harm_robustness,
                 friction_scores=dict(intv.friction_scores),
+                harm_scores=dict(intv.harm_scores),
                 suffering_reduction_scores=dict(intv.suffering_reduction_scores),
             )
         )
-    rows.sort(key=lambda r: (-r.suffering_composite, r.intervention_id))
+    rows.sort(key=lambda r: (-r.net_composite, r.intervention_id))
     return rows
 
 
@@ -184,17 +222,21 @@ def _format_camp_terse(camp: Camp) -> str:
 
 def _format_ranking_row(row: LeverageRanking) -> str:
     friction = ", ".join(f"{k}={v}" for k, v in sorted(row.friction_scores.items()))
+    harm = ", ".join(f"{k}={v}" for k, v in sorted(row.harm_scores.items()))
     suffering = ", ".join(
         f"{k}={v}" for k, v in sorted(row.suffering_reduction_scores.items())
     )
     return (
-        f"- {row.intervention_id}: suffering_composite={row.suffering_composite:.3f} "
-        f"(viability={row.composite_score:.3f} x "
-        f"suffering={row.mean_suffering_reduction:.3f})\n"
+        f"- {row.intervention_id}: net_composite={row.net_composite:.3f} "
+        f"(suffering_composite={row.suffering_composite:.3f} x "
+        f"harm_robustness={row.mean_harm_robustness:.3f})\n"
+        f"    suffering_composite = viability={row.composite_score:.3f} x "
+        f"suffering={row.mean_suffering_reduction:.3f}\n"
         f"    viability = leverage={row.leverage_score} x "
         f"robustness={row.mean_robustness:.3f}\n"
         f"    text: {row.intervention_text}\n"
         f"    friction_scores: {friction}\n"
+        f"    harm_scores: {harm or '(none)'}\n"
         f"    suffering_reduction_scores: {suffering or '(none)'}"
     )
 
@@ -216,11 +258,17 @@ def build_leverage_context(
         "# Leverage ranking (deterministic) + camp registry",
         "",
         "Friction semantic: 1 = no friction, 0 = fully blocked. Higher = more robust.",
+        "Harm semantic: 1 = no harm, 0 = maximum harm. Same polarity as friction. "
+        "Absence of harm_scores => zero net_composite by design.",
         "Suffering-reduction semantic: 1 = maximum reduction, 0 = no reduction. "
-        "Absence of scores => zero suffering composite by design.",
+        "Absence of scores => zero net_composite by design.",
         "",
-        "Composite: suffering_composite = leverage x mean(friction) x "
-        "mean(suffering_reduction). Rankings sort by suffering_composite.",
+        "Composites (nested so each term's marginal effect stays legible):",
+        "  viability            = leverage x mean(friction)",
+        "  suffering_composite  = viability x mean(suffering_reduction)",
+        "  net_composite        = suffering_composite x mean(harm_robustness)",
+        "Rankings sort by net_composite --- the -SUFFERING EV net of harm caused "
+        "if the intervention lands.",
         "",
         "## Rankings (top to bottom)",
     ]
@@ -242,30 +290,38 @@ def build_leverage_context(
 
 _USER_PROMPT = """Analyze this leverage ranking and the camps.
 
-The ranking is deterministic --- suffering_composite = \
-leverage x mean(friction) x mean(suffering_reduction). Do not second-guess the \
-numbers; reason about the coalitions around them and the plausibility of the \
-suffering numerator.
+The ranking is deterministic --- net_composite = \
+leverage x mean(friction) x mean(suffering_reduction) x mean(harm_robustness). \
+Do not second-guess the numbers; reason about the coalitions around them and \
+the plausibility of the suffering numerator and the harm scores.
 
 For each intervention in the ranking, return a `coalition_analyses` entry:
 - `supporting_camps`: camps whose normative stack + held descriptives line up behind it
 - `contesting_camps`: camps whose stance actively opposes or constrains it (not merely \
-indifferent)
+indifferent). Harm-side camps (environmentalists, displaced-workers, concentration-\
+wary) often sit here on interventions whose harm_scores are low.
 - `expected_friction`: one paragraph on (a) where the friction actually binds in \
-practice and (b) whether the suffering_reduction_scores look right given the \
-intervention's mechanism. Operator voice: specific, no hedging, no manifesto voice, \
-name the binding constraint and name the suffering layer the intervention actually \
-touches.
+practice, (b) whether the suffering_reduction_scores look right given the \
+intervention's mechanism, and (c) whether the harm_scores look right --- \
+especially if an intervention is ranked high on net_composite but has obvious \
+water/land/displacement/concentration costs that the scores under-count. \
+Operator voice: specific, no hedging, no manifesto voice, name the binding \
+constraint, name the suffering layer the intervention actually touches, and \
+name the harm layer if the scores look off.
 
-Then flag `ranking_blindspots` --- interventions whose suffering_composite is likely \
-mispriced given the camp graph or the suffering layers. Examples of valid flags: the \
-operator's leverage is higher than the camp coalition can plausibly move; a \
-low-ranked intervention has cross-camp coalition support that the composite misses; \
-mean_robustness masks a single-layer veto; a suffering_reduction_scores entry credits \
-an intervention for a layer it doesn't actually touch; an intervention with zero \
-suffering numerator is ranked at the bottom when its *enabling* role for \
-suffering-reducing deployment is load-bearing. One sentence per flag, with the \
-specific mechanism.
+Then flag `ranking_blindspots` --- interventions whose net_composite is likely \
+mispriced given the camp graph, the suffering layers, or the harm layers. \
+Examples of valid flags: the operator's leverage is higher than the camp \
+coalition can plausibly move; a low-ranked intervention has cross-camp \
+coalition support that the composite misses; mean_robustness masks a \
+single-layer veto; mean_harm_robustness masks a catastrophic single-layer harm \
+(e.g. one harm_score near zero averaged against several near one); a \
+suffering_reduction_scores entry credits an intervention for a layer it \
+doesn't actually touch; harm_scores under-count a first-order cost (water, \
+displacement, concentration, lock-in) that the intervention's mechanism \
+obviously incurs; an intervention with zero suffering numerator is ranked at \
+the bottom when its *enabling* role for suffering-reducing deployment is \
+load-bearing. One sentence per flag, with the specific mechanism.
 
 Return ONLY JSON matching the schema in the system prompt."""
 

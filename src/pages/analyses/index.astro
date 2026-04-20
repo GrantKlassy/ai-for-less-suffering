@@ -67,6 +67,15 @@ const entries = loadAnalyses();
                     {analysis.contested_claims.length}
                   </>
                 )}
+                {analysis.kind === "reallocation" && (
+                  <>
+                    camps: {analysis.camps.join(", ")} · pairs:{" "}
+                    {analysis.pairs.length} · harm flags:{" "}
+                    {analysis.harm_divergence_flags.length} · coalition shifts:{" "}
+                    {analysis.coalition_shifts.length} · contested:{" "}
+                    {analysis.contested_claims.length}
+                  </>
+                )}
                 {analysis.kind === "steelman" && (
                   <>
                     target: {analysis.target_intervention_id} · for:{" "}
