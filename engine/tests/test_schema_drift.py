@@ -94,7 +94,7 @@ def test_intervention_kind_shape() -> None:
 def test_provenance_method_shape() -> None:
     """D5: ProvenanceMethod (Literal alias) values are locked down."""
     values = list(get_args(ProvenanceMethod))
-    assert sorted(values) == ["httpx", "manual_paste"]
+    assert sorted(values) == ["file", "httpx", "manual_paste"]
 
 
 def test_id_prefix_includes_coalition_kinds() -> None:

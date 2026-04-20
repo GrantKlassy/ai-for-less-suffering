@@ -34,7 +34,7 @@ aborts ingest before the LLM call so token spend tracks real articles only."""
 _PARAGRAPH_TAG_RE: re.Pattern[str] = re.compile(r"<p[> ]")
 
 
-def _count_paragraph_tags(html: str) -> int:
+def count_paragraph_tags(html: str) -> int:
     """Count occurrences of `<p>` or `<p ` (attributed) in raw HTML.
 
     Parity with `curl -sL <url> | grep -o '<p>' | wc -l`, extended to also
@@ -79,7 +79,7 @@ def extract_text(html: str) -> str:
     return parser.text()
 
 
-def _truncate_utf8(text: str, max_bytes: int) -> str:
+def truncate_utf8(text: str, max_bytes: int) -> str:
     encoded = text.encode("utf-8")
     if len(encoded) <= max_bytes:
         return text
@@ -104,7 +104,7 @@ def fetch_and_extract(
         response = client.get(url)
         response.raise_for_status()
     raw_html = response.text
-    paragraph_count = _count_paragraph_tags(raw_html)
-    text = _truncate_utf8(extract_text(raw_html), max_bytes)
+    paragraph_count = count_paragraph_tags(raw_html)
+    text = truncate_utf8(extract_text(raw_html), max_bytes)
     sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
     return str(response.url), text, sha256, paragraph_count

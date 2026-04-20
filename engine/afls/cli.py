@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import subprocess
 import tempfile
+from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
@@ -17,7 +18,14 @@ from rich.table import Table
 
 from afls import __version__
 from afls.config import data_dir, db_path, public_output_dir, repo_root
-from afls.ingest import MIN_PARAGRAPH_TAGS, fetch_and_extract
+from afls.ingest import (
+    MIN_PARAGRAPH_TAGS,
+    SUPPORTED_SUFFIXES,
+    ReadResult,
+    UnsupportedFileType,
+    fetch_and_extract,
+    read_and_extract,
+)
 from afls.output import (
     analysis_paths,
     leverage_analysis_paths,
@@ -51,6 +59,7 @@ from afls.schema import (
     Intervention,
     MethodTag,
     Provenance,
+    ProvenanceMethod,
     Source,
     SourceKind,
     Support,
@@ -504,43 +513,51 @@ def _git_sha() -> str:
 _fetch_for_ingest = fetch_and_extract
 """Module-level fetch hook. Tests monkeypatch this to avoid the network."""
 
+_read_for_ingest = read_and_extract
+"""Module-level file-read hook. Parallel to `_fetch_for_ingest`; tests may swap."""
+
 
 def _build_ingest_client() -> AnthropicClient:
     """Module-level client factory. Tests monkeypatch this to inject a fake SDK."""
     return AnthropicClient()
 
 
-@app.command()
-def ingest(url: str) -> None:
-    """Fetch a URL and draft Source + DescriptiveClaims + Evidence YAML via Claude."""
-    typer.secho(f"fetching {url}", fg="cyan")
-    try:
-        final_url, article_text, sha256, paragraph_count = _fetch_for_ingest(url)
-    except Exception as exc:
-        typer.secho(f"fetch failed: {exc}", fg="red")
-        raise typer.Exit(1) from exc
-    if paragraph_count < MIN_PARAGRAPH_TAGS:
-        typer.secho(
-            f"precheck failed: {paragraph_count} <p> tag(s) in raw HTML, "
-            f"need {MIN_PARAGRAPH_TAGS}+. Page is likely JS-rendered, a paywall, "
-            "or not an article --- LLM call skipped.",
-            fg="red",
-        )
-        raise typer.Exit(1)
-    if not article_text.strip():
-        typer.secho("fetched page contained no extractable text", fg="red")
-        raise typer.Exit(1)
-    typer.secho(
-        f"extracted {len(article_text)} chars (sha256={sha256[:12]}...) from {final_url} "
-        f"[{paragraph_count} <p> tags]",
-        fg="cyan",
-    )
+_MIN_FILE_TEXT_CHARS: int = 200
+"""Non-empty floor for file ingest (PDF/text). HTML still uses MIN_PARAGRAPH_TAGS."""
 
+_DIRECTIVE_PATH_PARTS: frozenset[str] = frozenset({"directives", "directives-ai"})
+"""Directories that must never feed the source graph. Mirrors the schema-drift
+test in `tests/test_schema_drift.py`: directives are reasoner context, not
+citable evidence, so `ingest:dir` refuses to walk through them."""
+
+
+@dataclass(frozen=True)
+class _IngestArtifacts:
+    source: Source
+    claims: list[DescriptiveClaim]
+    evidence_count: int
+
+
+def _ingest_extracted(
+    *,
+    client: AnthropicClient,
+    canonical_url: str,
+    article_text: str,
+    sha256: str,
+    method: ProvenanceMethod,
+    run_linker: bool = True,
+) -> _IngestArtifacts:
+    """Draft via Claude, persist Source+claims+evidence, optionally run the linker.
+
+    Assumes the caller has already validated that `article_text` is non-empty and
+    that any format-specific precheck passed. Raises `typer.Exit(1)` on any
+    collision or LLM failure (so single-URL invocation exits non-zero) --- batch
+    callers catch that and count it as a per-file failure.
+    """
     typer.secho("drafting source+claims+evidence (opus)...", fg="cyan")
-    client = _build_ingest_client()
     try:
         draft = run_ingest_query(
-            client, data_dir(), url=final_url, article_text=article_text
+            client, data_dir(), url=canonical_url, article_text=article_text
         )
     except ReasoningError as exc:
         typer.secho(f"LLM draft failed: {exc}", fg="red")
@@ -584,7 +601,7 @@ def ingest(url: str) -> None:
             raise typer.Exit(1)
 
     provenance = Provenance(
-        method="httpx",
+        method=method,
         tool=_INGEST_TOOL,
         git_sha=_git_sha(),
         at=datetime.now(UTC),
@@ -594,7 +611,7 @@ def ingest(url: str) -> None:
         id=source_id,
         source_kind=draft.source.source_kind,
         title=draft.source.title,
-        url=final_url,
+        url=canonical_url,
         authors=list(draft.source.authors),
         published_at=draft.source.published_at,
         accessed_at=date.today().isoformat(),
@@ -637,6 +654,17 @@ def ingest(url: str) -> None:
         bold=True,
     )
 
+    if run_linker:
+        _run_ingest_linker(client, claims)
+
+    return _IngestArtifacts(
+        source=source, claims=claims, evidence_count=len(draft.evidence)
+    )
+
+
+def _run_ingest_linker(
+    client: AnthropicClient, claims: list[DescriptiveClaim]
+) -> None:
     typer.secho("linking new claims to camps (haiku)...", fg="cyan")
     try:
         linker_draft = run_linker_query(client, data_dir(), new_claims=claims)
@@ -653,10 +681,205 @@ def ingest(url: str) -> None:
             fg="green",
         )
 
+
+def _walk_for_ingest(root: Path) -> list[Path]:
+    """Return files under `root` that are candidates for file-ingest.
+
+    Skips dotfiles/dotdirs, unsupported extensions, and anything under a
+    `directives` or `directives-ai` directory --- that filter is load-bearing
+    per the schema-drift invariant that directives never land as Source content.
+    """
+    candidates: list[Path] = []
+    for path in root.rglob("*"):
+        if not path.is_file():
+            continue
+        rel_parts = path.relative_to(root).parts
+        if any(part.startswith(".") for part in rel_parts):
+            continue
+        if any(part in _DIRECTIVE_PATH_PARTS for part in rel_parts):
+            continue
+        if path.suffix.lower() not in SUPPORTED_SUFFIXES:
+            continue
+        candidates.append(path)
+    return sorted(candidates)
+
+
+def _file_precheck_ok(result: ReadResult) -> bool:
+    """Format-aware precheck. HTML uses `<p>`-tag floor (catches JS shells);
+    PDF/text uses extracted-text length (catches image-only PDFs / empty files).
+    """
+    if not result.text.strip():
+        typer.secho("precheck failed: no extractable text --- skipping.", fg="yellow")
+        return False
+    if result.kind == "html":
+        if result.paragraph_count < MIN_PARAGRAPH_TAGS:
+            typer.secho(
+                f"precheck failed: {result.paragraph_count} <p> tag(s), "
+                f"need {MIN_PARAGRAPH_TAGS}+ --- skipping.",
+                fg="yellow",
+            )
+            return False
+    else:
+        stripped = len(result.text.strip())
+        if stripped < _MIN_FILE_TEXT_CHARS:
+            typer.secho(
+                f"precheck failed: {stripped} chars of extractable text, "
+                f"need {_MIN_FILE_TEXT_CHARS}+ --- skipping.",
+                fg="yellow",
+            )
+            return False
+    return True
+
+
+@app.command("ingest:url")
+def ingest_url(url: str) -> None:
+    """Fetch a URL and draft Source + DescriptiveClaims + Evidence YAML via Claude."""
+    typer.secho(f"fetching {url}", fg="cyan")
+    try:
+        final_url, article_text, sha256, paragraph_count = _fetch_for_ingest(url)
+    except Exception as exc:
+        typer.secho(f"fetch failed: {exc}", fg="red")
+        raise typer.Exit(1) from exc
+    if paragraph_count < MIN_PARAGRAPH_TAGS:
+        typer.secho(
+            f"precheck failed: {paragraph_count} <p> tag(s) in raw HTML, "
+            f"need {MIN_PARAGRAPH_TAGS}+. Page is likely JS-rendered, a paywall, "
+            "or not an article --- LLM call skipped.",
+            fg="red",
+        )
+        raise typer.Exit(1)
+    if not article_text.strip():
+        typer.secho("fetched page contained no extractable text", fg="red")
+        raise typer.Exit(1)
     typer.secho(
-        f"review with: afls edit {source.id}  (then the desc_* / evi_* nodes)",
+        f"extracted {len(article_text)} chars (sha256={sha256[:12]}...) from {final_url} "
+        f"[{paragraph_count} <p> tags]",
         fg="cyan",
     )
+
+    client = _build_ingest_client()
+    artifacts = _ingest_extracted(
+        client=client,
+        canonical_url=final_url,
+        article_text=article_text,
+        sha256=sha256,
+        method="httpx",
+        run_linker=True,
+    )
+    typer.secho(
+        f"review with: afls edit {artifacts.source.id}  (then the desc_* / evi_* nodes)",
+        fg="cyan",
+    )
+
+
+@app.command("ingest:dir")
+def ingest_dir(directory: Path) -> None:
+    """Walk a directory and ingest every supported file (.html, .pdf, .txt, .md).
+
+    Intended as the escape hatch for URLs that `ingest:url` can't reach:
+    bot-blocked pages, JS-rendered shells, and PDFs. Save the files locally
+    (curl with UA, browser save-as, SingleFile extension), point this at the
+    directory, and the same Claude-drafted pipeline runs per file with
+    `Provenance.method = "file"`. Links all new claims to camps once at the end.
+    """
+    if not directory.is_dir():
+        typer.secho(f"not a directory: {directory}", fg="red")
+        raise typer.Exit(1)
+
+    candidates = _walk_for_ingest(directory)
+    if not candidates:
+        typer.secho(f"no supported files found under {directory}", fg="yellow")
+        raise typer.Exit(1)
+
+    typer.secho(
+        f"found {len(candidates)} candidate file(s) under {directory}", fg="cyan"
+    )
+
+    client = _build_ingest_client()
+    all_claims: list[DescriptiveClaim] = []
+    seen_hashes: set[str] = set()
+    ok = 0
+    skipped_precheck = 0
+    skipped_duplicate = 0
+    skipped_unsupported = 0
+    failed = 0
+
+    for path in candidates:
+        rel = path.relative_to(directory)
+        typer.secho(f"\n--- {rel}", fg="cyan", bold=True)
+        try:
+            result = _read_for_ingest(path, root=directory)
+        except UnsupportedFileType as exc:
+            typer.secho(f"skip (unsupported): {exc}", fg="yellow")
+            skipped_unsupported += 1
+            continue
+        except Exception as exc:
+            typer.secho(f"read failed: {exc}", fg="red")
+            failed += 1
+            continue
+
+        if not _file_precheck_ok(result):
+            skipped_precheck += 1
+            continue
+
+        if result.sha256 in seen_hashes:
+            typer.secho(
+                f"skip (duplicate content): sha256={result.sha256[:12]}... already "
+                "ingested in this batch",
+                fg="yellow",
+            )
+            skipped_duplicate += 1
+            continue
+        seen_hashes.add(result.sha256)
+
+        typer.secho(
+            f"extracted {len(result.text)} chars (sha256={result.sha256[:12]}...) "
+            f"from {result.canonical_id} [kind={result.kind}]",
+            fg="cyan",
+        )
+        try:
+            artifacts = _ingest_extracted(
+                client=client,
+                canonical_url=result.canonical_id,
+                article_text=result.text,
+                sha256=result.sha256,
+                method="file",
+                run_linker=False,
+            )
+        except typer.Exit:
+            # reason was already printed by _ingest_extracted via secho
+            failed += 1
+            continue
+        except Exception as exc:
+            typer.secho(f"unexpected error: {exc}", fg="red")
+            failed += 1
+            continue
+
+        all_claims.extend(artifacts.claims)
+        ok += 1
+
+    typer.secho("\n=== ingest:dir summary ===", fg="green", bold=True)
+    typer.secho(f"  ok: {ok}", fg="green")
+    if skipped_precheck:
+        typer.secho(f"  skipped (precheck): {skipped_precheck}", fg="yellow")
+    if skipped_duplicate:
+        typer.secho(f"  skipped (duplicate): {skipped_duplicate}", fg="yellow")
+    if skipped_unsupported:
+        typer.secho(f"  skipped (unsupported): {skipped_unsupported}", fg="yellow")
+    if failed:
+        typer.secho(f"  failed: {failed}", fg="red")
+
+    if all_claims:
+        _run_ingest_linker(client, all_claims)
+
+
+@app.command("ingest", hidden=True)
+def ingest_deprecated(url: str) -> None:
+    """Deprecated alias for `ingest:url`."""
+    typer.secho(
+        "note: `ingest` is renamed to `ingest:url` --- forwarding.", fg="yellow"
+    )
+    ingest_url(url)
 
 
 if __name__ == "__main__":

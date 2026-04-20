@@ -13,7 +13,7 @@ from typer.testing import CliRunner
 
 from afls import cli as cli_module
 from afls.cli import app
-from afls.ingest.fetch import _count_paragraph_tags, _truncate_utf8, extract_text
+from afls.ingest.fetch import count_paragraph_tags, extract_text, truncate_utf8
 from afls.reasoning import AnthropicClient
 from afls.schema import (
     DescriptiveClaim,
@@ -61,30 +61,30 @@ def test_extract_text_preserves_ordering() -> None:
     assert lines == ["one", "two", "three"]
 
 
-def test_truncate_utf8_respects_multibyte_boundary() -> None:
+def testtruncate_utf8_respects_multibyte_boundary() -> None:
     text = "a" + "\u00e9" * 10
-    truncated = _truncate_utf8(text, max_bytes=5)
+    truncated = truncate_utf8(text, max_bytes=5)
     truncated.encode("utf-8")
     assert len(truncated.encode("utf-8")) <= 5
 
 
-def test_truncate_utf8_noop_when_under_limit() -> None:
-    assert _truncate_utf8("hello", max_bytes=100) == "hello"
+def testtruncate_utf8_noop_when_under_limit() -> None:
+    assert truncate_utf8("hello", max_bytes=100) == "hello"
 
 
-def test_count_paragraph_tags_matches_bare_and_attributed() -> None:
+def testcount_paragraph_tags_matches_bare_and_attributed() -> None:
     html = '<p>a</p><p class="b">b</p><p data-x="c">c</p>'
-    assert _count_paragraph_tags(html) == 3
+    assert count_paragraph_tags(html) == 3
 
 
-def test_count_paragraph_tags_ignores_sibling_p_prefixed_tags() -> None:
+def testcount_paragraph_tags_ignores_sibling_p_prefixed_tags() -> None:
     """`<pre>`, `<picture>`, `<path>` all start with `<p` but are not paragraphs."""
     html = "<pre>code</pre><picture></picture><path></path>"
-    assert _count_paragraph_tags(html) == 0
+    assert count_paragraph_tags(html) == 0
 
 
-def test_count_paragraph_tags_returns_zero_on_empty() -> None:
-    assert _count_paragraph_tags("") == 0
+def testcount_paragraph_tags_returns_zero_on_empty() -> None:
+    assert count_paragraph_tags("") == 0
 
 
 # --- CLI end-to-end ------------------------------------------------------
@@ -191,7 +191,7 @@ def test_ingest_writes_source_claim_evidence(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _install_fake_ingest(monkeypatch)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 0, result.output
 
     source = load_node(Source, "src_example_piece", data_root)
@@ -235,7 +235,7 @@ def test_ingest_refuses_source_id_collision(
         data_root,
     )
     _install_fake_ingest(monkeypatch)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "collision" in result.output
     assert len(list_nodes(DescriptiveClaim, data_root)) == 0
@@ -252,7 +252,7 @@ def test_ingest_refuses_claim_id_collision(
         data_root,
     )
     _install_fake_ingest(monkeypatch)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "collision" in result.output
     assert len(list_nodes(Source, data_root)) == 0
@@ -264,7 +264,7 @@ def test_ingest_bails_on_empty_body(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _install_fake_ingest(monkeypatch, fetched_text="   \n  ")
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "no extractable text" in result.output
 
@@ -278,7 +278,7 @@ def test_ingest_bails_on_fetch_error(
         raise RuntimeError("network gone")
 
     monkeypatch.setattr(cli_module, "_fetch_for_ingest", _boom)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "fetch failed" in result.output
     assert "network gone" in result.output
@@ -291,7 +291,7 @@ def test_ingest_bails_when_paragraph_count_below_floor(
 ) -> None:
     """Precheck fires before the LLM call when raw HTML has too few `<p>` tags."""
     sdk = _install_fake_ingest(monkeypatch, paragraph_count=2)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "precheck failed" in result.output
     assert "2 <p> tag" in result.output
@@ -332,7 +332,7 @@ def test_ingest_rejects_duplicate_llm_slugs(
         ],
     }
     _install_fake_ingest(monkeypatch, llm_payload=payload)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "duplicate claim id_slug" in result.output
     assert len(list_nodes(Source, data_root)) == 0
@@ -366,7 +366,7 @@ def test_ingest_rejects_out_of_range_claim_idx(
         ],
     }
     _install_fake_ingest(monkeypatch, llm_payload=payload)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 1
     assert "claim_idx=5" in result.output
     assert len(list_nodes(Source, data_root)) == 0
@@ -379,8 +379,365 @@ def test_ingest_sha256_matches_text(
 ) -> None:
     """The sha256 in provenance is whatever the fetcher returned; ingest doesn't re-hash."""
     _install_fake_ingest(monkeypatch, sha256="cafebabe" * 8)
-    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    result = runner.invoke(app, ["ingest:url", "https://example.com/article"])
     assert result.exit_code == 0, result.output
     source = load_node(Source, "src_example_piece", data_root)
     assert source.provenance is not None
     assert source.provenance.raw_content_hash == "cafebabe" * 8
+
+
+def test_ingest_bare_alias_forwards_to_ingest_url(
+    runner: CliRunner,
+    data_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Bare `ingest` is hidden but still forwards to `ingest:url` for muscle memory."""
+    _install_fake_ingest(monkeypatch)
+    result = runner.invoke(app, ["ingest", "https://example.com/article"])
+    assert result.exit_code == 0, result.output
+    assert "renamed to `ingest:url`" in result.output
+    assert load_node(Source, "src_example_piece", data_root).title == "Example Piece"
+
+
+# --- read.py unit tests --------------------------------------------------
+
+
+def _write_html_article(path: Path, body_tag: str = "article") -> None:
+    """Write a minimal article HTML with enough <p> tags to pass precheck."""
+    paragraphs = "".join(
+        f"<p>Paragraph {i} of the {body_tag} content, with enough words to be real.</p>"
+        for i in range(10)
+    )
+    path.write_text(
+        f"<html><body>{paragraphs}</body></html>", encoding="utf-8"
+    )
+
+
+def test_read_and_extract_html_counts_paragraphs_and_builds_canonical_id(
+    tmp_path: Path,
+) -> None:
+    from afls.ingest.read import read_and_extract
+
+    article = tmp_path / "sub" / "article.html"
+    article.parent.mkdir()
+    _write_html_article(article)
+    result = read_and_extract(article, root=tmp_path)
+    assert result.kind == "html"
+    assert result.paragraph_count == 10
+    assert result.canonical_id == "file://sub/article.html"
+    assert "Paragraph 0" in result.text
+    assert result.sha256  # non-empty
+
+
+def test_read_and_extract_markdown_has_zero_paragraph_count(tmp_path: Path) -> None:
+    from afls.ingest.read import read_and_extract
+
+    notes = tmp_path / "notes.md"
+    notes.write_text("# Notes\n\nSome body text.", encoding="utf-8")
+    result = read_and_extract(notes, root=tmp_path)
+    assert result.kind == "text"
+    assert result.paragraph_count == 0
+    assert "Some body text" in result.text
+
+
+def test_read_and_extract_pdf_dispatches_to_pdf_reader(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """We don't generate a real PDF in tests --- just verify suffix dispatch routes
+    through the PDF extractor, and that kind='pdf' + paragraph_count=0."""
+    from afls.ingest import read as read_module
+
+    pdf_path = tmp_path / "doc.pdf"
+    pdf_path.write_bytes(b"not a real pdf")
+    monkeypatch.setattr(
+        read_module, "_extract_pdf_text", lambda p: "fake pdf body text " * 30
+    )
+    result = read_module.read_and_extract(pdf_path, root=tmp_path)
+    assert result.kind == "pdf"
+    assert result.paragraph_count == 0
+    assert "fake pdf body text" in result.text
+
+
+def test_read_and_extract_rejects_unsupported_suffix(tmp_path: Path) -> None:
+    from afls.ingest.read import UnsupportedFileType, read_and_extract
+
+    binary = tmp_path / "mystery.bin"
+    binary.write_bytes(b"\x00\x01\x02")
+    with pytest.raises(UnsupportedFileType):
+        read_and_extract(binary, root=tmp_path)
+
+
+# --- ingest:dir CLI end-to-end ------------------------------------------
+
+
+def _make_ingest_payload(source_slug: str, claim_slug: str) -> str:
+    return json.dumps(
+        {
+            "source": {
+                "id_slug": source_slug,
+                "source_kind": "press",
+                "title": f"Title {source_slug}",
+                "authors": [],
+                "published_at": "",
+                "reliability": 0.5,
+                "notes": "",
+            },
+            "claims": [
+                {"id_slug": claim_slug, "text": "Something claimed.", "confidence": 0.5},
+            ],
+            "evidence": [
+                {
+                    "claim_idx": 0,
+                    "locator": "paragraph 1",
+                    "quote": "Something claimed.",
+                    "method_tag": "journalistic_report",
+                    "supports": "support",
+                    "weight": 0.5,
+                },
+            ],
+        }
+    )
+
+
+_LINKER_PAYLOAD: str = json.dumps({"linkages": {}})
+
+
+class _FakeMessagesSequence:
+    """Returns a different payload per call, in order. Last payload is repeated
+    if the engine makes more calls than we staged (safety net, not a feature)."""
+
+    def __init__(self, payloads: list[str]) -> None:
+        self._payloads = payloads
+        self.calls: list[dict[str, Any]] = []
+
+    def create(self, **kwargs: Any) -> _FakeResponse:
+        idx = len(self.calls)
+        self.calls.append(kwargs)
+        payload = (
+            self._payloads[idx] if idx < len(self._payloads) else self._payloads[-1]
+        )
+        block = TextBlock(type="text", text=payload, citations=None)
+        return _FakeResponse(content=[block])
+
+
+class _FakeSequenceSDK:
+    def __init__(self, payloads: list[str]) -> None:
+        self.messages = _FakeMessagesSequence(payloads)
+
+
+def _install_fake_sequence(
+    monkeypatch: pytest.MonkeyPatch, payloads: list[str]
+) -> _FakeSequenceSDK:
+    sdk = _FakeSequenceSDK(payloads)
+    monkeypatch.setattr(
+        cli_module,
+        "_build_ingest_client",
+        lambda: AnthropicClient(sdk_client=cast(Any, sdk)),
+    )
+    return sdk
+
+
+def test_ingest_dir_walks_supported_files_and_links_once(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    saved = tmp_path / "saved"
+    saved.mkdir()
+    _write_html_article(saved / "one.html")
+    (saved / "notes.md").write_text(
+        "# Notes\n\n" + ("Some body text. " * 40), encoding="utf-8"
+    )
+
+    payloads = [
+        _make_ingest_payload("html_one", "claim_html_one"),
+        _make_ingest_payload("md_notes", "claim_md_notes"),
+        _LINKER_PAYLOAD,
+    ]
+    sdk = _install_fake_sequence(monkeypatch, payloads)
+
+    result = runner.invoke(app, ["ingest:dir", str(saved)])
+    assert result.exit_code == 0, result.output
+
+    sources = list_nodes(Source, data_root)
+    assert {s.id for s in sources} == {"src_html_one", "src_md_notes"}
+
+    for s in sources:
+        assert s.url.startswith("file://")
+        assert s.provenance is not None
+        assert s.provenance.method == "file"
+        assert s.provenance.raw_content_hash  # populated with text hash
+
+    claims = list_nodes(DescriptiveClaim, data_root)
+    assert len(claims) == 2
+    evidence = list_nodes(Evidence, data_root)
+    assert len(evidence) == 2
+
+    # 2 ingest + 1 linker = 3 total LLM calls. The linker fires exactly once.
+    assert len(sdk.messages.calls) == 3
+
+
+def test_ingest_dir_skips_directives_subpath(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Files under a directives/ or directives-ai/ subdir must never reach the LLM."""
+    saved = tmp_path / "saved"
+    saved.mkdir()
+    (saved / "directives").mkdir()
+    _write_html_article(saved / "directives" / "leak.html")
+    _write_html_article(saved / "good.html")
+
+    payloads = [
+        _make_ingest_payload("good_only", "claim_good"),
+        _LINKER_PAYLOAD,
+    ]
+    sdk = _install_fake_sequence(monkeypatch, payloads)
+
+    result = runner.invoke(app, ["ingest:dir", str(saved)])
+    assert result.exit_code == 0, result.output
+
+    sources = list_nodes(Source, data_root)
+    assert {s.id for s in sources} == {"src_good_only"}
+
+    # 1 ingest (good only) + 1 linker = 2 calls. leak.html never reached the LLM.
+    assert len(sdk.messages.calls) == 2
+
+
+def test_ingest_dir_dedupes_identical_content(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    saved = tmp_path / "saved"
+    saved.mkdir()
+    html = (
+        "<html><body>"
+        + "".join(f"<p>identical paragraph {i}.</p>" for i in range(10))
+        + "</body></html>"
+    )
+    (saved / "a.html").write_text(html, encoding="utf-8")
+    (saved / "b.html").write_text(html, encoding="utf-8")
+
+    payloads = [
+        _make_ingest_payload("identical", "claim_identical"),
+        _LINKER_PAYLOAD,
+    ]
+    _install_fake_sequence(monkeypatch, payloads)
+
+    result = runner.invoke(app, ["ingest:dir", str(saved)])
+    assert result.exit_code == 0, result.output
+    assert "duplicate content" in result.output.lower()
+
+    sources = list_nodes(Source, data_root)
+    assert {s.id for s in sources} == {"src_identical"}
+
+
+def test_ingest_dir_continues_past_per_file_failure(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A bad LLM response for one file shouldn't poison the whole batch."""
+    saved = tmp_path / "saved"
+    saved.mkdir()
+    # Distinct body_tag values so the two files have distinct content hashes
+    # (the batch dedupes by sha256, which would otherwise eat the second file).
+    _write_html_article(saved / "a_first.html", body_tag="first")
+    _write_html_article(saved / "b_second.html", body_tag="second")
+
+    broken_payload = json.dumps(
+        {
+            "source": {
+                "id_slug": "broken",
+                "source_kind": "press",
+                "title": "broken",
+                "authors": [],
+                "published_at": "",
+                "reliability": 0.5,
+                "notes": "",
+            },
+            "claims": [{"id_slug": "broken_claim", "text": "x", "confidence": 0.5}],
+            "evidence": [
+                {
+                    "claim_idx": 99,  # out of range --- forces Exit(1) in _ingest_extracted
+                    "locator": "",
+                    "quote": "",
+                    "method_tag": "journalistic_report",
+                    "supports": "support",
+                    "weight": 0.5,
+                },
+            ],
+        }
+    )
+    payloads = [
+        broken_payload,
+        _make_ingest_payload("second_ok", "claim_second"),
+        _LINKER_PAYLOAD,
+    ]
+    _install_fake_sequence(monkeypatch, payloads)
+
+    result = runner.invoke(app, ["ingest:dir", str(saved)])
+    assert result.exit_code == 0, result.output
+
+    sources = list_nodes(Source, data_root)
+    assert {s.id for s in sources} == {"src_second_ok"}
+
+
+def test_ingest_dir_bails_on_empty_directory(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+) -> None:
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    result = runner.invoke(app, ["ingest:dir", str(empty)])
+    assert result.exit_code == 1
+    assert "no supported files" in result.output
+
+
+def test_ingest_dir_rejects_non_directory(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+) -> None:
+    stray = tmp_path / "stray.html"
+    stray.write_text("<html></html>", encoding="utf-8")
+    result = runner.invoke(app, ["ingest:dir", str(stray)])
+    assert result.exit_code == 1
+    assert "not a directory" in result.output
+
+
+def test_ingest_dir_skips_html_with_too_few_paragraphs(
+    runner: CliRunner,
+    data_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """HTML precheck still applies on the file path --- a saved JS shell gets skipped."""
+    saved = tmp_path / "saved"
+    saved.mkdir()
+    (saved / "shell.html").write_text(
+        "<html><body><p>only one paragraph</p></body></html>", encoding="utf-8"
+    )
+    _write_html_article(saved / "real.html")
+
+    payloads = [
+        _make_ingest_payload("real_only", "claim_real"),
+        _LINKER_PAYLOAD,
+    ]
+    sdk = _install_fake_sequence(monkeypatch, payloads)
+
+    result = runner.invoke(app, ["ingest:dir", str(saved)])
+    assert result.exit_code == 0, result.output
+    assert "precheck failed" in result.output
+
+    sources = list_nodes(Source, data_root)
+    assert {s.id for s in sources} == {"src_real_only"}
+    # shell.html skipped pre-LLM --- 1 ingest + 1 linker = 2 calls.
+    assert len(sdk.messages.calls) == 2

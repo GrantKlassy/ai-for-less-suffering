@@ -30,6 +30,7 @@ class SourceKind(StrEnum):
 ProvenanceMethod = Literal[
     "httpx",
     "manual_paste",
+    "file",
 ]
 
 
