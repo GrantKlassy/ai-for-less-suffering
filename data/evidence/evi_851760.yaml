@@ -1,0 +1,14 @@
+claim_id: desc_anthropic_fellows_cohort_1_paper_rate
+created_at: '2026-04-23T02:42:29.887230Z'
+id: evi_851760
+kind: evidence
+locator: opening paragraph after header
+method_tag: primary_testimony
+provenance_url: null
+quote: In our first cohort, over 80% of fellows produced papers, including on agentic
+  misalignment, subliminal learning, rapid response to new ASL3 jailbreaks, and open-source
+  circuits.
+source_id: src_anthropic_fellows_2026_applications
+supports: support
+updated_at: '2026-04-23T02:42:29.887232Z'
+weight: 0.95

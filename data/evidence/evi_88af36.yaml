@@ -1,0 +1,14 @@
+claim_id: desc_physical_ai_articulated_object_handling
+created_at: '2026-04-23T02:51:14.617010Z'
+id: evi_88af36
+kind: evidence
+locator: PHYSICAL AI OPENS NEW SCENARIOS section
+method_tag: primary_testimony
+provenance_url: null
+quote: One advantage of physical AI is that we can tackle use cases that were not
+  possible before, pointing in particular to articulated objects such as cables, which
+  are difficult to handle with conventional programming.
+source_id: src_hannover_messe_2026_industrial_ai
+supports: support
+updated_at: '2026-04-23T02:51:14.617011Z'
+weight: 0.9

@@ -1,0 +1,17 @@
+claim_id: desc_ireland_datacenter_32pct_demand_2026
+created_at: '2026-04-23T02:45:36.297912Z'
+id: evi_9905ad
+kind: evidence
+locator: Ireland electricity demand paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: Electricity demand from data centres in Ireland, for example, was 5.3 TWh in
+  2022, equivalent to 17% of the country's total electricity consumption. The IEA
+  has stated that 'at this pace, Ireland's data centres may double their electricity
+  consumption by 2026, and with AI applications penetrating the market at a fast rate,
+  we forecast the sector to reach a share of 32% of the country's total electricity
+  demand in 2026'.
+source_id: src_iaea_datacenter_nuclear_2024
+supports: support
+updated_at: '2026-04-23T02:45:36.297915Z'
+weight: 0.88

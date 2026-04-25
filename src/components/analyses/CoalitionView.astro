@@ -1,0 +1,134 @@
+---
+// Coalition render. Opens with the CoalitionStrip so the reader sees the set
+// of camps under analysis before any claim or intervention. Then descriptive
+// convergences as claim cards with inline text (what the camps agree on at
+// the factual layer), convergent interventions with each camp's divergent
+// normative reason inline, then bridges + blindspots.
+//
+// Contested claims are intentionally rendered by the parent, not here --- they
+// appear under every analysis kind, so they live in the dispatcher.
+
+import { getEntry } from "astro:content";
+import NodeRef from "../NodeRef.astro";
+import CoalitionStrip from "./CoalitionStrip.astro";
+import BridgeCard from "./BridgeCard.astro";
+import BlindspotCard from "./BlindspotCard.astro";
+import type { CoalitionAnalysis } from "../../lib/analysis";
+
+interface Props {
+  analysis: CoalitionAnalysis;
+}
+
+const { analysis } = Astro.props;
+
+const convergenceText: Record<string, string> = {};
+for (const id of analysis.descriptive_convergences) {
+  const entry = await getEntry("descriptiveClaims", id);
+  if (entry) convergenceText[id] = entry.data.text;
+}
+---
+
+<CoalitionStrip camps={analysis.camps} />
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Descriptive convergence
+  </h2>
+  {
+    analysis.descriptive_convergences.length === 0 ? (
+      <p class="text-sm text-zinc-500">
+        No claims held across every analyzed camp.
+      </p>
+    ) : (
+      <ul class="space-y-3 text-sm">
+        {analysis.descriptive_convergences.map((id) => (
+          <li class="rounded border border-zinc-800 p-3">
+            {convergenceText[id] && (
+              <p class="mb-1 text-zinc-100">{convergenceText[id]}</p>
+            )}
+            <NodeRef id={id} />
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Convergent interventions
+  </h2>
+  {
+    analysis.convergent_interventions.length === 0 ? (
+      <p class="text-sm text-zinc-500">No interventions reach ≥2 camps.</p>
+    ) : (
+      <div class="space-y-6">
+        {analysis.convergent_interventions.map((item) => (
+          <div class="rounded border border-zinc-800 p-4">
+            <div class="mb-3">
+              <NodeRef id={item.intervention_id} />
+            </div>
+            {item.operator_note && (
+              <blockquote class="mb-3 border-l-2 border-zinc-700 pl-3 text-sm text-zinc-300 italic">
+                {item.operator_note}
+              </blockquote>
+            )}
+            <div class="mb-2 text-xs text-zinc-500">
+              Supporters and divergent anchors:
+            </div>
+            <ul class="space-y-1 text-sm">
+              {item.supporting_camps.map((campId) => {
+                const normId = item.divergent_reasons[campId];
+                return (
+                  <li class="flex flex-wrap items-baseline gap-x-2">
+                    <NodeRef id={campId} />
+                    <span class="text-zinc-500">---</span>
+                    {normId ? (
+                      <NodeRef id={normId} />
+                    ) : (
+                      <span class="text-zinc-500">(no anchor)</span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Bridges
+  </h2>
+  {
+    analysis.bridges.length === 0 ? (
+      <p class="text-sm text-zinc-500">No bridges generated.</p>
+    ) : (
+      <div class="space-y-4">
+        {analysis.bridges.map((bridge) => (
+          <BridgeCard bridge={bridge} />
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<section class="mb-10">
+  <h2 class="mb-3 border-b border-zinc-800 pb-1 text-lg text-zinc-200">
+    Blindspots
+  </h2>
+  {
+    analysis.blindspots.length === 0 ? (
+      <p class="text-sm text-zinc-500">None flagged.</p>
+    ) : (
+      <ul class="space-y-3">
+        {analysis.blindspots.map((blindspot) => (
+          <BlindspotCard blindspot={blindspot} />
+        ))}
+      </ul>
+    )
+  }
+</section>

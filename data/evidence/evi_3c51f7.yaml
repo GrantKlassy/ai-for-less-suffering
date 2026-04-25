@@ -1,0 +1,14 @@
+claim_id: desc_pjm_6gw_shortage_2027_projection
+created_at: '2026-04-23T02:39:28.241066Z'
+id: evi_3c51f7
+kind: evidence
+locator: Body paragraph 3
+method_tag: journalistic_report
+provenance_url: null
+quote: PJM Interconnection, the largest US grid operator that serves over 65 million
+  people across 13 states, projects that it will be a full six gigawatts short of
+  its reliability requirements in 2027.
+source_id: src_common_dreams_grid_crisis_2026
+supports: support
+updated_at: '2026-04-23T02:39:28.241067Z'
+weight: 0.85

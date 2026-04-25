@@ -1,0 +1,17 @@
+claim_id: desc_ai_productivity_gains_skewed_high_income
+created_at: '2026-04-23T02:53:56.557751Z'
+id: evi_2abd37
+kind: evidence
+locator: Section 'High-income workers appear most likely to benefit from AI-driven
+  productivity boosts in the near term'
+method_tag: expert_estimate
+provenance_url: null
+quote: the people best positioned to use and benefit from these systems are those
+  who can easily interact with software as part of their existing workflows; namely,
+  those who do much of their work at a computer. Those who work in agriculture, in
+  the skilled trades, in-person service work, and in other professions composed mostly
+  of physical labor have a much less direct access point
+source_id: src_manning_ai_income_inequality_brookings
+supports: support
+updated_at: '2026-04-23T02:53:56.557752Z'
+weight: 0.85

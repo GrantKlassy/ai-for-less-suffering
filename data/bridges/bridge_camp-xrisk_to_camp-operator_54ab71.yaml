@@ -1,0 +1,16 @@
+caveats:
+- Operator treats pause as temperamentally foreign and coordination-infeasible; x-risk
+  treats operator's 'build-toward-suffering-reduction' as smuggling acceleration under
+  a humanitarian label.
+content_hash: 54ab7114c8095ba2351bff6b85cf0d90c605e8cc3fc0739b1744b3243b03aff1
+created_at: '2026-04-23T03:14:16.121792Z'
+from_camp: camp_xrisk
+id: bridge_camp-xrisk_to_camp-operator_54ab71
+kind: bridge
+provenance_url: null
+to_camp: camp_operator
+translation: 'X-risk''s halt-option framing is a strong version of the operator''s
+  own insistence on separating descriptive from normative: if alignment cannot be
+  verified, the +EV move is to not press the button, regardless of conviction on upside.
+  The operator''s poker brain should recognize variance from ruin.'
+updated_at: '2026-04-23T03:14:16.121793Z'

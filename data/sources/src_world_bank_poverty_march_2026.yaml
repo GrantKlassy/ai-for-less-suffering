@@ -1,0 +1,29 @@
+accessed_at: '2026-04-22'
+authors:
+- "Jonas Helth L\xF8nborg"
+- Martha Viveros
+- R. Andres Castaneda Aguilar
+- Christoph Lakner
+- Gabriel Lara Ibarra
+- Minh Cong Nguyen
+created_at: '2026-04-23T02:44:55.168367Z'
+id: src_world_bank_poverty_march_2026
+kind: source
+notes: World Bank Development Data Group official blog post reporting new PIP platform
+  estimates; slight upward adjustment from prior estimates justified by new Pakistan
+  survey data and methodological improvements; reliability elevated above blog prior
+  (0.35) due to institutional authority and direct data-release context.
+provenance:
+  at: '2026-04-23T02:44:55.168267Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 1e8e85b036387013ba3a8ed1ffeb93de281a94e8363619ee720af099f6317533
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-03-26'
+reliability: 0.88
+source_kind: blog
+title: 'March 2026 global poverty update from the World Bank: New data and updated
+  poverty numbers'
+updated_at: '2026-04-23T02:44:55.168369Z'
+url: https://blogs.worldbank.org/en/opendata/march-2026-global-poverty-update-from-the-world-bank--new-data-a

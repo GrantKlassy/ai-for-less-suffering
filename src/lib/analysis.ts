@@ -1,6 +1,6 @@
 // Shape of the analyses emitted by the afls engine.
 // Sources of truth:
-//   engine/afls/queries/palantir.py (PalantirAnalysis)
+//   engine/afls/queries/coalition.py (CoalitionAnalysis)
 //   engine/afls/queries/leverage.py (LeverageAnalysis)
 //   engine/afls/queries/reallocation.py (ReallocationAnalysis)
 //   engine/afls/queries/steelman.py (SteelmanAnalysis)
@@ -56,8 +56,8 @@ export interface ContestedClaim {
   qualifies: EvidenceSummary[];
 }
 
-export interface PalantirAnalysis {
-  kind: "palantir";
+export interface CoalitionAnalysis {
+  kind: "coalition";
   generated_at: string;
   camps: string[];
   descriptive_convergences: string[];
@@ -163,7 +163,7 @@ export interface SteelmanAnalysis {
 }
 
 export type Analysis =
-  | PalantirAnalysis
+  | CoalitionAnalysis
   | LeverageAnalysis
   | ReallocationAnalysis
   | SteelmanAnalysis;
@@ -173,15 +173,18 @@ export interface AnalysisEntry {
   analysis: Analysis;
 }
 
-// Filename prefix is the discriminator --- `palantir_<stamp>.json`,
+// Filename prefix is the discriminator --- `coalition_<stamp>.json`,
 // `leverage_<stamp>.json`, `reallocation_<stamp>.json`, or
 // `steelman_<stamp>.json`. Throws on unknown prefix rather than silently
 // falling back, so a new analysis kind can't ship without the renderer
 // learning about it.
 export function parseAnalysis(filename: string, raw: string): Analysis {
   const payload = JSON.parse(raw) as Record<string, unknown>;
-  if (filename.startsWith("palantir_")) {
-    return { kind: "palantir", ...(payload as Omit<PalantirAnalysis, "kind">) };
+  if (filename.startsWith("coalition_")) {
+    return {
+      kind: "coalition",
+      ...(payload as Omit<CoalitionAnalysis, "kind">),
+    };
   }
   if (filename.startsWith("leverage_")) {
     return { kind: "leverage", ...(payload as Omit<LeverageAnalysis, "kind">) };

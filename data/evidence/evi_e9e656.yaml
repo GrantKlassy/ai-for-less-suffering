@@ -1,0 +1,16 @@
+claim_id: desc_ibm_entry_level_hiring_counter_trend_2026
+created_at: '2026-04-23T02:37:03.407759Z'
+id: evi_e9e656
+kind: evidence
+locator: Fifth paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: IBM has reportedly tripled its entry-level hiring in 2026, saying that while
+  AI can do many entry-level jobs, it still needs a human touch. Furthermore, while
+  cutting entry-level jobs would deliver short-term savings for any organization,
+  it comes with the risk of erasing the pipeline needed to train future experienced
+  workers and mid-level managers.
+source_id: src_toms_hardware_q1_2026_layoffs
+supports: support
+updated_at: '2026-04-23T02:37:03.407760Z'
+weight: 0.8

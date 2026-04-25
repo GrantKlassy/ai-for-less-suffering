@@ -1,0 +1,14 @@
+claim_id: desc_anthropic_fellows_smart_contract_vulnerability
+created_at: '2026-04-23T02:42:29.889216Z'
+id: evi_dcef77
+kind: evidence
+locator: Security section
+method_tag: primary_testimony
+provenance_url: null
+quote: Our fellows developed agents that identified 4.6M USD in blockchain smart contract
+  vulnerabilities and discovered two novel zero-day vulnerabilities, demonstrating
+  that profitable autonomous exploitation is now technically feasible.
+source_id: src_anthropic_fellows_2026_applications
+supports: support
+updated_at: '2026-04-23T02:42:29.889217Z'
+weight: 0.92

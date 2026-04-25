@@ -1,0 +1,15 @@
+claim_id: desc_hodjat_ai_productivity_gains_six_months_to_year
+created_at: '2026-04-23T02:37:03.406448Z'
+id: evi_12b186
+kind: evidence
+locator: Second paragraph, Hodjat caveat
+method_tag: primary_testimony
+provenance_url: null
+quote: '''I don''t know if they are directly related to actual productivity gains,''
+  Hodjat told Nikkei in reference to the job cuts. ''Sometimes, you know, AI becomes
+  the scapegoat from a financial perspective, like when a company hired too many,
+  or they want to resize, and it gets blamed on AI.'''
+source_id: src_toms_hardware_q1_2026_layoffs
+supports: support
+updated_at: '2026-04-23T02:37:03.406450Z'
+weight: 0.85

@@ -1,0 +1,23 @@
+accessed_at: '2026-04-22'
+authors: []
+created_at: '2026-04-23T02:45:36.289939Z'
+id: src_iaea_datacenter_nuclear_2024
+kind: source
+notes: IAEA official bulletin; primary source on agency perspective and expert quotes,
+  but projections are second-hand reporting of IEA figures. Reliability discounted
+  from press prior due to promotional framing (nuclear advocacy) and lack of independent
+  verification of commercial commitments mentioned.
+provenance:
+  at: '2026-04-23T02:45:36.289862Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 327cf95e3740212408937382c6e2edd733b648403b620f8228fa0b5a35204e3a
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2024-10
+reliability: 0.65
+source_kind: press
+title: Data Centres, Artificial Intelligence and Cryptocurrencies Eye Advanced Nuclear
+  to Meet Growing Power Needs
+updated_at: '2026-04-23T02:45:36.289941Z'
+url: https://www.iaea.org/bulletin/data-centres-artificial-intelligence-and-cryptocurrencies-eye-advanced-nuclear-to-meet-growing-power-needs

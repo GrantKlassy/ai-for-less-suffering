@@ -1,0 +1,23 @@
+accessed_at: '2026-04-22'
+authors:
+- Michael Dickens
+created_at: '2026-04-23T02:43:56.372324Z'
+id: src_dickens_animal_welfare_tai
+kind: source
+notes: Blog post on EA-adjacent forum presenting author's personal framework and cost-effectiveness
+  estimates; reliability reflects typical blog-post uncertainties around methodology
+  and empirical grounding, offset partially by author's demonstrated engagement with
+  existing literature and quantitative reasoning.
+provenance:
+  at: '2026-04-23T02:43:56.372256Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: b61797564028a11f7326f9fb5c1b4fceecceee55e6bef74abf5adc1b30953206
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-03-26'
+reliability: 0.5
+source_kind: blog
+title: 'Quick ideas: animal welfare in light of ASI'
+updated_at: '2026-04-23T02:43:56.372325Z'
+url: https://mdickens.me/2026/03/26/quick_ideas_animal_welfare_in_light_of_ASI/

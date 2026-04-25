@@ -1,0 +1,11 @@
+against_prior_set: GRANT_BRAIN.md
+content_hash: 6fb91986d7b5122d36f05ba6361f3ee7f69169d2568def22226e44abdb39a872
+created_at: '2026-04-23T03:22:18.154882Z'
+flagged_camp_id: camp_animal_welfare
+id: blind_camp-animal-welfare_6fb919
+kind: blindspot
+provenance_url: null
+reasoning: 80B land animals/yr is the largest numerator in any honest -suffering ledger
+  and the operator's manifesto references suffering at civilizational scale; animal
+  welfare is under-weighted relative to its size in the term operator claims to optimize.
+updated_at: '2026-04-23T03:22:18.154882Z'

@@ -1,0 +1,14 @@
+claim_id: desc_therapists_should_assess_ai_chatbot_use
+created_at: '2026-04-23T02:52:12.072124Z'
+id: evi_67d425
+kind: evidence
+locator: Saba quotation section
+method_tag: primary_testimony
+provenance_url: null
+quote: "Our job is to understand why people are behaving as they are \u2014 in this\
+  \ case, why they are seeking help from an AI system, and to learn about what it's\
+  \ doing for them, what it's not doing for them."
+source_id: src_npr_therapists_ai_jama_psychiatry
+supports: support
+updated_at: '2026-04-23T02:52:12.072125Z'
+weight: 0.85

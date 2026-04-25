@@ -1,0 +1,13 @@
+claim_id: desc_tech_layoffs_73k_q1_2026
+created_at: '2026-04-23T02:37:13.885309Z'
+id: evi_50aa45
+kind: evidence
+locator: opening paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: over 73,000 employees laid off in the first quarter of 2026 alone, according
+  to industry data.
+source_id: src_channeliam_tech_layoffs_q1_2026
+supports: support
+updated_at: '2026-04-23T02:37:13.885310Z'
+weight: 0.85

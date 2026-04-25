@@ -1,0 +1,16 @@
+claim_id: desc_ai_protein_design_false_positives_validation_gap
+created_at: '2026-04-23T02:56:41.484099Z'
+id: evi_1cb230
+kind: evidence
+locator: "Early Milestones and Missed Shots \u2013 A Short History of Progress section;\
+  \ 'Misses and Missteps' subsection"
+method_tag: expert_estimate
+provenance_url: null
+quote: "One early challenge was the problem of false positives \u2014 AI models confidently\
+  \ predicting that a designed protein would fold or function correctly, only for\
+  \ experimental validation to reveal instability or poor performance in biological\
+  \ systems."
+source_id: src_pharma_almanac_ai_protein_design
+supports: support
+updated_at: '2026-04-23T02:56:41.484100Z'
+weight: 0.9

@@ -1,0 +1,15 @@
+caveats:
+- X-risk treats capability progress as the dependent variable to control; Anthropic
+  treats it as the independent variable to race. The RSP is not a pause mechanism.
+content_hash: 5c14acd60bc48c7a8adb77178956047d6818209b24b1c4d46c798f9c681d64bb
+created_at: '2026-04-23T03:14:16.121691Z'
+from_camp: camp_xrisk
+id: bridge_camp-xrisk_to_camp-anthropic_5c14ac
+kind: bridge
+provenance_url: null
+to_camp: camp_anthropic
+translation: X-risk's pause demand is, in Anthropic framing, a claim that current
+  alignment evidence (alignment faking, jailbreak universality, FLI D-grades on existential
+  safety) already exceeds the risk budget Anthropic implicitly operates under. Anthropic's
+  own RSP self-reported noncompliance is the shared evidence base.
+updated_at: '2026-04-23T03:14:16.121691Z'

@@ -1,0 +1,14 @@
+claim_id: desc_iaea_ai_datacenter_nuclear_inevitability
+created_at: '2026-04-23T02:45:50.767800Z'
+id: evi_b3da10
+kind: evidence
+locator: Why AI was destined to turn to nuclear energy section, final paragraph
+method_tag: primary_testimony
+provenance_url: null
+quote: 'There is only one energy source that can meet combined demands of low-carbon
+  generation, 24/7 reliability, massive power density, grid stability and genuine
+  scalability: nuclear energy.'
+source_id: src_iaea_grossi_atoms_algorithms
+supports: support
+updated_at: '2026-04-23T02:45:50.767801Z'
+weight: 0.9

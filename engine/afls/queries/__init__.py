@@ -1,15 +1,15 @@
 """Query orchestrators: load graph state + LLM reasoning -> structured analysis."""
 
-from afls.queries.palantir import (
-    PalantirAnalysis,
-    PalantirLLMOutput,
+from afls.queries.coalition import (
+    CoalitionAnalysis,
+    CoalitionLLMOutput,
     find_descriptive_convergences,
-    run_palantir_query,
+    run_coalition_query,
 )
 
 __all__ = [
-    "PalantirAnalysis",
-    "PalantirLLMOutput",
+    "CoalitionAnalysis",
+    "CoalitionLLMOutput",
     "find_descriptive_convergences",
-    "run_palantir_query",
+    "run_coalition_query",
 ]

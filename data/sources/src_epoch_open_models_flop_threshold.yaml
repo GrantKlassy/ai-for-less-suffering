@@ -1,0 +1,24 @@
+accessed_at: '2026-04-22'
+authors:
+- Luke Emberson
+created_at: '2026-04-23T02:48:34.727016Z'
+id: src_epoch_open_models_flop_threshold
+kind: source
+notes: Epoch AI is a research institute with transparent methodology and code availability.
+  Score elevated from blog prior (0.35) to 0.78 due to quantitative rigor, published
+  code, bootstrap validation, robustness checks across filtering cutoffs, and convergence
+  with independent signals (Zuckerberg's H100 cluster statement). Source makes a specific
+  computational claim grounded in historical trend extrapolation rather than opinion.
+provenance:
+  at: '2026-04-23T02:48:34.726924Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 5318febed99910431cbf9b26803447f90b620d7ec7b527987b18ccc4c1f44f28
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025'
+reliability: 0.78
+source_kind: blog
+title: Frontier open models may surpass 1e26 FLOP of training compute before 2026
+updated_at: '2026-04-23T02:48:34.727017Z'
+url: https://epoch.ai/data-insights/open-models-threshold

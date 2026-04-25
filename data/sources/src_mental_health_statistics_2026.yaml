@@ -1,0 +1,25 @@
+accessed_at: '2026-04-22'
+authors: []
+created_at: '2026-04-23T02:41:44.091534Z'
+id: src_mental_health_statistics_2026
+kind: source
+notes: Aggregates data from WHO, CDC, SAMHSA, Lancet, and NHS with explicit source
+  attribution. Reliability discounted from blog prior (0.35) to 0.68 due to transparent
+  methodology, named authoritative sources, and explicit uncertainty flagging ('widely
+  cited but poorly sourced'). Author provides no byline and some claims lack precise
+  dating ('2025 updates pending'), reducing confidence slightly below primary source
+  aggregation.
+provenance:
+  at: '2026-04-23T02:41:44.091451Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: c8b1174c4cfaa5a0668a43648b64fe9bee95640537578cdfb7f9d467a8cd4eed
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026'
+reliability: 0.68
+source_kind: blog
+title: 'Mental Health Statistics 2026: Depression, Treatment Gaps, and the Youth Crisis
+  in Numbers'
+updated_at: '2026-04-23T02:41:44.091536Z'
+url: https://whennotesfly.com/explainers/data-research/mental-health-statistics-2026

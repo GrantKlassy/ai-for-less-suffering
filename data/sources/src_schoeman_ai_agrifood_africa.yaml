@@ -1,0 +1,22 @@
+accessed_at: '2026-04-22'
+authors:
+- Mark Schoeman
+created_at: '2026-04-23T02:49:01.119969Z'
+id: src_schoeman_ai_agrifood_africa
+kind: source
+notes: Commentary/opinion piece in Brookings framed as forward-looking analysis. Lower
+  reliability than news reporting; higher than pure blog due to institutional affiliation
+  and cited Genesis Analytics report. No primary data collection.
+provenance:
+  at: '2026-04-23T02:49:01.119912Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: e04c40780b343efaecc42cacfe04fb817bce8a99616bdd328576154d0e30e807
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2024-05-16'
+reliability: 0.55
+source_kind: press
+title: How AI can inclusively transform agri-food systems in Africa
+updated_at: '2026-04-23T02:49:01.119971Z'
+url: https://www.brookings.edu/articles/how-ai-can-inclusively-transform-agri-food-systems-in-africa/

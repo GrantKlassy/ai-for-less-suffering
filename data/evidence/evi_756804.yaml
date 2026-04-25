@@ -1,0 +1,15 @@
+claim_id: desc_sub_saharan_africa_specialist_gap_stark
+created_at: '2026-04-23T02:46:49.414573Z'
+id: evi_756804
+kind: evidence
+locator: Numbers behind the urgency section
+method_tag: expert_estimate
+provenance_url: null
+quote: sub-Saharan Africa has 11 percent of the world's population and 24 percent
+  of the global disease burden, yet only 3 percent of the world's health workers and
+  less than 1 percent of global health expenditure. Nigeria, for example, has roughly
+  one pathologist per 500,000 people, compared with a global average of one per 25,000.
+source_id: src_ai_africa_healthcare_global_voices
+supports: support
+updated_at: '2026-04-23T02:46:49.414575Z'
+weight: 0.8

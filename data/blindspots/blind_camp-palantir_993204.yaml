@@ -1,0 +1,12 @@
+against_prior_set: GRANT_BRAIN.md
+content_hash: 9932048883de7f26d726f966d528add022e46642efd978a7a084628064cea574
+created_at: '2026-04-23T03:14:16.121907Z'
+flagged_camp_id: camp_palantir
+id: blind_camp-palantir_993204
+kind: blindspot
+provenance_url: null
+reasoning: Operator's self-hosting/sovereign-infra politics is in direct tension with
+  Palantir's ICE/ImmigrationOS surveillance stack, but the national-security framing
+  can slide into the operator's accelerationist frame if not separated --- the same
+  vendor is both grid-buildout ally and sovereignty adversary.
+updated_at: '2026-04-23T03:14:16.121908Z'

@@ -1,0 +1,13 @@
+claim_id: desc_fda_cder_ai_submissions_500_plus_2016_2023
+created_at: '2026-04-23T02:55:33.395296Z'
+id: evi_a58e29
+kind: evidence
+locator: What is CDER's perspective on the use of AI in drug development?
+method_tag: primary_testimony
+provenance_url: null
+quote: CDER's experience with over 500 submissions with AI components from 2016 to
+  2023
+source_id: src_fda_ai_drug_development
+supports: support
+updated_at: '2026-04-23T02:55:33.395298Z'
+weight: 0.95

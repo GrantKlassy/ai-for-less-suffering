@@ -1,0 +1,14 @@
+claim_id: desc_physical_ai_factory_floor_integration
+created_at: '2026-04-23T02:51:14.613925Z'
+id: evi_4d7399
+kind: evidence
+locator: Opening section, paragraph 1
+method_tag: journalistic_report
+provenance_url: null
+quote: With artificial intelligence (AI) more deeply integrated into production, machines
+  are beginning to perceive, decide and act within workflows, rather than simply execute
+  pre-programmed instructions.
+source_id: src_hannover_messe_2026_industrial_ai
+supports: support
+updated_at: '2026-04-23T02:51:14.613926Z'
+weight: 0.9

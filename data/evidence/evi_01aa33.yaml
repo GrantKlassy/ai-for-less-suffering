@@ -1,0 +1,14 @@
+claim_id: desc_voice_modality_removes_cognitive_barriers
+created_at: '2026-04-23T02:52:33.463344Z'
+id: evi_01aa33
+kind: evidence
+locator: paragraphs 4-5
+method_tag: expert_estimate
+provenance_url: null
+quote: Voice is how humans first learn language...Voice removes those barriers. Speech
+  recognition is significantly faster, nearly three times as fast as typing. It is
+  more seamless and far more emotionally engaging.
+source_id: src_augustin_voice_chatbot_mental_health
+supports: support
+updated_at: '2026-04-23T02:52:33.463345Z'
+weight: 0.65

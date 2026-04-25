@@ -1,0 +1,15 @@
+claim_id: desc_dickens_pause_ai_animal_welfare_time_benefit
+created_at: '2026-04-23T02:43:56.376093Z'
+id: evi_ef470d
+kind: evidence
+locator: Advocate to pause AI section, Pros subsection
+method_tag: primary_testimony
+provenance_url: null
+quote: Pausing AI gives us time to figure out what to do about post-TAI animal welfare,
+  including time to work on the other interventions on this list. The sorts of alignment
+  paradigms that take longer to figure out also appear more likely to be good for
+  animals.
+source_id: src_dickens_animal_welfare_tai
+supports: support
+updated_at: '2026-04-23T02:43:56.376095Z'
+weight: 0.85

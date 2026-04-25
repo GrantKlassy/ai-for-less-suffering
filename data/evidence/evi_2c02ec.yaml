@@ -1,0 +1,16 @@
+claim_id: desc_surveillance_pay_vendors_20_high_risk
+created_at: '2026-04-23T02:54:28.133616Z'
+id: evi_2c02ec
+kind: evidence
+locator: The surveillance pay practices enabled by AI vendors... section, Table 2
+method_tag: primary_testimony
+provenance_url: null
+quote: we identified 20 vendors whose products we determined to be at high risk for
+  producing algorithmic wage discrimination. While algorithmic pay practices began
+  in the transportation and delivery sectors, our findings suggest that they have
+  spread to workforce management in a number of industries, most prominently health
+  care, customer service, logistics, and retail.
+source_id: src_dubal_negron_surveillance_pay_2025
+supports: support
+updated_at: '2026-04-23T02:54:28.133619Z'
+weight: 0.95

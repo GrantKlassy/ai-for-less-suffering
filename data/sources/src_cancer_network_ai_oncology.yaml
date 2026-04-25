@@ -1,0 +1,24 @@
+accessed_at: '2026-04-22'
+authors:
+- Viviana Cortiana
+- Kennedy Itodo
+- Yan Leyfman
+created_at: '2026-04-23T02:43:03.092676Z'
+id: src_cancer_network_ai_oncology
+kind: source
+notes: Review article in peer-reviewed oncology journal citing clinical studies and
+  expert presentations; lower end of press prior due to editorial/synthesis nature
+  rather than original research reporting.
+provenance:
+  at: '2026-04-23T02:43:03.092608Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 9aa1589151fc64e3d8bdf9ae93d5d9383fb4b1e7c517be1259faffe02179d983
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-04-15'
+reliability: 0.62
+source_kind: press
+title: 'Artificial Intelligence in Cancer Care: Addressing Challenges and Health Equity'
+updated_at: '2026-04-23T02:43:03.092679Z'
+url: https://www.cancernetwork.com/view/artificial-intelligence-in-cancer-care-addressing-challenges-and-health-equity

@@ -1,0 +1,21 @@
+accessed_at: '2026-04-22'
+authors:
+- Charles McIvor
+created_at: '2026-04-23T02:51:33.375596Z'
+id: src_mcivor_innovation_news_april_2026
+kind: source
+notes: Curated news digest; reliability reflects aggregation of third-party sources
+  rather than original reporting. Quality depends on source selection.
+provenance:
+  at: '2026-04-23T02:51:33.375491Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: fde138e6f53ca9217909f5c338167da55f5edd4189b46122208c2a12905088a3
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-22'
+reliability: 0.5
+source_kind: blog
+title: Innovation in the news April 22, 2026
+updated_at: '2026-04-23T02:51:33.375599Z'
+url: https://innovationinthenews.substack.com/p/innovation-in-the-news-april-22-2026

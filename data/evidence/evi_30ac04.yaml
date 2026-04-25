@@ -1,0 +1,13 @@
+claim_id: desc_frontier_compute_slowdown_2018
+created_at: '2026-04-23T02:48:04.367494Z'
+id: evi_30ac04
+kind: evidence
+locator: Frontier model growth section
+method_tag: expert_estimate
+provenance_url: null
+quote: One plausible story is that between 2010 and 2018 we were in a 'compute overhang',
+  where ML experiments were small-scale relative to available compute.
+source_id: src_epoch_ai_compute_trends_2024
+supports: qualify
+updated_at: '2026-04-23T02:48:04.367496Z'
+weight: 0.65

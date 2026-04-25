@@ -6,7 +6,7 @@ operator to read their own position from outside, and to surface what they would
 to concede to a frame they would otherwise filter out.
 
 Deterministic pieces:
-- `contested_descriptive` --- reuses `palantir.find_contested_claims`.
+- `contested_descriptive` --- reuses `coalition.find_contested_claims`.
 - `conceded_descriptive` --- descriptive claim IDs cited by both FOR and AGAINST.
 
 LLM pieces (one Opus call):
@@ -22,7 +22,7 @@ from typing import ClassVar
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from afls.queries.palantir import (
+from afls.queries.coalition import (
     ContestedClaim,
     build_graph_context,
     find_contested_claims,

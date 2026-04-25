@@ -1,0 +1,13 @@
+claim_id: desc_ai_biotech_regulatory_pathway_gap
+created_at: '2026-04-23T02:56:23.723911Z'
+id: evi_e73579
+kind: evidence
+locator: The Path Forward for AI-Powered Biotech section
+method_tag: journalistic_report
+provenance_url: null
+quote: Key challenges include data quality, model interpretability, intellectual property
+  questions and integrating AI outputs into clinical trials.
+source_id: src_ai_biotech_revolution_healthai
+supports: support
+updated_at: '2026-04-23T02:56:23.723912Z'
+weight: 0.65

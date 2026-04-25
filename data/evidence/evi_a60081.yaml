@@ -1,0 +1,17 @@
+claim_id: desc_stargate_500b_ai_infrastructure_2029
+created_at: '2026-04-23T02:47:28.303708Z'
+id: evi_a60081
+kind: evidence
+locator: The Stargate Factor section
+method_tag: journalistic_report
+provenance_url: null
+quote: The Stargate project, a joint venture between OpenAI, SoftBank, Oracle, and
+  MGX, announced in January 2025 and backed by the Trump administration. The project
+  targets $500 billion in AI infrastructure investment by 2029, with an initial $100
+  billion deployment. As of September 2025, roughly 7 GW of capacity had been planned
+  across five sites in Texas, New Mexico, and Ohio, with more than $400 billion in
+  commitments within the first three years.
+source_id: src_futurum_ai_capex_2026
+supports: support
+updated_at: '2026-04-23T02:47:28.303712Z'
+weight: 0.88

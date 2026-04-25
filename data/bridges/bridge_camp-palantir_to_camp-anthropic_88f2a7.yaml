@@ -1,0 +1,19 @@
+caveats:
+- Anthropic's RSP treats military end-use with additional scrutiny; Palantir's Maven/ImmigrationOS
+  stack is the kind of deployment Anthropic's alignment work is designed to make *possible*,
+  not prevent.
+- The convergence papers over substantial disagreement about authoritarian-surveillance
+  risk (Amodei flags it; Palantir sells to it).
+content_hash: 88f2a7893ccdbe339717ade2857b29d302a595d39a26790f9a546a212a0c947b
+created_at: '2026-04-23T03:22:18.154739Z'
+from_camp: camp_palantir
+id: bridge_camp-palantir_to_camp-anthropic_88f2a7
+kind: bridge
+provenance_url: null
+to_camp: camp_anthropic
+translation: Palantir's national-advantage framing and Anthropic's safety framing
+  both presuppose that frontier AI must be built by responsible Western actors before
+  less responsible ones do. The operative convergence is on US-led compute buildout
+  + institutional integration; the disagreement is on whether the binding risk is
+  adversary-state capability (Palantir) or misaligned-system capability (Anthropic).
+updated_at: '2026-04-23T03:22:18.154739Z'

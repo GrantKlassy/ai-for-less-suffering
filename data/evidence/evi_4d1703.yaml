@@ -1,0 +1,14 @@
+claim_id: desc_hyperscaler_capex_660_690b_2026
+created_at: '2026-04-23T02:47:28.300460Z'
+id: evi_4d1703
+kind: evidence
+locator: opening paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: The five largest US cloud and AI infrastructure providers have collectively
+  committed to spending between $660 billion and $690 billion on capital expenditure
+  in 2026, nearly doubling 2025 levels.
+source_id: src_futurum_ai_capex_2026
+supports: support
+updated_at: '2026-04-23T02:47:28.300462Z'
+weight: 0.95

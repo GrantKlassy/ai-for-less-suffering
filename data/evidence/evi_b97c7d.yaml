@@ -1,0 +1,14 @@
+claim_id: desc_mental_health_treatment_gap_low_income
+created_at: '2026-04-23T02:41:44.099056Z'
+id: evi_b97c7d
+kind: evidence
+locator: 'The Treatment Gap: A Global Inequality section, opening'
+method_tag: expert_estimate
+provenance_url: null
+quote: WHO estimates that more than 75% of people with mental health conditions in
+  low- and middle-income countries receive no care. In some low-income countries,
+  the proportion receiving no treatment exceeds 95%.
+source_id: src_mental_health_statistics_2026
+supports: support
+updated_at: '2026-04-23T02:41:44.099058Z'
+weight: 0.96

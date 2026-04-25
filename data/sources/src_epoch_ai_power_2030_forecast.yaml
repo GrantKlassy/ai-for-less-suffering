@@ -1,0 +1,25 @@
+accessed_at: '2026-04-22'
+authors:
+- Joshua You
+- David Owen
+created_at: '2026-04-23T02:48:18.824153Z'
+id: src_epoch_ai_power_2030_forecast
+kind: source
+notes: Epoch AI blog post reporting on co-authored white paper with EPRI. Reliability
+  slightly above blog prior (0.75) due to quantitative forecasting methodology, collaboration
+  with established research organization (EPRI), and transparent modeling assumptions
+  described in text and linked code. Forecasts carry uncertainty ranges reflecting
+  methodological honesty.
+provenance:
+  at: '2026-04-23T02:48:18.824062Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 774bfcaa4ec06accff5143a54e0694dda38f9ebe14de9fc7829be1dabe6d5601
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025'
+reliability: 0.78
+source_kind: blog
+title: How much power will frontier AI training demand in 2030?
+updated_at: '2026-04-23T02:48:18.824155Z'
+url: https://epoch.ai/blog/power-demands-of-frontier-ai-training

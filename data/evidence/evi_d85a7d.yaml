@@ -1,0 +1,14 @@
+claim_id: desc_frontier_training_power_growth_2_2x_to_2_9x_annual
+created_at: '2026-04-23T02:48:18.829433Z'
+id: evi_d85a7d
+kind: evidence
+locator: Overall conclusion paragraph
+method_tag: modeled_projection
+provenance_url: null
+quote: Overall, we conclude that power demand for frontier training will likely grow
+  by 2.2x to 2.9x per year in the coming years, implying that the largest training
+  runs will reach 4-16 GW by 2030.
+source_id: src_epoch_ai_power_2030_forecast
+supports: support
+updated_at: '2026-04-23T02:48:18.829434Z'
+weight: 0.93

@@ -1,0 +1,24 @@
+accessed_at: '2026-04-22'
+authors:
+- Rafael Mariano Grossi
+created_at: '2026-04-23T02:45:50.761889Z'
+id: src_iaea_grossi_atoms_algorithms
+kind: source
+notes: 'Primary source: IAEA Director General''s prepared remarks at official International
+  Symposium. Higher reliability than typical press due to institutional authority
+  and careful preparation, but scored below typical filing (0.90) because the statement
+  is forward-looking policy framing rather than factual reporting of completed events.'
+provenance:
+  at: '2026-04-23T02:45:50.761655Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 90095a0a61dce42a4becbe89f0256adf14e590f424e882e4cdc33a20515d17b7
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-12-03'
+reliability: 0.88
+source_kind: primary_doc
+title: 'The Atom and the Algorithm: Nuclear Energy and AI are Converging to Shape
+  the Future'
+updated_at: '2026-04-23T02:45:50.761893Z'
+url: https://www.iaea.org/newscenter/statements/the-atom-and-the-algorithm-nuclear-energy-and-ai-are-converging-to-shape-the-future

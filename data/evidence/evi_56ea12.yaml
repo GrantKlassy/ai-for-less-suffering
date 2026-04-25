@@ -1,0 +1,14 @@
+claim_id: desc_ai_radiomics_tumor_characterization
+created_at: '2026-04-23T02:43:03.098357Z'
+id: evi_56ea12
+kind: evidence
+locator: Role of AI and Deep Learning section
+method_tag: expert_estimate
+provenance_url: null
+quote: AI enables radiomics, defined as the retrieval of quantitative information
+  from medical images... identifies tumor attributes such as size, shape, and sphericity
+  that may be imperceptible to the human eye.
+source_id: src_cancer_network_ai_oncology
+supports: support
+updated_at: '2026-04-23T02:43:03.098358Z'
+weight: 0.82

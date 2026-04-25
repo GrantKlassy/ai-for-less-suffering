@@ -1,0 +1,13 @@
+claim_id: desc_amodei_ai_systems_nation_state_influence
+created_at: '2026-04-23T02:50:01.861470Z'
+id: evi_26a86a
+kind: evidence
+locator: paragraph 3
+method_tag: primary_testimony
+provenance_url: null
+quote: such systems could rival nation-states in influence, accelerating economic
+  disruption while placing extraordinary power in the hands of a small number of actors
+source_id: src_amodei_civilisation_risk_essay
+supports: support
+updated_at: '2026-04-23T02:50:01.861471Z'
+weight: 0.95

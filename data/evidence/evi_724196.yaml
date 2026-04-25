@@ -1,0 +1,14 @@
+claim_id: desc_ai_denovo_protein_intractable_targets
+created_at: '2026-04-23T02:56:41.485432Z'
+id: evi_724196
+kind: evidence
+locator: What AI Is Making Possible That Nature (and Humans) Couldn't section; 'Addressing
+  Previously Intractable Targets' subsection
+method_tag: expert_estimate
+provenance_url: null
+quote: AI models can generate synthetic binders or stabilizing proteins specifically
+  tailored to interact with these elusive targets [intrinsically disordered proteins].
+source_id: src_pharma_almanac_ai_protein_design
+supports: support
+updated_at: '2026-04-23T02:56:41.485433Z'
+weight: 0.8

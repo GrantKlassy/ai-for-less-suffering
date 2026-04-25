@@ -16,6 +16,10 @@ held_descriptive:
 - desc_compute_matters
 - desc_deepseek_hopper_fleet_size
 - desc_deepseek_v3_on_trend_cost
+- desc_epoch_llama4_h100_cluster_zuckerberg_statement
+- desc_epoch_open_model_1e26_flop_arrival_nov_2025
+- desc_epoch_open_model_compute_scaling_4_7x_annual
+- desc_epoch_open_model_scaling_acceleration_recent
 - desc_flagship_training_cost
 - desc_gpu_compute_commoditization
 - desc_leading_edge_chip_concentration

@@ -36,8 +36,8 @@ describe("latestLeverageFrom", () => {
   });
 
   it("returns null when there are no leverage entries", () => {
-    const palantir: Analysis = {
-      kind: "palantir",
+    const coalition: Analysis = {
+      kind: "coalition",
       generated_at: "2026-04-18T00:00:00Z",
       camps: [],
       descriptive_convergences: [],
@@ -47,7 +47,7 @@ describe("latestLeverageFrom", () => {
       contested_claims: [],
     };
     expect(
-      latestLeverageFrom([{ id: "palantir_1", analysis: palantir }]),
+      latestLeverageFrom([{ id: "coalition_1", analysis: coalition }]),
     ).toBeNull();
   });
 
@@ -60,8 +60,8 @@ describe("latestLeverageFrom", () => {
   });
 
   it("ignores non-leverage analyses entirely", () => {
-    const palantir: Analysis = {
-      kind: "palantir",
+    const coalition: Analysis = {
+      kind: "coalition",
       generated_at: "2026-05-01T00:00:00Z",
       camps: [],
       descriptive_convergences: [],
@@ -71,7 +71,7 @@ describe("latestLeverageFrom", () => {
       contested_claims: [],
     };
     const entries = [
-      { id: "palantir_new", analysis: palantir },
+      { id: "coalition_new", analysis: coalition },
       { id: "leverage_older", analysis: lev("2026-04-18T22:10:02Z") },
     ];
     expect(latestLeverageFrom(entries)?.id).toBe("leverage_older");

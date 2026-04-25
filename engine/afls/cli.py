@@ -41,11 +41,18 @@ from afls.output import (
     write_steelman_markdown,
 )
 from afls.queries.leverage import run_leverage_query
-from afls.queries.palantir import persist_palantir_nodes, run_palantir_query
+from afls.queries.coalition import (
+    DEFAULT_CAMP_IDS as COALITION_DEFAULT_CAMP_IDS,
+)
+from afls.queries.coalition import (
+    persist_coalition_nodes,
+    run_coalition_query,
+)
 from afls.queries.reallocation import run_reallocation_query
 from afls.queries.steelman import run_steelman_query
 from afls.reasoning import (
     AnthropicClient,
+    Model,
     ReasoningError,
     apply_linker_draft,
     run_ingest_query,
@@ -342,7 +349,7 @@ def _floating_claim_lint(
     """Flag DescriptiveClaims no Camp holds.
 
     A floating claim passes referential-integrity but is invisible to
-    `find_descriptive_convergences` --- the palantir query cannot reason over
+    `find_descriptive_convergences` --- the coalition query cannot reason over
     it, so it is effectively dead weight in the graph. Non-blocking warning:
     the operator may have a legitimate reason to keep a claim unattached (e.g.
     awaiting a new camp), but the default should be surfacing the drift.
@@ -441,11 +448,38 @@ def reindex() -> None:
 
 
 _SUPPORTED_QUERIES: tuple[str, ...] = (
-    "palantir",
+    "coalition",
     "leverage",
     "reallocation",
     "steelman",
 )
+
+
+def _resolve_coalition_camps(raw: str) -> tuple[str, ...]:
+    """Map `--camps` CLI value to a tuple of camp ids.
+
+    - empty string -> canonical 5-camp default (`COALITION_DEFAULT_CAMP_IDS`)
+    - `all` -> every camp id on disk, sorted
+    - anything else -> comma-split, stripped, validated against the graph
+    """
+    token = raw.strip()
+    if not token:
+        return COALITION_DEFAULT_CAMP_IDS
+    if token == "all":
+        return tuple(sorted(c.id for c in list_nodes(Camp, data_dir())))
+    picked = tuple(part.strip() for part in token.split(",") if part.strip())
+    if not picked:
+        typer.secho("--camps provided but parsed to zero ids", fg="red")
+        raise typer.Exit(1)
+    on_disk = {c.id for c in list_nodes(Camp, data_dir())}
+    missing = [cid for cid in picked if cid not in on_disk]
+    if missing:
+        typer.secho(
+            f"--camps references unknown camp ids: {', '.join(missing)}",
+            fg="red",
+        )
+        raise typer.Exit(1)
+    return picked
 
 
 @app.command()
@@ -456,10 +490,18 @@ def query(
         "--target",
         help="Intervention id to target. Required for `steelman`.",
     ),
+    camps: str = typer.Option(
+        "",
+        "--camps",
+        help=(
+            "Comma-separated camp ids to analyze (coalition only). "
+            "Default: canonical 5-camp test anchor. 'all' = every camp in the graph."
+        ),
+    ),
 ) -> None:
     """Run a named reasoning query.
 
-    Supported: `palantir`, `leverage`, `reallocation`, `steelman`.
+    Supported: `coalition`, `leverage`, `reallocation`, `steelman`.
     """
     if name not in _SUPPORTED_QUERIES:
         typer.secho(
@@ -471,12 +513,15 @@ def query(
         typer.secho("steelman requires --target <intervention_id>", fg="red")
         raise typer.Exit(1)
     client = AnthropicClient()
-    if name == "palantir":
-        palantir_analysis = run_palantir_query(client, data_dir())
-        json_path, md_path = analysis_paths(public_output_dir(), palantir_analysis)
-        write_analysis_json(palantir_analysis, json_path)
-        write_analysis_markdown(palantir_analysis, md_path, data_dir())
-        counts = persist_palantir_nodes(palantir_analysis, data_dir())
+    if name == "coalition":
+        camp_ids = _resolve_coalition_camps(camps)
+        coalition_analysis = run_coalition_query(
+            client, data_dir(), camp_ids=camp_ids
+        )
+        json_path, md_path = analysis_paths(public_output_dir(), coalition_analysis)
+        write_analysis_json(coalition_analysis, json_path)
+        write_analysis_markdown(coalition_analysis, md_path, data_dir())
+        counts = persist_coalition_nodes(coalition_analysis, data_dir())
         typer.secho(
             f"persisted: {counts['bridges_written']} bridges written "
             f"({counts['bridges_skipped']} dedupe-skipped), "
@@ -565,6 +610,7 @@ def _ingest_extracted(
     sha256: str,
     method: ProvenanceMethod,
     run_linker: bool = True,
+    model: Model = Model.OPUS,
 ) -> _IngestArtifacts:
     """Draft via Claude, persist Source+claims+evidence, optionally run the linker.
 
@@ -573,10 +619,10 @@ def _ingest_extracted(
     collision or LLM failure (so single-URL invocation exits non-zero) --- batch
     callers catch that and count it as a per-file failure.
     """
-    typer.secho("drafting source+claims+evidence (opus)...", fg="cyan")
+    typer.secho(f"drafting source+claims+evidence ({model.name.lower()})...", fg="cyan")
     try:
         draft = run_ingest_query(
-            client, data_dir(), url=canonical_url, article_text=article_text
+            client, data_dir(), url=canonical_url, article_text=article_text, model=model
         )
     except ReasoningError as exc:
         typer.secho(f"LLM draft failed: {exc}", fg="red")
@@ -750,9 +796,32 @@ def _file_precheck_ok(result: ReadResult) -> bool:
     return True
 
 
+_MODEL_CHOICES: dict[str, Model] = {"opus": Model.OPUS, "haiku": Model.HAIKU}
+
+
+def _resolve_model(name: str) -> Model:
+    key = name.lower()
+    if key not in _MODEL_CHOICES:
+        typer.secho(
+            f"unknown --model {name!r}. valid: {', '.join(sorted(_MODEL_CHOICES))}",
+            fg="red",
+        )
+        raise typer.Exit(1)
+    return _MODEL_CHOICES[key]
+
+
 @app.command("ingest:url")
-def ingest_url(url: str) -> None:
+def ingest_url(
+    url: str,
+    model: str = typer.Option(
+        "opus",
+        "--model",
+        "-m",
+        help="Drafting model: 'opus' (default, reasoning-grade) or 'haiku' (cheaper parse).",
+    ),
+) -> None:
     """Fetch a URL and draft Source + DescriptiveClaims + Evidence YAML via Claude."""
+    chosen_model = _resolve_model(model)
     typer.secho(f"fetching {url}", fg="cyan")
     try:
         final_url, article_text, sha256, paragraph_count = _fetch_for_ingest(url)
@@ -784,6 +853,7 @@ def ingest_url(url: str) -> None:
         sha256=sha256,
         method="httpx",
         run_linker=True,
+        model=chosen_model,
     )
     typer.secho(
         f"review with: afls edit {artifacts.source.id}  (then the desc_* / evi_* nodes)",
@@ -898,7 +968,7 @@ def ingest_deprecated(url: str) -> None:
     typer.secho(
         "note: `ingest` is renamed to `ingest:url` --- forwarding.", fg="yellow"
     )
-    ingest_url(url)
+    ingest_url(url, model="opus")
 
 
 if __name__ == "__main__":

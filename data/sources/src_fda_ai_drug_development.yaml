@@ -1,0 +1,22 @@
+accessed_at: '2026-04-22'
+authors:
+- FDA Center for Drug Evaluation and Research (CDER)
+created_at: '2026-04-23T02:55:33.391645Z'
+id: src_fda_ai_drug_development
+kind: source
+notes: Primary regulatory agency document describing FDA's institutional approach
+  to AI in drug development. Scored above base filing prior (0.90) due to official
+  policy codification and direct institutional authority.
+provenance:
+  at: '2026-04-23T02:55:33.391576Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 0bc20331994b18137850ca35f9b787e32136548409b9533a500c52e263267de6
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2025-02
+reliability: 0.92
+source_kind: primary_doc
+title: Artificial Intelligence for Drug Development
+updated_at: '2026-04-23T02:55:33.391646Z'
+url: https://www.fda.gov/about-fda/center-drug-evaluation-and-research-cder/artificial-intelligence-drug-development

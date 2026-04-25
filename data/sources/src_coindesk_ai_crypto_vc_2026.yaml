@@ -1,0 +1,24 @@
+accessed_at: '2026-04-22'
+authors:
+- Francisco Rodrigues
+created_at: '2026-04-23T02:43:17.667163Z'
+id: src_coindesk_ai_crypto_vc_2026
+kind: source
+notes: Press article reporting on market data and trends. Lower reliability due to
+  reliance on secondary sources (Binance Research, Crunchbase, Gartner projections)
+  without direct access to underlying datasets. Market projections (Gartner $2.52T)
+  are estimates, not measurements.
+provenance:
+  at: '2026-04-23T02:43:17.667103Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 65818022ccb031b1aae3b44e522a75d357d87e2a97f16c48cf6f385fc48b57e0
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-18'
+reliability: 0.5
+source_kind: press
+title: AI is increasingly eating into VC fundings and here is how crypto firms are
+  adapting
+updated_at: '2026-04-23T02:43:17.667164Z'
+url: https://www.coindesk.com/business/2026/04/18/ai-is-increasingly-eating-into-vc-fundings-and-here-is-how-crypto-firms-are-adapting

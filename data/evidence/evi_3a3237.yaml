@@ -1,0 +1,14 @@
+claim_id: desc_cancer_overdiagnosis_rates_breast_randomized
+created_at: '2026-04-23T02:43:03.097743Z'
+id: evi_3a3237
+kind: evidence
+locator: Overdiagnosis paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: Findings from breast cancer studies report overdiagnosis rates ranging from
+  0% to 54%, findings from with randomized trials suggesting a narrower range of 11%
+  to 22%.
+source_id: src_cancer_network_ai_oncology
+supports: support
+updated_at: '2026-04-23T02:43:03.097744Z'
+weight: 0.9

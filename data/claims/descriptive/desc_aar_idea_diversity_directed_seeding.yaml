@@ -1,0 +1,10 @@
+confidence: 0.9
+created_at: '2026-04-23T02:42:05.388533Z'
+id: desc_aar_idea_diversity_directed_seeding
+kind: descriptive_claim
+provenance_url: null
+text: Assigning parallel AAR agents distinct research directions prevents entropy
+  collapse and maintains exploration diversity, measured via Shannon entropy of method-category
+  distribution, whereas undirected parallel AARs converge quickly to a small set of
+  approaches like self-training.
+updated_at: '2026-04-23T02:42:05.388534Z'

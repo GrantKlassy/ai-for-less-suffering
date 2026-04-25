@@ -8,16 +8,28 @@ agents:
 created_at: '2026-04-18T00:00:00Z'
 disputed_evidence: []
 held_descriptive:
+- desc_ai_factory_farming_intensification_risk
+- desc_ai_welfare_monitoring_cage_bias
+- desc_animal_advocates_ai_coalition_strategy
 - desc_animal_suffering_scale
+- desc_animal_welfare_advocates_skeptical_ai_sentience
+- desc_anthropic_employees_expected_major_donors
+- desc_bay_area_tech_funded_animal_welfare
+- desc_dickens_direct_ai_values_advocacy_vs_conventional
+- desc_dickens_farm_animal_advocacy_post_tai_limited
+- desc_dickens_pause_ai_animal_welfare_time_benefit
+- desc_dickens_post_training_alignment_techniques_scaling
+- desc_sentient_futures_ai_animal_welfare_alignment
+- desc_speciesism_in_ai_systems_documented
 held_normative:
 - norm_animal_sentience
 id: camp_animal_welfare
 kind: camp
 name: Animal welfare
 provenance_url: null
-summary: Animal-suffering-weighting coalition. Holds that factory-farming scale makes
-  non-human suffering a first-order numerator term in any honest −suffering ranking;
-  AI's highest-leverage animal-welfare deployment is accelerating alternative protein,
-  compressing slaughter throughput via automation or supply-chain redesign, and informing
-  policy on confinement and species-weighting.
+summary: "Animal-suffering-weighting coalition. Holds that factory-farming scale makes\
+  \ non-human suffering a first-order numerator term in any honest \u2212suffering\
+  \ ranking; AI's highest-leverage animal-welfare deployment is accelerating alternative\
+  \ protein, compressing slaughter throughput via automation or supply-chain redesign,\
+  \ and informing policy on confinement and species-weighting."
 updated_at: '2026-04-18T00:00:00Z'

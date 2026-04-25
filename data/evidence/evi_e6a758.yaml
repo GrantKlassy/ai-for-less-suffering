@@ -1,0 +1,16 @@
+claim_id: desc_food_crisis_monitoring_annual_spending_140m
+created_at: '2026-04-23T02:57:09.540425Z'
+id: evi_e6a758
+kind: evidence
+locator: The $56 Billion Blind Spot section, paragraph 2
+method_tag: expert_estimate
+provenance_url: null
+quote: "Currently, we estimate the world spends less than $140 million annually on\
+  \ global food crisis monitoring systems \u2013 a fraction of what is required for\
+  \ reliable, accurate, real-time forecasting. In comparison, in 2014/15, we were\
+  \ spending an estimated $56 billion on weather forecasting and climate information\
+  \ systems globally."
+source_id: src_time_africa_food_security_agritech
+supports: support
+updated_at: '2026-04-23T02:57:09.540427Z'
+weight: 0.9

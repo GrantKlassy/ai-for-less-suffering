@@ -1,0 +1,18 @@
+claim_id: desc_openai_anthropic_revenue_gap_capex
+created_at: '2026-04-23T02:47:28.301464Z'
+id: evi_0e10ed
+kind: evidence
+locator: 'The Revenue Gap: Capex vs. AI Vendor Returns section'
+method_tag: expert_estimate
+provenance_url: null
+quote: "OpenAI's $20 billion ARR is impressive for a company that barely had consumer\
+  \ products three years ago, but it represents roughly 3% of the projected 2026 hyperscaler\
+  \ capex total. Anthropic's $9 billion run rate, while showing 9x year-over-year\
+  \ growth, occupies a similar position. The entire cohort of pure-play AI vendors\
+  \ \u2013 including Cohere ($150 million ARR), Mistral (~$400 million), Perplexity\
+  \ ($148 million annualized), and others \u2013 likely accounts for less than $35\
+  \ billion in projected combined 2026 revenue."
+source_id: src_futurum_ai_capex_2026
+supports: support
+updated_at: '2026-04-23T02:47:28.301467Z'
+weight: 0.9

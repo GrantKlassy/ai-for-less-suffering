@@ -1,0 +1,18 @@
+caveats:
+- Religious camps will not endorse species-weighted aggregation that the EA wing of
+  global-health sometimes uses; the human/non-human boundary is metaphysically loaded.
+- Consequentialist tradeoffs (e.g., triage rationing) that global-health accepts may
+  violate the non-substitutable-dignity constraint.
+content_hash: 5d0313f1964bb80890daee43ab2bac262e9915bac8b00bafa487f8e58faee0e3
+created_at: '2026-04-23T03:22:18.154579Z'
+from_camp: camp_religious
+id: bridge_camp-religious_to_camp-global-health_5d0313
+kind: bridge
+provenance_url: null
+to_camp: camp_global_health
+translation: Religious traditions ground human dignity in transcendent sources; global-health
+  philanthropy grounds suffering reduction in DALY aggregation. Both converge on 'AI
+  as instrument for human persons, not replacement' --- which maps cleanly onto the
+  global-health stance that AI should accelerate therapeutics and diagnostics rather
+  than substitute for clinician-patient relationship (cf. Stanford LLM-therapy findings).
+updated_at: '2026-04-23T03:22:18.154580Z'

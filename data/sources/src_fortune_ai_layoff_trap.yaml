@@ -1,0 +1,22 @@
+accessed_at: '2026-04-22'
+authors:
+- Kristin Stoller
+created_at: '2026-04-23T02:37:26.249434Z'
+id: src_fortune_ai_layoff_trap
+kind: source
+notes: Opinion-driven HR commentary piece relying on anecdotal corporate dinner conversations
+  and expert quotes rather than quantitative data or primary research. No systematic
+  evidence presented. Reliability at press baseline.
+provenance:
+  at: '2026-04-23T02:37:26.249366Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: ce2cbde6a3e961d7835815512766ad8faecd087fe8de49417efb6818b829507a
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-20'
+reliability: 0.5
+source_kind: press
+title: 'The AI layoff trap: How cutting headcount could backfire on corporate America'
+updated_at: '2026-04-23T02:37:26.249435Z'
+url: https://fortune.com/2026/04/20/ai-layoff-trap-cutting-headcount-could-backfire/

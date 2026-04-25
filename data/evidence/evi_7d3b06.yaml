@@ -1,0 +1,13 @@
+claim_id: desc_bcg_50_55pct_jobs_reshaped_2_3_years
+created_at: '2026-04-23T02:53:33.052423Z'
+id: evi_7d3b06
+kind: evidence
+locator: Opening section and Key Takeaways
+method_tag: modeled_projection
+provenance_url: null
+quote: Over the next two to three years, 50% to 55% of jobs in the US will be reshaped
+  by AI.
+source_id: src_bcg_ai_job_reshape_2026
+supports: support
+updated_at: '2026-04-23T02:53:33.052425Z'
+weight: 0.95

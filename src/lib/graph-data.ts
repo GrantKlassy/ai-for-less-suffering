@@ -16,6 +16,7 @@ export interface GraphNode {
   id: string;
   kind: NodeKind;
   label: string;
+  fullLabel: string;
   emoji: string;
   color: string;
   href: string;
@@ -151,7 +152,10 @@ export interface BuildGraphDataInput {
   coalitions: InterventionCoalitionAnalysis[];
 }
 
-function truncate(s: string, max = 48): string {
+// Base-state label cap. Cytoscape wraps this at a narrow text-max-width so
+// long labels read as 2-3 short lines instead of one run-on string that
+// bumps into neighbors. Hover swaps in the full label from `fullLabel`.
+function truncate(s: string, max = 64): string {
   return s.length <= max ? s : s.slice(0, max - 1).trimEnd() + "…";
 }
 
@@ -209,6 +213,7 @@ export function buildGraphData(input: BuildGraphDataInput): GraphData {
       id,
       kind,
       label: truncate(label),
+      fullLabel: label,
       emoji: emojiFor(kind, id),
       color: NODE_KIND_COLOR[kind].fill,
       href: hrefFor(kind, id),

@@ -1,0 +1,14 @@
+claim_id: desc_google_cloud_fde_embedding_strategy
+created_at: '2026-04-23T02:50:21.818089Z'
+id: evi_f3e002
+kind: evidence
+locator: Forward-deployed engineering teams subsection
+method_tag: primary_testimony
+provenance_url: null
+quote: Google will embed FDEs alongside major consulting firms and systems integrators
+  like Accenture, Capgemini, Cognizant, Deloitte, HCLTech, PwC and TCS to support
+  customer deployments and solve deep technical challenges.
+source_id: src_google_cloud_750m_agentic_ai
+supports: support
+updated_at: '2026-04-23T02:50:21.818090Z'
+weight: 0.96

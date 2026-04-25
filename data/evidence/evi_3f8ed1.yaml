@@ -1,0 +1,14 @@
+claim_id: desc_sentient_futures_ai_animal_welfare_alignment
+created_at: '2026-04-23T02:44:27.720791Z'
+id: evi_3f8ed1
+kind: evidence
+locator: Opening section, Constance Li quote
+method_tag: primary_testimony
+provenance_url: null
+quote: "If you think that AI will make the majority of decisions, then it matters\
+  \ how they value animals and other sentient beings\u2014those that can feel and,\
+  \ therefore, suffer."
+source_id: src_bay_area_animal_ai_welfare
+supports: support
+updated_at: '2026-04-23T02:44:27.720792Z'
+weight: 0.85

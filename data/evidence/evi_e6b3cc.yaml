@@ -1,0 +1,13 @@
+claim_id: desc_language_models_caught_frontier_mid_2020
+created_at: '2026-04-23T02:48:04.369060Z'
+id: evi_e6b3cc
+kind: evidence
+locator: Language models caught up to the frontier around 2020 section, Figure 4
+method_tag: direct_measurement
+provenance_url: null
+quote: "Growth after the deceleration and until May 2024 is around 5.0x/year \u2013\
+  \ similar to the overall trend of frontier models."
+source_id: src_epoch_ai_compute_trends_2024
+supports: support
+updated_at: '2026-04-23T02:48:04.369061Z'
+weight: 0.9

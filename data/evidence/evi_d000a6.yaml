@@ -1,0 +1,14 @@
+claim_id: desc_anthropic_employees_expected_major_donors
+created_at: '2026-04-23T02:44:27.720041Z'
+id: evi_d000a6
+kind: evidence
+locator: The power of the purse section
+method_tag: expert_estimate
+provenance_url: null
+quote: "The next generation of big donors, Bollard expects, will be AI researchers\u2014\
+  particularly those who work at Anthropic... In February, Anthropic's valuation reached\
+  \ $380 billion and it gave employees the option to cash in on their equity."
+source_id: src_bay_area_animal_ai_welfare
+supports: support
+updated_at: '2026-04-23T02:44:27.720042Z'
+weight: 0.8

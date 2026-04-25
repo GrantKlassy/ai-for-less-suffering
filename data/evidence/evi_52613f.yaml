@@ -1,0 +1,14 @@
+claim_id: desc_llm_local_news_food_insecurity_signals
+created_at: '2026-04-23T02:49:30.875717Z'
+id: evi_52613f
+kind: evidence
+locator: Q3 response, paragraph on ZeroHungerAI
+method_tag: journalistic_report
+provenance_url: null
+quote: ZeroHungerAI at the World Bank, for example, is leveraging the predictive power
+  of news media, engaging large language models to convert data collected from local
+  news sources into high-frequency indicators of food insecurity.
+source_id: src_csis_ai_food_security_early_warning
+supports: support
+updated_at: '2026-04-23T02:49:30.875719Z'
+weight: 0.82

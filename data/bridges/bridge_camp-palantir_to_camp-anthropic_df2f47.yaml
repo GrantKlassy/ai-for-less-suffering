@@ -1,0 +1,15 @@
+caveats:
+- Anthropic's ASL-3 explicitly scopes out nation-state threats; Palantir's integration
+  model assumes nation-state customers. The convergence is on vendor behavior, not
+  on threat model.
+content_hash: df2f47914140c7406287c2cbef75b8e65327ec4a49e317c82258da7d3f7f656d
+created_at: '2026-04-23T03:14:16.121835Z'
+from_camp: camp_palantir
+id: bridge_camp-palantir_to_camp-anthropic_df2f47
+kind: bridge
+provenance_url: null
+to_camp: camp_anthropic
+translation: 'Palantir''s ''Western primacy requires safe systems'' lands inside Anthropic''s
+  ''responsible actors should lead'' frame: national-advantage and alignment-lead
+  converge on the same deployment posture for frontier models in defense contexts.'
+updated_at: '2026-04-23T03:14:16.121835Z'

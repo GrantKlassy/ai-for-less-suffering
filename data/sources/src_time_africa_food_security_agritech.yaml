@@ -1,0 +1,24 @@
+accessed_at: '2026-04-22'
+authors:
+- Jean Martin Bauer
+- Ekhosuehi Iyahen
+- Simon Winter
+created_at: '2026-04-23T02:57:09.537051Z'
+id: src_time_africa_food_security_agritech
+kind: source
+notes: Opinion/analysis piece in TIME Africa by WFP, insurance, and foundation leaders.
+  Press outlet and expert bylines support moderate reliability, but article is primarily
+  advocacy/analysis rather than direct reporting or primary data.
+provenance:
+  at: '2026-04-23T02:57:09.536995Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: a6de6e3f4bd4a8ff1fc24f8006df3266f28b3d6386ef370c8b91c0bab2c52945
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2026-02
+reliability: 0.55
+source_kind: press
+title: 'Beyond the Crisis: How Agri-Tech and Data Can Secure Africa''s Food Future'
+updated_at: '2026-04-23T02:57:09.537052Z'
+url: https://africa.time.com/africa/future-of-food-security-africa-agritech/

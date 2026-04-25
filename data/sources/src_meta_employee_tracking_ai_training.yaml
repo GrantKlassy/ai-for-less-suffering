@@ -1,0 +1,22 @@
+accessed_at: '2026-04-22'
+authors:
+- Eva Roytburg
+created_at: '2026-04-23T02:50:46.466323Z'
+id: src_meta_employee_tracking_ai_training
+kind: source
+notes: News report citing Reuters and internal Meta memo; reliability discounted below
+  press prior (0.50) due to reliance on secondhand reporting of internal disclosure
+  rather than direct company statement, though Meta provided responding quote to Fortune.
+provenance:
+  at: '2026-04-23T02:50:46.466251Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: c5eccdddb0bb64937e12009bd9d240dc58225a2cc10190d2977845ebb8a6938c
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-21'
+reliability: 0.52
+source_kind: press
+title: Meta will start tracking employees' screens and keystrokes to train AI tools
+updated_at: '2026-04-23T02:50:46.466325Z'
+url: https://fortune.com/2026/04/21/meta-will-start-tracking-employees-screens-and-keystrokes-to-train-ai/

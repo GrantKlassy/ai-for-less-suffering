@@ -1,0 +1,15 @@
+claim_id: desc_ai_driven_closed_loop_experiments_proposed
+created_at: '2026-04-23T02:40:26.119806Z'
+id: evi_38c08c
+kind: evidence
+locator: paragraph 6
+method_tag: expert_estimate
+provenance_url: null
+quote: "Building such \"AI-native\" experimental ecosystems \u2013 combined with more\
+  \ interpretable and controllable models \u2013 could help bridge the gap between\
+  \ prediction and performance through closed-loop, AI-driven workflows in which automated\
+  \ experiments continuously generate data to refine models."
+source_id: src_medicine_maker_ai_biologic_discovery
+supports: support
+updated_at: '2026-04-23T02:40:26.119807Z'
+weight: 0.75

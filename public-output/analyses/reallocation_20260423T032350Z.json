@@ -1,0 +1,857 @@
+{
+  "camps": [
+    "camp_palantir",
+    "camp_anthropic",
+    "camp_operator",
+    "camp_displaced_workers",
+    "camp_xrisk",
+    "camp_global_health",
+    "camp_animal_welfare",
+    "camp_biomedical"
+  ],
+  "coalition_shifts": [
+    {
+      "friction_rebinds": "Training friction binds on enterprise absorption and labor-retraining politics; drug discovery friction binds on FDA pathway, wet-lab throughput, and IP structure. Moving compute-hours from fine-tuning pipelines to target discovery shifts the blocker from HR departments to regulators and CROs --- a harder but cleaner fight because the regulator has a suffering mandate on paper. Harm trade is small and real: you lose some worker-retraining capacity (norm_workers_dignity takes a marginal hit) but the destination's DALY math dominates by an order of magnitude. Not a scoring artifact.",
+      "from_intervention_id": "intv_training",
+      "gaining_camps": [
+        "camp_global_health",
+        "camp_biomedical",
+        "camp_anthropic"
+      ],
+      "losing_camps": [
+        "camp_displaced_workers"
+      ],
+      "to_intervention_id": "intv_drug_discovery"
+    },
+    {
+      "friction_rebinds": "Grid friction is physical --- interconnect queues, transformer lead times, NIMBY. Drug discovery friction is institutional --- trial design, regulatory approval, manufacturing. The +0.267 harm_robustness delta is the honest signal here: drug discovery doesn't pour concrete or burn gas. The catch is that grid was enabling infrastructure for every compute-intensive downstream including drug discovery itself, so the move is only coherent if you're reallocating effort (researcher-hours, capital allocation attention), not electrons. If the operator reads this as 'stop building grid capacity,' that's the scoring artifact --- grid is a substrate, not a competitor.",
+      "from_intervention_id": "intv_grid",
+      "gaining_camps": [
+        "camp_global_health",
+        "camp_biomedical",
+        "camp_animal_welfare"
+      ],
+      "losing_camps": [
+        "camp_palantir",
+        "camp_anthropic"
+      ],
+      "to_intervention_id": "intv_drug_discovery"
+    },
+    {
+      "friction_rebinds": "Alt protein friction binds on consumer adoption, price parity, and ag-industry lobbying; drug discovery friction binds on regulatory pathway and clinical trials. The trade is real, not an artifact: animal welfare loses its single largest numerator lever (factory farming scale) for a human-DALY gain. This pair is exactly the kind of cross-species suffering-weighting fight that the composite can't resolve --- if you weight animal suffering at 1:1 with human the delta_net flips. Operator's default weighting pushes toward the move; the blindspot is that the weighting is a normative choice, not a fact.",
+      "from_intervention_id": "intv_alt_protein",
+      "gaining_camps": [
+        "camp_global_health",
+        "camp_biomedical"
+      ],
+      "losing_camps": [
+        "camp_animal_welfare"
+      ],
+      "to_intervention_id": "intv_drug_discovery"
+    },
+    {
+      "friction_rebinds": "Compute friction is capex and power; drug discovery friction is regulatory and wet-lab. The +0.450 harm_robustness jump is the dominant term --- compute buildout is the dirtiest line item in the whole graph (power draw, concentration, dual-use). Xrisk gains because less frontier compute means less capability overhang; displaced workers gain because compute expansion is the substrate of the labor-displacement trajectory. Harm trade is robust across axioms: Kantian, capabilities, and aggregate-welfare frames all prefer the destination. Not a scoring artifact.",
+      "from_intervention_id": "intv_compute",
+      "gaining_camps": [
+        "camp_global_health",
+        "camp_biomedical",
+        "camp_xrisk",
+        "camp_displaced_workers"
+      ],
+      "losing_camps": [
+        "camp_palantir",
+        "camp_anthropic"
+      ],
+      "to_intervention_id": "intv_drug_discovery"
+    },
+    {
+      "friction_rebinds": "Alignment friction is conceptual --- we don't know what we're doing yet --- and drug discovery friction is procedural, which is why the viability delta is negative (-0.101): you're moving from a field with low throughput-per-researcher to one with queue-bound throughput. The -0.033 harm_robustness delta understates the real cost: alignment research is an option premium on catastrophic tail risk, and its suffering numerator is near-zero by design (it's insurance, not intervention). The composite can't price options. This is the pair where the deterministic delta is most suspect.",
+      "from_intervention_id": "intv_alignment_research",
+      "gaining_camps": [
+        "camp_global_health",
+        "camp_biomedical"
+      ],
+      "losing_camps": [
+        "camp_xrisk",
+        "camp_anthropic"
+      ],
+      "to_intervention_id": "intv_drug_discovery"
+    }
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "descriptive_convergences": [],
+  "generated_at": "2026-04-23T03:23:50.294831Z",
+  "harm_divergence_flags": [
+    {
+      "delta_harm_robustness": -0.49999999999999994,
+      "delta_net": -0.011933999999999993,
+      "delta_suffering_composite": 0.07836,
+      "delta_viability": 0.069,
+      "from_intervention_id": "intv_alignment_research",
+      "from_net_composite": 0.066912,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.48333333333333334,
+      "delta_net": 0.01064466666666667,
+      "delta_suffering_composite": 0.10388,
+      "delta_viability": 0.295,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.4499999999999999,
+      "delta_net": -0.07622999999999999,
+      "delta_suffering_composite": -0.0069300000000000195,
+      "delta_viability": 0.17049999999999993,
+      "from_intervention_id": "intv_drug_discovery",
+      "from_net_composite": 0.131208,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.40833333333333327,
+      "delta_net": -0.016494916666666658,
+      "delta_suffering_composite": 0.06283,
+      "delta_viability": 0.23599999999999993,
+      "from_intervention_id": "intv_mental_health_triage",
+      "from_net_composite": 0.07147291666666666,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.35833333333333334,
+      "delta_net": 0.0022886249999999955,
+      "delta_suffering_composite": 0.08269499999999999,
+      "delta_viability": 0.3044999999999999,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.31666666666666665,
+      "delta_net": -0.017632000000000002,
+      "delta_suffering_composite": 0.013679999999999998,
+      "delta_viability": -0.07200000000000001,
+      "from_intervention_id": "intv_alignment_research",
+      "from_net_composite": 0.066912,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.30000000000000004,
+      "delta_net": 0.004946666666666662,
+      "delta_suffering_composite": 0.0392,
+      "delta_viability": 0.15399999999999997,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.2666666666666666,
+      "delta_net": -0.081928,
+      "delta_suffering_composite": -0.07161000000000002,
+      "delta_viability": 0.029499999999999915,
+      "from_intervention_id": "intv_drug_discovery",
+      "from_net_composite": 0.131208,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.22499999999999998,
+      "delta_net": -0.022192916666666666,
+      "delta_suffering_composite": -0.0018500000000000044,
+      "delta_viability": 0.09499999999999992,
+      "from_intervention_id": "intv_mental_health_triage",
+      "from_net_composite": 0.07147291666666666,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.1833333333333333,
+      "delta_net": 0.005698000000000009,
+      "delta_suffering_composite": 0.06468,
+      "delta_viability": 0.14100000000000001,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.17500000000000004,
+      "delta_net": -0.003409375000000013,
+      "delta_suffering_composite": 0.01801499999999999,
+      "delta_viability": 0.16349999999999987,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.1416666666666666,
+      "delta_net": -0.014222624999999989,
+      "delta_suffering_composite": -0.004334999999999992,
+      "delta_viability": -0.23549999999999988,
+      "from_intervention_id": "intv_alignment_research",
+      "from_net_composite": 0.066912,
+      "to_intervention_id": "intv_alt_protein",
+      "to_net_composite": 0.05268937500000001
+    },
+    {
+      "delta_harm_robustness": -0.125,
+      "delta_net": 0.008356041666666675,
+      "delta_suffering_composite": 0.02118500000000001,
+      "delta_viability": -0.009499999999999897,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_alt_protein",
+      "to_net_composite": 0.05268937500000001
+    }
+  ],
+  "pairs": [
+    {
+      "delta_harm_robustness": -0.03333333333333344,
+      "delta_net": 0.08687466666666666,
+      "delta_suffering_composite": 0.11081000000000002,
+      "delta_viability": 0.12450000000000006,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": 0.2666666666666666,
+      "delta_net": 0.081928,
+      "delta_suffering_composite": 0.07161000000000002,
+      "delta_viability": -0.029499999999999915,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": 0.09166666666666656,
+      "delta_net": 0.07851862499999998,
+      "delta_suffering_composite": 0.08962500000000001,
+      "delta_viability": 0.13399999999999995,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": 0.4499999999999999,
+      "delta_net": 0.07622999999999999,
+      "delta_suffering_composite": 0.0069300000000000195,
+      "delta_viability": -0.17049999999999993,
+      "from_intervention_id": "intv_compute",
+      "from_net_composite": 0.054978000000000006,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": -0.050000000000000044,
+      "delta_net": 0.06429599999999999,
+      "delta_suffering_composite": 0.08529000000000002,
+      "delta_viability": -0.10149999999999992,
+      "from_intervention_id": "intv_alignment_research",
+      "from_net_composite": 0.066912,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": 0.04166666666666663,
+      "delta_net": 0.05973508333333333,
+      "delta_suffering_composite": 0.06976000000000002,
+      "delta_viability": 0.0655,
+      "from_intervention_id": "intv_mental_health_triage",
+      "from_net_composite": 0.07147291666666666,
+      "to_intervention_id": "intv_drug_discovery",
+      "to_net_composite": 0.131208
+    },
+    {
+      "delta_harm_robustness": -0.07500000000000007,
+      "delta_net": 0.027139583333333328,
+      "delta_suffering_composite": 0.04105,
+      "delta_viability": 0.05900000000000005,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_mental_health_triage",
+      "to_net_composite": 0.07147291666666666
+    },
+    {
+      "delta_harm_robustness": 0.016666666666666607,
+      "delta_net": 0.022578666666666664,
+      "delta_suffering_composite": 0.02552,
+      "delta_viability": 0.22599999999999998,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_alignment_research",
+      "to_net_composite": 0.066912
+    },
+    {
+      "delta_harm_robustness": 0.22499999999999998,
+      "delta_net": 0.022192916666666666,
+      "delta_suffering_composite": 0.0018500000000000044,
+      "delta_viability": -0.09499999999999992,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_mental_health_triage",
+      "to_net_composite": 0.07147291666666666
+    },
+    {
+      "delta_harm_robustness": 0.04999999999999993,
+      "delta_net": 0.018783541666666653,
+      "delta_suffering_composite": 0.019864999999999994,
+      "delta_viability": 0.06849999999999995,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_mental_health_triage",
+      "to_net_composite": 0.07147291666666666
+    },
+    {
+      "delta_harm_robustness": 0.31666666666666665,
+      "delta_net": 0.017632000000000002,
+      "delta_suffering_composite": -0.013679999999999998,
+      "delta_viability": 0.07200000000000001,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_alignment_research",
+      "to_net_composite": 0.066912
+    },
+    {
+      "delta_harm_robustness": 0.40833333333333327,
+      "delta_net": 0.016494916666666658,
+      "delta_suffering_composite": -0.06283,
+      "delta_viability": -0.23599999999999993,
+      "from_intervention_id": "intv_compute",
+      "from_net_composite": 0.054978000000000006,
+      "to_intervention_id": "intv_mental_health_triage",
+      "to_net_composite": 0.07147291666666666
+    },
+    {
+      "delta_harm_robustness": 0.1416666666666666,
+      "delta_net": 0.014222624999999989,
+      "delta_suffering_composite": 0.004334999999999992,
+      "delta_viability": 0.23549999999999988,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_alignment_research",
+      "to_net_composite": 0.066912
+    },
+    {
+      "delta_harm_robustness": 0.49999999999999994,
+      "delta_net": 0.011933999999999993,
+      "delta_suffering_composite": -0.07836,
+      "delta_viability": -0.069,
+      "from_intervention_id": "intv_compute",
+      "from_net_composite": 0.054978000000000006,
+      "to_intervention_id": "intv_alignment_research",
+      "to_net_composite": 0.066912
+    },
+    {
+      "delta_harm_robustness": -0.48333333333333334,
+      "delta_net": 0.01064466666666667,
+      "delta_suffering_composite": 0.10388,
+      "delta_viability": 0.295,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.125,
+      "delta_net": 0.008356041666666675,
+      "delta_suffering_composite": 0.02118500000000001,
+      "delta_viability": -0.009499999999999897,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_alt_protein",
+      "to_net_composite": 0.05268937500000001
+    },
+    {
+      "delta_harm_robustness": -0.1833333333333333,
+      "delta_net": 0.005698000000000009,
+      "delta_suffering_composite": 0.06468,
+      "delta_viability": 0.14100000000000001,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    },
+    {
+      "delta_harm_robustness": -0.30000000000000004,
+      "delta_net": 0.004946666666666662,
+      "delta_suffering_composite": 0.0392,
+      "delta_viability": 0.15399999999999997,
+      "from_intervention_id": "intv_training",
+      "from_net_composite": 0.044333333333333336,
+      "to_intervention_id": "intv_grid",
+      "to_net_composite": 0.04928
+    },
+    {
+      "delta_harm_robustness": -0.09166666666666667,
+      "delta_net": 0.0045609166666666645,
+      "delta_suffering_composite": 0.015530000000000002,
+      "delta_viability": -0.16699999999999993,
+      "from_intervention_id": "intv_alignment_research",
+      "from_net_composite": 0.066912,
+      "to_intervention_id": "intv_mental_health_triage",
+      "to_net_composite": 0.07147291666666666
+    },
+    {
+      "delta_harm_robustness": 0.17500000000000004,
+      "delta_net": 0.003409375000000013,
+      "delta_suffering_composite": -0.01801499999999999,
+      "delta_viability": -0.16349999999999987,
+      "from_intervention_id": "intv_grid",
+      "from_net_composite": 0.04928,
+      "to_intervention_id": "intv_alt_protein",
+      "to_net_composite": 0.05268937500000001
+    },
+    {
+      "delta_harm_robustness": -0.35833333333333334,
+      "delta_net": 0.0022886249999999955,
+      "delta_suffering_composite": 0.08269499999999999,
+      "delta_viability": 0.3044999999999999,
+      "from_intervention_id": "intv_alt_protein",
+      "from_net_composite": 0.05268937500000001,
+      "to_intervention_id": "intv_compute",
+      "to_net_composite": 0.054978000000000006
+    }
+  ],
+  "rankings": [
+    {
+      "composite_score": 0.3905,
+      "friction_scores": {
+        "friction_capex": 0.55,
+        "friction_enterprise": 0.75,
+        "friction_grid": 0.95,
+        "friction_public": 0.9,
+        "friction_regulation": 0.4
+      },
+      "harm_scores": {
+        "harm_concentration": 0.7,
+        "harm_displacement": 0.9,
+        "harm_extraction": 0.85,
+        "harm_land": 0.9,
+        "harm_lock_in": 0.6,
+        "harm_water": 0.85
+      },
+      "intervention_id": "intv_drug_discovery",
+      "intervention_text": "Deploy frontier AI (structure prediction, candidate screening, trial simulation) inside drug discovery and therapeutic development pipelines targeting neglected infectious disease, antimicrobial resistance, and LMIC-priority therapeutics.",
+      "leverage_score": 0.55,
+      "mean_harm_robustness": 0.7999999999999999,
+      "mean_robustness": 0.71,
+      "mean_suffering_reduction": 0.42000000000000004,
+      "net_composite": 0.131208,
+      "suffering_composite": 0.16401000000000002,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.85,
+        "suffering_mental_health": 0.15,
+        "suffering_mortality": 0.7,
+        "suffering_poverty": 0.3
+      }
+    },
+    {
+      "composite_score": 0.325,
+      "friction_scores": {
+        "friction_capex": 0.8,
+        "friction_enterprise": 0.55,
+        "friction_grid": 0.95,
+        "friction_public": 0.5,
+        "friction_regulation": 0.45
+      },
+      "harm_scores": {
+        "harm_concentration": 0.5,
+        "harm_displacement": 0.7,
+        "harm_extraction": 0.95,
+        "harm_land": 0.95,
+        "harm_lock_in": 0.5,
+        "harm_water": 0.95
+      },
+      "intervention_id": "intv_mental_health_triage",
+      "intervention_text": "Scale AI-assisted mental health triage, initial-line support, and care-navigation tooling targeted at the ~70% of global mental-health burden currently untreated, with integration into public health systems and evaluation against clinical outcomes.",
+      "leverage_score": 0.5,
+      "mean_harm_robustness": 0.7583333333333333,
+      "mean_robustness": 0.65,
+      "mean_suffering_reduction": 0.29,
+      "net_composite": 0.07147291666666666,
+      "suffering_composite": 0.09425,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.05,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.7,
+        "suffering_mortality": 0.3,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.49199999999999994,
+      "friction_scores": {
+        "friction_capex": 0.7,
+        "friction_enterprise": 0.7,
+        "friction_grid": 1.0,
+        "friction_public": 0.9,
+        "friction_regulation": 0.8
+      },
+      "harm_scores": {
+        "harm_concentration": 0.6,
+        "harm_displacement": 1.0,
+        "harm_extraction": 0.9,
+        "harm_land": 1.0,
+        "harm_lock_in": 0.7,
+        "harm_water": 0.9
+      },
+      "intervention_id": "intv_alignment_research",
+      "intervention_text": "Scale funding for interpretability and alignment research.",
+      "leverage_score": 0.6,
+      "mean_harm_robustness": 0.85,
+      "mean_robustness": 0.82,
+      "mean_suffering_reduction": 0.16,
+      "net_composite": 0.066912,
+      "suffering_composite": 0.07872,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.2,
+        "suffering_mortality": 0.2,
+        "suffering_poverty": 0.1
+      }
+    },
+    {
+      "composite_score": 0.5609999999999999,
+      "friction_scores": {
+        "friction_capex": 0.6,
+        "friction_enterprise": 0.9,
+        "friction_grid": 0.4,
+        "friction_public": 0.7,
+        "friction_regulation": 0.7
+      },
+      "harm_scores": {
+        "harm_concentration": 0.2,
+        "harm_displacement": 0.6,
+        "harm_extraction": 0.3,
+        "harm_land": 0.5,
+        "harm_lock_in": 0.3,
+        "harm_water": 0.2
+      },
+      "intervention_id": "intv_compute",
+      "intervention_text": "Expand frontier-lab compute capacity (chips, datacenters, networking).",
+      "leverage_score": 0.85,
+      "mean_harm_robustness": 0.35000000000000003,
+      "mean_robustness": 0.6599999999999999,
+      "mean_suffering_reduction": 0.28,
+      "net_composite": 0.054978000000000006,
+      "suffering_composite": 0.15708,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.4,
+        "suffering_mental_health": 0.3,
+        "suffering_mortality": 0.4,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.25650000000000006,
+      "friction_scores": {
+        "friction_capex": 0.5,
+        "friction_enterprise": 0.6,
+        "friction_grid": 0.9,
+        "friction_public": 0.35,
+        "friction_regulation": 0.5
+      },
+      "harm_scores": {
+        "harm_concentration": 0.6,
+        "harm_displacement": 0.7,
+        "harm_extraction": 0.7,
+        "harm_land": 0.8,
+        "harm_lock_in": 0.7,
+        "harm_water": 0.75
+      },
+      "intervention_id": "intv_alt_protein",
+      "intervention_text": "Accelerate alternative-protein development (precision fermentation, cultivated meat, plant-based) with AI-driven strain engineering, scaffolding optimization, and supply-chain cost-down, targeting displacement of factory-farm protein at scale.",
+      "leverage_score": 0.45,
+      "mean_harm_robustness": 0.7083333333333334,
+      "mean_robustness": 0.5700000000000001,
+      "mean_suffering_reduction": 0.29,
+      "net_composite": 0.05268937500000001,
+      "suffering_composite": 0.074385,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.85,
+        "suffering_disease": 0.3,
+        "suffering_mental_health": 0.05,
+        "suffering_mortality": 0.15,
+        "suffering_poverty": 0.1
+      }
+    },
+    {
+      "composite_score": 0.41999999999999993,
+      "friction_scores": {
+        "friction_capex": 0.6,
+        "friction_enterprise": 0.8,
+        "friction_grid": 0.5,
+        "friction_public": 0.6,
+        "friction_regulation": 0.3
+      },
+      "harm_scores": {
+        "harm_concentration": 0.7,
+        "harm_displacement": 0.8,
+        "harm_extraction": 0.4,
+        "harm_land": 0.3,
+        "harm_lock_in": 0.6,
+        "harm_water": 0.4
+      },
+      "intervention_id": "intv_grid",
+      "intervention_text": "Accelerate grid and generation buildout (permitting reform, interconnection, new generation).",
+      "leverage_score": 0.75,
+      "mean_harm_robustness": 0.5333333333333333,
+      "mean_robustness": 0.5599999999999999,
+      "mean_suffering_reduction": 0.22000000000000003,
+      "net_composite": 0.04928,
+      "suffering_composite": 0.0924,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.3,
+        "suffering_mental_health": 0.2,
+        "suffering_mortality": 0.3,
+        "suffering_poverty": 0.2
+      }
+    },
+    {
+      "composite_score": 0.26599999999999996,
+      "friction_scores": {
+        "friction_capex": 0.8,
+        "friction_enterprise": 0.5,
+        "friction_grid": 1.0,
+        "friction_public": 0.8,
+        "friction_regulation": 0.7
+      },
+      "harm_scores": {
+        "harm_concentration": 0.8,
+        "harm_displacement": 0.5,
+        "harm_extraction": 1.0,
+        "harm_land": 1.0,
+        "harm_lock_in": 0.7,
+        "harm_water": 1.0
+      },
+      "intervention_id": "intv_training",
+      "intervention_text": "Invest in AI workforce training and retraining programs.",
+      "leverage_score": 0.35,
+      "mean_harm_robustness": 0.8333333333333334,
+      "mean_robustness": 0.76,
+      "mean_suffering_reduction": 0.2,
+      "net_composite": 0.044333333333333336,
+      "suffering_composite": 0.0532,
+      "suffering_reduction_scores": {
+        "suffering_animal": 0.1,
+        "suffering_disease": 0.2,
+        "suffering_mental_health": 0.3,
+        "suffering_mortality": 0.1,
+        "suffering_poverty": 0.3
+      }
+    }
+  ],
+  "reallocation_blindspots": [
+    {
+      "flagged_from_intervention_id": "intv_alignment_research",
+      "flagged_to_intervention_id": "intv_drug_discovery",
+      "reasoning": "Alignment is tail-risk insurance with near-zero baseline suffering numerator; the composite scores it as a weak intervention because it prices the mean, not the variance, so delta_net=+0.064 oversells a move that trades catastrophic-risk reduction for DALY gains the market will fund anyway."
+    },
+    {
+      "flagged_from_intervention_id": "intv_grid",
+      "flagged_to_intervention_id": "intv_drug_discovery",
+      "reasoning": "Grid is enabling infrastructure --- drug discovery's own compute runs on it --- so the deterministic delta treats grid and drug_discovery as substitutes when they're stacked, and a literal reallocation collapses the destination's viability floor."
+    },
+    {
+      "flagged_from_intervention_id": "intv_compute",
+      "flagged_to_intervention_id": "intv_drug_discovery",
+      "reasoning": "Same substrate problem as grid but weaker: drug discovery's throughput at the frontier is compute-bound, so the +0.076 delta over-credits the move if 'reallocating compute' is read as reducing compute capacity rather than redirecting compute hours already built."
+    },
+    {
+      "flagged_from_intervention_id": "intv_alt_protein",
+      "flagged_to_intervention_id": "intv_drug_discovery",
+      "reasoning": "The composite averages human and animal suffering reduction with implicit equal weighting; camp_animal_welfare's axiom that factory-farming scale dominates the numerator isn't in the scoring function, so delta_net=+0.079 is conditional on a species-weighting choice the graph doesn't surface."
+    }
+  ]
+}

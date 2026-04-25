@@ -1,0 +1,13 @@
+claim_id: desc_prism_trial_largest_us_ai_breast_screening
+created_at: '2026-04-23T02:55:06.482733Z'
+id: evi_8197d6
+kind: evidence
+locator: Dr. Joann G. Elmore quote, second paragraph
+method_tag: expert_estimate
+provenance_url: null
+quote: This is the first large-scale randomized trial of AI in breast cancer screening
+  in the United States.
+source_id: src_ucla_prism_ai_breast_screening
+supports: support
+updated_at: '2026-04-23T02:55:06.482736Z'
+weight: 0.9

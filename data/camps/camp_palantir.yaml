@@ -6,10 +6,15 @@ disputed_evidence: []
 held_descriptive:
 - desc_accelerating
 - desc_algorithmic_efficiency
+- desc_amodei_ai_systems_nation_state_influence
 - desc_anduril_6b_gov_contracts_2025
 - desc_anduril_autonomous_weapons_deployed
 - desc_anduril_fury_beat_primes
 - desc_anduril_products_company_model
+- desc_army_ea_competition_preserved_claim
+- desc_army_ea_removes_reseller_passthrough_fees
+- desc_army_ea_volume_discount_other_dod
+- desc_army_negotiating_other_vendor_eas
 - desc_astris_led_by_odonnell_xerox
 - desc_compute_matters
 - desc_deepseek_hopper_fleet_size
@@ -20,6 +25,7 @@ held_descriptive:
 - desc_dod_ai_contract_spend
 - desc_enterprise_slow
 - desc_flagship_training_cost
+- desc_google_security_operations_agents_threat_hunting
 - desc_gpu_supply_shortage_resolved_mid_2024
 - desc_grid_constraint
 - desc_huawei_ascend_capability_gap
@@ -37,16 +43,22 @@ held_descriptive:
 - desc_maim_already_describes_strategic_picture
 - desc_maim_deterrence_regime_proposal
 - desc_maven_cjadc2_contributor
+- desc_maven_multi_sensor_targeting_fusion
+- desc_maven_program_of_record_formalization
 - desc_maven_smart_system_five_combatant_commands
 - desc_maven_status
 - desc_maven_third_party_ai_integration_mandate
 - desc_meta_scale_defense_partnership_llama
 - desc_nist_critical_infra_profile_concept
 - desc_palantir_ai_tip_processing_ice
+- desc_palantir_army_ea_10b_75_contracts
+- desc_palantir_army_ea_consolidates_75_contracts
+- desc_palantir_army_ea_volume_discounts_dod_wide
 - desc_palantir_dominant
 - desc_palantir_gov_revenue
 - desc_palantir_icm_ice_backbone
 - desc_palantir_immigrationos_contract
+- desc_palantir_maven_contract_expansion_795m
 - desc_palantir_self_described_defense_ai_vendor
 - desc_powerful_ai_chip_threshold
 - desc_scale_ai_self_described_dod_nat_sec_role

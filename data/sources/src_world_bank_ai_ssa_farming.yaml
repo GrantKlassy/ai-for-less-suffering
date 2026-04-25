@@ -1,0 +1,25 @@
+accessed_at: '2026-04-22'
+authors:
+- Chakib Jenane
+created_at: '2026-04-23T02:49:14.264079Z'
+id: src_world_bank_ai_ssa_farming
+kind: source
+notes: World Bank blog by regional practice director. Makes specific factual claims
+  about investment, project outcomes, and platform reach, but primarily synthesis/advocacy
+  rather than original reporting. Reliability reduced from blog prior (0.35) due to
+  institutional credibility and cited figures, but not to 0.75 (press prior) because
+  blog format lacks editorial verification and cites figures without source attribution.
+provenance:
+  at: '2026-04-23T02:49:14.264007Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 1d04a7229d4571a708144dcf0265f5a65c648b044b6a7f71efc9e753eef3ff7c
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-03-12'
+reliability: 0.6
+source_kind: blog
+title: Is Artificial Intelligence the future of farming? Exploring opportunities and
+  challenges in Sub-Saharan Africa
+updated_at: '2026-04-23T02:49:14.264081Z'
+url: https://blogs.worldbank.org/en/agfood/artificial-interlligence-in-the-future-of-sub-saharan-africa-far

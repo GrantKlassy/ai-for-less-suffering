@@ -1,0 +1,12 @@
+against_prior_set: GRANT_BRAIN.md
+content_hash: c28228f1b2cbf263428a1c5569f30cf0632358ab04cd1433969756503a2f6ab2
+created_at: '2026-04-23T03:22:18.154861Z'
+flagged_camp_id: camp_open_weights
+id: blind_camp-open-weights_c28228
+kind: blindspot
+provenance_url: null
+reasoning: Operator is a sovereign-individual maximalist and should be closer to open-weights
+  than his manifesto's Anthropic-adjacent framing reads; the norm_open_weights_distribution
+  claim is load-bearing for the operator's own politics and is likely under-represented
+  relative to his stated values.
+updated_at: '2026-04-23T03:22:18.154862Z'

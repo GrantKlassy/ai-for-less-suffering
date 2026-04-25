@@ -1,4 +1,4 @@
-"""Emit Palantir analyses as canonical JSON + prose companion markdown.
+"""Emit coalition analyses as canonical JSON + prose companion markdown.
 
 JSON is the source of truth for downstream renderers (Astro). Prose is shaped for
 human reading; it does not introduce new facts --- only a flatter presentation of
@@ -16,11 +16,11 @@ from afls.queries.leverage import (
     LeverageRanking,
     RankingBlindSpot,
 )
-from afls.queries.palantir import (
+from afls.queries.coalition import (
+    CoalitionAnalysis,
     ContestedClaim,
     ConvergentInterventionAnalysis,
     EvidenceSummary,
-    PalantirAnalysis,
 )
 from afls.queries.reallocation import (
     HARM_DIVERGENCE_THRESHOLD,
@@ -41,25 +41,25 @@ from afls.schema import (
 from afls.storage import list_nodes
 
 
-def _stamp_slug(analysis: PalantirAnalysis) -> str:
+def _stamp_slug(analysis: CoalitionAnalysis) -> str:
     return analysis.generated_at.strftime("%Y%m%dT%H%M%SZ")
 
 
-def analysis_paths(public_output_dir: Path, analysis: PalantirAnalysis) -> tuple[Path, Path]:
+def analysis_paths(public_output_dir: Path, analysis: CoalitionAnalysis) -> tuple[Path, Path]:
     """Return (json_path, md_path) for an analysis based on its timestamp."""
     base = public_output_dir / "analyses"
     slug = _stamp_slug(analysis)
-    return (base / f"palantir_{slug}.json", base / f"palantir_{slug}.md")
+    return (base / f"coalition_{slug}.json", base / f"coalition_{slug}.md")
 
 
-def write_analysis_json(analysis: PalantirAnalysis, path: Path) -> None:
+def write_analysis_json(analysis: CoalitionAnalysis, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = analysis.model_dump(mode="json")
     with path.open("w") as handle:
         json.dump(payload, handle, indent=2, sort_keys=True)
 
 
-def render_analysis_markdown(analysis: PalantirAnalysis, data_dir: Path) -> str:
+def render_analysis_markdown(analysis: CoalitionAnalysis, data_dir: Path) -> str:
     """Shape the analysis into prose. Deterministic; no LLM call."""
     camps_by_id = {c.id: c for c in list_nodes(Camp, data_dir)}
     descriptives = {c.id: c for c in list_nodes(DescriptiveClaim, data_dir)}
@@ -67,7 +67,7 @@ def render_analysis_markdown(analysis: PalantirAnalysis, data_dir: Path) -> str:
     interventions = {i.id: i for i in list_nodes(Intervention, data_dir)}
 
     parts = [
-        "# Palantir coalition analysis",
+        "# Coalition analysis",
         "",
         f"Generated: `{analysis.generated_at.isoformat()}`",
         "",
@@ -122,7 +122,7 @@ def _render_contested_claims(contested: list[ContestedClaim]) -> str:
 
 
 def _render_descriptive_convergences(
-    analysis: PalantirAnalysis, descriptives: dict[str, DescriptiveClaim]
+    analysis: CoalitionAnalysis, descriptives: dict[str, DescriptiveClaim]
 ) -> str:
     if not analysis.descriptive_convergences:
         return "## Descriptive convergence\n\nNo claims are held across every camp.\n"
@@ -208,7 +208,7 @@ def _render_blindspots(blindspots: list[BlindSpot], camps_by_id: dict[str, Camp]
     return "\n".join(lines) + "\n"
 
 
-def write_analysis_markdown(analysis: PalantirAnalysis, path: Path, data_dir: Path) -> None:
+def write_analysis_markdown(analysis: CoalitionAnalysis, path: Path, data_dir: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(render_analysis_markdown(analysis, data_dir))
 

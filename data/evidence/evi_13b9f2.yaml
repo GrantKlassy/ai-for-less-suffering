@@ -1,0 +1,15 @@
+claim_id: desc_bcg_entry_level_hiring_volume_decline
+created_at: '2026-04-23T02:53:33.054070Z'
+id: evi_13b9f2
+kind: evidence
+locator: 'Section: ''The Side Effects of Agentic AI Role Transformation'', second
+  subsection'
+method_tag: modeled_projection
+provenance_url: null
+quote: As AI absorbs much of the routine work that has historically justified large
+  entry-level hiring cohorts, fewer execution-focused positions will be required.
+  In the short term, the volume of entry-level jobs may decrease.
+source_id: src_bcg_ai_job_reshape_2026
+supports: support
+updated_at: '2026-04-23T02:53:33.054072Z'
+weight: 0.88

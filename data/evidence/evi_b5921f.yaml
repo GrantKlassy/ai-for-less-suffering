@@ -1,0 +1,17 @@
+claim_id: desc_epoch_open_model_compute_scaling_4_7x_annual
+created_at: '2026-04-23T02:48:34.733907Z'
+id: evi_b5921f
+kind: evidence
+locator: Analysis section, main findings
+method_tag: modeled_projection
+provenance_url: null
+quote: The straightforward regression yields a slope of 4.7x per year, and crosses
+  1e26 FLOPs in November 2025. To establish confidence intervals on the slope of the
+  fit and the time at which we expect open models to surpass a 1e26 FLOP threshold,
+  we run a bootstrapping exercise (n=500), re-identifying top-1 frontier models for
+  each sample. We find a median slope of 4.6x/year, with a 90% confidence interval
+  of (3.6, 6.1).
+source_id: src_epoch_open_models_flop_threshold
+supports: support
+updated_at: '2026-04-23T02:48:34.733908Z'
+weight: 0.96

@@ -1,0 +1,437 @@
+{
+  "blindspots": [
+    {
+      "against_prior_set": "GRANT_BRAIN.md",
+      "content_hash": "c9580b8e5c6df1b53ed246cf82a9161b00c62195eeec472f0ce5ad2c03ed7bcc",
+      "created_at": "2026-04-23T03:14:16.121862Z",
+      "flagged_camp_id": "camp_displaced_workers",
+      "id": "blind_camp-displaced-workers_c9580b",
+      "kind": "blindspot",
+      "provenance_url": null,
+      "reasoning": "Operator's sovereign-individual frame treats collective-labor friction as a coordination failure, but the 78k Q1 2026 tech layoffs with 48% AI-attributed are the operator's own profession --- labor dignity is a first-order constraint the accelerationist overlay routinely underweights.",
+      "updated_at": "2026-04-23T03:14:16.121862Z"
+    },
+    {
+      "against_prior_set": "GRANT_BRAIN.md",
+      "content_hash": "0278568e914a06cfa691fb986a19fbc3ab29aef03e1ced1cae663cbbfa07927f",
+      "created_at": "2026-04-23T03:14:16.121886Z",
+      "flagged_camp_id": "camp_xrisk",
+      "id": "blind_camp-xrisk_027856",
+      "kind": "blindspot",
+      "provenance_url": null,
+      "reasoning": "Operator defaults to Anthropic's build-carefully variant and discounts the stronger halt-option x-risk holds; alignment-faking and FLI D-grades on existential safety are evidence the operator's EV brain should take more seriously before treating pause as temperamentally unavailable.",
+      "updated_at": "2026-04-23T03:14:16.121886Z"
+    },
+    {
+      "against_prior_set": "GRANT_BRAIN.md",
+      "content_hash": "9932048883de7f26d726f966d528add022e46642efd978a7a084628064cea574",
+      "created_at": "2026-04-23T03:14:16.121907Z",
+      "flagged_camp_id": "camp_palantir",
+      "id": "blind_camp-palantir_993204",
+      "kind": "blindspot",
+      "provenance_url": null,
+      "reasoning": "Operator's self-hosting/sovereign-infra politics is in direct tension with Palantir's ICE/ImmigrationOS surveillance stack, but the national-security framing can slide into the operator's accelerationist frame if not separated --- the same vendor is both grid-buildout ally and sovereignty adversary.",
+      "updated_at": "2026-04-23T03:14:16.121908Z"
+    }
+  ],
+  "bridges": [
+    {
+      "caveats": [
+        "Anthropic will not accept that halting is a live option; x-risk will not accept that staying at the frontier is a precondition for safety. The disagreement on whether to build is not bridgeable, only contained."
+      ],
+      "content_hash": "43a4d65ab4ea1ae27e2c6dda81df3420b326932594985e03ebaeda94ed94ad10",
+      "created_at": "2026-04-23T03:14:16.121652Z",
+      "from_camp": "camp_anthropic",
+      "id": "bridge_camp-anthropic_to_camp-xrisk_43a4d6",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_xrisk",
+      "translation": "Anthropic's 'build safely before others do' is, in x-risk framing, a bet that lead-with-alignment is the least-bad path given that pause is unattainable. X-risk reads it as race rationalization; Anthropic reads x-risk as demanding a coordination good that does not exist.",
+      "updated_at": "2026-04-23T03:14:16.121655Z"
+    },
+    {
+      "caveats": [
+        "X-risk treats capability progress as the dependent variable to control; Anthropic treats it as the independent variable to race. The RSP is not a pause mechanism."
+      ],
+      "content_hash": "5c14acd60bc48c7a8adb77178956047d6818209b24b1c4d46c798f9c681d64bb",
+      "created_at": "2026-04-23T03:14:16.121691Z",
+      "from_camp": "camp_xrisk",
+      "id": "bridge_camp-xrisk_to_camp-anthropic_5c14ac",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_anthropic",
+      "translation": "X-risk's pause demand is, in Anthropic framing, a claim that current alignment evidence (alignment faking, jailbreak universality, FLI D-grades on existential safety) already exceeds the risk budget Anthropic implicitly operates under. Anthropic's own RSP self-reported noncompliance is the shared evidence base.",
+      "updated_at": "2026-04-23T03:14:16.121691Z"
+    },
+    {
+      "caveats": [
+        "Palantir will not accept labor veto over deployment decisions; displaced-workers will not accept that national-security framing legitimates AI-enabled surveillance of the same workers."
+      ],
+      "content_hash": "0d62a226b71ef69e2a2d03e58678ff969128d79caef93ea20e01f34c675ca5f6",
+      "created_at": "2026-04-23T03:14:16.121719Z",
+      "from_camp": "camp_palantir",
+      "id": "bridge_camp-palantir_to_camp-displaced-workers_0d62a2",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_displaced_workers",
+      "translation": "Palantir's order-first framing concedes that institutional legitimacy requires labor to not be dumped. A defense-industrial-base strategy that hollows out the domestic workforce fails on its own terms by eroding the social base for the institutions Palantir is trying to preserve.",
+      "updated_at": "2026-04-23T03:14:16.121719Z"
+    },
+    {
+      "caveats": [
+        "Labor will not concede that order justifies ICE/ImmigrationOS-class deployments regardless of efficiency gains."
+      ],
+      "content_hash": "ee0fc080d5a7458f1961305b982d8043efcb62521274012725277ad45f0c2b82",
+      "created_at": "2026-04-23T03:14:16.121742Z",
+      "from_camp": "camp_displaced_workers",
+      "id": "bridge_camp-displaced-workers_to_camp-palantir_ee0fc0",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_palantir",
+      "translation": "Labor's dignity-first framing maps onto Palantir's order claim: workers without role or meaning are the population from which instability is recruited. Labor protection is a precondition for the stable institutions Palantir says it wants.",
+      "updated_at": "2026-04-23T03:14:16.121742Z"
+    },
+    {
+      "caveats": [
+        "Anthropic accepts defense and enterprise revenue the operator flags as capital-extraction drift; operator accepts accelerationist compute expansion Anthropic treats as risk to be metered."
+      ],
+      "content_hash": "21c57ba758fc8c99589e07267ea5354e6712707a9d54613c540f30e1d014a18f",
+      "created_at": "2026-04-23T03:14:16.121766Z",
+      "from_camp": "camp_anthropic",
+      "id": "bridge_camp-anthropic_to_camp-operator_21c57b",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_operator",
+      "translation": "Anthropic's alignment-first framing shares the operator's root-cause disposition: aligned frontier systems are the substrate for pointing AI at suffering reduction rather than capital extraction. The safety overhead is the cost of the deployment surface the operator wants to exist.",
+      "updated_at": "2026-04-23T03:14:16.121767Z"
+    },
+    {
+      "caveats": [
+        "Operator treats pause as temperamentally foreign and coordination-infeasible; x-risk treats operator's 'build-toward-suffering-reduction' as smuggling acceleration under a humanitarian label."
+      ],
+      "content_hash": "54ab7114c8095ba2351bff6b85cf0d90c605e8cc3fc0739b1744b3243b03aff1",
+      "created_at": "2026-04-23T03:14:16.121792Z",
+      "from_camp": "camp_xrisk",
+      "id": "bridge_camp-xrisk_to_camp-operator_54ab71",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_operator",
+      "translation": "X-risk's halt-option framing is a strong version of the operator's own insistence on separating descriptive from normative: if alignment cannot be verified, the +EV move is to not press the button, regardless of conviction on upside. The operator's poker brain should recognize variance from ruin.",
+      "updated_at": "2026-04-23T03:14:16.121793Z"
+    },
+    {
+      "caveats": [
+        "Operator retains sovereign-individual frame that treats collective labor action as second-best to individual exit; labor treats exit as unavailable to most workers."
+      ],
+      "content_hash": "8e8a7a3d9261241ee6a68df32e6afdb6656ab5dca744307504a75eda26e49d01",
+      "created_at": "2026-04-23T03:14:16.121815Z",
+      "from_camp": "camp_operator",
+      "id": "bridge_camp-operator_to_camp-displaced-workers_8e8a7a",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_displaced_workers",
+      "translation": "The operator's 'capital extraction is dead quarters' axiom is the same claim labor makes about AI deployment: if the gains flow to capital and the costs to workers, the deployment is misallocated by the operator's own standard.",
+      "updated_at": "2026-04-23T03:14:16.121815Z"
+    },
+    {
+      "caveats": [
+        "Anthropic's ASL-3 explicitly scopes out nation-state threats; Palantir's integration model assumes nation-state customers. The convergence is on vendor behavior, not on threat model."
+      ],
+      "content_hash": "df2f47914140c7406287c2cbef75b8e65327ec4a49e317c82258da7d3f7f656d",
+      "created_at": "2026-04-23T03:14:16.121835Z",
+      "from_camp": "camp_palantir",
+      "id": "bridge_camp-palantir_to_camp-anthropic_df2f47",
+      "kind": "bridge",
+      "provenance_url": null,
+      "to_camp": "camp_anthropic",
+      "translation": "Palantir's 'Western primacy requires safe systems' lands inside Anthropic's 'responsible actors should lead' frame: national-advantage and alignment-lead converge on the same deployment posture for frontier models in defense contexts.",
+      "updated_at": "2026-04-23T03:14:16.121835Z"
+    }
+  ],
+  "camps": [
+    "camp_palantir",
+    "camp_anthropic",
+    "camp_operator",
+    "camp_displaced_workers",
+    "camp_xrisk"
+  ],
+  "contested_claims": [
+    {
+      "claim_id": "desc_dod_ai_contract_spend",
+      "claim_text": "DoD obligated AI-related contract spending rose substantially 2022-2025, driven by JWCC, Project Maven, and CDAO-managed pilots; precise totals are hampered by inconsistent AI tagging on contract line items.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_contract_failures",
+          "locator": "Investigative pieces on DoD AI pilot failures and miscategorization",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.55
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_gao_ai_slow",
+          "locator": "Summary findings on acquisition-pace gaps",
+          "method_tag": "direct_measurement",
+          "source_id": "src_gao_dod_ai",
+          "source_title": "Artificial Intelligence: DoD Needs Department-Wide Guidance to Inform Acquisitions (GAO-22-105834 and follow-ups)",
+          "stance": "qualify",
+          "weight": 0.75
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_ai_dod_spend",
+          "locator": "AI funding appendix; DoD budget rollups",
+          "method_tag": "modeled_projection",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.8
+        },
+        {
+          "evidence_id": "evi_usaspending_contracts",
+          "locator": "DoD AI-tagged obligations 2022-2025",
+          "method_tag": "direct_measurement",
+          "source_id": "src_usaspending",
+          "source_title": "USASpending.gov federal contract awards",
+          "stance": "support",
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_palantir_dominant",
+      "claim_text": "No other pure-play US defense-AI software vendor has matched Palantir's contract backlog or combatant-command integration depth; cloud-provider primes (AWS, Microsoft, Google, Oracle via JWCC) supply infrastructure, not mission-software integration.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_intercept_dominance_skeptical",
+          "locator": "Coverage framing Palantir as over-sold relative to internal-tool alternatives",
+          "method_tag": "journalistic_report",
+          "source_id": "src_intercept_palantir",
+          "source_title": "The Intercept coverage of Palantir contracts and DoD AI programs",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_crs_vendor_landscape",
+          "locator": "Vendor-landscape discussion",
+          "method_tag": "expert_estimate",
+          "source_id": "src_crs_dod_ai",
+          "source_title": "Artificial Intelligence and National Security (CRS Report R45178)",
+          "stance": "support",
+          "weight": 0.75
+        },
+        {
+          "evidence_id": "evi_pltr_10k_competitive",
+          "locator": "Competition section, Item 1",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_10k_2024",
+          "source_title": "Palantir Technologies Inc. Form 10-K Annual Report (FY 2024)",
+          "stance": "support",
+          "weight": 0.6
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_us_datacenter_load_forecast",
+      "claim_text": "Credible 2030 forecasts for US datacenter share of electricity consumption diverge by more than 2x --- from ~4.6% (IEA/EPRI conservative) to ~9% (Goldman Sachs, EPRI high scenario) --- reflecting genuine uncertainty, not measurement error.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_goldman_high_forecast",
+          "locator": "Executive summary; 160% growth figure",
+          "method_tag": "modeled_projection",
+          "source_id": "src_goldman_gen_power",
+          "source_title": "Generational growth: AI, data centers and the coming US power demand surge",
+          "stance": "contradict",
+          "weight": 0.7
+        }
+      ],
+      "qualifies": [
+        {
+          "evidence_id": "evi_iea_low_forecast",
+          "locator": "Analysing Electricity Demand; data centres chapter",
+          "method_tag": "modeled_projection",
+          "source_id": "src_iea_electricity_2024",
+          "source_title": "Electricity 2024 --- Analysis and Forecast to 2026",
+          "stance": "qualify",
+          "weight": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "evidence_id": "evi_epri_scenarios",
+          "locator": "Scenario table: 4.6%-9.1% by 2030",
+          "method_tag": "modeled_projection",
+          "source_id": "src_epri_powering_intelligence",
+          "source_title": "Powering Intelligence: Analyzing Artificial Intelligence and Data Center Energy Consumption",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_pjm_market_signal",
+          "locator": "2025/2026 BRA clearing results",
+          "method_tag": "direct_measurement",
+          "source_id": "src_pjm_2024_capacity",
+          "source_title": "2025/2026 Base Residual Auction Results",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    },
+    {
+      "claim_id": "desc_workforce_resistance",
+      "claim_text": "Frontier-lab and big-tech employees have episodically resisted DoD contracts (Google Maven 2018, Microsoft IVAS 2019, Microsoft/OpenAI IDF deployments 2024), producing temporary pauses but no sustained shift in vendor willingness.",
+      "contradicts": [
+        {
+          "evidence_id": "evi_pltr_ceo_dismisses_resistance",
+          "locator": "Karp interviews dismissing employee resistance as inconsequential",
+          "method_tag": "primary_testimony",
+          "source_id": "src_pltr_ceo_interview",
+          "source_title": "Alex Karp public interviews and op-eds, 2023-2024",
+          "stance": "contradict",
+          "weight": 0.5
+        }
+      ],
+      "qualifies": [],
+      "supports": [
+        {
+          "evidence_id": "evi_google_maven_withdraw",
+          "locator": "Open letter and subsequent Google announcement",
+          "method_tag": "primary_testimony",
+          "source_id": "src_google_maven_letter_2018",
+          "source_title": "Google employee open letter opposing Project Maven",
+          "stance": "support",
+          "weight": 0.9
+        },
+        {
+          "evidence_id": "evi_microsoft_workers_ivas",
+          "locator": "Employee open letter, February 2019",
+          "method_tag": "primary_testimony",
+          "source_id": "src_microsoft_workers_2019",
+          "source_title": "Microsoft employee open letter opposing HoloLens/IVAS contract",
+          "stance": "support",
+          "weight": 0.85
+        },
+        {
+          "evidence_id": "evi_openai_idf_nyt",
+          "locator": "OpenAI military-use policy-change coverage, 2024",
+          "method_tag": "journalistic_report",
+          "source_id": "src_nyt_openai_idf",
+          "source_title": "Coverage of OpenAI and Microsoft AI use by Israeli military, 2024",
+          "stance": "support",
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "convergent_interventions": [
+    {
+      "divergent_reasons": {
+        "camp_anthropic": "norm_anthropic_alignment",
+        "camp_operator": "norm_operator_flourishing",
+        "camp_xrisk": "norm_xrisk_halt"
+      },
+      "intervention_id": "intv_alignment_research",
+      "operator_note": "Anthropic funds alignment to keep building; x-risk funds it as precondition for continuing at all. Same check, different memo line.",
+      "supporting_camps": [
+        "camp_anthropic",
+        "camp_xrisk",
+        "camp_operator"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_anthropic": "norm_anthropic_safety",
+        "camp_operator": "norm_operator_flourishing"
+      },
+      "intervention_id": "intv_drug_discovery",
+      "operator_note": "Drug discovery is the cleanest suffering-reduction deployment. Anthropic gets a safety-aligned revenue story; operator gets DALYs per dollar.",
+      "supporting_camps": [
+        "camp_operator",
+        "camp_anthropic"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_anthropic": "norm_anthropic_safety",
+        "camp_operator": "norm_operator_flourishing"
+      },
+      "intervention_id": "intv_mental_health_triage",
+      "operator_note": "70% untreated mental-health burden is the highest-leverage suffering target where AI already has deployable capability. Anthropic signs on if safeguards are the binding constraint.",
+      "supporting_camps": [
+        "camp_operator",
+        "camp_anthropic"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_displaced_workers": "norm_workers_dignity",
+        "camp_operator": "norm_operator_flourishing"
+      },
+      "intervention_id": "intv_alt_protein",
+      "operator_note": "Animal suffering at 80B/yr scale is the operator's axiom. Labor coalition joins if transition from factory-farm jobs is managed, not dumped.",
+      "supporting_camps": [
+        "camp_operator",
+        "camp_displaced_workers"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_anthropic": "norm_anthropic_safety",
+        "camp_operator": "norm_operator_sovereignty",
+        "camp_palantir": "norm_palantir_national"
+      },
+      "intervention_id": "intv_grid",
+      "operator_note": "Grid is the rare convergence where Palantir (national advantage), Anthropic (safe capacity buildout), and operator (sovereignty via energy abundance) all hit the same button.",
+      "supporting_camps": [
+        "camp_palantir",
+        "camp_anthropic",
+        "camp_operator"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_anthropic": "norm_anthropic_safety",
+        "camp_operator": "norm_operator_flourishing",
+        "camp_palantir": "norm_palantir_national"
+      },
+      "intervention_id": "intv_compute",
+      "operator_note": "All three want more compute; x-risk and displaced-workers are the load-bearing dissenters. Convergence is real but narrower than the EV-brain wants to believe.",
+      "supporting_camps": [
+        "camp_palantir",
+        "camp_anthropic",
+        "camp_operator"
+      ]
+    },
+    {
+      "divergent_reasons": {
+        "camp_displaced_workers": "norm_workers_dignity",
+        "camp_operator": "norm_operator_sovereignty",
+        "camp_palantir": "norm_palantir_order"
+      },
+      "intervention_id": "intv_training",
+      "operator_note": "Workforce training is a coalition cheap-buy: labor wants dignity, operator wants individual capacity, Palantir wants social stability around the transition.",
+      "supporting_camps": [
+        "camp_displaced_workers",
+        "camp_operator",
+        "camp_palantir"
+      ]
+    }
+  ],
+  "descriptive_convergences": [
+    "desc_accelerating",
+    "desc_defense_llama_target_use_cases_planning_targeting",
+    "desc_maven_multi_sensor_targeting_fusion",
+    "desc_maven_program_of_record_formalization",
+    "desc_palantir_army_ea_10b_75_contracts",
+    "desc_palantir_maven_contract_expansion_795m",
+    "desc_thunderforge_indopacom_eucom_initial_deployment"
+  ],
+  "generated_at": "2026-04-23T03:14:16.121917Z"
+}

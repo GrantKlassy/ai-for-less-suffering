@@ -1,0 +1,14 @@
+claim_id: desc_prism_trial_patient_centered_focus_design
+created_at: '2026-04-23T02:55:06.483393Z'
+id: evi_7fdc85
+kind: evidence
+locator: Paragraph before 'Collaborative effort across six states' section
+method_tag: primary_testimony
+provenance_url: null
+quote: In addition to analyzing cancer detection and recall rates, the study will
+  include focus groups and surveys to capture how patients and radiologists perceive
+  and trust AI-assisted care.
+source_id: src_ucla_prism_ai_breast_screening
+supports: support
+updated_at: '2026-04-23T02:55:06.483395Z'
+weight: 0.92

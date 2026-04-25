@@ -1,0 +1,15 @@
+claim_id: desc_somalia_food_insecurity_6_5m_feb_2026
+created_at: '2026-04-23T02:57:09.541156Z'
+id: evi_c9b140
+kind: evidence
+locator: Opening section and subsequent paragraphs on Somalia crisis
+method_tag: journalistic_report
+provenance_url: null
+quote: "6.5 million people in Somalia currently face acute food insecurity... An urgent,\
+  \ current example is the rapidly evolving drought in Somalia, announced as a national\
+  \ humanitarian emergency on Feb 5, 2026... Despite these alerts, 6.5 million Somalis\
+  \ face food insecurity \u2013 nearly double the amount in 2025."
+source_id: src_time_africa_food_security_agritech
+supports: support
+updated_at: '2026-04-23T02:57:09.541157Z'
+weight: 0.85

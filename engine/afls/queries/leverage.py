@@ -28,7 +28,7 @@ from typing import ClassVar
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from afls.queries.palantir import (
+from afls.queries.coalition import (
     ContestedClaim,
     find_contested_claims,
     find_descriptive_convergences,

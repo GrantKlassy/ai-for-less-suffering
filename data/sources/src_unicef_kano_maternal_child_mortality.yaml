@@ -1,0 +1,22 @@
+accessed_at: '2026-04-22'
+authors:
+- Maduabuchi Nmeribeh
+created_at: '2026-04-23T02:47:09.875464Z'
+id: src_unicef_kano_maternal_child_mortality
+kind: source
+notes: Press article reporting on government inauguration event. No independent verification
+  of recruitment numbers or program claims. Relies on quotes from government officials
+  and UNICEF representative.
+provenance:
+  at: '2026-04-23T02:47:09.875311Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 4efc1c531c2d08aeeea0ec93faf4fc71fc762ad2b82fd27de3b356ca8622bf3f
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-21'
+reliability: 0.5
+source_kind: press
+title: UNICEF, Kano govt intensify fight against maternal, child mortality
+updated_at: '2026-04-23T02:47:09.875468Z'
+url: https://pmnewsnigeria.com/2026/04/21/unicef-kano-govt-intensify-fight-against-maternal-child-mortality/

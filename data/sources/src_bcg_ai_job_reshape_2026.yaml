@@ -1,0 +1,32 @@
+accessed_at: '2026-04-22'
+authors:
+- Greg Emerson
+- Matthew Kropp
+- Julie Bedard
+- Lisa Krayer
+- Viacheslav Romanov
+- Megan Hsu
+- Luis Sanchez Boedo
+- Diya Mohnot
+created_at: '2026-04-23T02:53:33.046282Z'
+id: src_bcg_ai_job_reshape_2026
+kind: source
+notes: BCG is a reputable management consulting firm, but this is prescriptive consulting
+  analysis rather than empirical research. Uses proprietary microeconomic modeling
+  on task-level automation applied to 1,500-role taxonomy. Reliability discounted
+  from press baseline (0.50) due to model-based projections rather than direct measurement,
+  but elevated above blog baseline due to institutional credibility and structured
+  methodology.
+provenance:
+  at: '2026-04-23T02:53:33.046151Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 2dcb8e385e6ae3a3a5d0a30ebca608609a581edd544515262e5dff3330148e0a
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-03'
+reliability: 0.62
+source_kind: press
+title: AI Will Reshape More Jobs Than It Replaces
+updated_at: '2026-04-23T02:53:33.046284Z'
+url: https://www.bcg.com/publications/2026/ai-will-reshape-more-jobs-than-it-replaces

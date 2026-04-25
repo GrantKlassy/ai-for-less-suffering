@@ -1,0 +1,21 @@
+accessed_at: '2026-04-22'
+authors:
+- Xinhua
+created_at: '2026-04-23T02:51:14.607272Z'
+id: src_hannover_messe_2026_industrial_ai
+kind: source
+notes: Xinhua news report from trade fair; lower reliability typical of press coverage
+  of emerging industrial applications; lacks independent verification of vendor claims.
+provenance:
+  at: '2026-04-23T02:51:14.607134Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 0a389023bae3360ac18a02fa59459b5f666a0eaa6ebf5cb9d768ebaa2fbb2d5d
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-04-22'
+reliability: 0.5
+source_kind: press
+title: 'World Insights: Beyond "brain in jar," industrial AI redefines factory floor'
+updated_at: '2026-04-23T02:51:14.607275Z'
+url: https://english.news.cn/20260422/fa44215d5ed744dba769bbc950383777/c.html

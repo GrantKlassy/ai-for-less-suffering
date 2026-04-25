@@ -1,0 +1,15 @@
+claim_id: desc_maven_multi_sensor_targeting_fusion
+created_at: '2026-04-23T02:40:52.323571Z'
+id: evi_c622f6
+kind: evidence
+locator: second paragraph
+method_tag: journalistic_report
+provenance_url: null
+quote: Project Maven began in 2017 as a Pentagon effort to use AI to help analysts
+  process massive volumes of surveillance imagery and video, but it has since evolved
+  into a broader military intelligence and targeting platform that fuses data from
+  multiple sensors to identify objects, assess threats, and support operational decisions.
+source_id: src_military_com_maven_expansion_2026
+supports: support
+updated_at: '2026-04-23T02:40:52.323573Z'
+weight: 0.85

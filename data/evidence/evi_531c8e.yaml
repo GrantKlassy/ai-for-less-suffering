@@ -1,0 +1,15 @@
+claim_id: desc_ai_energy_disclosure_heterogeneous
+created_at: '2026-04-23T02:39:56.892783Z'
+id: evi_531c8e
+kind: evidence
+locator: Energy measure and disclosures section
+method_tag: journalistic_report
+provenance_url: null
+quote: Methodological differences in measurement and reporting, such as focusing solely
+  on inference while omitting training costs, using median instead of mean consumption
+  figures, and employing 'market-based' instead of 'location-based' emissions calculations,
+  make meaningful cross-model comparisons extremely difficult for regulators and consumers.
+source_id: src_brookings_ai_energy_april_2026
+supports: support
+updated_at: '2026-04-23T02:39:56.892785Z'
+weight: 0.9

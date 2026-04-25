@@ -1,0 +1,15 @@
+claim_id: desc_dickens_direct_ai_values_advocacy_vs_conventional
+created_at: '2026-04-23T02:43:56.377508Z'
+id: evi_100edb
+kind: evidence
+locator: Traditional animal advocacy section, Cons subsection
+method_tag: modeled_projection
+provenance_url: null
+quote: "I created a back-of-the-envelope calculation that aligns with my initial expectation:\
+  \ my BOTEC-informed guess is that direct advocacy on AI values (by advocating to\
+  \ make LLMs more animal-friendly) is 2\u20133 orders of magnitude more cost-effective\
+  \ than conventional animal advocacy."
+source_id: src_dickens_animal_welfare_tai
+supports: support
+updated_at: '2026-04-23T02:43:56.377509Z'
+weight: 0.75

@@ -1,0 +1,14 @@
+claim_id: desc_ai_biologic_prediction_performance_gap
+created_at: '2026-04-23T02:40:26.119138Z'
+id: evi_dc8d64
+kind: evidence
+locator: paragraph 5
+method_tag: journalistic_report
+provenance_url: null
+quote: Current models often excel at predicting molecular structure but struggle to
+  capture the complexity of biological systems, leading to a persistent gap between
+  in silico predictions and in vivo outcomes.
+source_id: src_medicine_maker_ai_biologic_discovery
+supports: support
+updated_at: '2026-04-23T02:40:26.119140Z'
+weight: 0.8

@@ -1,0 +1,15 @@
+claim_id: desc_alphafold_server_8m_folds_predictions
+created_at: '2026-04-23T02:40:13.955125Z'
+id: evi_c944e4
+kind: evidence
+locator: A new era of digital biology section, fourth paragraph
+method_tag: primary_testimony
+provenance_url: null
+quote: The AlphaFold Server is empowering non-commercial researchers globally to harness
+  this technology, accelerating their ability to formulate and test new hypotheses.
+  So far, it's helped make more than 8 million folds - predictions of structures and
+  interactions - for thousands of researchers around the world.
+source_id: src_alphafold_five_years_impact
+supports: support
+updated_at: '2026-04-23T02:40:13.955126Z'
+weight: 0.88

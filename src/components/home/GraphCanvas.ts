@@ -54,6 +54,7 @@ export function initGraph(mountId: string, dataId: string): Core | null {
         data: {
           id: n.id,
           label: n.emoji ? `${n.emoji} ${n.label}` : n.label,
+          fullLabel: n.emoji ? `${n.emoji} ${n.fullLabel}` : n.fullLabel,
           kind: n.kind,
           color: n.color,
           href: n.href,
@@ -84,6 +85,8 @@ export function initGraph(mountId: string, dataId: string): Core | null {
           "text-outline-color": "#09090b",
           "text-valign": "bottom",
           "text-margin-y": 4,
+          "text-wrap": "wrap",
+          "text-max-width": "140px",
           width: "data(size)",
           height: "data(size)",
         },
@@ -275,6 +278,15 @@ export function initGraph(mountId: string, dataId: string): Core | null {
           "border-width": 2,
           "text-opacity": 1,
           "z-index": 10,
+        },
+      },
+      {
+        // Hover/legend-pill highlight swaps in the full label so nothing reads
+        // as "…" when the user is actually trying to see what a node says.
+        selector: "node.highlight",
+        style: {
+          label: "data(fullLabel)",
+          "text-max-width": "280px",
         },
       },
       {

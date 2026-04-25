@@ -1,0 +1,27 @@
+accessed_at: '2026-04-22'
+authors:
+- Emma Curtis
+- Zane Swanson
+- Caitlin Welsh
+created_at: '2026-04-23T02:49:30.868979Z'
+id: src_csis_ai_food_security_early_warning
+kind: source
+notes: CSIS policy roundtable report synthesizing expert perspectives on AI in food
+  security early warning systems. Reliability discounted slightly below press prior
+  (0.50) to 0.65 because it is synthesized expert testimony from a convening rather
+  than original reporting or primary-source data; elevated above typical blog/synthesis
+  work due to institutional credibility and named participants. No methodological
+  detail provided on individual claims.
+provenance:
+  at: '2026-04-23T02:49:30.868896Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 42f91adc58b5242cd7f50b73955443568432b27d7af894f1ce0cd417d3750d69
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2026-01-20'
+reliability: 0.65
+source_kind: press
+title: 'AI and Global Food Security: A Focus on Early Warning Systems'
+updated_at: '2026-04-23T02:49:30.868981Z'
+url: https://www.csis.org/analysis/ai-and-global-food-security-focus-early-warning-systems

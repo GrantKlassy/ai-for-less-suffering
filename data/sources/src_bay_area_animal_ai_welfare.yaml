@@ -1,0 +1,25 @@
+accessed_at: '2026-04-22'
+authors:
+- Michelle Kim
+created_at: '2026-04-23T02:44:27.715728Z'
+id: src_bay_area_animal_ai_welfare
+kind: source
+notes: 'MIT Technology Review article reporting on Sentient Futures summit and Bay
+  Area animal welfare advocates'' engagement with AI. Reliability is mid-range for
+  press: reporting on industry movement and future-oriented claims from advocates
+  rather than established facts. Some claims about Anthropic valuation and equity
+  cashing are verifiable; others (animal welfare funding flows, AI sentience speculation)
+  are forward-looking or reportage of advocates'' views.'
+provenance:
+  at: '2026-04-23T02:44:27.715652Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: 75c2b33215f56d49a4843d0aed74bd898bb339c53f45ce42d03c15e879db5683
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: 2026-03
+reliability: 0.5
+source_kind: press
+title: The Bay Area's animal welfare movement wants to recruit AI
+updated_at: '2026-04-23T02:44:27.715730Z'
+url: https://www.technologyreview.com/2026/03/23/1134491/the-bay-areas-animal-welfare-movement-wants-to-recruit-ai/

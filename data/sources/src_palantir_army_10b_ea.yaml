@@ -1,0 +1,23 @@
+accessed_at: '2026-04-22'
+authors:
+- Elodie Collins
+created_at: '2026-04-23T02:41:13.003017Z'
+id: src_palantir_army_10b_ea
+kind: source
+notes: Trade press reporting on government contract award. Reliability slightly above
+  press prior due to direct quotes from Army CIO and contracting officials, but below
+  that of primary procurement documents. Army quotes on EA rationale and future competition
+  claims reduce but do not eliminate ambiguity around actual purchasing constraints.
+provenance:
+  at: '2026-04-23T02:41:13.002973Z'
+  git_sha: c5dfdacea11afede670105b47f48c198df5f102f
+  method: httpx
+  raw_content_hash: c5ea47fa491663158037ee06c66faf942a979445cb1be441fed10da6f8d92bf7
+  tool: afls-ingest/0.0.1
+provenance_url: null
+published_at: '2025-08-01'
+reliability: 0.52
+source_kind: press
+title: Army Awards Palantir Potential $10B Agreement for Commercial Software
+updated_at: '2026-04-23T02:41:13.003019Z'
+url: https://www.govconwire.com/articles/palantir-army-enterprise-agreement-commercial-software-leo-garciga
