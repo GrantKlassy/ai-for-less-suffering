@@ -38,14 +38,14 @@ from typing import ClassVar
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from afls.queries.leverage import (
-    LeverageRanking,
-    rank_interventions,
-)
 from afls.queries.coalition import (
     ContestedClaim,
     find_contested_claims,
     find_descriptive_convergences,
+)
+from afls.queries.leverage import (
+    LeverageRanking,
+    rank_interventions,
 )
 from afls.reasoning import AnthropicClient, Model, complete_and_parse
 from afls.schema import (

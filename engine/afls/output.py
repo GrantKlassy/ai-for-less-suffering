@@ -10,17 +10,17 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from afls.queries.leverage import (
-    InterventionCoalitionAnalysis,
-    LeverageAnalysis,
-    LeverageRanking,
-    RankingBlindSpot,
-)
 from afls.queries.coalition import (
     CoalitionAnalysis,
     ContestedClaim,
     ConvergentInterventionAnalysis,
     EvidenceSummary,
+)
+from afls.queries.leverage import (
+    InterventionCoalitionAnalysis,
+    LeverageAnalysis,
+    LeverageRanking,
+    RankingBlindSpot,
 )
 from afls.queries.reallocation import (
     HARM_DIVERGENCE_THRESHOLD,

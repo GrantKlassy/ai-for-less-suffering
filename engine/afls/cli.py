@@ -40,7 +40,6 @@ from afls.output import (
     write_steelman_json,
     write_steelman_markdown,
 )
-from afls.queries.leverage import run_leverage_query
 from afls.queries.coalition import (
     DEFAULT_CAMP_IDS as COALITION_DEFAULT_CAMP_IDS,
 )
@@ -48,6 +47,7 @@ from afls.queries.coalition import (
     persist_coalition_nodes,
     run_coalition_query,
 )
+from afls.queries.leverage import run_leverage_query
 from afls.queries.reallocation import run_reallocation_query
 from afls.queries.steelman import run_steelman_query
 from afls.reasoning import (
