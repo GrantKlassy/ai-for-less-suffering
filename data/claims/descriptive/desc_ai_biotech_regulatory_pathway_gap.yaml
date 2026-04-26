@@ -1,9 +1,0 @@
-confidence: 0.55
-created_at: '2026-04-23T02:56:23.721097Z'
-id: desc_ai_biotech_regulatory_pathway_gap
-kind: descriptive_claim
-provenance_url: null
-text: Key challenges in AI-powered drug discovery include developing regulatory pathways
-  that match technological speed, establishing data quality and model interpretability
-  standards, and integrating AI outputs into clinical trials.
-updated_at: '2026-04-23T02:56:23.721099Z'

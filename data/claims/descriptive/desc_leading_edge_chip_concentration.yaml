@@ -1,9 +1,0 @@
-confidence: 0.9
-created_at: '2026-04-17T00:00:00Z'
-id: desc_leading_edge_chip_concentration
-kind: descriptive_claim
-provenance_url: null
-text: Over 90% of leading-edge (<10nm, effectively 100% of <5nm) logic fabrication
-  capacity sits in Taiwan at TSMC; HBM memory for AI accelerators is ~95% produced
-  by three Korean/US firms, with SK Hynix alone holding >50% share in 2024.
-updated_at: '2026-04-17T00:00:00Z'

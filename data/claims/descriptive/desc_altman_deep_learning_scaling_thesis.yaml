@@ -1,9 +1,0 @@
-confidence: 0.85
-created_at: '2026-04-19T18:49:48.222360Z'
-id: desc_altman_deep_learning_scaling_thesis
-kind: descriptive_claim
-provenance_url: null
-text: 'Altman frames the path to powerful AI as a three-factor story: deep learning
-  works as a general learning algorithm, its capability improves predictably with
-  scale, and humanity is dedicating increasing compute and data resources to it.'
-updated_at: '2026-04-19T18:49:48.222362Z'

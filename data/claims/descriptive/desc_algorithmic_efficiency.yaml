@@ -1,9 +1,0 @@
-confidence: 0.7
-created_at: '2026-04-17T00:00:00Z'
-id: desc_algorithmic_efficiency
-kind: descriptive_claim
-provenance_url: null
-text: Algorithmic progress roughly halves the compute required to reach a fixed language-model
-  performance threshold every ~8 months, so algorithmic efficiency contributes comparably
-  to raw hardware scaling in observed capability gains.
-updated_at: '2026-04-17T00:00:00Z'

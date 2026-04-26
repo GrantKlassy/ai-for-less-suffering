@@ -1,9 +1,0 @@
-confidence: 0.8
-created_at: '2026-04-19T23:08:26.125126Z'
-id: desc_axon_body_cam_audio_to_report_pipeline
-kind: descriptive_claim
-provenance_url: null
-text: Axon's AI police-report product generates narrative reports from body-worn-camera
-  audio, binding the report-drafting pipeline to the existing body-cam hardware deployment
-  base.
-updated_at: '2026-04-19T23:08:26.125128Z'

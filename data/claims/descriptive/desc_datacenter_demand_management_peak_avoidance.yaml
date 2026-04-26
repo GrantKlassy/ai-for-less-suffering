@@ -1,9 +1,0 @@
-confidence: 0.65
-created_at: '2026-04-23T02:39:11.178871Z'
-id: desc_datacenter_demand_management_peak_avoidance
-kind: descriptive_claim
-provenance_url: null
-text: Data centers can manage their electricity demand to avoid peak-demand periods
-  by shifting loads, meaning they can access substantial grid power without increasing
-  the system's peak demand requirement.
-updated_at: '2026-04-23T02:39:11.178872Z'

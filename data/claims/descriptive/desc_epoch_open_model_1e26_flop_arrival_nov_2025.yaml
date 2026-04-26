@@ -1,9 +1,0 @@
-confidence: 0.82
-created_at: '2026-04-23T02:48:34.728808Z'
-id: desc_epoch_open_model_1e26_flop_arrival_nov_2025
-kind: descriptive_claim
-provenance_url: null
-text: The largest open-weight frontier AI model will surpass 10^26 FLOP of training
-  compute by November 2025, with a 90% confidence interval of August 2025 to November
-  2026.
-updated_at: '2026-04-23T02:48:34.728811Z'

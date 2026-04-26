@@ -1,9 +1,0 @@
-confidence: 0.85
-created_at: '2026-04-23T02:48:34.730713Z'
-id: desc_epoch_open_model_scaling_acceleration_recent
-kind: descriptive_claim
-provenance_url: null
-text: The pace of compute scaling for frontier open models has accelerated in recent
-  years, with fitting slopes increasing monotonically as analysis cutoff dates move
-  forward from 2018 to 2022.
-updated_at: '2026-04-23T02:48:34.730715Z'

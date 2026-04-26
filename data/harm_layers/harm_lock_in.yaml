@@ -1,9 +1,0 @@
-created_at: '2026-04-17T00:00:00Z'
-description: Institutional dependency on a single vendor, model family, or deployment
-  stack --- procurement lock-in, curriculum lock-in, regulatory-frame lock-in. Harm is
-  the loss of future optionality when the chosen path stops serving the original goal.
-id: harm_lock_in
-kind: harm_layer
-name: Lock-in
-provenance_url: null
-updated_at: '2026-04-17T00:00:00Z'

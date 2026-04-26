@@ -1,9 +1,0 @@
-confidence: 0.85
-created_at: '2026-04-19T20:52:03.121115Z'
-id: desc_defense_llama_llama3_donovan_exclusive
-kind: descriptive_claim
-provenance_url: null
-text: Scale AI's Defense Llama is a Llama 3-based large language model fine-tuned
-  for US national security use cases and made available exclusively within controlled
-  US government environments through Scale's Donovan platform.
-updated_at: '2026-04-19T20:52:03.121116Z'

@@ -1,9 +1,0 @@
-confidence: 0.65
-created_at: '2026-04-23T02:56:23.720621Z'
-id: desc_ai_biotech_data_integration_patterns
-kind: descriptive_claim
-provenance_url: null
-text: Machine learning systems analyzing genomic sequences, proteomics, high-throughput
-  assay results, and clinical records can identify patterns for drug discovery that
-  humans might miss.
-updated_at: '2026-04-23T02:56:23.720622Z'
