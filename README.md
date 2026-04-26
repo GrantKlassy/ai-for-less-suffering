@@ -8,15 +8,15 @@ This repo was a {[peaceful protest](https://en.wikipedia.org/wiki/Nonviolent_res
 
 # Special Thanks
 
-Claude 🧡🧡🧡
+[Claude](https://claude.ai) 🧡🧡🧡
 
-GitHub 🖤🖤🖤
+[GitHub](https://github.com/) 🖤🖤🖤
 
-Cloudflare 💛💛💛
+[Cloudflare](https://www.cloudflare.com/) 💛💛💛
 
-Astro 5 🩷🩷🩷
+[Astro](https://astro.build/) 💜💜💜
 
-[GPG](https://en.wikipedia.org/wiki/GNU_Privacy_Guard)
+[GPG](https://en.wikipedia.org/wiki/GNU_Privacy_Guard) ❓❓❓
 
 # funny funny funny
 
