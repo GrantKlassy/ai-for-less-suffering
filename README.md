@@ -9,9 +9,13 @@ This repo was a peaceful protest using `claude` --- Please read [`DIRECTIVE.md`]
 # Special Thanks
 
 Claude 🧡🧡🧡
+
 GitHub 🖤🖤🖤
+
 Cloudflare 💛💛💛
+
 Astro 5 🩷🩷🩷
+
 [GPG](https://en.wikipedia.org/wiki/GNU_Privacy_Guard)
 
 # funny funny funny
