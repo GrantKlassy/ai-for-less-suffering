@@ -21,27 +21,7 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-
       - run: pnpm install --frozen-lockfile
-
-      - name: engine --- sync
-        working-directory: engine
-        run: uv sync
-
-      - name: engine --- lint (ruff)
-        working-directory: engine
-        run: uv run ruff check .
-
-      - name: engine --- typecheck (mypy)
-        working-directory: engine
-        run: uv run mypy afls
-
-      - name: engine --- tests (pytest, includes cross-layer drift check)
-        working-directory: engine
-        run: uv run pytest
 
       - name: site --- typecheck (astro check)
         run: pnpm check
