@@ -24,6 +24,8 @@ Please read [`DIRECTIVE.md`](directives/DIRECTIVE.md) --- I wrote it [4/18/2026 
 
 [GPG](https://en.wikipedia.org/wiki/GNU_Privacy_Guard) ❓❓❓
 
+[Fedora KDE](https://fedoraproject.org/kde/) 💙💙💙
+
 # funny funny funny
 
 ![funny9a](assets/evidence/funny9a.png)
